@@ -1,0 +1,13 @@
+The nice way to run long-running batch files
+such as batch.g, which computes the cohomology
+groups for all groups of size 16, is on someone
+else's machine. Your department probabally has
+a machine set up just for this purpose. Log on to
+this machine and invoke the script as follows.
+
+nice nohup gap -o 1000M batch.g &
+
+and then log out of the machine while the 
+program runs. Come back later for the results
+and kill the GAP process. Do this on Saturday
+if possible.
