@@ -1,0 +1,324 @@
+\documentclass[12pt]{article}
+\usepackage{euler,palatino,amsfonts,vmargin,amsmath,amssymb}
+\usepackage[arrow,matrix]{xy}
+\setmarginsrb{1in}{1in}{1in}{1in}{0in}{0in}{0in}{0in}
+\title{An Example \textsf{CRIME} calculation: 
+The cohomology ring of $Q_8$}\author{}
+\begin{document}
+\maketitle
+
+Let $G=Q_8=\left\langle x,y\left|
+x^2=y^2=\left(xy\right)^2,x^4=1\right.\right\rangle
+=\left\langle x,y,z\left|
+x^2=y^2=z=\left(xy\right)^2,x^4=1\right.\right\rangle$.
+Observe that $z$ in the second presentation is redundant,
+but simplifies the notation later. In \textsf{GAP}, we execute
+the following commands.
+\begin{verbatim}
+gap> G:=SmallGroup(8,4);
+<pc group of size 8 with 3 generators>
+gap> Pcgs(G);
+Pcgs([ f1, f2, f3 ])
+\end{verbatim}
+Then a little manipulation in \textsf{ GAP}
+reveals that \verb!f1!, \verb!f2!, and \verb!f3!,
+correspond with $x$, $y$, and $z$
+from the presentation above, and with $i$,
+$j$, and $-1$ from the standard presentation 
+of $Q_8$.
+
+Let $k=\mathbb{F}_2$. It's well known that $k$
+has a periodic minimal $kG$-projecive resolution.
+To see this, we start with the following commands.
+
+\begin{verbatim}
+gap> C:=CohomologyObject(G);
+<object>
+gap> ProjectiveResolution(C,10);
+[ 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2 ]
+\end{verbatim}
+
+\verb!ProjectiveResolution! returns the $kG$-ranks
+of the terms of the minimal projective resolution.
+These numbers are called the {\em Betti numbers}
+of the resolution.
+Therefore, this tells us that $k$ has a minimal 
+$kG$-projective resolution 
+\begin{equation}\label{res}
+P_\ast:\qquad\begin{xy}\xymatrix{
+\dots\ar[r]&kG\ar[r]^{\partial_4}
+&kG\ar[r]^{\partial_3}
+&\left(kG\right)^2\ar[r]^{\partial_2}
+&\left(kG\right)^2\ar[r]^{\partial_1}
+&kG\ar[r]^{\epsilon}
+&k\ar[r]&0
+}\end{xy}\end{equation}
+We can see from (\ref{res}) that $P_\ast$ 
+appears to be periodic, but we
+confirm this below by looking at the boundary maps.
+The map $\epsilon$ is the usual augmentation
+$\epsilon\left(\sum_g\alpha_gg\right)
+=\sum_g\alpha_g$.
+
+Since $P_\ast$ is minimal, 
+the cohomology groups $H^i\left(G\right)
+=\mathrm{Ext}^i\left(k,k\right)$ are simply
+\[\mathrm{Hom}_{kG}\left(P_i,k\right)=k^{b_i}.\]
+Here, $b_i$ is the $\left(i+1\right)$st element
+in the list returned by \verb!ProjectiveResolution!,
+so the first element in this list is the dimension
+of $P_0$. Thus, the Betti numbers give the 
+ranks of the cohomology groups as well.
+
+To look at the boundary maps, we need some notation.
+Recall that for $G$ a $p$-group of size $p^n$ and $k$ a field of
+characteristic $p$, which is exactly the situation
+that we're in in this example, the group algebra $kG$ has
+a basis
+\begin{equation}
+\mathcal{B}'=\left\{\left.\rule{0pt}{12pt} x_1^{a_1}x_2^{a_2}\dots x_n^{a_n}\right|
+0\le a_1,a_2,\dots a_n\le p-1\right\}\end{equation}
+where $x_1,x_2,\dots x_n$ is a polycyclic generating set for $G$.
+In fact, the fact that $\mathcal{B'}$ is a basis merely expresses the
+fact the $x_1,x_2,\dots x_n$ is a polycyclic generating set.
+In the example $G=Q_8$, arranging the $\left(a_1,a_2,\dots, a_n\right)$'s 
+in reverse lexicographic order, we have
+\begin{align*}
+\mathcal{B}'
+&=\left(\begin{array}{cccccccc}1,&x,&y,&xy,&z,&xz,&yz,&xyz\end{array}\right)\\
+&=\left(\begin{array}{cccccccc}1,&i,&j,&k,&-1,&-i,&-j,&-k\end{array}\right).
+\end{align*}
+
+However, a more computationally efficient basis of $kG$ is the following.
+\begin{equation}
+\mathcal{B}=\left\{\left.\rule{0pt}{12pt}\left(x_1-1\right)^{a_1}
+\left(x_2-1\right)^{a_2}\dots \left(x_n-1\right)^{a_n}\right|
+0\le a_1,a_2,\dots a_n\le p-1\right\}\end{equation}
+
+Let $I=x+1$, $J=y+1$, and $K=xy+1$.
+Observe that $I^2=J^2=z+1$.
+Observe also that $K=I+J+IJ$. The element $K$ was included
+to make the boundary maps below look more symmetric.
+Then in the example $G=Q_8$ we have
+\[\mathcal{B}=\left(\begin{array}{cccccccc}
+1,&I,&J,&IJ,&I^2,&I^3,&I^2J,&I^3J\end{array}\right)\]
+
+The boundary maps returned by \verb!BoundaryMaps! are with respect
+to the basis $\mathcal{B}$.
+\begin{verbatim}
+gap> Display(BoundaryMap(C,1));
+. 1 . . . . . .
+. . 1 . . . . .
+gap> Display(BoundaryMap(C,2));
+. 1 . . . . . . . . 1 . . . . .
+. . 1 . . . . . . 1 1 1 . . . .
+gap> Display(BoundaryMap(C,3));
+. . 1 . . . . . . 1 1 1 . . . .
+gap> Display(BoundaryMap(C,4));
+. . . . . . . 1
+gap> Display(BoundaryMap(C,5));
+. 1 . . . . . .
+. . 1 . . . . .
+\end{verbatim}
+Observe first that $\partial_5=\partial_1$,
+so we see that $P_\ast$ is in fact
+periodic as mentioned above. 
+The matrices for $\partial_n$ give only the image of $1_G$
+from each direct factor of $P_n$, since the images of the
+the other elements of $P_n$ are determined by linearity.
+\footnote{Note to users: if the matrices giving the action
+of $kG$ on itself with respect to $\mathcal{B}$, or the full
+matrices for the $\partial_n$'s would be useful to users,
+please let me know. I could include functions to return them,
+but I hesitate to overload the user with superfluous information.}
+For example, since \[\partial_1:P_1=kG\oplus kG\to P_0=kG,\]
+the matrix returned above tells us that $\partial_1\left(1_G,0\right)=I$
+and $\partial_1\left(0,1_G\right)=J$. Summarizing the information
+above, we have the following.
+
+\begin{equation}\label{boundary}
+\partial_n=\begin{cases}
+\begin{pmatrix}I\\J\end{pmatrix}&\text{if }n\equiv 1\pmod{4}\\
+\begin{pmatrix}I&J\\J&K\end{pmatrix}&\text{if }n\equiv 2\pmod{4}\\
+\begin{pmatrix}J&K\end{pmatrix}&\text{if }n\equiv 3\pmod{4}\\
+\begin{pmatrix}I^3J\end{pmatrix}&\text{if }n\equiv 0\pmod{4}
+\end{cases}\qquad\left(n\ge 1\right)
+\end{equation}
+
+The matrices in (\ref{boundary}) are meant to be multiplied on the right
+as usual in \textsf{GAP}.
+
+Now since $H^1\left(G\right)=\mathrm{Hom}_{kG}\left(P_1,k\right)$,
+we have a natural basis 
+$\left\{\eta_1,\eta_2\right\}$ of $H^1\left(G\right)$
+where $\eta_1$ is the map sending $\left(1_G,0\right)\mapsto 1_k$
+and $\left(0,1_G\right)\mapsto 0$ and $\eta_2$ is the other way
+around. 
+
+Then the following are chain maps representing $\eta_1$ and $\eta_2$.
+\begin{equation}\label{eta12}
+\begin{xy}\xymatrix{
+P_3\ar[r]^{\left(\begin{smallmatrix}J&K\end{smallmatrix}\right)}
+\ar[d]_{\left(\begin{smallmatrix}0&1\end{smallmatrix}\right)}
+&P_2\ar[r]^{\left(\begin{smallmatrix}I&J\\J&K\end{smallmatrix}\right)}
+\ar[d]_{\left(\begin{smallmatrix}1&0\\0&1\end{smallmatrix}\right)}
+&P_1\ar[rd]^{\eta_1}
+\ar[d]_{\left(\begin{smallmatrix}1\\0\end{smallmatrix}\right)}\\
+P_2\ar[r]_{\left(\begin{smallmatrix}I&J\\J&K\end{smallmatrix}\right)}
+&P_1\ar[r]_{\left(\begin{smallmatrix}I\\J\end{smallmatrix}\right)}
+&P_0\ar[r]^\epsilon
+&k
+}\end{xy}\qquad
+\begin{xy}\xymatrix{
+P_3\ar[r]^{\left(\begin{smallmatrix}J&K\end{smallmatrix}\right)}
+\ar[d]_{\left(\begin{smallmatrix}1&1\end{smallmatrix}\right)}
+&P_2\ar[r]^{\left(\begin{smallmatrix}I&J\\J&K\end{smallmatrix}\right)}
+\ar[d]_{\left(\begin{smallmatrix}0&1\\1+J&1\end{smallmatrix}\right)}
+&P_1\ar[rd]^{\eta_2}
+\ar[d]_{\left(\begin{smallmatrix}0\\1\end{smallmatrix}\right)}\\
+P_2\ar[r]_{\left(\begin{smallmatrix}I&J\\J&K\end{smallmatrix}\right)}
+&P_1\ar[r]_{\left(\begin{smallmatrix}I\\J\end{smallmatrix}\right)}
+&P_0\ar[r]^\epsilon
+&k
+}\end{xy}
+\end{equation}
+In the rows of the diagrams in (\ref{eta12}) we have copies
+of $P_\ast$, while in the columns, we have maps making the diagrams
+commute. These maps were produced by inspection and by \dots
+well, let's just say that I used \textsf{GAP} a tiny bit.
+Fortunately, this is exactly what the \textsf{CRIME} package
+does for us, as we will see below.
+
+For the purpose of multiplication,
+the pictures in (\ref{eta12}) represent
+$\eta_1$ and $\eta_2$, so the composition
+of the two pictures represents the product,
+as in the following picture.
+
+\begin{equation}\label{prod}
+\begin{xy}\xymatrix{
+P_3\ar[r]
+\ar[d]_{\left(\begin{smallmatrix}0&1\end{smallmatrix}\right)}
+&P_2\ar[r]
+\ar[d]_{\left(\begin{smallmatrix}1&0\\0&1\end{smallmatrix}\right)}
+&P_1\ar[rd]^{\eta_1}
+\ar[d]_{\left(\begin{smallmatrix}1\\0\end{smallmatrix}\right)}\\
+P_2\ar[r]
+\ar[d]_{\left(\begin{smallmatrix}0&1\\1+J&1\end{smallmatrix}\right)}
+&P_1\ar[r]\ar[dr]^{\eta_2}
+\ar[d]_{\left(\begin{smallmatrix}0\\1\end{smallmatrix}\right)}
+&P_0\ar[r]^\epsilon
+&k\\
+P_1\ar[r]
+&P_0\ar[r]^\epsilon
+&k
+}\end{xy}
+\end{equation}
+
+From (\ref{prod}), we can see that $\eta_1\eta_2=\zeta_2$
+where $\left\{\zeta_1,\zeta_2\right\}$ is the natural basis of
+$H^2\left(G\right)$.
+This is the map going from $P_2$ in the top row to $k$
+in the bottom, as in the diagrams in (\ref{eta12}).
+
+By composing the first diagram with itself, we find that
+$\eta_1^2=\zeta_1$.
+Similarly, by more chain map production and composition,
+we find that $\eta_2\zeta_2$ is a nonzero
+element of degree 3, but that no product of 
+elements of degree $<4$ produces
+a nonzero element of degree 4.
+
+Let $\left\{\xi\right\}$ be the natural 
+basis of $H^4\left(G\right)$.
+We lift $\xi$ to a chain map.
+\begin{equation}\label{xi}
+\begin{xy}\xymatrix{
+P_8\ar[r]^{\left(\begin{smallmatrix}I^3J\end{smallmatrix}\right)}
+\ar[d]_1
+&P_7\ar[r]^{\left(\begin{smallmatrix}J\\K\end{smallmatrix}\right)}
+\ar[d]_1
+&P_6\ar[r]^{\left(\begin{smallmatrix}I&J\\J&K\end{smallmatrix}\right)}
+\ar[d]_1
+&P_5\ar[r]^{\left(\begin{smallmatrix}I&J\end{smallmatrix}\right)}
+\ar[d]_1
+&P_4\ar[rd]^{\xi}\ar[d]^1\\
+P_4\ar[r]_{\left(\begin{smallmatrix}I^3J\end{smallmatrix}\right)}
+&P_3\ar[r]_{\left(\begin{smallmatrix}J\\K\end{smallmatrix}\right)}
+&P_2\ar[r]_{\left(\begin{smallmatrix}I&J\\J&K\end{smallmatrix}\right)}
+&P_1\ar[r]_{\left(\begin{smallmatrix}I&J\end{smallmatrix}\right)}\ar[r]
+&P_0\ar[r]^\epsilon
+&k
+}\end{xy}
+\end{equation}
+This time, the production of the chain map is easy because
+of the periodicity of $P_\ast$. 
+From (\ref{xi}), we see that all the elements of degree 4--7 
+arise as products of $\xi$ with elements of degree
+0--3, which in turn are products of $\eta_1$ and $\eta_2$.
+
+Thus, by recursion, we find that 
+$\eta_1$, $\eta_2$, and $\xi$ generate the entire ring
+$H^\ast\left(G\right)$.
+This is precisely what \textsf{GAP} tells us from
+the following commands.
+\begin{verbatim}
+gap> CohomologyGenerators(C,10);
+[ 1, 1, 4 ]
+gap> A:=CohomologyRing(C,10);
+<algebra of dimension 17 over GF(2)>
+gap> LocateGeneratorsInCohomologyRing(C);
+[ v.2, v.3, v.7 ]
+\end{verbatim}
+
+\verb!CohomologyGenerators! merely tells us the
+degrees of the generators, and they agree with
+those which we computed above.
+
+The ring returned by \verb!CohomologyRing! has basis 
+\verb![A.1, A.2, .. A.17]! corresponding with 
+the concatenation of the natural bases
+of the $H^i\left(G\right)$'s. Thus, \verb!A.1!
+is the identity element, \verb!A.2! and \verb!A.3!
+correspond with $\eta_1$ and $\eta_2$, 
+\verb!A.4! and \verb!A.5! correspond with $\zeta_1$ and $\zeta_2$,
+etc. Observe that $17=\sum_{i=0}^{10} b_i$
+which explains the dimension of \verb!A!. The true
+cohomology ring is infinite-dimensional, so that
+\verb!A! can be seen as a degree-10-truncation,
+that is, 
+$\mathtt{A}\cong H^\ast\left(G\right)/J_{>10}$ where
+$J_{>10}$ is the subring of all elements of degree $>10$.
+
+The following commands verify the calculations mentioned above.
+\begin{verbatim}
+gap> A.2^2;
+v.4
+gap> A.2*A.3;
+v.5
+gap> A.3*A.5;
+v.6
+\end{verbatim}
+
+The command \verb!LocateGeneratorsInCohomologyRing! tells
+us that $\eta_1$, $\eta_2$, and $\xi$ correspond with
+\verb!A.2!, \verb!A.3!, and \verb!A.7!, which we had
+already deduced by degree considerations, but if
+$\dim H^4\left(G\right)$ had been greater than 1,
+we wouldn't have known which element corresponded
+with $\xi$.
+
+Finally, \textsf{GAP} gives us a presentation of
+$H^\ast\left(G\right)$ with the following command.
+\begin{verbatim}
+gap> CohomologyRelators(C,10);
+[ [ z, y, x ], [ z^2+z*y+y^2, y^3 ] ]
+\end{verbatim}
+This tells us that
+\[H^\ast\left(G\right)\cong k\left[z,y,x\right]
+\left/\left(z^2+yz+y^2,y^3\right)\right.\]
+is a polynomial ring in the variables $z$, $y$ and $x$, 
+modulo the ideal generated by 
+$z^2+yz+y^2$ and $y^3$.
+
+\end{document}

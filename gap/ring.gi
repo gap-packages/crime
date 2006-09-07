@@ -29,6 +29,9 @@ InstallOtherMethod(CohomologyRing,
   [IsGroup,IsPosInt],
   function(G,n)
     local C;
+    if not IsFinite(G) or not IsPGroup(G)
+      then TryNextMethod();
+    fi;
     C:=CohomologyObject(G);
     CohomologyRing(C,n);
     return C!.A;

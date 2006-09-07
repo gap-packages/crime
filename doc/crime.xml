@@ -4,7 +4,7 @@
 
 <TitlePage>
 <Title>The <Package>Crime</Package> Package</Title>
-<Version>Version 0.2</Version>
+<Version>Version 0.3</Version>
 <Author>Marcus Bishop
   <Email>marcus.bishop@epfl.ch</Email>
 </Author>
@@ -12,7 +12,7 @@
     We adopt the copyright regulations of &GAP; as detailed in the
     copyright notice in the &GAP; manual. </Copyright>
 <Acknowledgements>
-This project wouldn't have been possible without Jon Carlson.
+This project would not have been possible without Jon Carlson.
 Jon devised the algorithms used by <K>ProjectiveResolution</K>,
 <K>CohomologyGenerators</K>, and <K>CohomologyRelators</K>,
 having already implemented them in <Package>Magma</Package>
@@ -21,7 +21,7 @@ and sharing these programs with me.
 <P/>Thank you also to Laurent Bartholdi for his helpful
 suggestions regarding the &GAP; implementation and the
 user interface. Laurent also tested the program extensively
-and uncovered many bugs.
+and uncovered several bugs.
 </Acknowledgements>
 
 </TitlePage>
@@ -39,8 +39,8 @@ do the following.
 <![CDATA[
 $ cd /usr/local/gap4r4/pkg
 $ su
-% wget 'http://mad.epfl.ch/~bishop/Crime/crime-0.2.tar.gz'
-% tar xvzvf crime-0.2.tar.gz 
+% wget 'http://mad.epfl.ch/~bishop/Crime/crime-0.3.tar.gz'
+% tar xvzvf crime-0.3.tar.gz 
 ]]>
 </Example>
 In this situation, users would then load the package
@@ -62,8 +62,8 @@ directory such as <K>/tmp</K> as follows.
 <![CDATA[
 $ mkdir /tmp/pkg
 $ cd /tmp/pkg
-$ wget 'http://mad.epfl.ch/~bishop/Crime/crime-0.2.tar.gz'
-$ tar xvzvf crime-0.2.tar.gz 
+$ wget 'http://mad.epfl.ch/~bishop/Crime/crime-0.3.tar.gz'
+$ tar xvzvf crime-0.3.tar.gz 
 $ gap -l ';/tmp'
 gap> LoadPackage("crime");
 ]]></Example>
@@ -84,7 +84,8 @@ described in Chapter <Ref Chap="test"/>.
 <Chapter> <Heading>Usage</Heading>
 
 All the functions described below taking an argument <K>n</K>
-except <K>CohomologyRing</K> do whatever the 
+except <K>CohomologyRing</K>, <K>CohomologyRelators</K>
+and <K>InducedHomomorphismOnCohomology</K> do whatever the 
 manual says they do until some stage <K>n</K>, where
 <K>n</K> is normally the homological degree.
 These functions are idempotent in the sense that
@@ -95,12 +96,12 @@ calculations left off.
 
 <Section> <Heading>Cohomology Objects</Heading>
 
-The calculation of group cohomology involves
-several computations, the results of 
+The computation of group cohomology involves
+several calculations, the results of 
 which are reused in later calculations, 
 and are thus collected in an object of 
-type <K>CObject</K>, created with the 
-following operation.
+type <K>CObject</K>, which is created with the 
+following command.
 
 <ManSection>
 <Oper Name="CohomologyObject" Arg="G,k,M" 
@@ -123,7 +124,16 @@ the field
 the trivial &MeatAxe; <M>kG</M>-module.
 </Description></ManSection>
 
-The cohomology object is used to store, in addition
+<P/>We emphasize that in the first invocation,
+<K>k</K> can be any field of characteristic
+<M>p</M> and that <K>M</K> can be any &MeatAxe; module
+over <M>kG</M>. However, since the case
+<Alt Only="LaTeX"><M>k=\mathbb{F}_p</M>,</Alt>
+<Alt Not="LaTeX"><M>k=GF(p)</M>,</Alt> and
+<M>M=k</M> is probabaly the most common, the
+second invocation is provided for convenience.
+
+<P/>The cohomology object is used to store, in addition
 to the group, field, and module, 
 the boundary maps, the Betti numbers, the multiplication
 table, etc.
@@ -137,15 +147,15 @@ a <M>kG</M>-module <M>M</M>,
 the function below computes a minimal projective resolution
 <Alt Only="LaTeX">
 <Display> P_n\rightarrow\cdots\rightarrow P_2\rightarrow P_1
-\rightarrow P_0\rightarrow k\rightarrow 0 </Display>
-where <M>P_i=(kG)^{b_i}</M> 
+\rightarrow P_0\rightarrow M\rightarrow 0 </Display>
+where <M>P_i=\left(kG\right)^{b_i}</M> 
 </Alt>
 <Alt Not="LaTeX">
-<Display>P_n -> ... P_2 -> P_1 -> P_0 -> k -> 0</Display>
+<Display> P_n -> ... P_2 -> P_1 -> P_0 -> M -> 0</Display>
 where <M>P_i=(kG)^(b_i)</M> 
 </Alt>
-for certain numbers 
-<M>b_i</M>, the <E>Betti numbers</E> of the resolution.
+for certain numbers <M>b_i</M>, 
+the <E>Betti numbers</E> of the resolution.
 Then the groups 
 <Alt Only="LaTeX">
 <M>\mathrm{Ext}^n_{kG}\left(M,N\right)</M></Alt>
@@ -165,8 +175,8 @@ and if <M>N=k</M> is the trivial <M>kG</M>-module, then
 Comm="Computes a minimal projective resolution"/>
 <Returns>a list containing the Betti numbers 
 <M>b_0, b_1,\ldots, b_n</M>.</Returns>
-<Description>
 
+<Description>
 Given a cohomology object <K>C</K> having
 components <M>G</M>, <M>k</M>, and <M>M</M>,
 this function computes the first <K>n</K><M>+1</M> terms 
@@ -179,6 +189,27 @@ for <M>0\leq i\leq n</M>,</Alt>
 for <M>i=0,1,...,n</M>,</Alt> 
 and returns the numbers <M>b_i</M> as a list.
 </Description></ManSection>
+
+<ManSection><Oper Name="BoundaryMap" Arg="C,n"
+Comm="Returns the nth boundary map"/>
+<Returns>the <M>n</M>th boundary map.</Returns>
+<Description>
+Given the cohomology object <K>C</K>, this function
+computes a projective resolution to degree <K>n</K> 
+if it hasn't been computed already,
+and returns the <K>n</K>th boundary map.
+
+<P/>The map is returned is a
+<M>b_n</M> -by- <M>\left|G\right|b_{n-1}</M> matrix,
+having in the <M>i</M>th row the image of the element
+<M>1_G</M> from the <M>i</M>th direct summand of
+<M>P_n</M>.
+
+<P/>See the file <K>doc/example.*</K> for an example
+of the usage and interpretation of the result of
+this function.
+</Description></ManSection>
+
 </Section>
 
 <Section><Heading>Cohomology Generators and Relators</Heading>
@@ -229,6 +260,15 @@ variables <K>x&uscore;1</K>, <K>x&uscore;2</K>,  <K>x&uscore;3</K>,
 <M>\ldots</M>
 otherwise. The second is a list of polynomials
 in the variables from the first list.
+
+<P/>While this isn't likely to occur, we point
+out that if there are 12 or more generators 
+and some of the indeterminates
+<K>x&uscore;1</K>, <K>x&uscore;2</K>,  <K>x&uscore;3</K>,
+<M>\ldots</M> have already been named, say by a previous
+call to <K>CohomologyRelators</K>, then these variables
+will retain their old names. If this is confusing,
+restart &GAP; and do it again.
 
 <P/>These two lists should be interpreted as follows. 
 The degree <K>n</K> truncation of the cohomology ring
@@ -290,7 +330,7 @@ taking <M>z=z+y</M>, giving
 <Section Label="ring"><Heading>Cohomology Rings</Heading>
 See <Cite Key="carlson"/> for the details of the calculation
 of cohomology products using composition of chain maps.
-See also the file <K>doc/explanation.tex</K>
+See also the file <K>doc/explanation.*</K>
 for an explanation of the implementation.
 
 <ManSection>
@@ -320,16 +360,17 @@ immediately, throwing away all intermediate calculations.
 <K>n</K> truncation of the infinite-dimensional
 cohomology ring. A consequence of this is that
 multiplying two elements whose product
-has degree greater than <K>n</K> results in zero.
+has degree greater than <K>n</K> results in zero,
+whether or not the product is really zero.
 
 <P/>Observe also that calling <K>CohomologyRing</K> 
 a second time with a bigger <K>n</K> does 
 <E>not</E> extend the previous ring, 
 but rather, recalculates the entire ring
-from the beginning. Admittedly, this is rather
-inconvenient, and I promise to think about extending
-the previous ring the next time I find myself
-drinking a martini on the beach with my laptop.
+from the beginning. Extending the previous
+ring appears not to be worth the effort
+for technical reasons, since almost everything
+would need to be recalculated again anyway.
 </Description></ManSection>
 
 <ManSection>
@@ -392,7 +433,7 @@ Having already called <K>CohomologyRing</K>
 (see <Ref Subsect="CohomologyRing"/>),
 this function returns a list of elements of
 the cohomology ring which together with the
-identity element of the ring generate it as a ring.
+identity element generate the cohomology ring.
 
 <P/>This function is a wrapper for <K>CohomologyGenerators</K>
 (see <Ref Subsect="CohomologyGenerators"/>),
@@ -415,14 +456,13 @@ true
 </Section>
 
 <Section><Heading>Induced Maps</Heading>
-Let <M>f: G \rightarrow H</M> be a group homomorphism
-for <M>p</M>-groups <M>G</M> and <M>H</M>.
+Let <M>f: H \rightarrow G</M> be a group homomorphism.
 Then <M>f</M> induces a homomorphism on cohomology 
 <Alt Only="LaTeX">
-<M>H^\ast\left(H,k\right)
-\to H^\ast\left(G,k\right)</M>
+<M>H^\ast\left(G,k\right)
+\to H^\ast\left(H,k\right)</M>
 </Alt><Alt Not="LaTeX">
-<M>H\ast(H,k) \rightarrow H\ast(G,k)</M></Alt>
+<M>H\ast(G,k) \rightarrow H\ast(H,k)</M></Alt>
 which is returned by the following function.
 
 <ManSection>
@@ -432,17 +472,33 @@ Comm="Computes the induced homomorphism on cohomology"/>
 <Description>
 This function returns the induced homomorphism on cohomology
 <Alt Only="LaTeX">
-<M>H^\ast\left(H,k\right)
-\to H^\ast\left(G,k\right)</M>
+<M>H^\ast\left(G,k\right)
+\to H^\ast\left(H,k\right)</M>
 </Alt><Alt Not="LaTeX">
-<M>H\ast(H,k) \rightarrow H\ast(G,k)</M></Alt>
-where the groups <M>G</M> and <M>H</M> are the components
+<M>H\ast(G,k) \rightarrow H\ast(H,k)</M></Alt>
+where the groups <M>H</M> and <M>G</M> are the components
 of the cohomology objects <K>C</K> and <K>D</K>
-and <M>f: G \rightarrow H</M> is a group homomorphism.
+and <M>f: H \rightarrow G</M> is a group homomorphism.
 If the cohomology rings have not yet been
 calculated, they will be computed to degree <M>n</M>,
 and in this case, they can then be accessed 
 by calling <K>CohomologyRing</K> (see <Ref Subsect="CohomologyRing"/>). 
+</Description></ManSection>
+
+<ManSection>
+<Func Name="Inclusion" Arg="H,G" Comm="Returns the inclusion"/>
+<Returns>the inclusion <M>H\rightarrow G</M></Returns>
+<Description>This function returns the group homomorphism
+<M>H\rightarrow G</M> when <M>H</M> is a subgroup
+of <M>G</M>. The returned map can be used as the
+<K>f</K> argument of <K>InducedHomomorphismOnCohomology</K>,
+in which case the induced homomorphism is the
+restriction map
+<Alt Only="LaTeX">
+<M>\mathrm{Res}^G_H:H^\ast\left(G,k\right)
+\to H^\ast\left(H,k\right)</M>
+</Alt><Alt Not="LaTeX">
+<M>Res: H\ast(G,k) \rightarrow H\ast(H,k)</M></Alt>.
 </Description></ManSection>
 
 The following example calculates the
@@ -452,28 +508,25 @@ into the dihedral group of size 8.
 
 <Example>
 <![CDATA[
-gap> G:=CyclicGroup(4);H:=DihedralGroup(8);
-<pc group of size 4 with 2 generators>
+gap> G:=DihedralGroup(8);H:=Subgroup(G,[G.2]);
 <pc group of size 8 with 3 generators>
-gap> C:=CohomologyObject(G);D:=CohomologyObject(H);
+Group([ f2 ])
+gap> C:=CohomologyObject(H);D:=CohomologyObject(G);
 <object>
 <object>
-gap> f:=GroupHomomorphismByImages(G,H,[G.1],[H.2]);
-[ f1 ] -> [ f2 ]
-gap> F:=InducedHomomorphismOnCohomology(C,D,f,10);
-CanonicalBasis( <algebra of dimension 66 over GF(2)> ) ->
-[ v.1, 0*v.1, v.2, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1 ]
-gap> B:=CohomologyRing(D,10);
+gap> i:=Inclusion(H,G);
+[ f2 ] -> [ f2 ]
+gap> Res:=InducedHomomorphismOnCohomology(C,D,i,10);;
+gap> A:=CohomologyRing(D,10);
 <algebra of dimension 66 over GF(2)>
-gap> B.1^F;B.2^F;
+gap> LocateGeneratorsInCohomologyRing(D);
+[ v.2, v.3, v.6 ]
+gap> A.1^Res; A.2^Res; A.3^Res; A.6^Res;
 v.1
-0*v.1]]>
+0*v.1
+v.2
+v.3
+]]>
 </Example>
 
 </Section>
@@ -481,7 +534,7 @@ v.1
 See <Cite Key="kraines"/> for the definitions
 and <Cite Key="borge"/> for the details of the
 calculation using the Yoneda cocomplex.
-See also the file <K>doc/explanation.tex</K>
+See also the file <K>doc/explanation.*</K>
 for an explanation of the implementation.
 <ManSection>
 <Func Name="MasseyProduct" Arg="x1, x2, ... , xn"
@@ -489,7 +542,7 @@ Comm="Computes the Massey product &tlt;L&tgt;"/>
 <Returns>the Massey product 
 <Alt Only="LaTeX"> <M>\left\langle
 x_1,x_2,\dots,x_n\right\rangle</M></Alt>
-<Alt Not="LaTeX"> <M>\langle x1, x2, ... , xn\rangle</M></Alt>.
+<Alt Not="LaTeX"> <M>\left\langle x1, x2, ... , xn\right\rangle</M></Alt>.
 </Returns>
 <Description> Given elements
 <Alt Only="LaTeX"> <M>x_1,x_2,\dots,x_n</M></Alt>
@@ -500,7 +553,7 @@ this function computes the <M>n</M>-fold Massey product
 <Alt Only="LaTeX">
 <M>\left\langle x_1,x_2,\ldots,x_n\right\rangle</M></Alt>
 <Alt Not="LaTeX">
-<M>\langle&nbsp;x1, x2, \ldots , xn&nbsp;\right\rangle</M></Alt>
+<M>\left\langle&nbsp;x1, x2, \ldots , xn&nbsp;\right\rangle</M></Alt>
 provided that the lower-degree Massey products
 <M>\left\langle&nbsp;x_i ,x_{{i+1}}, \ldots , x_j&nbsp;\right\rangle</M> vanish
 for all <M>1 \leq i &lt; j \leq n</M>, and returns <K>fail</K> otherwise.
@@ -515,7 +568,7 @@ are both given by
 <Alt Only="LaTeX">
 <M>k\left\langle z, y\right\rangle\left/\left(z^2\right)\right.</M>,
 </Alt><Alt Not="LaTeX">
-<M>k\langle&nbsp;z,y&nbsp;\rangle/\left(z^2\right)</M>,</Alt>
+<M>k\left\langle&nbsp;z,y&nbsp;\right\rangle/\left(z^2\right)</M>,</Alt>
 that is, they are isomorphic as rings. However, the following
 example shows that
 <M>\left\langle&nbsp;z, z, z&nbsp;\right\rangle</M>
@@ -685,6 +738,6 @@ Time:  8:14:32.187
 </Example>
 </Chapter>
 </Body>
-<Bibliography Databases="crime" />
+<Bibliography Databases="crime" Style="plain"/>
 <TheIndex/>
 </Book>

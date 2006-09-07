@@ -5,10 +5,10 @@
 SetPackageInfo( rec(
   PackageName := "Crime",
   Subtitle := "A GAP Package to Calculate Group Cohomology and Massey Products",
-  Version := "0.2",
-  Date := "24/07/2006",
+  Version := "0.3",
+  Date := "7/09/2006",
   ArchiveURL := 
-    "http://mad.epfl.ch/~bishop/Crime/crime-0.2",
+    "http://mad.epfl.ch/~bishop/Crime/crime-0.3",
   ArchiveFormats := ".tar.gz",
 
   Persons := [

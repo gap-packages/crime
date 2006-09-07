@@ -9,5 +9,5 @@ nice nohup gap -o 1000M batch.g &
 
 and then log out of the machine while the 
 program runs. Come back later for the results
-and kill the GAP process. Do this on Saturday
-if possible.
+and kill the GAP process.
+Do this on Saturday or at night if possible.
