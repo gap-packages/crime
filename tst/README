@@ -1,7 +1,7 @@
 The nice way to run long-running batch files
 such as batch.g, which computes the cohomology
 groups for all groups of size 16, is on someone
-else's machine. Your department probabally has
+else's machine. Your department probably has
 a machine set up just for this purpose. Log on to
 this machine and invoke the script as follows.
 

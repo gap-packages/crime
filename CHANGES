@@ -3,10 +3,9 @@ Changes from the 0.2 to the 0.3 versions.
 Most importantly, the function DiagonalAction
 uses a for-loop in place of the call to
 KroneckerProduct. I thought I was so clever
-for having written the entire function on one line
-with one single call to KroneckerProduct, but in fact,
-KroneckerProduct was taking up an inordinate amount
-of processor time.
+for having written the entire function on one line,
+but in fact, KroneckerProduct was taking 
+up an inordinate amount of processor time.
 
 The same function has been renamed DownTheMiddle
 to avoid a conflict with another GAP package.
@@ -35,7 +34,25 @@ This information is kept in order to fix a bug in Intersperse.
 NiceIndeterminate was eliminated and incorporated into
 CohomologyRelators.
 
-CohomologyObject and CohomologyRing both use the filter
-IsPGroup instead of IsGroup.
+CohomologyObject and CohomologyRing both test that
+G is a p-group via the TryNextMethod() mechanism.
 
-Added operation Inclusion.
+Added functions Inclusion and BoundaryMap.
+
+Added file doc/example.* which gives a better
+explanation of the usage of BoundaryMap then the
+manual.
+
+Wrote a slick perl script packagecrime.pl to 
+archive the package and another slick perl
+script perl.pl to print all the code without
+the comments.
+
+Included p as a component of the CObject to avoid all
+the calls to PrimePGroup and Characteristic.
+
+Took away the K argument from CohomologyObject,
+as K can be determined from M, and indeed, should
+be the same.
+
+Improved the argument testing in CohomologyObject.

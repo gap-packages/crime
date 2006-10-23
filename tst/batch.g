@@ -6,7 +6,6 @@ LoadPackage("crime");
 s:=0;
 f:=Concatenation(String(n),"-group_cohomology.txt");
 for j in [1..NumberSmallGroups(n)] do
-  Unbind(C);
   AppendTo(f,"SmallGroup(",n,",",j,")\n");
   G:=SmallGroup(n,j);
   C:=CohomologyObject(G);

@@ -11,7 +11,7 @@ k:=GF(2);
 M:=TrivialGModule(G,k);
 
 Print("CohomologyObject, first method, characterisic 2\n");
-C:=CohomologyObject(G,k,M);
+C:=CohomologyObject(G,M);
 Print("CohomologyObject, second method characeristic 2\n");
 D:=CohomologyObject(H);
 
