@@ -6,9 +6,9 @@ cohomology and Massey products in the cohomology
 ring.
 
 To install, download the package from
-http://mad.epfl.ch/~bishop/Crime/crime-1.0.tar.gz
+http://math.uic.edu/~marcus/Crime/crime-1.1.tar.gz
 Put the package in GAP's pkg directory and unpack:
-tar xvzvf crime-1.0.tar.gz
+tar xvzvf crime-1.1.tar.gz
 
 See the documentation in the doc directory for
 more information.

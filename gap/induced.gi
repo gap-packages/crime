@@ -3,7 +3,7 @@
 
 InstallGlobalFunction(InducedHomomorphismOnCohomology,
   function(C,D,f,n)
-  local B,P,Q,L,F,c,i,j,k,I,J;
+  local B,P,Q,M,L,F,c,i,j,k,I,J;
   
   if not C!.K=D!.K then 
     Error("Fields not the same\n");fi;
@@ -22,12 +22,13 @@ InstallGlobalFunction(InducedHomomorphismOnCohomology,
   # gives the action of H on kG.
   P:=Pcgs(C!.G);
   Q:=Pcgs(D!.G);
+  M:=IdentityMat(Size(D!.G),D!.K);
   L:=List(P,x->
     LinearCombinationPcgs(
-      D!.L[1],
+      D!.L[1]+M,
       ExponentsOfPcElement(Q,x^f),
       IdentityMat(Size(D!.G),C!.K)
-    )
+    )-M
   );
   
   # Lift 1:K->K to a chain map.
