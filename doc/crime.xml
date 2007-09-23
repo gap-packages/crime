@@ -4,64 +4,74 @@
 
 <TitlePage>
 <Title>The <Package>Crime</Package> Package</Title>
-<Version>Version 1.1</Version>
+<Version>Version 1.2</Version>
 <Author>Marcus Bishop
   <Email>marcus.bishop@gmail.com</Email>
 </Author>
-<Copyright> &copyright; 2006 Marcus Bishop <P/>
-    We adopt the copyright regulations of &GAP; as detailed in the
-    copyright notice in the &GAP; manual. </Copyright>
+
+<Copyright> &copyright; 2006, 2007 Marcus Bishop <P/>
+Crime is free software which is distributed under
+the GNU Public Licence, version 2, and may be
+redistributed under the GNU Public Licence, version 2
+or later (at your preference). 
+See the file COPYING for detailed information
+</Copyright>
+
 <Acknowledgements>
 This project would not have been possible without Jon Carlson.
 Jon devised the algorithms used by <K>ProjectiveResolution</K>,
 <K>CohomologyGenerators</K>, and <K>CohomologyRelators</K>,
-having already implemented them in <Package>Magma</Package>
-and sharing these programs with me.
+having already implemented them in <Package>Magma</Package>,
+and shared these programs with me.
+<P/>
+The documentation for Crime was prepared using the GAPdoc package
+by Frank L\"ubeck and Max Neunh\"offer
 </Acknowledgements>
 
 </TitlePage>
 
 <TableOfContents/>
 <Body>
-<Chapter> <Heading>Installation and Loading</Heading>
+<Chapter><Heading>Installation and Loading</Heading>
 Like other &GAP; packages, you download and unpack 
 this package into &GAP;'s <K>pkg</K> directory. 
 For example, if you were using some Unix derivative 
 and &GAP; were installed in the directory 
 <K>/usr/local/gap4r4</K>, then you would
 do the following.
-<Example>
+<Log>
 <![CDATA[
 $ cd /usr/local/gap4r4/pkg
 $ su
-% wget 'http://math.uic.edu/~marcus/Crime/crime-1.1.tar.gz'
-% tar xvzvf crime-1.1.tar.gz 
+% wget 'http://math.uic.edu/~marcus/Crime/crime-1.2.tar.gz'
+% tar xvzvf crime-1.2.tar.gz 
 ]]>
-</Example>
+</Log>
 In this situation, users would then load the package
 with the <K>LoadPackage</K> command.
-<Example>
+<Log>
 <![CDATA[
 $ gap
 gap> LoadPackage("crime");
 ]]>
-</Example>
+</Log>
 
 Users not having root access, using
 someone else's computer, or having bad
 relationships with their network administrators,
 could install the package into their home 
 directories or into some other writable
-directory such as <K>/tmp</K> as follows.
-<Example>
+directory such as <K>/tmp</K>, and load
+the package as follows.
+<Log>
 <![CDATA[
 $ mkdir /tmp/pkg
 $ cd /tmp/pkg
-$ wget 'http://math.uic.edu/~marcus/Crime/crime-1.1.tar.gz'
-$ tar xvzvf crime-1.1.tar.gz 
+$ wget 'http://math.uic.edu/~marcus/Crime/crime-1.2.tar.gz'
+$ tar xvzvf crime-1.2.tar.gz 
 $ gap -l ';/tmp'
 gap> LoadPackage("crime");
-]]></Example>
+]]></Log>
 
 Finally, it would be a good idea to run the test file
 to confirm that all the functions work.
@@ -72,17 +82,14 @@ gap> ReadPackage("crime","tst/test.g");
 You can count yourself lucky if &GAP; doesn't complain
 about anything. There is also a longer running test
 file for those having ample free time
-described in Chapter <Ref Chap="test"/>.
+described in Appendix <Ref Chap="test"/>.
 
 </Chapter>
 
-<Chapter> <Heading>Usage</Heading>
-
-All the functions described below taking an argument <K>n</K>
-except <K>CohomologyRing</K>, <K>CohomologyRelators</K>
-and <K>InducedHomomorphismOnCohomology</K> do whatever the 
-manual says they do until some stage <K>n</K>, where
-<K>n</K> is normally the homological degree.
+<Chapter><Heading>Usage</Heading>
+Unless otherwise specified,
+all the functions described below taking an argument <K>n</K>
+do whatever the manual says they do up to homological degree <K>n</K>.
 These functions are idempotent in the sense that
 called a second time with the same argument <K>n</K>, they
 do nothing, but called with a bigger <K>n</K>,
@@ -99,36 +106,40 @@ type <K>CObject</K>, which is created with the
 following command.
 
 <ManSection>
-<Oper Name="CohomologyObject" Arg="G,M" 
+<Oper Name="CohomologyObject" Arg="G, M" 
 Comm="Makes cohomology object"/>
 <Oper Name="CohomologyObject" Arg="G"
 Comm="Makes cohomology object"/>
-<Returns>a cohomology object.</Returns>
+<Returns>a <K>CObject</K>.</Returns>
 <Description>
-This function creates a cohomology object having components
+This function creates a <K>CObject</K> having components
 the <M>p</M>-group <M>G</M>
-and the &MeatAxe; <M>kG</M>-module <M>M</M>.
-
+and the &MeatAxe; module <M>M</M>, which should be
+a <M>kG</M>-module with <M>G</M> the same group and
+<M>k</M> a field of characteristic <M>p</M>.
+Note that &MeatAxe; modules record <M>k</M> but not
+<M>G</M>, which is why this operation requires the user
+to specify <M>G</M> but not <M>k</M>.
+<P/>
+Fortunately, most users won't need to know anything
+about this &MeatAxe; business, since they will
+be interested only in the case where 
+<Alt Only="LaTeX"><M>k=\mathbb{F}_p</M>,</Alt>
+<Alt Not="LaTeX"><M>k=GF(p)</M>,</Alt> and
+<M>M=k</M>, the trivial <M>kG</M>-module. 
 The second invocation creates a cohomology 
 object having components
 the <M>p</M>-group <M>G</M> and
 the trivial &MeatAxe; <M>kG</M>-module
-where <M>k</M> is the field 
-<Alt Only="LaTeX"><M>\mathbb{F}_p</M>.</Alt>
-<Alt Not="LaTeX"><M>GF(p)</M>.</Alt>
+<Alt Only="LaTeX"><M>k=\mathbb{F}_p</M>.</Alt>
+<Alt Not="LaTeX"><M>k=GF(p)</M>.</Alt>
 </Description></ManSection>
+<P/>
 
-<P/>We emphasize that in the first invocation,
-<K>M</K> can be any &MeatAxe; module
-over <M>kG</M> where
-<M>k</M> is any field of characteristic
-<M>p</M>.
-But since the case
-<Alt Only="LaTeX"><M>k=\mathbb{F}_p</M>,</Alt>
-<Alt Not="LaTeX"><M>k=GF(p)</M>,</Alt> and
-<M>M=k</M> is probably the most common, the
-second invocation is provided for convenience.
-At the present, <K>ProjectiveResolution</K>
+We emphasize that in the first invocation,
+<M>k</M> can be any field of characteristic
+<M>p</M> and <K>M</K> can be any &MeatAxe; module
+over <M>kG</M>, and that <K>ProjectiveResolution</K>
 works when <K>M</K> is an arbitrary &MeatAxe; module, 
 but all the functions dealing with the ring-structure of 
 <Alt Only="LaTeX"><M>H^\ast\left(G,k\right)</M> 
@@ -144,9 +155,9 @@ table, etc.
 <Section><Heading>Minimal Projective Resolutions</Heading>
 
 Given a <M>p</M>-group <M>G</M>, a field
-<M>k</M> of characteristic <M>p</M> and
+<M>k</M> of characteristic <M>p</M>, and
 a <M>kG</M>-module <M>M</M>,
-the function below computes the first few 
+the function below computes the first <M>n</M>
 terms of the minimal projective resolution
 of <M>M</M>
 <Alt Only="LaTeX">
@@ -162,31 +173,34 @@ for certain numbers <M>b_i</M>,
 the <E>Betti numbers</E> of the resolution.
 The minimal <M>kG</M>-projective resolution of <M>M</M>
 is unique up to chain isomorphism.
-Then the groups 
+Because of the minimality of
+<Alt Only="LaTeX"><M>P_\ast</M>,</Alt><Alt Not="LaTeX"><M>P</M>,</Alt>
+the groups 
 <Alt Only="LaTeX">
-<M>\mathrm{Ext}^n_{kG}\left(M,N\right)</M></Alt>
-<Alt Not="LaTeX"><M>Ext^n(M,N)</M></Alt>
+<M>\mathrm{Ext}^i_{kG}\left(M,N\right)</M></Alt>
+<Alt Not="LaTeX"><M>Ext^i(M,N)</M></Alt>
 are simply 
 <Alt Only="LaTeX">
-<M>\mathrm{Hom}_{kG}\left(P_n,N\right)</M>,</Alt>
-<Alt Not="LaTeX"><M>Hom(P_n,N)</M>,</Alt>
-and if <M>M=N=k</M> is the trivial <M>kG</M>-module, then
+<M>\mathrm{Hom}_{kG}\left(P_i,N\right)</M>,</Alt>
+<Alt Not="LaTeX"><M>Hom(P_i,N)</M>,</Alt>
+and if <M>M</M> and <M>N</M> are both the trivial <M>kG</M>-module <M>k</M>, then
 <Alt Only="LaTeX">
-<M>H^n\left(G,k\right)=\mathrm{Ext}^n_{kG}
-\left(k,k\right)=k^{b_n}</M>.</Alt>
+<M>H^i\left(G,k\right)=\mathrm{Ext}^i_{kG}
+\left(k,k\right)=k^{b_i}</M>.</Alt>
 <Alt Not="LaTeX">
-<M>H^n(G,k)=Ext^n(k,k)=k^(b_n)</M>.</Alt>
+<M>H^i(G,k)=Ext^i(k,k)=k^(b_i)</M>.</Alt>
 
-<ManSection><Oper Name="ProjectiveResolution" Arg="C,n"
+<ManSection><Oper Name="ProjectiveResolution" Arg="C, n"
 Comm="Computes a minimal projective resolution"/>
 <Returns>a list containing the Betti numbers 
 <M>b_0, b_1,\ldots, b_n</M>.</Returns>
 
 <Description>
 Given a cohomology object <K>C</K> having
-components <M>G</M>, <M>k</M>, and <M>M</M>,
+components <M>G</M> and <M>M</M>,
 this function computes the first <K>n</K><M>+1</M> terms 
-of the minimal projective resolution <M>P_\ast</M>
+of the minimal projective resolution 
+<Alt Only="LaTeX"><M>P_\ast</M></Alt><Alt Not="LaTeX"><M>P</M></Alt>
 of <M>M</M> of the form
 <Alt Only="LaTeX">
 <M>P_i=\left(kG\right)^{\oplus b_i}</M> 
@@ -197,7 +211,7 @@ for <M>i=0,1,...,n</M>,</Alt>
 and returns the numbers <M>b_i</M> as a list.
 </Description></ManSection>
 
-<ManSection><Oper Name="BoundaryMap" Arg="C,n"
+<ManSection><Oper Name="BoundaryMap" Arg="C, n"
 Comm="Returns the nth boundary map"/>
 <Returns>the <K>n</K>th boundary map.</Returns>
 <Description>
@@ -224,19 +238,20 @@ this function.
 
 <Section><Heading>Cohomology Generators and Relators</Heading>
 
-<ManSection><Oper Name="CohomologyGenerators" Arg="C,n"
+<ManSection><Oper Name="CohomologyGenerators" Arg="C, n"
 Comm="Calculates generators of the cohomology ring"/>
-<Returns>a list containing the degrees of 
-the generators of the cohomology ring.</Returns>
+<Returns>a list containing the degrees of the elements of
+a set of generators of the cohomology ring.</Returns>
 <Description>
-Given a cohomology object <K>C</K> having components <M>G</M>,
-<M>k</M>, and <M>M</M>, this function computes the generators of 
+Given a cohomology object <K>C</K> having group component <M>G</M>
+and module component the trivial <M>kG</M>-module 
+this function computes a set of generators of 
 <Alt Only="LaTeX">
 <M>H^\ast\left(G,k\right)</M> 
 </Alt><Alt Not="LaTeX">
 <M>H*(G,k)</M> 
 </Alt>
-of degree less than or equal to <K>n</K>, and stores them in <K>C</K>.
+having degree <K>n</K> or less, and stores them in <K>C</K>.
 The function returns a list of the degrees of these generators.
 </Description></ManSection>
 
@@ -244,19 +259,19 @@ The actual cohomology generators are represented by
 maps <M>P_n \rightarrow k</M> and are stored in <K>C</K>
 as matrices. Only their degrees are returned.
 
-<ManSection><Oper Name="CohomologyRelators" Arg="C,n"
+<ManSection><Oper Name="CohomologyRelators" Arg="C, n"
 Comm="Calculates the relators of the cohomology ring"/>
 <Returns>a list of generators and a list of relators.</Returns>
 <Description>
-Given a cohomology object <K>C</K> having components <M>G</M>,
-<M>k</M>, and <M>M</M>, this function computes a set of
+Given a cohomology object <K>C</K> having group component <M>G</M>
+and module component <M>k</M>, this function computes a set of
 generators of the ideal of relators in 
 <Alt Only="LaTeX">
 <M>H^\ast\left(G,k\right),</M> 
 </Alt><Alt Not="LaTeX">
 <M>H*(G,k),</M> 
 </Alt>
-all having multidegree less than or equal to <M>n</M>.
+all having multidegree <M>n</M> or less.
 Read on for what this means exactly.
 
 <P/>The function returns two lists, the first list containing
@@ -273,7 +288,7 @@ otherwise. The second list is a list of polynomials
 in the variables from the first list.
 
 <P/>These two lists should be interpreted as follows. 
-A degree-<K>n</K> approximation of the cohomology ring
+A degree <K>n</K> approximation of the cohomology ring
 <Alt Only="LaTeX">
 <M>H^\ast\left(G,k\right)</M> 
 </Alt><Alt Not="LaTeX">
@@ -286,7 +301,7 @@ and subject to the relators in the second list.
 See <Ref Sect="whathappens"/> for more details still.
 </Description></ManSection>
 
-For example, the following commands 
+For example, consider the following commands.
 <Example>
 <![CDATA[
 gap> C:=CohomologyObject(DihedralGroup(8));
@@ -297,7 +312,7 @@ gap> CohomologyRelators(C,10);
 [ [ z, y, x ], [ z*y+y^2 ] ]
 ]]>
 </Example>
-tell us that for <M>G=D_8</M>, the cohomology ring
+This tells us that for <M>G=D_8</M>, the cohomology ring
 <Alt Only="LaTeX">
 <M>H^\ast\left(G,k\right)</M> 
 </Alt><Alt Not="LaTeX">
@@ -344,8 +359,10 @@ and some of the indeterminates
 <K>x&uscore;1</K>, <K>x&uscore;2</K>,  <K>x&uscore;3</K>,
 <M>\ldots</M> have already been named, say by a previous
 call to <K>CohomologyRelators</K>, then these variables
-will retain their old names. If this is confusing,
+will retain their old names. If this is confusing, you could
 restart &GAP; and do it again.
+
+Finally, <K>CohomologyRelators</K> is <E>not</E> idempotent.
 </Section>
 
 <Section Label="completion"><Heading>Tests for Completion</Heading>
@@ -362,17 +379,15 @@ See also the file <K>doc/explanation.*</K>
 for an explanation of the implementation.
 
 <ManSection>
-<Oper Name="CohomologyRing" Arg="C,n"
+<Oper Name="CohomologyRing" Arg="C, n"
 Comm="Calculates the cohomology ring"/>
-<Oper Name="CohomologyRing" Arg="G,n"
+<Oper Name="CohomologyRing" Arg="G, n"
 Comm="Calculates the cohomology ring"/>
 <Returns>the cohomology ring of <M>G</M>.</Returns>
 <Description>
-Given a cohomology object <K>C</K> 
-having module component the trivial <M>kG</M>-module 
-and possibly having a projective resolution
-already computed, this function returns 
-the degree-<K>n</K> truncation of the cohomology ring 
+Given a cohomology object <K>C</K> with group component <M>G</M> and
+module component the trivial <M>kG</M>-module,
+this function returns the degree <K>n</K> truncation of the cohomology ring 
 <Alt Only="LaTeX"><M>H^\ast\left(G,k\right).</M></Alt>
 <Alt Not="LaTeX"><M>H*(G,k)</M>.</Alt> 
 See <Ref Sect="whathappens"/> for what this
@@ -425,7 +440,7 @@ This function is intended to return the degree of the
 possibly non-homogeneous element <K>e</K> of some 
 cohomology ring <M>A</M>,
 but in principle, works for any element
-of any graded <K>SCAlgebra</K>.
+of any graded structure constant algebra.
 Specifically, if 
 <Alt Only="LaTeX">
 <M>A=A_0\oplus A_1\oplus A_2\oplus\cdots</M>
@@ -467,8 +482,8 @@ the cohomology ring which together with the
 identity element generate the cohomology ring.
 
 <P/>This function is a wrapper for <K>CohomologyGenerators</K>
-(see <Ref Subsect="CohomologyGenerators"/>),
-indicating which elements of the cohomology
+(see <Ref Subsect="CohomologyGenerators"/>).
+It points out which elements of the cohomology
 ring correspond with the generators found
 by <K>CohomologyGenerators</K>.
 </Description>
@@ -489,21 +504,25 @@ true
 <Section Label="whathappens">
 <Heading>What Happens if <K>n</K> Isn't
 Big Enough?</Heading>
-Since <M>P_\ast</M> is a <E>minimal</E> resolution,
+Since
+<Alt Only="LaTeX"><M>P_\ast</M></Alt><Alt Not="LaTeX"><M>P</M></Alt>
+is a <E>minimal</E> projective resolution,
 the cohomology group
-<M>H^i\left(G,k\right)</M> is the dual
-of <M>P_n</M>, so that <M>H^i\left(G,k\right)</M>
+<M>H^i\left(G,k\right)</M> is the <M>k</M>-dual
+of <M>P_i</M>, so that <M>H^i\left(G,k\right)</M>
 has a natural basis consisting of the maps
 sending the element <M>1_G</M> of the <M>j</M>th
 direct summand of <M>P_i</M> to <M>1_k</M>
-and all other direct summands to <M>0_k</M> for 
+and all other direct summands to <M>0</M>, for 
 <Alt Only="LaTeX">
-<M>1\le j\le b_i</M>.</Alt>
+<M>1\le j\le b_i</M>,</Alt>
 <Alt Not="LaTeX">
-<M>j=1,2,\ldots,b_i</M>.</Alt>
+<M>j=1,2,\ldots,b_i</M>,</Alt>
+where <M>b_i</M> is the <M>kG</M>-rank of <M>P_i</M>.
 
-<P/>The command <K>CohomologyRing(C,n)</K> concatenates
-these bases for 
+<P/>The command <K>CohomologyRing(C,n)</K> forms the vector
+space whose basis is the concatenation of the natural bases of 
+<M>H^i\left(G,k\right)</M> for
 <Alt Only="LaTeX">
 <M>1\le i\le n</M></Alt>
 <Alt Not="LaTeX">
@@ -513,14 +532,14 @@ for which <M>\deg x+\deg y \leq n</M>.
 Thinking of 
 <Alt Only="LaTeX"><M>H^\ast\left(G,k\right)</M></Alt>
 <Alt Not="LaTeX"><M>H*(G,k)</M></Alt> 
-in terms of it's multiplication table, then this means that
+in terms of it's multiplication table, this means that
 the function computes the upper left-hand corner
 of the multiplication table.
-If <M>\deg x + \deg y > n</M>
-then the product <M>xy</M> is taken to be zero.
-Therefore, the ring returned by <K>CohomologyGenerators</K> is
+If <M>\deg x + \deg y > n</M>,
+the product <M>xy</M> is taken to be zero.
+Therefore, the ring returned by <K>CohomologyRing</K> is
 <Alt Only="LaTeX">
-<M>H^\ast\left(G,k\right)\left/J_{&tgt;n}\right.</M> 
+<M>H^\ast\left(G,k\right)\left/J_{&gt;n}\right.</M> 
 </Alt><Alt Not="LaTeX">
 <M>H*(G,k)/J</M></Alt>
 where <Alt Only="LaTeX"><M>J_{>n}</M></Alt>
@@ -533,19 +552,19 @@ and <K>CohomologyRelators</K> is somewhat different.
 taking all standard basis elements of 
 <M>H^1\left(G,k\right)</M> as generators, and for
 <Alt Only="LaTeX">
-<M>1&tlt;i\le n</M>,</Alt> 
+<M>1&lt;i\le n</M>,</Alt> 
 <Alt Not="LaTeX">
 <M>i=2\ldots n</M>,</Alt> 
 taking all standard basis elements
 of <M>H^i\left(G,k\right)</M> which are <E>not</E>
 products of lower-degree elements as generators.
-Therefore, unless you have some reason to believe
-that there exists a generating set for 
+Therefore, unless you know that there is an <M>n</M> for which
+there exists a generating set of 
 <Alt Only="LaTeX">
 <M>H^\ast\left(G,k\right)</M> 
 </Alt><Alt Not="LaTeX">
 <M>H*(G,k)</M></Alt> 
-consisting of elements of degree <M>\leq n</M>,
+consisting of elements of degree <M>n</M> or less,
 then you are <E>not</E> guaranteed
 that the elements returned by the
 <K>CohomologyGenerators</K> generate
@@ -553,38 +572,38 @@ that the elements returned by the
 <M>H^\ast\left(G,k\right)</M> 
 </Alt><Alt Not="LaTeX">
 <M>H*(G,k)</M></Alt> 
-as a ring.
+as a ring. The knowledge of such an <M>n</M> is the subject of
+<Ref Sect="completion"/>.
 
 <P/>Similarly, <K>CohomologyRelators</K> proceeds inductively
-until degree <M>n</M>, returning a list of polynomials 
-of multidegree <M>\leq n</M>.
+until degree <M>n</M>, returning a list of polynomials which
+generate the ideal of relators of multidegree <M>n</M> or less.
 
-<P/>The impact of the preceeding information is
+<P/>The result of the preceding information is
 that there is a homomorphism
 <Alt Only="LaTeX">
 <M>f:k\left.\left\langle x_1,x_2,\dots x_m \right\rangle\right./I
-\to H^\ast\left(G,k\right)</M> 
-</Alt><Alt Not="LaTeX">
-<M>k\left\langle x_1,x_2,\ldots, x_m \right\rangle/ I \to H*(G,k)</M></Alt>
-where <M>x_1,x_2,\ldots,x_m</M> represent 
-the elements returned by <K>CohomologyGenerators(C,n)</K>,
-<M>k\left\langle x_1,x_2,\ldots x_m \right\rangle</M>
-is the polynomial ring over <M>k</M> in 
+\to H^\ast\left(G,k\right)</M>,</Alt> 
+<Alt Not="LaTeX">
+<M>k\left\langle x_1,x_2,\ldots, x_m \right\rangle/ I \to H*(G,k)</M>,</Alt>
+where <M>k\left\langle x_1,x_2,\ldots x_m \right\rangle</M>
+is the graded polynomial ring over <M>k</M> in 
 the non-commuting variables <M>x_1,x_2,\ldots,x_m</M>,
+having degrees the numbers in the list returned by <K>CohomologyGenerators</K>,
 and <M>I</M> is the ideal in
 <M>k\left\langle x_1,x_2,\ldots, x_m \right\rangle</M>
 generated by the elements returned by
 <K>CohomologyRelators(C,n)</K>.
 
 <P/>Therefore, if there is a 
-generator of degree <M>>n</M>,
+generator of degree greater than <M>n</M>,
 then <M>f</M> won't be surjective.
-If there is a relator of multidegree
-<M>>n</M> which is not a consequence
+Similarly, if there is a relator of multidegree
+greater than <M>n</M> which is not a consequence
 of lower degree relators, then <M>f</M>
 won't be injective.
 
-See <Ref Sect="completion"/> for how
+See <Ref Sect="completion"/> for a discussion on how
 big <M>n</M> needs to be to ensure that
 <M>f</M> be an isomorphism.
 
@@ -601,16 +620,15 @@ Then <M>f</M> induces a homomorphism on cohomology
 which is returned by the following function.
 
 <ManSection>
-<Func Name="InducedHomomorphismOnCohomology" Arg="C,D,f,n"
+<Func Name="InducedHomomorphismOnCohomology" Arg="C, D, f, n"
 Comm="Computes the induced homomorphism on cohomology"/>
-<Returns>the induced homomorphism on cohomology rings.</Returns>
+<Returns>the induced homomorphism on cohomology.</Returns>
 <Description>
-This function returns the induced homomorphism on cohomology
+This function returns the induced homomorphism
 <Alt Only="LaTeX">
 <M>H^\ast\left(G,k\right)
-\to H^\ast\left(H,k\right)</M>
-</Alt><Alt Not="LaTeX">
-<M>H\ast(G,k) \rightarrow H\ast(H,k)</M></Alt>
+\to H^\ast\left(H,k\right)</M>,</Alt>
+<Alt Not="LaTeX"><M>H\ast(G,k) \rightarrow H\ast(H,k)</M>,</Alt>
 where the groups <M>H</M> and <M>G</M> are the components
 of the cohomology objects <K>C</K> and <K>D</K>
 and <M>f: H \rightarrow G</M> is a group homomorphism.
@@ -621,7 +639,7 @@ by calling <K>CohomologyRing</K> (see <Ref Subsect="CohomologyRing"/>).
 </Description></ManSection>
 
 <ManSection>
-<Func Name="Inclusion" Arg="H,G" Comm="Returns the inclusion"/>
+<Func Name="Inclusion" Arg="H, G" Comm="Returns the inclusion"/>
 <Returns>the inclusion <M>H\rightarrow G</M></Returns>
 <Description>This function returns the group homomorphism
 <M>H\rightarrow G</M> when <M>H</M> is a subgroup
@@ -682,7 +700,7 @@ x_1,x_2,\dots,x_n\right\rangle</M>.</Alt>
 <Description> Given elements
 <Alt Only="LaTeX"> <M>x_1,x_2,\dots,x_n</M></Alt>
 <Alt Not="LaTeX"> <M>x1, x2, \ldots , xn</M></Alt>
-of a cohomology ring returned by
+of the ring returned by
 <K>CohomologyRing</K> (see <Ref Sect="ring"/>), 
 this function computes the <M>n</M>-fold Massey product
 <Alt Only="LaTeX">
@@ -690,13 +708,16 @@ this function computes the <M>n</M>-fold Massey product
 <Alt Not="LaTeX">
 <M>\left\langle&nbsp;x1, x2, \ldots , xn&nbsp;\right\rangle</M></Alt>
 provided that the lower-degree Massey products
-<M>\left\langle&nbsp;x_i ,x_{{i+1}}, \ldots , x_j&nbsp;\right\rangle</M> vanish
-for all <M>1 \leq i &lt; j \leq n</M>, and returns <K>fail</K> otherwise.
+<Alt Only="LaTeX">
+<M>\left\langle x_i,x_{i+1},\ldots,x_n\right\rangle</M></Alt>
+<Alt Not="LaTeX">
+<M>\left\langle&nbsp;xi, x{{i+1}}, \ldots , xj&nbsp;\right\rangle</M></Alt>
+vanish for all <M>1 \leq i &lt; j \leq n</M>, and returns <K>fail</K> otherwise.
 </Description>
 </ManSection>
 
 As an example, recall that the cohomology rings of the cyclic
-groups <M>C_3</M> and <M>C_9</M> of size 3 and 9 over
+groups <M>C_3</M> and <M>C_9</M> of sizes 3 and 9 over
 <Alt Only="LaTeX"><M>k=\mathbb{F}_3</M></Alt>
 <Alt Not="LaTeX"><M>k=GF(3)</M></Alt> 
 are both given by
@@ -704,9 +725,12 @@ are both given by
 <M>k\left\langle z, y\right\rangle\left/\left(z^2\right)\right.</M>,
 </Alt><Alt Not="LaTeX">
 <M>k\left\langle&nbsp;z,y&nbsp;\right\rangle/\left(z^2\right)</M>,</Alt>
-that is, they are isomorphic as rings. However, the following
+so they are isomorphic as rings. However, the following
 example shows that
-<M>\left\langle&nbsp;z, z, z&nbsp;\right\rangle</M>
+<Alt Only="LaTeX">
+<M>\left\langle z,z,z\right\rangle</M></Alt>
+<Alt Not="LaTeX">
+<M>\left\langle&nbsp;z, z, z&nbsp;\right\rangle</M></Alt>
 is non-zero in 
 <Alt Only="LaTeX"><M>H^\ast\left(C_3,k\right)</M></Alt>
 <Alt Not="LaTeX"><M>H*(C_3,k)</M></Alt> 
@@ -737,9 +761,199 @@ v.3
 </Example>
 </Section>
 </Chapter>
+</Body>
 
+<Appendix Label="benchmarks"><Heading>Some Benchmarks</Heading>
+The numbers in the following table compare the times
+taken to execute the 1.1 and 1.2 versions of the
+functions listed in the column headers
+on all the groups of size 16.
+All functions were executed on a 2.4 GHz AMD64 processor with 12 GB of RAM.
+The number in the first column of every row
+is the Small Group Library number of the
+group used in that row, so the group used in row <K>n</K>
+is <K>SmallGroup(16,n)</K>.
+The upper number in each box is the runtime for the 1.1 version, whereas the 
+lower number is the runtime for the 1.2 version.
+<Table Align="c|c|c|c">
+<Row>
+<Item>Group</Item>
+<Item><K>ProjectiveResolution</K></Item>
+<Item><K>CohomologyGenerators</K></Item>
+<Item><K>CohomologyRelators</K></Item>
+</Row>
 
-<Chapter Label="test"><Heading>Leisure and Recreation: Cohomology Rings
+<HorLine></HorLine><Row>
+<Item>1</Item>
+<Item>0:00:00.424</Item>
+<Item>0:00:00.040</Item>
+<Item>0:00:00.092</Item>
+</Row><Row>
+<Item></Item>
+<Item>0:00:00.380</Item>
+<Item>0:00:00.016</Item>
+<Item>0:00:00.012</Item>
+</Row>
+
+<HorLine></HorLine><Row>
+<Item>2</Item>
+<Item>0:00:00.436</Item>
+<Item>0:00:01.472</Item>
+<Item>0:00:05.848</Item>
+</Row><Row>
+<Item></Item>
+<Item>0:00:00.072</Item>
+<Item>0:00:00.116</Item>
+<Item>0:00:00.396</Item>
+</Row>
+
+<HorLine></HorLine><Row>
+<Item>3</Item>
+<Item>0:00:02.752</Item>
+<Item>0:00:11.469</Item>
+<Item>0:00:42.887</Item>
+</Row><Row>
+<Item></Item>
+<Item>0:00:00.352</Item>
+<Item>0:00:01.192</Item>
+<Item>0:00:01.944</Item>
+</Row>
+
+<HorLine></HorLine><Row>
+<Item>4</Item>
+<Item>0:00:00.480</Item>
+<Item>0:00:01.456</Item>
+<Item>0:00:06.320</Item>
+</Row><Row>
+<Item></Item>
+<Item>0:00:00.068</Item>
+<Item>0:00:00.116</Item>
+<Item>0:00:00.316</Item>
+</Row>
+
+<HorLine></HorLine><Row>
+<Item>5</Item>
+<Item>0:00:00.480</Item>
+<Item>0:00:01.136</Item>
+<Item>0:00:06.045</Item>
+</Row><Row>
+<Item></Item>
+<Item>0:00:00.080</Item>
+<Item>0:00:00.096</Item>
+<Item>0:00:00.296</Item>
+</Row>
+
+<HorLine></HorLine><Row>
+<Item>6</Item>
+<Item>0:00:00.204</Item>
+<Item>0:00:00.724</Item>
+<Item>0:00:01.892</Item>
+</Row><Row>
+<Item></Item>
+<Item>0:00:00.036</Item>
+<Item>0:00:00.072</Item>
+<Item>0:00:00.116</Item>
+</Row>
+
+<HorLine></HorLine><Row>
+<Item>7</Item>
+<Item>0:00:00.504</Item>
+<Item>0:00:01.156</Item>
+<Item>0:00:06.140</Item>
+</Row><Row>
+<Item></Item>
+<Item>0:00:00.088</Item>
+<Item>0:00:00.100</Item>
+<Item>0:00:00.344</Item>
+</Row>
+
+<HorLine></HorLine><Row>
+<Item>8</Item>
+<Item>0:00:00.192</Item>
+<Item>0:00:00.704</Item>
+<Item>0:00:01.800</Item>
+</Row><Row>
+<Item></Item>
+<Item>0:00:00.036</Item>
+<Item>0:00:00.064</Item>
+<Item>0:00:00.120</Item>
+</Row>
+
+<HorLine></HorLine><Row>
+<Item>9</Item>
+<Item>0:00:00.060</Item>
+<Item>0:00:00.100</Item>
+<Item>0:00:00.284</Item>
+</Row><Row>
+<Item></Item>
+<Item>0:00:00.020</Item>
+<Item>0:00:00.012</Item>
+<Item>0:00:00.028</Item>
+</Row>
+
+<HorLine></HorLine><Row>
+<Item>10</Item>
+<Item>0:00:10.161</Item>
+<Item>0:00:34.326</Item>
+<Item>0:03:07.104</Item>
+</Row><Row>
+<Item></Item>
+<Item>0:00:01.524</Item>
+<Item>0:00:04.252</Item>
+<Item>0:00:08.089</Item>
+</Row>
+
+<HorLine></HorLine><Row>
+<Item>11</Item>
+<Item>0:00:10.397</Item>
+<Item>0:00:32.354</Item>
+<Item>0:03:07.355</Item>
+</Row><Row>
+<Item></Item>
+<Item>0:00:01.716</Item>
+<Item>0:00:04.584</Item>
+<Item>0:00:08.021</Item>
+</Row>
+
+<HorLine></HorLine><Row>
+<Item>12</Item>
+<Item>0:00:01.184</Item>
+<Item>0:00:04.613</Item>
+<Item>0:00:20.789</Item>
+</Row><Row>
+<Item></Item>
+<Item>0:00:00.192</Item>
+<Item>0:00:00.544</Item>
+<Item>0:00:00.984</Item>
+</Row>
+
+<HorLine></HorLine><Row>
+<Item>13</Item>
+<Item>0:00:01.152</Item>
+<Item>0:00:04.496</Item>
+<Item>0:00:20.990</Item>
+</Row><Row>
+<Item></Item>
+<Item>0:00:00.196</Item>
+<Item>0:00:00.472</Item>
+<Item>0:00:01.072</Item>
+</Row>
+
+<HorLine></HorLine><Row>
+<Item>14</Item>
+<Item>0:03:26.817</Item>
+<Item>0:07:37.960</Item>
+<Item>0:56:39.273</Item>
+</Row><Row>
+<Item></Item>
+<Item>0:00:41.919</Item>
+<Item>0:02:07.399</Item>
+<Item>0:01:54.752</Item>
+</Row>
+</Table>
+</Appendix>
+
+<Appendix Label="test"><Heading>Leisure and Recreation: Cohomology Rings
 of all Groups of Size 16</Heading>
 Below is the output of the test file 
 <K>tst/batch.g</K>. The file runs through
@@ -748,135 +962,87 @@ is initially set to <M>16</M>, and runs
 <K>ProjectiveResolution</K>, <K>CohomologyGenerators</K>
 and <K>CohomologyRelators</K> for each group, 
 and prints the results as well as 
-the timings for each operation to a file. The output
-below was computed on a 3.06 GHz Intel processor
-with 3.71 GB of RAM. The projective resolutions are calculated
-initially to degree <M>10</M> and the generators and
-relators to degree <M>6</M>, due to the fact that
-I already knew all the generators and relators
-to be of degree less than 6, see
-<URL>http://www.math.uga.edu/~lvalero/cohointro.html</URL>.
-See also the file <K>tst/README</K> for suggestions
+the timings for each operation to a file. The timings
+have been deleted, having been presented in
+Appendix <Ref Chap="benchmarks"/>. The output
+below was computed on a 2.4 GHz AMD64 processor
+with 12 GB of RAM. 
+See the file <K>tst/README</K> for suggestions
 on dealing with other users when running long-running batch processes.
-<Example>
+<Log>
 <![CDATA[
 SmallGroup(16,1)
 Betti Numbers: [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
-Time:  0:00:05.864
 Generators in degrees: [ 1, 2 ]
-Time:  0:00:00.086
 Relators: [ [ z, y ], [ z^2 ] ]
-Time:  0:00:00.245
 
 SmallGroup(16,2)
 Betti Numbers: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
-Time:  0:00:00.931
 Generators in degrees: [ 1, 1, 2, 2 ]
-Time:  0:00:02.874
 Relators: [ [ z, y, x, w ], [ z^2, y^2 ] ]
-Time:  0:00:12.227
 
 SmallGroup(16,3)
 Betti Numbers: [ 1, 2, 4, 6, 9, 12, 16, 20, 25, 30, 36 ]
-Time:  0:00:05.292
 Generators in degrees: [ 1, 1, 2, 2, 2 ]
-Time:  0:00:21.770
 Relators: [ [ z, y, x, w, v ], [ z^2, z*y, z*x, y^2*v+x^2 ] ]
-Time:  0:01:26.166
 
 SmallGroup(16,4)
 Betti Numbers: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
-Time:  0:00:01.047
 Generators in degrees: [ 1, 1, 2, 2 ]
-Time:  0:00:03.253
 Relators: [ [ z, y, x, w ], [ z^2, z*y+y^2, y^3 ] ]
-Time:  0:00:14.294
 
 SmallGroup(16,5)
 Betti Numbers: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
-Time:  0:00:01.065
 Generators in degrees: [ 1, 1, 2 ]
-Time:  0:00:02.493
 Relators: [ [ z, y, x ], [ z^2 ] ]
-Time:  0:00:13.573
 
 SmallGroup(16,6)
 Betti Numbers: [ 1, 2, 2, 2, 3, 4, 4, 4, 5, 6, 6 ]
-Time:  0:00:00.446
 Generators in degrees: [ 1, 1, 3, 4 ]
-Time:  0:00:01.566
 Relators: [ [ z, y, x, w ], [ z^2, z*y^2, z*x, x^2 ] ]
-Time:  0:00:04.132
 
 SmallGroup(16,7)
 Betti Numbers: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
-Time:  0:00:01.076
 Generators in degrees: [ 1, 1, 2 ]
-Time:  0:00:02.495
 Relators: [ [ z, y, x ], [ z*y ] ]
-Time:  0:00:13.862
 
 SmallGroup(16,8)
 Betti Numbers: [ 1, 2, 2, 2, 3, 4, 4, 4, 5, 6, 6 ]
-Time:  0:00:00.465
 Generators in degrees: [ 1, 1, 3, 4 ]
-Time:  0:00:01.570
 Relators: [ [ z, y, x, w ], [ z*y, z^3, z*x, y^2*w+x^2 ] ]
-Time:  0:00:04.350
 
 SmallGroup(16,9)
 Betti Numbers: [ 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2 ]
-Time:  0:00:00.140
 Generators in degrees: [ 1, 1, 4 ]
-Time:  0:00:00.255
 Relators: [ [ z, y, x ], [ z*y, z^3+y^3, y^4 ] ]
-Time:  0:00:00.718
 
 SmallGroup(16,10)
 Betti Numbers: [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66 ]
-Time:  0:00:20.139
 Generators in degrees: [ 1, 1, 1, 2 ]
-Time:  0:01:04.158
 Relators: [ [ z, y, x, w ], [ z^2 ] ]
-Time:  0:06:27.688
 
 SmallGroup(16,11)
 Betti Numbers: [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66 ]
-Time:  0:00:20.428
 Generators in degrees: [ 1, 1, 1, 2 ]
-Time:  0:01:04.678
 Relators: [ [ z, y, x, w ], [ z*y ] ]
-Time:  0:06:33.808
 
 SmallGroup(16,12)
 Betti Numbers: [ 1, 3, 5, 6, 7, 9, 11, 12, 13, 15, 17 ]
-Time:  0:00:02.438
 Generators in degrees: [ 1, 1, 1, 4 ]
-Time:  0:00:08.927
 Relators: [ [ z, y, x, w ], [ z^2+z*y+y^2, y^3 ] ]
-Time:  0:00:44.464
 
 SmallGroup(16,13)
 Betti Numbers: [ 1, 3, 5, 6, 7, 9, 11, 12, 13, 15, 17 ]
-Time:  0:00:02.389
 Generators in degrees: [ 1, 1, 1, 4 ]
-Time:  0:00:09.247
 Relators: [ [ z, y, x, w ], [ z*y+x^2, z*x^2+y*x^2, y^2*x^2+x^4 ] ]
-Time:  0:00:44.323
 
 SmallGroup(16,14)
 Betti Numbers: [ 1, 4, 10, 20, 35, 56, 84, 120, 165, 220, 286 ]
-Time:  0:07:00.973
 Generators in degrees: [ 1, 1, 1, 1 ]
-Time:  0:15:40.874
 Relators: [ [ z, y, x, w ], [  ] ]
-Time:  1:54:28.052
-
-Total time:  2:38:14.841
 ]]>
-</Example>
-</Chapter>
-</Body>
+</Log>
+</Appendix>
 <Bibliography Databases="crime" Style="plain"/>
 <TheIndex/>
 </Book>

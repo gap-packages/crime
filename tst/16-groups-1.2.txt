@@ -1,116 +1,114 @@
-The following is the result of my run
-of batch.g on imbsrv3.epfl.ch.
-
+# The following is the output of the 1.2 version of batch.g on brun.srv.nuigalway.ie
 SmallGroup(16,1)
 Betti Numbers: [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
-Time:  0:00:05.864
+Time:  0:00:00.380
 Generators in degrees: [ 1, 2 ]
-Time:  0:00:00.086
+Time:  0:00:00.016
 Relators: [ [ z, y ], [ z^2 ] ]
-Time:  0:00:00.245
+Time:  0:00:00.012
 
 SmallGroup(16,2)
 Betti Numbers: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
-Time:  0:00:00.931
+Time:  0:00:00.072
 Generators in degrees: [ 1, 1, 2, 2 ]
-Time:  0:00:02.874
+Time:  0:00:00.116
 Relators: [ [ z, y, x, w ], [ z^2, y^2 ] ]
-Time:  0:00:12.227
+Time:  0:00:00.396
 
 SmallGroup(16,3)
 Betti Numbers: [ 1, 2, 4, 6, 9, 12, 16, 20, 25, 30, 36 ]
-Time:  0:00:05.292
+Time:  0:00:00.352
 Generators in degrees: [ 1, 1, 2, 2, 2 ]
-Time:  0:00:21.770
+Time:  0:00:01.192
 Relators: [ [ z, y, x, w, v ], [ z^2, z*y, z*x, y^2*v+x^2 ] ]
-Time:  0:01:26.166
+Time:  0:00:01.944
 
 SmallGroup(16,4)
 Betti Numbers: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
-Time:  0:00:01.047
+Time:  0:00:00.068
 Generators in degrees: [ 1, 1, 2, 2 ]
-Time:  0:00:03.253
+Time:  0:00:00.116
 Relators: [ [ z, y, x, w ], [ z^2, z*y+y^2, y^3 ] ]
-Time:  0:00:14.294
+Time:  0:00:00.316
 
 SmallGroup(16,5)
 Betti Numbers: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
-Time:  0:00:01.065
+Time:  0:00:00.080
 Generators in degrees: [ 1, 1, 2 ]
-Time:  0:00:02.493
+Time:  0:00:00.096
 Relators: [ [ z, y, x ], [ z^2 ] ]
-Time:  0:00:13.573
+Time:  0:00:00.296
 
 SmallGroup(16,6)
 Betti Numbers: [ 1, 2, 2, 2, 3, 4, 4, 4, 5, 6, 6 ]
-Time:  0:00:00.446
+Time:  0:00:00.036
 Generators in degrees: [ 1, 1, 3, 4 ]
-Time:  0:00:01.566
+Time:  0:00:00.072
 Relators: [ [ z, y, x, w ], [ z^2, z*y^2, z*x, x^2 ] ]
-Time:  0:00:04.132
+Time:  0:00:00.116
 
 SmallGroup(16,7)
 Betti Numbers: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
-Time:  0:00:01.076
+Time:  0:00:00.088
 Generators in degrees: [ 1, 1, 2 ]
-Time:  0:00:02.495
+Time:  0:00:00.100
 Relators: [ [ z, y, x ], [ z*y ] ]
-Time:  0:00:13.862
+Time:  0:00:00.344
 
 SmallGroup(16,8)
 Betti Numbers: [ 1, 2, 2, 2, 3, 4, 4, 4, 5, 6, 6 ]
-Time:  0:00:00.465
+Time:  0:00:00.036
 Generators in degrees: [ 1, 1, 3, 4 ]
-Time:  0:00:01.570
+Time:  0:00:00.064
 Relators: [ [ z, y, x, w ], [ z*y, z^3, z*x, y^2*w+x^2 ] ]
-Time:  0:00:04.350
+Time:  0:00:00.120
 
 SmallGroup(16,9)
 Betti Numbers: [ 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2 ]
-Time:  0:00:00.140
+Time:  0:00:00.020
 Generators in degrees: [ 1, 1, 4 ]
-Time:  0:00:00.255
+Time:  0:00:00.012
 Relators: [ [ z, y, x ], [ z*y, z^3+y^3, y^4 ] ]
-Time:  0:00:00.718
+Time:  0:00:00.028
 
 SmallGroup(16,10)
 Betti Numbers: [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66 ]
-Time:  0:00:20.139
+Time:  0:00:01.524
 Generators in degrees: [ 1, 1, 1, 2 ]
-Time:  0:01:04.158
+Time:  0:00:04.252
 Relators: [ [ z, y, x, w ], [ z^2 ] ]
-Time:  0:06:27.688
+Time:  0:00:08.089
 
 SmallGroup(16,11)
 Betti Numbers: [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66 ]
-Time:  0:00:20.428
+Time:  0:00:01.716
 Generators in degrees: [ 1, 1, 1, 2 ]
-Time:  0:01:04.678
+Time:  0:00:04.584
 Relators: [ [ z, y, x, w ], [ z*y ] ]
-Time:  0:06:33.808
+Time:  0:00:08.021
 
 SmallGroup(16,12)
 Betti Numbers: [ 1, 3, 5, 6, 7, 9, 11, 12, 13, 15, 17 ]
-Time:  0:00:02.438
+Time:  0:00:00.192
 Generators in degrees: [ 1, 1, 1, 4 ]
-Time:  0:00:08.927
+Time:  0:00:00.544
 Relators: [ [ z, y, x, w ], [ z^2+z*y+y^2, y^3 ] ]
-Time:  0:00:44.464
+Time:  0:00:00.984
 
 SmallGroup(16,13)
 Betti Numbers: [ 1, 3, 5, 6, 7, 9, 11, 12, 13, 15, 17 ]
-Time:  0:00:02.389
+Time:  0:00:00.196
 Generators in degrees: [ 1, 1, 1, 4 ]
-Time:  0:00:09.247
+Time:  0:00:00.472
 Relators: [ [ z, y, x, w ], [ z*y+x^2, z*x^2+y*x^2, y^2*x^2+x^4 ] ]
-Time:  0:00:44.323
+Time:  0:00:01.072
 
 SmallGroup(16,14)
 Betti Numbers: [ 1, 4, 10, 20, 35, 56, 84, 120, 165, 220, 286 ]
-Time:  0:07:00.973
+Time:  0:00:41.919
 Generators in degrees: [ 1, 1, 1, 1 ]
-Time:  0:15:40.874
+Time:  0:02:07.399
 Relators: [ [ z, y, x, w ], [  ] ]
-Time:  1:54:28.052
+Time:  0:01:54.752
 
-Total time:  2:38:14.841
+Total time:  0:05:22.204
