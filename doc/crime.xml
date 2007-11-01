@@ -4,7 +4,7 @@
 
 <TitlePage>
 <Title>The <Package>Crime</Package> Package</Title>
-<Version>Version 1.2</Version>
+<Version>Version 1.3</Version>
 <Author>Marcus Bishop
   <Email>marcus.bishop@gmail.com</Email>
 </Author>
@@ -23,9 +23,6 @@ Jon devised the algorithms used by <K>ProjectiveResolution</K>,
 <K>CohomologyGenerators</K>, and <K>CohomologyRelators</K>,
 having already implemented them in <Package>Magma</Package>,
 and shared these programs with me.
-<P/>
-The documentation for Crime was prepared using the GAPdoc package
-by Frank L\"ubeck and Max Neunh\"offer
 </Acknowledgements>
 
 </TitlePage>
@@ -43,11 +40,11 @@ do the following.
 <![CDATA[
 $ cd /usr/local/gap4r4/pkg
 $ su
-% wget 'http://math.uic.edu/~marcus/Crime/crime-1.2.tar.gz'
-% tar xvzvf crime-1.2.tar.gz 
+% wget http://math.uic.edu/~marcus/Crime/crime-1.3.tar.gz
+% tar xvzvf crime-1.3.tar.gz 
 ]]>
 </Log>
-In this situation, users would then load the package
+In this situation, users would load the package
 with the <K>LoadPackage</K> command.
 <Log>
 <![CDATA[
@@ -67,8 +64,8 @@ the package as follows.
 <![CDATA[
 $ mkdir /tmp/pkg
 $ cd /tmp/pkg
-$ wget 'http://math.uic.edu/~marcus/Crime/crime-1.2.tar.gz'
-$ tar xvzvf crime-1.2.tar.gz 
+$ wget http://math.uic.edu/~marcus/Crime/crime-1.3.tar.gz
+$ tar xvzvf crime-1.3.tar.gz 
 $ gap -l ';/tmp'
 gap> LoadPackage("crime");
 ]]></Log>
@@ -121,13 +118,13 @@ Note that &MeatAxe; modules record <M>k</M> but not
 <M>G</M>, which is why this operation requires the user
 to specify <M>G</M> but not <M>k</M>.
 <P/>
-Fortunately, most users won't need to know anything
-about this &MeatAxe; business, since they will
-be interested only in the case where 
+Fortunately, most users don't need to know anything
+about &MeatAxe; modules, 
+being interested primarily in the case where 
 <Alt Only="LaTeX"><M>k=\mathbb{F}_p</M>,</Alt>
 <Alt Not="LaTeX"><M>k=GF(p)</M>,</Alt> and
-<M>M=k</M>, the trivial <M>kG</M>-module. 
-The second invocation creates a cohomology 
+<M>M=k</M>, the trivial <M>kG</M>-module. In this situation, 
+the second invocation creates a cohomology 
 object having components
 the <M>p</M>-group <M>G</M> and
 the trivial &MeatAxe; <M>kG</M>-module
@@ -141,7 +138,7 @@ We emphasize that in the first invocation,
 <M>p</M> and <K>M</K> can be any &MeatAxe; module
 over <M>kG</M>, and that <K>ProjectiveResolution</K>
 works when <K>M</K> is an arbitrary &MeatAxe; module, 
-but all the functions dealing with the ring-structure of 
+but that all the functions dealing with the ring-structure of 
 <Alt Only="LaTeX"><M>H^\ast\left(G,k\right)</M> 
 </Alt><Alt Not="LaTeX"><M>H*(G,k)</M></Alt>
 require that <K>M</K> be the trivial module.
@@ -166,7 +163,7 @@ of <M>M</M>
 where <M>P_i=\left(kG\right)^{\oplus b_i}</M> 
 </Alt>
 <Alt Not="LaTeX">
-<Display> P_n -> ... P_2 -> P_1 -> P_0 -> M -> 0</Display>
+<Display> P_n -> ... -> P_2 -> P_1 -> P_0 -> M -> 0</Display>
 where <M>P_i</M> is the direct sum <M>(kG)^(b_i)</M> 
 </Alt>
 for certain numbers <M>b_i</M>, 
@@ -222,9 +219,9 @@ and returns the <K>n</K>th boundary map.
 
 <P/>The map returned is a
 <Alt Only="LaTeX">
-<M>b_n\times\left(b_{n-1}\left|G\right|\right)</M></Alt>
+<M>b_n\times b_{n-1}\left|G\right|</M></Alt>
 <Alt Not="LaTeX">
-<M>b_n x \left(b_\left(n-1\right)\left|G\right|\right)</M></Alt>
+<M>b_n x b_{n-1}|G|</M></Alt>
 matrix, having in the <M>i</M>th row the image of the element
 <M>1_G</M> from the <M>i</M>th direct summand of
 <M>P_n</M>.
@@ -237,6 +234,10 @@ this function.
 </Section>
 
 <Section><Heading>Cohomology Generators and Relators</Heading>
+See <Cite Key="carlson"/> for the details of the calculation
+of cohomology products using composition of chain maps.
+See also the file <K>doc/explanation.*</K>
+for an explanation of the implementation.
 
 <ManSection><Oper Name="CohomologyGenerators" Arg="C, n"
 Comm="Calculates generators of the cohomology ring"/>
@@ -244,7 +245,7 @@ Comm="Calculates generators of the cohomology ring"/>
 a set of generators of the cohomology ring.</Returns>
 <Description>
 Given a cohomology object <K>C</K> having group component <M>G</M>
-and module component the trivial <M>kG</M>-module 
+and module component the trivial <M>kG</M>-module, 
 this function computes a set of generators of 
 <Alt Only="LaTeX">
 <M>H^\ast\left(G,k\right)</M> 
@@ -272,9 +273,8 @@ generators of the ideal of relators in
 <M>H*(G,k),</M> 
 </Alt>
 all having multidegree <M>n</M> or less.
-Read on for what this means exactly.
 
-<P/>The function returns two lists, the first list containing
+<P/>More specifically, the function returns two lists, the first list containing
 the variables <K>z</K>, <K>y</K>, <K>x</K>, <M>\ldots</M>
 corresponding to the generators of
 <Alt Only="LaTeX">
@@ -296,9 +296,10 @@ A degree <K>n</K> approximation of the cohomology ring
 is given by the polynomial ring over <M>k</M> in the 
 non-commuting variables from the first list,
 (having degrees given by the list returned by
- <K>CohomologyGenerators</K> above) 
+<K>CohomologyGenerators</K> 
+in section <Ref Sect="CohomologyGenerators"/> ) 
 and subject to the relators in the second list. 
-See <Ref Sect="whathappens"/> for more details still.
+See section <Ref Sect="whathappens"/> for more details still.
 </Description></ManSection>
 
 For example, consider the following commands.
@@ -327,7 +328,7 @@ subject to the relation
 </Alt><Alt Not="LaTeX">
 <M>H*(G,k)</M> 
 </Alt>
-<E>is</E> commutative, <M>k</M> being of
+is commutative, <M>k</M> being of
 characteristic 2, we have
 <Alt Only="LaTeX">
 <M>H^\ast\left(G,k\right)=k\left[z,y,x\right]
@@ -351,7 +352,7 @@ that there was a set of generators for
 all having degree less than 10, and that there was
 a set of generators of the ideal of relators
 all having multidegree less than 10. See
-see <Ref Sect="whathappens"/> for details.
+see section <Ref Sect="whathappens"/> for details.
 
 <P/>While this isn't likely to occur, we point
 out that if there are 12 or more generators 
@@ -362,7 +363,10 @@ call to <K>CohomologyRelators</K>, then these variables
 will retain their old names. If this is confusing, you could
 restart &GAP; and do it again.
 
-Finally, <K>CohomologyRelators</K> is <E>not</E> idempotent.
+<P/>Finally, <K>CohomologyRelators</K> is <E>not</E> idempotent
+for efficiency reasons, so sadly, if you don't uncover all the
+relators the first time, you will have to start all over from
+the beginning.
 </Section>
 
 <Section Label="completion"><Heading>Tests for Completion</Heading>
@@ -373,7 +377,12 @@ See <Cite Key="carlson"/> for the details.
 </Section>
 
 <Section Label="ring"><Heading>Cohomology Rings</Heading>
-See <Cite Key="carlson"/> for the details of the calculation
+Whereas the operations in sections <Ref Sect="CohomologyGenerators"/>
+and <Ref Sect="CohomologyRelators"/> calculate a presentation
+for the cohomology ring, the operation below creates the ring
+in &GAP; as a structure constant algebra.
+
+<P/>See <Cite Key="carlson"/> for the details of the calculation
 of cohomology products using composition of chain maps.
 See also the file <K>doc/explanation.*</K>
 for an explanation of the implementation.
@@ -419,16 +428,30 @@ for technical reasons, since almost everything
 would need to be recalculated again anyway.
 </Description></ManSection>
 
+Recall that 
+<Alt Only="LaTeX"><M>H^\ast\left(G,k\right)</M></Alt>
+<Alt Not="LaTeX"><M>H*(G,k)</M></Alt> 
+is a graded structure constant algebra, the components being
+the cohomology groups
+<Alt Only="LaTeX"><M>H^i\left(G,k\right)</M>.</Alt>
+<Alt Not="LaTeX"><M>H^i(G,k)</M>.</Alt> 
+The following functions were intended to be used for cohomology rings,
+but in principle, they work for any graded structure constant algebra.
+
 <ManSection>
 <Oper Name="IsHomogeneous" Arg="e"
 Comm="Determines whether e is homogeneous"/>
 <Returns><K>true</K> or <K>false</K>.</Returns>
 <Description>
-Given an element <K>e</K> of some cohomology
-ring <M>A</M>, this operation determines 
+Given an element <K>e</K> of a cohomology ring
+<Alt Only="LaTeX"><M>H^\ast\left(G,k\right)</M>,</Alt>
+<Alt Not="LaTeX"><M>H*(G,k)</M>,</Alt> 
+this operation determines 
 whether or not <K>e</K> is homogeneous, 
-that is, whether or not <K>e</K>
-is contained in some <K>hom&uscore;component</K> of <M>A</M>.
+that is, whether <K>e</K> is contained in 
+<Alt Only="LaTeX"><M>H^i\left(G,k\right)</M></Alt>
+<Alt Not="LaTeX"><M>H^i(G,k)</M></Alt> 
+for some <K>i</K>.
 </Description></ManSection>
 
 <ManSection>
@@ -436,19 +459,21 @@ is contained in some <K>hom&uscore;component</K> of <M>A</M>.
 Comm="Determines the degree of e"/>
 <Returns>the degree of <K>e</K>.</Returns>
 <Description>
-This function is intended to return the degree of the 
-possibly non-homogeneous element <K>e</K> of some 
-cohomology ring <M>A</M>,
-but in principle, works for any element
-of any graded structure constant algebra.
+This function returns the degree of the
+possibly non-homogeneous element <K>e</K> of a 
+cohomology ring
+<Alt Only="LaTeX"><M>H^\ast\left(G,k\right)</M>.</Alt>
+<Alt Not="LaTeX"><M>H*(G,k)</M>.</Alt> 
 Specifically, if 
 <Alt Only="LaTeX">
-<M>A=A_0\oplus A_1\oplus A_2\oplus\cdots</M>
+<M>H^\ast\left(G,k\right)=A_0\oplus A_1\oplus A_2\oplus\cdots</M>
 </Alt><Alt Not="LaTeX">
-<M>A = A_0 + A_1 + A_2 + \ldots</M>
+<M>H*(G,k) = A_0 + A_1 + A_2 + \ldots</M>
 </Alt>
-where <M>A_i</M> are the <K>hom&uscore;components</K>
-of <M>A</M>, then this function returns the
+where 
+<Alt Only="LaTeX"><M>A_i=H^i\left(G,k\right)</M>,</Alt>
+<Alt Not="LaTeX"><M>A_i = H^i(G,k)</M>,</Alt> 
+then this function returns the
 minimum <M>n</M> such that <K>e</K> is in
 <Alt Only="LaTeX">
 <M>A_0\oplus A_1\oplus\cdots\oplus A_n</M>.
@@ -506,10 +531,13 @@ true
 Big Enough?</Heading>
 Since
 <Alt Only="LaTeX"><M>P_\ast</M></Alt><Alt Not="LaTeX"><M>P</M></Alt>
-is a <E>minimal</E> projective resolution,
-the cohomology group
-<M>H^i\left(G,k\right)</M> is the <M>k</M>-dual
-of <M>P_i</M>, so that <M>H^i\left(G,k\right)</M>
+is a <E>minimal</E> projective resolution, we have
+<Alt Only="LaTeX">
+<M>H^i\left(G,k\right) = \mathrm{Hom}_{kG}\left(P_i,k\right)</M>
+</Alt><Alt Not="LaTeX">
+<M>H^i(G,k) = Hom_{{kG}}(P_i,k)</M></Alt>
+where <M>P_i = \left(kG\right)^{b_i}</M>
+so that <M>H^i\left(G,k\right)</M>
 has a natural basis consisting of the maps
 sending the element <M>1_G</M> of the <M>j</M>th
 direct summand of <M>P_i</M> to <M>1_k</M>
@@ -549,13 +577,13 @@ is the ideal of all elements of degree <M>>n</M>.
 <P/>The ring determined by <K>CohomologyGenerators</K>
 and <K>CohomologyRelators</K> is somewhat different.
 <K>CohomologyGenerators</K> proceeds inductively,
-taking all standard basis elements of 
+taking all natural basis elements of 
 <M>H^1\left(G,k\right)</M> as generators, and for
 <Alt Only="LaTeX">
 <M>1&lt;i\le n</M>,</Alt> 
 <Alt Not="LaTeX">
 <M>i=2\ldots n</M>,</Alt> 
-taking all standard basis elements
+taking all natural basis elements
 of <M>H^i\left(G,k\right)</M> which are <E>not</E>
 products of lower-degree elements as generators.
 Therefore, unless you know that there is an <M>n</M> for which
@@ -573,11 +601,12 @@ that the elements returned by the
 </Alt><Alt Not="LaTeX">
 <M>H*(G,k)</M></Alt> 
 as a ring. The knowledge of such an <M>n</M> is the subject of
-<Ref Sect="completion"/>.
+section <Ref Sect="completion"/>.
 
 <P/>Similarly, <K>CohomologyRelators</K> proceeds inductively
 until degree <M>n</M>, returning a list of polynomials which
 generate the ideal of relators of multidegree <M>n</M> or less.
+Again, you have to already know how big <M>n</M> should be.
 
 <P/>The result of the preceding information is
 that there is a homomorphism
@@ -603,7 +632,7 @@ greater than <M>n</M> which is not a consequence
 of lower degree relators, then <M>f</M>
 won't be injective.
 
-See <Ref Sect="completion"/> for a discussion on how
+See section <Ref Sect="completion"/> for a discussion on how
 big <M>n</M> needs to be to ensure that
 <M>f</M> be an isomorphism.
 
@@ -764,8 +793,12 @@ v.3
 </Body>
 
 <Appendix Label="benchmarks"><Heading>Some Benchmarks</Heading>
-The numbers in the following table compare the times
-taken to execute the 1.1 and 1.2 versions of the
+Some of the key subroutines have been improved
+in version 1.3 of <Package>Crime</Package>, resulting in a
+significant speedup of many basic calculations.
+
+<P/>The numbers in the following table compare the runtimes
+of the 1.1 and 1.3 versions of the
 functions listed in the column headers
 on all the groups of size 16.
 All functions were executed on a 2.4 GHz AMD64 processor with 12 GB of RAM.
@@ -774,7 +807,7 @@ is the Small Group Library number of the
 group used in that row, so the group used in row <K>n</K>
 is <K>SmallGroup(16,n)</K>.
 The upper number in each box is the runtime for the 1.1 version, whereas the 
-lower number is the runtime for the 1.2 version.
+lower number is the runtime for the 1.3 version.
 <Table Align="c|c|c|c">
 <Row>
 <Item>Group</Item>
@@ -958,13 +991,13 @@ of all Groups of Size 16</Heading>
 Below is the output of the test file 
 <K>tst/batch.g</K>. The file runs through
 all groups of size <M>n</M>, which
-is initially set to <M>16</M>, and runs
-<K>ProjectiveResolution</K>, <K>CohomologyGenerators</K>
+is initially set to <M>16</M>, calls
+<K>ProjectiveResolution</K>, <K>CohomologyGenerators</K>,
 and <K>CohomologyRelators</K> for each group, 
-and prints the results as well as 
-the timings for each operation to a file. The timings
-have been deleted, having been presented in
-Appendix <Ref Chap="benchmarks"/>. The output
+and prints the results, as well as 
+the runtimes for each operation, to a file like the one shown below. The runtimes
+in this example have been deleted, having been presented in
+Appendix <Ref Chap="benchmarks"/>. The example
 below was computed on a 2.4 GHz AMD64 processor
 with 12 GB of RAM. 
 See the file <K>tst/README</K> for suggestions
@@ -1043,6 +1076,6 @@ Relators: [ [ z, y, x, w ], [  ] ]
 ]]>
 </Log>
 </Appendix>
-<Bibliography Databases="crime" Style="plain"/>
+<Bibliography Databases="crimebib.xml" Style="plain"/>
 <TheIndex/>
 </Book>

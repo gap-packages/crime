@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE file SYSTEM "bibxmlext.dtd">
+<file>
+<entry id="carlson"><book>
+  <author>
+    <name><first>Jon F.</first><last>Carlson</last></name>
+    <name><first>Lisa</first><last>Townsley</last></name>
+    <name><first>Luis</first><last>Valeri-Elizondo</last></name>
+    <name><first>Mucheng</first><last>Zhang</last></name>
+  </author>  
+  <title>Cohomology rings of finite groups</title>
+  <publisher>Kluwer Academic Publishers</publisher>
+  <year>2003</year>
+  <volume>3</volume>
+  <series>Algebras and Applications</series>
+  <address>Dordrecht</address>
+  <isbn>1-4020-1525-9</isbn>
+  <mrnumber>MR2028960 (2004k:20110)</mrnumber>
+  <mrclass>20J06</mrclass>
+  <mrreviewer>Kevin P. Knudson</mrreviewer>
+  <other type="pages">xvi+776</other>
+</book></entry>
+<entry id="kraines"><article>
+  <author>
+    <name><first>David</first><last>Kraines</last></name>
+  </author>  
+  <title>Massey higher products</title>
+  <journal>Trans. Amer. Math. Soc.</journal>
+  <year>1966</year>
+  <volume>124</volume>
+  <pages>431--449</pages>
+  <issn>0002-9947</issn>
+  <mrnumber>MR0202136 (34 \#2010)</mrnumber>
+  <mrclass>55.34</mrclass>
+  <mrreviewer>W. D. Barcus</mrreviewer>
+  <other type="fjournal">Transactions of the American Mathematical
+      Society</other>
+</article></entry>
+<entry id="borge"><misc>
+  <author>
+    <name><first>Inger Christin</first><last>Borge</last></name>
+  </author>  
+  <title>A cohomological approach to the classification of
+      <M>p</M>-groups</title>
+  <howpublished>http://www.maths.abdn.ac.uk/~bensondj/html/archive/borge.html</howpublished>
+  <year>2001</year>
+  <other type="school">Oxford</other>
+</misc></entry>
+</file>
