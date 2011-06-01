@@ -22,7 +22,7 @@ InstallGlobalFunction(LiftHom,function(L,R,p)
       for k in [1..p-1] do
         first:=(t-1)*p^l+(k-1)*p^(j-1)+1;
         last:= (t-1)*p^l+ k   *p^(j-1)  ;
-	Append(m,ActDiagonally(m{[first..last]},L[j]));
+        Append(m,ActDiagonally(m{[first..last]},L[j]));
       od;
     od;
   od;

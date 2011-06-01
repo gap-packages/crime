@@ -8,28 +8,27 @@
 \newtheorem{observation}[definition]{Observation}
 \newtheorem{trouble}[definition]{Troubling Observation}
 \renewcommand{\qedsymbol}{\rule{0.5em}{0.5em}}
-\title{Cohomology Products in \textsf{GAP}, Explained in not Unbearable 
-Detail, but Still Bad Enough to Require Being Seated while Reading}
+\title{Cohomology Products in \textsf{CRIME}}
 \author{Marcus Bishop}
 \newcounter{savedenumii}
 \begin{document}
 \maketitle
 The purpose of this document is to explain
-the implementation of cohomology products in the 
-\textsf{crime} package for \textsf{GAP} including the Massey $n$-fold
-product. In this document, a composition of two functions
-$g\circ f$ is the function obtained by applying $f$ first 
+the implementation of cohomology products
+in the \textsf{CRIME} package for \textsf{GAP}.
+In this document, the composition $g\circ f$ of two functions
+$f$ and $g$ is the function obtained by applying $f$ first 
 and then $g$. The symbol $\circlearrowright$ is used
 in diagrams to indicate that a polygon either commutes
 or anticommutes. 
 
 Let $G$ be a finite $p$-group for some prime $p$
-and let $k=\mathbb{F}_p$. Also write $k$ for the
+and let $k=\mathbb{F}_p$. We write $k$ for the
 trivial $kG$-module. We assume that we can
 calculate a $kG$-projective resolution $P_\ast$
-of $k$, that is, for $n$ as large as we need,
+of $k$. In other words, for $n$ as large as we need,
 we can compute the integers
-$\left\{b_m:0\le m\le n\right\}$, the
+$\left\{b_m:0\le m\le n\right\}$ the
 maps $\left\{\partial_m:1\le m\le n\right\}$
 and the map $\epsilon$ such that
 \begin{equation}\label{proj}
@@ -37,15 +36,14 @@ and the map $\epsilon$ such that
 &P_{n-1}\ar[r]&\dots\ar[r]
 &P_1\ar[r]^{\partial_1}
 &P_0\ar[r]^{\epsilon}&k}\end{equation}
-is exact, where $P_m=\left(kG\right)^{\oplus b_m}$.
-Later, we will assume moreover that $P_\ast$ is {\em minimal},
-that is, that $\partial_m\left(P_m\right)\le 
-\mathrm{Rad}\left(P_{m-1}\right)$ for all $m\ge 1$.
+is exact where $P_m=\left(kG\right)^{\oplus b_m}$.
+Later, we will assume also that $P_\ast$ is minimal,
+but this assumption isn't needed at this point.
 
 \section{Cohomology Products}\label{cp}
 The following construction is taken from \cite{carlson}.
-We begin with two cocycles $f:P_i\to k$ and $g:P_j\to k$,
-that is, that $f\circ\partial_{i+1}=g\circ\partial_{j+1}=0$.
+We begin with two cocycles $f:P_i\to k$ and $g:P_j\to k$.
+This means that $f\circ\partial_{i+1}=g\circ\partial_{j+1}=0$.
 We want to compute the cup product $fg:P_{i+j}\to k$.
 
 We first convert $f$ into an chain map,
@@ -67,6 +65,7 @@ P_{m-i}\ar[r]_{\partial_{m-i}}
 &P_1\ar[r]_{\partial_1}
 &P_0\ar[r]_\epsilon&k\ar[r]&0
 }\end{equation}
+This is done as follows.
 \begin{enumerate}
 \item Define $f_i$ such that $\epsilon\circ f_i=f$.
 This is possible by projectivity of $P_i$.
@@ -74,16 +73,16 @@ This is possible by projectivity of $P_i$.
 =f_i\circ\partial_{i+1}$.
 This is possible by projectivity of $P_{i+1}$ since
 \[\mathrm{im}\left(f_i\circ\partial_{i+1}\right)
-\le\mathrm{im}\left(\partial_1\right)
-=\ker\left(\epsilon\right)\]
+\le\ker\left(\epsilon\right)
+=\mathrm{im}\left(\partial_1\right)\]
 as $\epsilon\circ\left(f_i\circ\partial_{i+1}\right)
-=f\circ\partial_{i+1}=0$.
+=f\circ\partial_{i+1}=0$ since $f$ is a cocycle.
 \item Define $f_{i+2}$ such that $\partial_2\circ f_{i+2}
 =f_{i+1}\circ\partial_{i+2}$.
 This is possible by projectivity of $P_{i+2}$ since
 \[\mathrm{im}\left(f_{i+1}\circ\partial_{i+2}\right)
-\le\mathrm{im}\left(\partial_2\right)
-=\ker\left(\partial_1\right)\]
+\le\ker\left(\partial_1\right)
+=\mathrm{im}\left(\partial_2\right)\]
 as $\partial_1\circ\left(f_{i+1}\circ\partial_{i+2}\right)
 =f_i\circ\partial_{i+1}\circ\partial_{i+2}=0$.
 \item Define $f_m$ for $m>i+2$ by recursion 
@@ -91,8 +90,8 @@ such that $\partial_{m-i}\circ f_m
 =f_{m-1}\circ\partial_m$.
 This is possible by projectivity of $P_m$ since
 \[\mathrm{im}\left(f_{m-1}\circ\partial_m\right)
-\le\mathrm{im}\left(\partial_{m-i}\right)
-=\ker\left(\partial_{m-i-1}\right)\]
+\le\ker\left(\partial_{m-i-1}\right)
+=\mathrm{im}\left(\partial_{m-i}\right)\]
 as $\partial_{m-i-1}\circ\left(f_{m-1}\circ\partial_m\right)
 =f_{m-2}\circ\partial_{m-1}\circ\partial_m=0$.
 \end{enumerate}
@@ -107,24 +106,24 @@ My understanding of the purpose of the Yoneda Cocomplex
 is the following. The definition of the Massey product below
 requires a cocomplex having an associative product.
 The product defined above,
-however, is defined only for $f$ and $g$ cocycles
+however, is defined only for $f$ and $g$ {\em cocycles}
 in $\mathrm{Hom}\left(P_\ast,k\right)$.
 The Yoneda cocomplex $Y$, on the other hand, has the same
 cohomology as $\mathrm{Hom}\left(P_\ast,k\right)$,
 but has an associative product defined 
 for all cochains, namely composition.
 Moreover, we will show that via the isomorphism 
-$\Phi:\mathrm{H}^\ast\left(G,k\right)\to
-\mathrm{H}^\ast\left(Y\right)$, composition in $Y$ 
+$\Phi:H^\ast\left(G,k\right)\to
+H^\ast\left(Y\right)$, composition in $Y$ 
 agrees with the product defined in Section \ref{cp}
-up to the factor $\left(-1\right)^{\deg f\deg g}$,
-that is, \[\Phi\left(fg\right)
+up to the factor $\left(-1\right)^{\deg f\deg g}$.
+In other words, \[\Phi\left(fg\right)
 =\left(-1\right)^{\deg f\deg g}\Phi\left(g\right)
 \circ\Phi\left(f\right).\]
 
 The following construction comes from \cite{borge}.
 \begin{definition}
-For $i\ge 0$, define
+For $i\ge 0$ define
 \[Y^i=\prod_{m\ge i}\mathrm{Hom}_{kG}\left(P_m,P_{m-i}\right).\]
 Then an element $f\in Y^i$ is a collection of $kG$-homomorphisms
 $\left\{f_m:P_m\to P_{m-i}:m\ge i\right\}$
@@ -155,8 +154,8 @@ P_{n-i}\ar[r]_{\partial_{n-i}}
 Diagram (\ref{f}) is not required to commute.
 
 \begin{definition}
-Define $\displaystyle{Y=\bigoplus_{i\ge 0}Y^i}$.
-$Y$ is called the {\em Yoneda cocomplex} of $P_\ast$.
+$\displaystyle{Y=\bigoplus_{i\ge 0}Y^i}$
+is called the {\em Yoneda cocomplex} of $P_\ast$.
 We write $\deg\left(f\right)=~i$ for $f\in Y^i$.
 Let $f=\left\{f_m:m\ge i\right\}\in Y^i$ and define 
 \begin{align*}
@@ -200,7 +199,7 @@ Follow along in the picture.
 \end{proof}
 
 \begin{theorem}
-The cohomology groups of $Y$ are $\mathrm{H}^\ast\left(G,k\right)$.
+The cohomology groups of $Y$ are $H^\ast\left(G,k\right)$.
 \end{theorem}
 \begin{proof}
 We will define a group isomorphism
@@ -208,7 +207,7 @@ $\Phi:H^i\left(G,k\right)\to H^i\left(Y\right)$.
 \begin{enumerate}
 \item Let $f:P_i\to k$ be a cocycle
 in $\mathrm{Hom}_{kG}^i\left(P_\ast,k\right)$,
-that is, assume $f\circ\partial_{i+1}=0$.
+so $f\circ\partial_{i+1}=0$.
 Define $\Phi\left(f\right)=
 \left\{f_m:m\ge i\right\}\in Y^i$ as follows.
 The element $\Phi\left(f\right)$, together with $f$, is pictured
@@ -239,16 +238,16 @@ This is possible by projectivity of $P_i$.
 =\left(-1\right)^i f_i\circ\partial_{i+1}$.
 This is possible by projectivity of $P_{i+1}$ since
 \[\mathrm{im}\left(\left(-1\right)^i f_i\circ\partial_{i+1}\right)
-\le\mathrm{im}\left(\partial_1\right)
-=\ker\left(\epsilon\right)\]
+\le\ker\left(\epsilon\right)
+=\mathrm{im}\left(\partial_1\right)\]
 as $\epsilon\circ\left(\left(-1\right)^i f_i\circ\partial_{i+1}\right)
 =\left(-1\right)^i f\circ\partial_{i+1}=0$.
 \item Define $f_{i+2}$ such that $\partial_2\circ f_{i+2}
 =\left(-1\right)^i f_{i+1}\circ\partial_{i+2}$.
 This is possible by projectivity of $P_{i+2}$ since
 \[\mathrm{im}\left(\left(-1\right)^i f_{i+1}\circ\partial_{i+2}\right)
-\le\mathrm{im}\left(\partial_2\right)
-=\ker\left(\partial_1\right)\]
+\le\ker\left(\partial_1\right)
+=\mathrm{im}\left(\partial_2\right)\]
 as $\partial_1\circ\left(\left(-1\right)^i
 f_{i+1}\circ\partial_{i+2}\right)
 =f_i\circ\partial_{i+1}\circ\partial_{i+2}=0$.
@@ -257,8 +256,8 @@ such that $\partial_{m-i}\circ f_m
 =\left(-1\right)^i f_{m-1}\circ\partial_m$.
 This is possible by projectivity of $P_m$ since
 \[\mathrm{im}\left(\left(-1\right)^i f_{m-1}\circ\partial_m\right)
-\le\mathrm{im}\left(\partial_{m-i}\right)
-=\ker\left(\partial_{m-i-1}\right)\]
+\le\ker\left(\partial_{m-i-1}\right)
+=\mathrm{im}\left(\partial_{m-i}\right)\]
 as $\partial_{m-i-1}\circ\left(\left(-1\right)^i
 f_{m-1}\circ\partial_m\right)
 =f_{m-2}\circ\partial_{m-1}\circ\partial_m=0$.
@@ -277,7 +276,7 @@ We claim than any other choice of maps
 $\left\{f'_m:m\ge i\right\}$ 
 satisfying the conditions in \ref{first}-\ref{last} above
 will be equivalent to
-$\left\{f_m:m\ge i\right\}$ in $\mathrm{H}^i\left(Y\right)$.
+$\left\{f_m:m\ge i\right\}$ in $H^i\left(Y\right)$.
 More precisely, if $f$ and $f'$ both satisfy
 conditions \ref{first}-\ref{last}, 
 then will define a map $\theta\in Y^{i-1}$
@@ -455,10 +454,11 @@ well-defined $k$-module homomorphism.
 \end{proof}
 
 \section{Products in $Y$}
-Consider the following product 
+In this section we define a product 
 $Y^i\otimes Y^j\to Y^{i+j}$ on $Y$.
-Let $f\in Y^i$ and $g\in Y^j$ and consider
-the composition of the individual component
+If $f\in Y^i$ and $g\in Y^j$ then let $fg$ be 
+element of $Y^{i+j}$ whose component maps are
+the compositions of the component
 maps of $f$ with those of $g$ such that legitimate
 compositions are obtained, as in the following diagram.
 \begin{equation}\label{comp}\xymatrix{
@@ -530,16 +530,16 @@ g_{m-i-1}\circ\partial_{m-i}
 \end{proof}
 \begin{claim}
 Composition in $Y$ induces via $\Phi$ an associative binary operation 
-\[\mathrm{H}^i\left(G,k\right)
-\otimes\mathrm{H}^j\left(G,k\right)
-\to\mathrm{H}^{i+j}\left(G,k\right)\]
-making $\mathrm{H}^\ast\left(G,k\right)$ into a ring with 1.
+\[H^i\left(G,k\right)
+\otimes H^j\left(G,k\right)
+\to H^{i+j}\left(G,k\right)\]
+making $H^\ast\left(G,k\right)$ into a ring with 1.
 \end{claim}
 
-\section{Relationships among products on $\mathrm{H}^\ast\left(G,k\right)$}
-Let $f\in\mathrm{H}^i\left(G,k\right)$ 
-and $g\in\mathrm{H}^j\left(G,k\right)$.
-Consider the following products on $\mathrm{H}^\ast\left(G,k\right)$.
+\section{Relationships among products on $H^\ast\left(G,k\right)$}
+Let $f\in H^i\left(G,k\right)$ 
+and $g\in H^j\left(G,k\right)$.
+Consider the following products on $H^\ast\left(G,k\right)$.
 \begin{enumerate}
 \item The {\em cup product}\label{cup} $fg$ defined in Section \ref{cp}
 \item\label{yp} The product induced from composition in $Y$
@@ -590,19 +590,19 @@ product to an $n$-fold product for $n\ge 2$.
 The following definition is adapted from \cite{kraines}.
 
 \begin{definition}\label{massey}
-For $k\ge 2$, let 
+For $k\ge 2$ let 
 $f^{\left(1\right)},
 f^{\left(2\right)},\dots,f^{\left(k\right)}$ be cocycles in $Y$.
 The {\em Massey $k$-fold product} 
 $\left\langle f^{\left(1\right)},
 f^{\left(2\right)},\dots,f^{\left(k\right)}\right\rangle$
 is defined provided that for each pair $\left(i,j\right)$
-with $1\le i<j\le k$ other than $\left(1,k\right)$,
+with $1\le i<j\le k$ other than $\left(1,k\right)$
 the lower-degree product 
 $\left\langle f^{\left(i\right)},
 f^{\left(i+1\right)},\dots,f^{\left(j\right)}\right\rangle$
-is defined and vanishes as an element of $H^\ast\left(Y\right)$,
-that is, if for each qualifying $\left(i,j\right)$,
+is defined and vanishes as an element of $H^\ast\left(Y\right)$.
+That is, if for each qualifying $\left(i,j\right)$
 there exists $u^{i,j}\in Y$ such that 
 $\partial u^{i,j}
 =\left\langle f^{\left(i\right)},
@@ -621,13 +621,12 @@ $f^{\left(k\right)}$ respectively
 and $\overline{u}=\left(-1\right)^{\deg\left(u\right)}u$.
 \end{definition}
 
-Observe that in the case $k=2$, the condition
+Observe that in the case $k=2$ the condition
 on $\left(i,j\right)$ is vacuously satisfied,
 so that $\left\langle f,g\right\rangle=g\circ\overline{f}$.
-
 Traditionally, one organizes the information
 in Definition \ref{massey} 
-in an array, such as the following, 
+into the array like
 \[\begin{array}{cccc}
 f^{\left(1\right)}&u^{1,2}&u^{1,3}\\
 &f^{\left(2\right)}&u^{2,3}&u^{2,4}\\
@@ -635,8 +634,8 @@ f^{\left(1\right)}&u^{1,2}&u^{1,3}\\
 &&&f^{\left(4\right)}\end{array}\]
 and traces the top row with one hand
 while tracing the rightmost column with
-the other hand as $t$ runs from 1 to 3. 
-In this case, we have
+the other hand as $t$ runs from 1 to $k-1$.
+In the example shown above we have
 \[\left\langle f^{\left(1\right)},f^{\left(2\right)},
 f^{\left(3\right)},f^{\left(4\right)}\right\rangle
 =u^{2,4}\circ \overline{f^{\left(1\right)}}
@@ -650,7 +649,7 @@ is a cocycle in $Y$.
 \end{lemma}
 The reason for the sign appearing 
 in Definition \ref{massey} becomes apparent
-is the following proof.
+in the following proof.
 \begin{proof}
 We begin by making a general observation about $Y$.
 Suppose $f\in Y^i$ and that $g=\partial\theta$
@@ -667,7 +666,7 @@ P_{m+2}\ar[r]_{\partial_{m+2}}
 &P_{m+1}\ar[r]_{\partial_{m+1}}
 &P_m
 }\]
-Then by Observation \ref{differential}, we have
+Then by Observation \ref{differential} we have
 \begin{eqnarray*}
 \left(g\circ f\right)_{i+j+m+1}
 &=&g_{j+m+1}\circ f_{i+j+m+1}\\
@@ -684,7 +683,7 @@ Then by Observation \ref{differential}, we have
 \left(\theta\circ\left(\partial f\right)\right)_{i+j+m+1} 
 +\left(-1\right)^i \partial\left(\theta\circ f\right)_{i+j+m+1}
 \end{eqnarray*}
-so that as elements of $\mathrm{H}^\ast\left(Y\right)$, we have
+so that as elements of $H^\ast\left(Y\right)$ we have
 \begin{equation}
 \partial\theta\circ f
 =-\left(-1\right)^i\theta\circ\partial f.\end{equation}
@@ -767,33 +766,39 @@ of (\ref{ij}).
 Write \[d=\deg\left(g\right)
 =\sum_{t=i}^j\deg\left(f^{\left(t\right)}\right)+i-j+1.\]
 The relevant maps are all pictured below.
-\begin{equation}\label{masseypic}\tiny
-\begin{xy}{\xymatrix@+13pt{
+
+\begin{multline*}\label{masseypic}
+\begin{xy}\xymatrix@+13pt{
 P_m\ar[r]^{\partial_m}\ar[d]_{g_m}
 &P_{m-1}\ar[r]^{\partial_{m-1}}\ar[d]_{g_{m-1}}\ar[dl]_{u^{i,j}_{m-1}}
 &P_{m-2}\ar[r]^{\partial_{m-2}}\ar[d]_{g_{m-2}}\ar[dl]_{u^{i,j}_{m-2}}
 &P_{m-3}\ar[r]\ar[d]_{g_{m-3}}\ar[dl]_{u^{i,j}_{m-3}}
-&\dots\ar[r]
-&P_{d+2}\ar[r]^{\partial_{d+2}}\ar[d]_{g_{d+2}}
-&P_{d+1}\ar[r]^{\partial_{d+1}}\ar[d]_{g_{d+1}}\ar[dl]_{u^{i,j}_{d+1}}
-&P_d\ar[d]_{g_d}\ar[r]^{\partial_d}\ar[dl]_{u^{i,j}_d}
-&P_{d-1}\ar[dl]_{u^{i,j}_{d-1}}
-\\
+&\dots\\
 P_{m-d}\ar[r]_{\partial_{m-d}}
 &P_{m-d-1}\ar[r]_{\partial_{m-d-1}}
 &P_{m-d-2}\ar[r]_{\partial_{m-d-2}}
 &P_{m-d-3}\ar[r]
-&\dots\ar[r]
+&\dots
+}
+\end{xy}
+\\
+\begin{xy}{\xymatrix@+13pt{
+\dots\ar[r]
+&P_{d+2}\ar[r]^{\partial_{d+2}}\ar[d]_{g_{d+2}}
+&P_{d+1}\ar[r]^{\partial_{d+1}}\ar[d]_{g_{d+1}}\ar[dl]_{u^{i,j}_{d+1}}
+&P_d\ar[d]_{g_d}\ar[r]^{\partial_d}\ar[dl]_{u^{i,j}_d}
+&P_{d-1}\ar[dl]_{u^{i,j}_{d-1}}\\
+\dots\ar[r]
 &P_2\ar[r]_{\partial_2}
 &P_1\ar[r]_{\partial_1}
 &P_0\ar[r]_\epsilon&k
 }};
-"2,8";"1,7"**{};
+"2,4";"1,3"**{};
 ?(.35)*{\circlearrowright}
 \end{xy}
-\end{equation}
+\end{multline*}
 
-We assume now that $P_\ast$ is minimal, that is,
+We assume now that $P_\ast$ is {\em minimal}. In other words, we assume
 that $\partial_m\left(P_m\right)\le\mathrm{Rad}\left(P_{m-1}\right)$
 for all $m\ge 1$.
 This implies that $\partial f=0$ for {\em any} cochain $f$,
@@ -806,9 +811,9 @@ The map $u^{i,j}\in Y^{d-1}$ is constructed as follows.
 \item The assumption that
 $\left\langle f^{\left(i\right)},
 f^{\left(i+1\right)},\dots,f^{\left(j\right)}\right\rangle=g$ 
-vanishes as an element of $\mathrm{H}^d\left(Y\right)$
+vanishes as an element of $H^d\left(Y\right)$
 tells us that $\epsilon\circ g_d$ vanishes
-as an element of $\mathrm{H}^d\left(G,k\right)$.
+as an element of $H^d\left(G,k\right)$.
 But since $P_\ast$ is {\em minimal}, this means
 that $\epsilon\circ g_d$ is actually the zero map.
 Then by projectivity of $P_d$, there exists

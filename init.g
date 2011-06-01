@@ -1,9 +1,6 @@
 ReadPackage("crime","gap/crime.gd");
-ReadPackage("crime","gap/order.gi");
-ReadPackage("crime","gap/regular.gi");
+ReadPackage("crime","gap/action.gi");
 ReadPackage("crime","gap/helpers.gi");
-ReadPackage("crime","gap/matrix.gi");
-ReadPackage("crime","gap/betterbasis.gi");
 ReadPackage("crime","gap/lift.gi");
 ReadPackage("crime","gap/augmentation.gi");
 ReadPackage("crime","gap/radical.gi");

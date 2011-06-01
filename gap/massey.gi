@@ -62,7 +62,7 @@ d:=List(arg,Degree);
 ProjectiveResolution(C,Sum(d)+1-m);
 H:=List(arg,x->FirstLift(C,Coefficients(Basis(f(Degree(x))),x)));
 for t in [1..m-1] do
-  LiftChainMapMassey(C,H[t],d[t],Sum(d{[t+1..m]}));
+  LiftChainMapAlternating(C,H[t],d[t],Sum(d{[t+1..m]}));
 od;
 
 y:=_MasseyProduct(C,H{[1..m-1]},d{[1..m-1]},d[m]);

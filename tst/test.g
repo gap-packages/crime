@@ -1,45 +1,46 @@
-# This file tests all the functions and methods
-# documented in the manual. It only calls each
-# function, but does not confirm the accuracy
-# of the results. If GAP chokes, the last line
-# printed is the problem.
-
-LoadPackage("crime");
-G:=DihedralGroup(8);
-H:=CyclicGroup(4);
-k:=GF(2);
-M:=TrivialGModule(G,k);
-
-Print("CohomologyObject, first method, characterisic 2\n");
-C:=CohomologyObject(G,M);
-Print("CohomologyObject, second method characeristic 2\n");
-D:=CohomologyObject(H);
-
-Print("ProjectiveResolution\n");
-ProjectiveResolution(C,10);
-Print("CohomologyRing, characteristic 2\n");
-A:=CohomologyRing(C,10);
-
-b:=Basis(A);
-Print("IsHomogeneous\n");
-IsHomogeneous(b[1]);
-Print("Degree\n");
-Degree(b[1]);
-Print("CohomologyGenerators\n");
-CohomologyGenerators(C,10);
-Print("CohomologyRelators\n");
-CohomologyRelators(C,10);
-
-f:=GroupHomomorphismByImages(H,G,[H.1],[G.2]);
-Print("InducedHomomorphismOnCohomology\n");
-F:=InducedHomomorphismOnCohomology(D,C,f,10);
-Print("Application of F\n");
-A.1^F;
-
-B:=CohomologyRing(CyclicGroup(3),10);
-Print("CohomologyRing, characteristic 3\n");
-z:=Basis(B)[2];
-Print("MasseyProduct, double\n");
-MasseyProduct(z,z);
-Print("MasseyProduct, triple\n");
-MasseyProduct(z,z,z);
+gap> LoadPackage("crime");
+true
+gap> G:=DihedralGroup(8);
+<pc group of size 8 with 3 generators>
+gap> H:=CyclicGroup(4);
+<pc group of size 4 with 2 generators>
+gap> k:=GF(2);
+GF(2)
+gap> M:=TrivialGModule(G,k);;
+gap> Display(M);Print("\n");
+rec(
+  dimension := 1,
+  field := GF(2),
+  generators := [ [ [ Z(2)^0 ] ], [ [ Z(2)^0 ] ], [ [ Z(2)^0 ] ] ],
+  isMTXModule := true )
+gap> C:=CohomologyObject(G,M);
+<object>
+gap> D:=CohomologyObject(H);
+<object>
+gap> ProjectiveResolution(C,10);
+[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+gap> A:=CohomologyRing(C,10);
+<algebra of dimension 66 over GF(2)>
+gap> b:=Basis(A);
+CanonicalBasis( <algebra of dimension 66 over GF(2)> )
+gap> IsHomogeneous(b[1]);
+true
+gap> Degree(b[1]);
+0
+gap> CohomologyGenerators(C,10);
+[ 1, 1, 2 ]
+gap> CohomologyRelators(C,10);
+[ [ z, y, x ], [ z*y+y^2 ] ]
+gap> f:=GroupHomomorphismByImages(H,G,[H.1],[G.2]);
+[ f1 ] -> [ f2 ]
+gap> F:=InducedHomomorphismOnCohomology(D,C,f,10);;
+gap> A.1^F;
+v.1
+gap> B:=CohomologyRing(CyclicGroup(3),10);
+<algebra of dimension 11 over GF(3)>
+gap> z:=Basis(B)[2];
+v.2
+gap> MasseyProduct(z,z);
+0*v.1
+gap> MasseyProduct(z,z,z);
+v.3
