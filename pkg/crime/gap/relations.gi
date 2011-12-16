@@ -1,11 +1,11 @@
 InstallGlobalFunction(ProductOfChainMaps,function(E,e,F,f,C)
   # e=Deg(E),f=Deg(F). 
   return List([1..Size(E)-f],
-    j->E[j+f]*LiftHom(C!.L[1],F[j],C!.K));
+    j->E[j+f]*LiftHom(C!.L[1],F[j],C!.p));
   end
 );
 
-InstallGlobalFunction(Intersperse,function(C,IN,M,x)
+InstallGlobalFunction(Intersperse,function(D,IN,M,x)
   # Every time we commute an element of degree d with an element
   # of degree e, we have to multiply the product by (-1)^(d*e).
   # This function returns the factor +/- 1 resulting from moving
@@ -15,10 +15,11 @@ InstallGlobalFunction(Intersperse,function(C,IN,M,x)
   f:=ExtRepPolynomialRatFun(M)[1];
   g:=First([1,3..Size(f)-1],x->f[x]>e);
   if fail=g then return 1;fi;
-  fo:=f{[g,g+2..Size(f)-1]}; # The indeterminate numbers to the RIGHT of x.
-  fe:=f{[g+1,g+3..Size(f)]}; # Their degrees.
-  return (-1)^(C!.D[e]*Sum([1..Size(fo)],
-    x->C!.D[Position(IN,fo[x])]*fe[x]));
+  fo:=f{[g,g+2..Size(f)-1]}; # The indeterminate numbers to the 
+                             # RIGHT of where x goes.
+  fe:=f{[g+1,g+3..Size(f)]}; # Their exponents.
+  return (-1)^(D[Position(IN,e)]*Sum([1..Size(fo)],
+    x->D[Position(IN,fo[x])]*fe[x]));
   end
 );
 
@@ -55,15 +56,15 @@ for d in [2..n] do
           Append(c,[z]);
           if not IsZero(PolynomialReducedRemainder(z,I,
             MonomialLexOrdering())) then
-            if not 2=Characteristic(C!.K) then
+            if not 2=C!.p then
               w:=ExtractColumn(LiftHom(C!.L[1],
                 x[3][y[1]+1]
-                *LiftHom(C!.L[1],y[3][1],C!.K),C!.K),1)
-                *Intersperse(C,IN,x[2],y[2]);
+                *LiftHom(C!.L[1],y[3][1],C!.p),C!.p),1)
+                *Intersperse(C!.D,IN,x[2],y[2]);
             else
               w:=ExtractColumn(LiftHom(C!.L[1],
                 x[3][y[1]+1]
-                *LiftHom(C!.L[1],y[3][1],C!.K),C!.K),1);
+                *LiftHom(C!.L[1],y[3][1],C!.p),C!.p),1);
             fi;
             if IsZero(w) then 
               Append(I,[z]);

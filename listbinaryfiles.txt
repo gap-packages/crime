@@ -1,6 +1,6 @@
-crime/doc/.nfs2106802f00003215
+crime/packagecrime.pl
+crime/doc/explanation.bbl
 crime/doc/manual.pdf
-crime/doc/.nfs2106800700002ba3
 crime/doc/explanation.pdf
 crime/doc/explanation.dvi
 crime/doc/manual.ps
@@ -11,4 +11,7 @@ crime/doc/manual.dvi
 crime/doc/crime.bbl
 crime/doc/example.ps
 crime/doc/compile
+crime/tst/some_profiles
+crime/tst/16-groups
 crime/gap/comments
+crime/gap/print.pl

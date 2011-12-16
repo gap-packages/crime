@@ -1,13 +1,13 @@
-InstallGlobalFunction(FirstStep,function(M)
+InstallGlobalFunction(FirstStep,function(M,p)
   local I,L,RC;
   I:=IdentityMat(MTX.Dimension(M),MTX.Field(M));
   L:=List(MTX.Generators(M),x->x-I); 
-  if MTX.IsMTXModule(M) and Size(MTX.BasisRadical(M))>1 then
+  if M!.isMTXModule and Size(MTX.BasisRadical(M))>1 then
     RC:=BaseOrthogonalSpaceMat(MTX.BasisRadical(M));
   else 
     RC:=I;
   fi;
-  return LiftHom(L,RC,MTX.Field(M));
+  return LiftHom(L,RC,p);
   end
 );
 

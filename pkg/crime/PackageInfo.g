@@ -5,10 +5,10 @@
 SetPackageInfo( rec(
   PackageName := "Crime",
   Subtitle := "A GAP Package to Calculate Group Cohomology and Massey Products",
-  Version := "0.3",
-  Date := "7/09/2006",
+  Version := "1.0",
+Date := "23/10/2006",
   ArchiveURL := 
-    "http://mad.epfl.ch/~bishop/Crime/crime-0.3",
+    "http://math.uic.edu/~marcus/Crime/crime-1.0",
   ArchiveFormats := ".tar.gz",
 
   Persons := [
@@ -17,31 +17,23 @@ SetPackageInfo( rec(
       FirstNames    := "Marcus",
       IsAuthor      := true,
       IsMaintainer  := true,
-      Email         := "marcus.bishop@epfl.ch",
-      WWWHome       := "http://people.epfl.ch/marcus.bishop",
-      PostalAddress := Concatenation([
-                         "EPFL SB IGAT MAD\n",
-                         "MA C3 615 (Bâtiment MA)\n",
-                         "Station 8\n",
-                         "CH-1015 Lausanne\n",
-                         "Switzerland"
-                        ]),
-      Place         := "Lausanne",
-      Institution   := "EPFL"
+      Email         := "marcus.bishop@gmail.com",
+      WWWHome       := "http://math.uic.edu/~marcus",
     )
   ],
-  Status := "deposited",
+  Status := "accepted",
+  CommunicatedBy := "Bettina Eick (Braunschweig)",
+  AcceptDate := "10/2006",
   README_URL := 
-    "http://mad.epfl.ch/~bishop/Crime/README",
+    "http://math.uic.edu/~marcus/Crime/README",
   PackageInfoURL:=
-    "http://mad.epfl.ch/~bishop/Crime/PackageInfo.g",
+    "http://math.uic.edu/~marcus/Crime/PackageInfo.g",
   AbstractHTML := Concatenation([
-    "This package computes the cohomology ring ",
-    "of finite p-groups, induced maps, and ",
-    "Massey products.\n"
+    "This package computes the cohomology ring of finite", 
+    "p-groups, induced maps, and Massey products."
   ]),
   PackageWWWHome:= 
-    "http://mad.epfl.ch/~bishop/Crime",
+    "http://math.uic.edu/~marcus/Crime",
 
   PackageDoc := rec(
     BookName      := "crime",
@@ -62,10 +54,10 @@ SetPackageInfo( rec(
 
   AvailabilityTest := ReturnTrue,
   BannerString:=Concatenation([
-    "\nLast night I was on the threshold of hell.\n",
-    "To-day, I am within sight of my heaven.\n",
-    "          -Emily Bronte, Wuthering Heights\n"
-  ]),
+    "\nThis is CRIME, Version 1.0\n\n",
+    "\"Obviously crime pays, or there'd be no crime\".\n",
+    "                                G. Gordon Liddy\n\n"
+  ]), 
   Autoload := false,
   TestFile := "tst/test.g",
   Keywords := ["cohomology"],

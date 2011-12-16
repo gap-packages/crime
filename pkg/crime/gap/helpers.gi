@@ -41,7 +41,7 @@ InstallGlobalFunction(LiftChainMap,function(C,L,d,n)
   local j,c;
   ProjectiveResolution(C,d+n);
   for j in [Size(L)..n] do
-    c:=C!.R[d+j]*LiftHom(C!.L[1],L[j],C!.K);
+    c:=C!.R[d+j]*LiftHom(C!.L[1],L[j],C!.p);
     Append(L,[List(c,x->SolutionMat(C!.d[j],x))]);
   od;
   end
@@ -53,7 +53,7 @@ InstallGlobalFunction(LiftChainMapMassey,function(C,L,d,n)
   local j,c;
   ProjectiveResolution(C,d+n);
   for j in [Size(L)..n] do
-    c:=C!.R[d+j]*LiftHom(C!.L[1],L[j],C!.K);
+    c:=C!.R[d+j]*LiftHom(C!.L[1],L[j],C!.p);
     Append(L,[List((-1)^d*c,x->SolutionMat(C!.d[j],x))]);
   od;
   end

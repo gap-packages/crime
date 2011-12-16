@@ -1,5 +1,5 @@
 # There is an explanation of this program in the documentation.
-# Wherever possible, the program uses the same notation
+# Wherever possible, the program uses the same notation as
 # that document.
 
 InstallGlobalFunction(_MasseyProduct,function(C,L,d,n)
@@ -18,7 +18,7 @@ if m=1 then return L[1];fi;
 # First we write down <L>=g.
 dg:=Sum(d)-m+2;               # dg=Degree(g), so Degree(u)=dg-1.
 f:=_MasseyProduct(C,L{[1..m-1]},d{[1..m-1]},d[m])[d[m]+1]
-  *LiftHom(C!.L[1],L[m][1],C!.K);
+  *LiftHom(C!.L[1],L[m][1],C!.p);
 g:=ListWithIdenticalEntries(n-1,0);
 for t in [1..m-1] do
   #u^{1..t}*u^{t+1..m}
@@ -27,16 +27,17 @@ for t in [1..m-1] do
   l:=_MasseyProduct(C,L{[1..t]},d{[1..t]},n+dr-1); # left factor
   r:=_MasseyProduct(C,L{[t+1..m]},d{[t+1..m]},n-1);# right factor
   for s in [1..n-1] do
-    g[s]:=g[s]+(-1)^dl*l[dr+s+1]*LiftHom(C!.L[1],r[s+1],C!.K);
+    g[s]:=g[s]+(-1)^dl*l[dr+s+1]*LiftHom(C!.L[1],r[s+1],C!.p);
   od;
 od;
-# f is the first step (g_d) and the list g contains steps [2..n] (g_{d+1}..g_{d+n})
+# f is the first step (the map g_d) and the list g contains 
+# steps 2 through n (the maps g_{d+1} through g_{d+n}).
 
 u:=[0,List(f*(-1)^dg,x->SolutionMat(C!.d[1],x))];
 if not ForAll(u[2],x->not x=fail) then return fail;fi;
 
 for t in [1..n-1] do
-  f:=g[t]-(-1)^dg*C!.R[dg+t]*LiftHom(C!.L[1],u[t+1],C!.K);
+  f:=g[t]-(-1)^dg*C!.R[dg+t]*LiftHom(C!.L[1],u[t+1],C!.p);
   Append(u,[List(f,x->SolutionMat(C!.d[t+1],x))]);
   if not ForAll(u[2+t],x->not x=fail) then return fail;fi;
 od;
@@ -67,7 +68,7 @@ od;
 y:=_MasseyProduct(C,H{[1..m-1]},d{[1..m-1]},d[m]);
 if y=fail then return fail;fi;
 x:=(-1)^(Sum(d{[1..m-1]})-m+2)
-  *y[d[m]+1]*LiftHom(C!.L[1],H[m][1],C!.K);
+  *y[d[m]+1]*LiftHom(C!.L[1],H[m][1],C!.p);
 dt:=Sum(d)-m+2;
 return Coefficients(Basis(FullRowSpace(C!.K,C!.B[dt+1])),
   TransposedMat(x)[1])*

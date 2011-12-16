@@ -3,14 +3,16 @@
 
 InstallGlobalFunction(InducedHomomorphismOnCohomology,
   function(C,D,f,n)
-  local P,Q,B,L,F,c,i,j,k,I,J;
+  local B,P,Q,L,F,c,i,j,k,I,J;
   
   if not C!.K=D!.K then 
     Error("Fields not the same\n");fi;
   if not Source(f)=C!.G then 
-    Error("Source(f) not the right group\n");fi;
+    Error("Source(f) not the correct group\n");fi;
   if not Range(f)=D!.G then 
-    Error("Range(f) not the right group\n");fi;
+    Error("Range(f) not the correct group\n");fi;
+  if not C!.p=D!.p then
+    Error("Primes not the same\n");fi;
 
   CohomologyRing(C,n);
   CohomologyRing(D,n);
@@ -32,7 +34,7 @@ InstallGlobalFunction(InducedHomomorphismOnCohomology,
   F:=[[ListWithIdenticalEntries(Size(D!.G),Zero(C!.K))]];
   F[1][1][1]:=One(C!.K);
   for j in [1..n] do
-    c:=C!.R[j]*LiftHom(L,F[j],C!.K);
+    c:=C!.R[j]*LiftHom(L,F[j],C!.p);
     F[j+1]:=List(c,x->SolutionMat(D!.d[j],x));
   od;
   

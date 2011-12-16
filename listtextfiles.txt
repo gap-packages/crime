@@ -24,12 +24,12 @@ crime/tst/test.g
 crime/tst/batch.g
 crime/tst/README
 crime/gap/radical.gi
+crime/gap/completion.gi
 crime/gap/order.gi
 crime/gap/resolution.gi
 crime/gap/generators.gi
 crime/gap/regular.gi
 crime/gap/locate.gi
-crime/gap/print.tex
 crime/gap/helpers.gi
 crime/gap/augmentation.gi
 crime/gap/induced.gi

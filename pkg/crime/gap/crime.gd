@@ -3,7 +3,7 @@ DeclareCategory("IsCObject",IsObject);
 DeclareOperation("CohomologyGenerators", 
   [IsCObject,IsPosInt]);
 DeclareOperation("CohomologyObject",
-  [IsGroup,IsRing,IsObject]);
+  [IsGroup,IsObject]);
 DeclareOperation("CohomologyRelators", 
   [IsCObject,IsPosInt]);
 DeclareOperation("CohomologyRing", 
