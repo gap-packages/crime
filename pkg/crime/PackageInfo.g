@@ -5,10 +5,10 @@
 SetPackageInfo( rec(
   PackageName := "Crime",
   Subtitle := "A GAP Package to Calculate Group Cohomology and Massey Products",
-  Version := "1.0",
-Date := "23/10/2006",
+  Version := "1.1",
+  Date := "09/11/2006",
   ArchiveURL := 
-    "http://math.uic.edu/~marcus/Crime/crime-1.0",
+    "http://math.uic.edu/~marcus/Crime/crime-1.1",
   ArchiveFormats := ".tar.gz",
 
   Persons := [
@@ -54,7 +54,7 @@ Date := "23/10/2006",
 
   AvailabilityTest := ReturnTrue,
   BannerString:=Concatenation([
-    "\nThis is CRIME, Version 1.0\n\n",
+    "\nThis is CRIME, Version 1.1\n",
     "\"Obviously crime pays, or there'd be no crime\".\n",
     "                                G. Gordon Liddy\n\n"
   ]), 

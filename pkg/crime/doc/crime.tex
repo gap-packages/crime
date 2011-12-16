@@ -55,7 +55,7 @@
 \begin{center}{\Huge \textbf{The \textsf{Crime} Package}}\\[1cm]
 \hypersetup{pdftitle=The \textsf{Crime} Package}
 \markright{\scriptsize \mbox{}\hfill The \textsf{Crime} Package \hfill\mbox{}}
-{Version 1.0}\\[1cm]
+{Version 1.1}\\[1cm]
 \mbox{}\\[2cm]
 {\large \textbf{Marcus Bishop  }}\\
 \hypersetup{pdfauthor=Marcus Bishop  }
@@ -63,7 +63,7 @@
 
 \mbox{}\\
 {\mbox{}\\
-\small \noindent \textbf{Marcus Bishop  } --- Email: \href{mailto://marcus.bishop@epfl.ch}{\texttt{marcus.bishop@epfl.ch}}}\\
+\small \noindent \textbf{Marcus Bishop  } --- Email: \href{mailto://marcus.bishop@gmail.com}{\texttt{marcus.bishop@gmail.com}}}\\
 \end{titlepage}
 
 \newpage\setcounter{page}{2}
@@ -77,11 +77,7 @@
 \section*{Acknowledgements}
 \logpage{[ 0, 0, 2 ]}
  This project would not have been possible without Jon Carlson. Jon devised the
-algorithms used by \texttt{ProjectiveResolution}, \texttt{CohomologyGenerators}, and \texttt{CohomologyRelators}, having already implemented them in \textsf{Magma} and sharing these programs with me. 
-
-Thank you also to Laurent Bartholdi for his helpful suggestions regarding the \textsf{GAP} implementation and the user interface, as well as for his proposal of the
-project in the first place. Laurent also tested the program extensively and
-uncovered several bugs. }\\[1cm]
+algorithms used by \texttt{ProjectiveResolution}, \texttt{CohomologyGenerators}, and \texttt{CohomologyRelators}, having already implemented them in \textsf{Magma} and sharing these programs with me. }\\[1cm]
 \newpage
 
 \def\contentsname{Contents\logpage{[ 0, 0, 3 ]}}
@@ -97,8 +93,8 @@ uncovered several bugs. }\\[1cm]
   
   $ cd /usr/local/gap4r4/pkg
   $ su
-  % wget 'http://mad.epfl.ch/~bishop/Crime/crime-1.0.tar.gz'
-  % tar xvzvf crime-1.0.tar.gz 
+  % wget 'http://math.uic.edu/~marcus/Crime/crime-1.1.tar.gz'
+  % tar xvzvf crime-1.1.tar.gz 
   
 \end{Verbatim}
  In this situation, users would then load the package with the \texttt{LoadPackage} command. 
@@ -115,8 +111,8 @@ into their home directories or into some other writable directory such as \textt
   
   $ mkdir /tmp/pkg
   $ cd /tmp/pkg
-  $ wget 'http://mad.epfl.ch/~bishop/Crime/crime-1.0.tar.gz'
-  $ tar xvzvf crime-1.0.tar.gz 
+  $ wget 'http://math.uic.edu/~marcus/Crime/crime-1.1.tar.gz'
+  $ tar xvzvf crime-1.1.tar.gz 
   $ gap -l ';/tmp'
   gap> LoadPackage("crime");
 \end{Verbatim}

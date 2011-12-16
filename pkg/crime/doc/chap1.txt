@@ -10,8 +10,8 @@
     [22m[35m[0m
     [22m[35m$ cd /usr/local/gap4r4/pkg[0m
     [22m[35m$ su[0m
-    [22m[35m% wget 'http://mad.epfl.ch/~bishop/Crime/crime-1.0.tar.gz'[0m
-    [22m[35m% tar xvzvf crime-1.0.tar.gz [0m
+    [22m[35m% wget 'http://math.uic.edu/~marcus/Crime/crime-1.1.tar.gz'[0m
+    [22m[35m% tar xvzvf crime-1.1.tar.gz [0m
     [22m[35m[0m
   [22m[35m------------------------------------------------------------------[0m
   
@@ -34,8 +34,8 @@
     [22m[35m[0m
     [22m[35m$ mkdir /tmp/pkg[0m
     [22m[35m$ cd /tmp/pkg[0m
-    [22m[35m$ wget 'http://mad.epfl.ch/~bishop/Crime/crime-1.0.tar.gz'[0m
-    [22m[35m$ tar xvzvf crime-1.0.tar.gz [0m
+    [22m[35m$ wget 'http://math.uic.edu/~marcus/Crime/crime-1.1.tar.gz'[0m
+    [22m[35m$ tar xvzvf crime-1.1.tar.gz [0m
     [22m[35m$ gap -l ';/tmp'[0m
     [22m[35mgap> LoadPackage("crime");[0m
   [22m[35m------------------------------------------------------------------[0m

@@ -9,15 +9,14 @@ mkdir "/tmp/pkg", 0755;
 system "cp -pR $location /tmp/pkg";
 use POSIX qw(strftime);
 my $date=strftime "%d/%m/%Y", localtime;
-print "THE DATE IS $date\n";
 
 open(P,"/tmp/pkg/crime/PackageInfo.g") or die "Can't open PackageInfo.g for reading: $!";
 open(Q,">/tmp/pkg/crime/PackageInfo.g-") or die "Can't open PackageInfo.g- for writing: $!";
 while(<P>){
 s/Version := \".*\"/Version := \"$version\"/;
-s/Version \d\.\d/Version $version/;
-s/^  Date := \".*\"/Date := \"$date\"/;
-s/crime-\d*\.\d*\.tar\.gz/crime-$version.tar.gz/;
+s/Version .*\\/Version $version\\/;
+s/^  Date := \".*\"/  Date := \"$date\"/;
+s/crime-.*\"/crime-$version\"/;
 print Q;
 }
 rename ("/tmp/pkg/crime/PackageInfo.g-","/tmp/pkg/crime/PackageInfo.g");
@@ -25,8 +24,8 @@ rename ("/tmp/pkg/crime/PackageInfo.g-","/tmp/pkg/crime/PackageInfo.g");
 open(P,"/tmp/pkg/crime/doc/crime.xml") or die "Can't open crime.xml for reading: $!";
 open(Q,">/tmp/pkg/crime/doc/crime.xml-") or die "Can't open crime.xml- for writing: $!";
 while(<P>){
-s/Version \d*\.\d*/Version $version/;
-s/crime-\d*\.\d*\.tar\.gz/crime-$version.tar.gz/;
+s/>Version .*</>Version $version</;
+s/crime-.*\.tar\.gz/crime-$version.tar.gz/;
 print Q;
 }
 rename ("/tmp/pkg/crime/doc/crime.xml-","/tmp/pkg/crime/doc/crime.xml");

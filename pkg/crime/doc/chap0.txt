@@ -3,7 +3,7 @@
                                [1m[4m[31mThe [1mCrime[1m[4m[31m Package[0m
   
   
-                                  Version 1.0
+                                  Version 1.1
   
   
                                  Marcus Bishop
@@ -11,7 +11,7 @@
   
   
   Marcus Bishop
-      Email:    [34mmailto:marcus.bishop@epfl.ch[0m
+      Email:    [34mmailto:marcus.bishop@gmail.com[0m
   
   -------------------------------------------------------
   [1m[4m[31mCopyright[0m
@@ -27,11 +27,6 @@
   the  algorithms  used  by  [22m[32mProjectiveResolution[0m,  [22m[32mCohomologyGenerators[0m,  and
   [22m[32mCohomologyRelators[0m,  having  already  implemented  them in [1mMagma[0m and sharing
   these programs with me.
-  
-  Thank  you  also  to Laurent Bartholdi for his helpful suggestions regarding
-  the  [1mGAP[0m  implementation and the user interface, as well as for his proposal
-  of  the  project  in  the  first  place.  Laurent  also  tested  the program
-  extensively and uncovered several bugs.
   
   
   -------------------------------------------------------
