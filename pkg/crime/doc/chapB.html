@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>GAP (crime) - Chapter 3: Leisure and Recreation: Cohomology Rings
+<title>GAP (crime) - Appendix B: Leisure and Recreation: Cohomology Rings
 of all Groups of Size 16</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="GAPDoc2HTML" />
@@ -14,19 +14,19 @@ of all Groups of Size 16</title>
 <body>
 
 
-<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
 
-<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">Top of Book</a>&nbsp;  &nbsp;<a href="chap2.html">Previous Chapter</a>&nbsp;  &nbsp;<a href="chapBib.html">Next Chapter</a>&nbsp;  </div>
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">Top of Book</a>&nbsp;  &nbsp;<a href="chapA.html">Previous Chapter</a>&nbsp;  &nbsp;<a href="chapBib.html">Next Chapter</a>&nbsp;  </div>
 
 <p><a id="X7BC2C62E7A8CC2B9" name="X7BC2C62E7A8CC2B9"></a></p>
-<div class="ChapSects"><a href="chap3.html#X7BC2C62E7A8CC2B9">3. <span class="Heading">Leisure and Recreation: Cohomology Rings
+<div class="ChapSects"><a href="chapB.html#X7BC2C62E7A8CC2B9">B. <span class="Heading">Leisure and Recreation: Cohomology Rings
 of all Groups of Size 16</span></a>
 </div>
 
-<h3>3. <span class="Heading">Leisure and Recreation: Cohomology Rings
+<h3>B. <span class="Heading">Leisure and Recreation: Cohomology Rings
 of all Groups of Size 16</span></h3>
 
-<p>Below is the output of the test file <code class="keyw">tst/batch.g</code>. The file runs through all groups of size n, which is initially set to 16, and runs <code class="keyw">ProjectiveResolution</code>, <code class="keyw">CohomologyGenerators</code> and <code class="keyw">CohomologyRelators</code> for each group, and prints the results as well as the timings for each operation to a file. The output below was computed on a 3.06 GHz Intel processor with 3.71 GB of RAM. The projective resolutions are calculated initially to degree 10 and the generators and relators to degree 6, due to the fact that I already knew all the generators and relators to be of degree less than 6, see <span class="URL"><a href="http://www.math.uga.edu/~lvalero/cohointro.html">http://www.math.uga.edu/~lvalero/cohointro.html</a></span>. See also the file <code class="keyw">tst/README</code> for suggestions on dealing with other users when running long-running batch processes.</p>
+<p>Below is the output of the test file <code class="keyw">tst/batch.g</code>. The file runs through all groups of size n, which is initially set to 16, and runs <code class="keyw">ProjectiveResolution</code>, <code class="keyw">CohomologyGenerators</code> and <code class="keyw">CohomologyRelators</code> for each group, and prints the results as well as the timings for each operation to a file. The timings have been deleted, having been presented in Appendix <a href="chapA.html#X82113B3184F76F58"><b>A.</b></a>. The output below was computed on a 2.4 GHz AMD64 processor with 12 GB of RAM. See the file <code class="keyw">tst/README</code> for suggestions on dealing with other users when running long-running batch processes.</p>
 
 
 <table class="example">
@@ -34,125 +34,81 @@ of all Groups of Size 16</span></h3>
 
 SmallGroup(16,1)
 Betti Numbers: [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
-Time:  0:00:05.864
 Generators in degrees: [ 1, 2 ]
-Time:  0:00:00.086
 Relators: [ [ z, y ], [ z^2 ] ]
-Time:  0:00:00.245
 
 SmallGroup(16,2)
 Betti Numbers: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
-Time:  0:00:00.931
 Generators in degrees: [ 1, 1, 2, 2 ]
-Time:  0:00:02.874
 Relators: [ [ z, y, x, w ], [ z^2, y^2 ] ]
-Time:  0:00:12.227
 
 SmallGroup(16,3)
 Betti Numbers: [ 1, 2, 4, 6, 9, 12, 16, 20, 25, 30, 36 ]
-Time:  0:00:05.292
 Generators in degrees: [ 1, 1, 2, 2, 2 ]
-Time:  0:00:21.770
 Relators: [ [ z, y, x, w, v ], [ z^2, z*y, z*x, y^2*v+x^2 ] ]
-Time:  0:01:26.166
 
 SmallGroup(16,4)
 Betti Numbers: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
-Time:  0:00:01.047
 Generators in degrees: [ 1, 1, 2, 2 ]
-Time:  0:00:03.253
 Relators: [ [ z, y, x, w ], [ z^2, z*y+y^2, y^3 ] ]
-Time:  0:00:14.294
 
 SmallGroup(16,5)
 Betti Numbers: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
-Time:  0:00:01.065
 Generators in degrees: [ 1, 1, 2 ]
-Time:  0:00:02.493
 Relators: [ [ z, y, x ], [ z^2 ] ]
-Time:  0:00:13.573
 
 SmallGroup(16,6)
 Betti Numbers: [ 1, 2, 2, 2, 3, 4, 4, 4, 5, 6, 6 ]
-Time:  0:00:00.446
 Generators in degrees: [ 1, 1, 3, 4 ]
-Time:  0:00:01.566
 Relators: [ [ z, y, x, w ], [ z^2, z*y^2, z*x, x^2 ] ]
-Time:  0:00:04.132
 
 SmallGroup(16,7)
 Betti Numbers: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
-Time:  0:00:01.076
 Generators in degrees: [ 1, 1, 2 ]
-Time:  0:00:02.495
 Relators: [ [ z, y, x ], [ z*y ] ]
-Time:  0:00:13.862
 
 SmallGroup(16,8)
 Betti Numbers: [ 1, 2, 2, 2, 3, 4, 4, 4, 5, 6, 6 ]
-Time:  0:00:00.465
 Generators in degrees: [ 1, 1, 3, 4 ]
-Time:  0:00:01.570
 Relators: [ [ z, y, x, w ], [ z*y, z^3, z*x, y^2*w+x^2 ] ]
-Time:  0:00:04.350
 
 SmallGroup(16,9)
 Betti Numbers: [ 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2 ]
-Time:  0:00:00.140
 Generators in degrees: [ 1, 1, 4 ]
-Time:  0:00:00.255
 Relators: [ [ z, y, x ], [ z*y, z^3+y^3, y^4 ] ]
-Time:  0:00:00.718
 
 SmallGroup(16,10)
 Betti Numbers: [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66 ]
-Time:  0:00:20.139
 Generators in degrees: [ 1, 1, 1, 2 ]
-Time:  0:01:04.158
 Relators: [ [ z, y, x, w ], [ z^2 ] ]
-Time:  0:06:27.688
 
 SmallGroup(16,11)
 Betti Numbers: [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66 ]
-Time:  0:00:20.428
 Generators in degrees: [ 1, 1, 1, 2 ]
-Time:  0:01:04.678
 Relators: [ [ z, y, x, w ], [ z*y ] ]
-Time:  0:06:33.808
 
 SmallGroup(16,12)
 Betti Numbers: [ 1, 3, 5, 6, 7, 9, 11, 12, 13, 15, 17 ]
-Time:  0:00:02.438
 Generators in degrees: [ 1, 1, 1, 4 ]
-Time:  0:00:08.927
 Relators: [ [ z, y, x, w ], [ z^2+z*y+y^2, y^3 ] ]
-Time:  0:00:44.464
 
 SmallGroup(16,13)
 Betti Numbers: [ 1, 3, 5, 6, 7, 9, 11, 12, 13, 15, 17 ]
-Time:  0:00:02.389
 Generators in degrees: [ 1, 1, 1, 4 ]
-Time:  0:00:09.247
 Relators: [ [ z, y, x, w ], [ z*y+x^2, z*x^2+y*x^2, y^2*x^2+x^4 ] ]
-Time:  0:00:44.323
 
 SmallGroup(16,14)
 Betti Numbers: [ 1, 4, 10, 20, 35, 56, 84, 120, 165, 220, 286 ]
-Time:  0:07:00.973
 Generators in degrees: [ 1, 1, 1, 1 ]
-Time:  0:15:40.874
 Relators: [ [ z, y, x, w ], [  ] ]
-Time:  1:54:28.052
-
-Total time:  2:38:14.841
 
 </pre></td></tr></table>
 
 
-<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">Top of Book</a>&nbsp;  &nbsp;<a href="chap2.html">Previous Chapter</a>&nbsp;  &nbsp;<a href="chapBib.html">Next Chapter</a>&nbsp;  </div>
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">Top of Book</a>&nbsp;  &nbsp;<a href="chapA.html">Previous Chapter</a>&nbsp;  &nbsp;<a href="chapBib.html">Next Chapter</a>&nbsp;  </div>
 
 
-<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>

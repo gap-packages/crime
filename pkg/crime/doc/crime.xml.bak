@@ -12,7 +12,7 @@
 <Copyright> &copyright; 2006, 2007 Marcus Bishop <P/>
 Crime is free software which is distributed under
 the GNU Public Licence, version 2, and may be
-redistributed under the GNU Public Licence, version 2
+redistibuted under the GNU Public Licence, version 2
 or later (at your preference). 
 See the file COPYING for detailed information
 </Copyright>
@@ -122,7 +122,7 @@ Note that &MeatAxe; modules record <M>k</M> but not
 to specify <M>G</M> but not <M>k</M>.
 <P/>
 Fortunately, most users won't need to know anything
-about this &MeatAxe; business, since they will
+about this &MeatAxe; buisness, since they will
 be interested only in the case where 
 <Alt Only="LaTeX"><M>k=\mathbb{F}_p</M>,</Alt>
 <Alt Not="LaTeX"><M>k=GF(p)</M>,</Alt> and
@@ -579,7 +579,7 @@ as a ring. The knowledge of such an <M>n</M> is the subject of
 until degree <M>n</M>, returning a list of polynomials which
 generate the ideal of relators of multidegree <M>n</M> or less.
 
-<P/>The result of the preceding information is
+<P/>The result of the preceeding information is
 that there is a homomorphism
 <Alt Only="LaTeX">
 <M>f:k\left.\left\langle x_1,x_2,\dots x_m \right\rangle\right./I
@@ -763,7 +763,7 @@ v.3
 </Chapter>
 </Body>
 
-<Appendix Label="benchmarks"><Heading>Some Benchmarks</Heading>
+<Appendix><Heading>Some Benchmarks</Heading>
 The numbers in the following table compare the times
 taken to execute the 1.1 and 1.2 versions of the
 functions listed in the column headers
@@ -963,11 +963,16 @@ is initially set to <M>16</M>, and runs
 and <K>CohomologyRelators</K> for each group, 
 and prints the results as well as 
 the timings for each operation to a file. The timings
-have been deleted, having been presented in
-Appendix <Ref Chap="benchmarks"/>. The output
+have been deleted, having been presented in the
+previous appendix The output
 below was computed on a 2.4 GHz AMD64 processor
-with 12 GB of RAM. 
-See the file <K>tst/README</K> for suggestions
+with 12 GB of RAM. The projective resolutions are calculated
+initially to degree <M>10</M> and the generators and
+relators to degree <M>6</M>, due to the fact that
+I already knew all the generators and relators
+to be of degree less than 6, see
+<URL>http://www.math.uga.edu/~lvalero/cohointro.html</URL>.
+See also the file <K>tst/README</K> for suggestions
 on dealing with other users when running long-running batch processes.
 <Log>
 <![CDATA[

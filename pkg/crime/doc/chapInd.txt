@@ -1,21 +1,21 @@
   
   
-  [1m[4m[31mIndex[0m
+  [1XIndex[0X
   
-  [1m[34mBoundaryMap[0m  2.2-2
-  [1m[34mCohomologyGenerators[0m  2.3-1
-  [1m[34mCohomologyObject[0m  2.1-1
-  [1m[34mCohomologyObject[0m  2.1-1
-  [1m[34mCohomologyRelators[0m  2.3-2
-  [1m[34mCohomologyRing[0m  2.5-1
-  [1m[34mCohomologyRing[0m  2.5-1
-  [1m[34mDegree[0m  2.5-3
-  [1m[34mInclusion[0m  2.7-2
-  [1m[34mInducedHomomorphismOnCohomology[0m  2.7-1
-  [1m[34mIsHomogeneous[0m  2.5-2
-  [1m[34mLocateGeneratorsInCohomologyRing[0m  2.5-4
-  [1m[34mMasseyProduct[0m  2.8-1
-  [1m[34mProjectiveResolution[0m  2.2-1
+  [2XBoundaryMap[0X  2.2-2
+  [2XCohomologyGenerators[0X  2.3-1
+  [2XCohomologyObject[0X  2.1-1
+  [2XCohomologyObject[0X  2.1-1
+  [2XCohomologyRelators[0X  2.3-2
+  [2XCohomologyRing[0X  2.5-1
+  [2XCohomologyRing[0X  2.5-1
+  [2XDegree[0X  2.5-3
+  [2XInclusion[0X  2.7-2
+  [2XInducedHomomorphismOnCohomology[0X  2.7-1
+  [2XIsHomogeneous[0X  2.5-2
+  [2XLocateGeneratorsInCohomologyRing[0X  2.5-4
+  [2XMasseyProduct[0X  2.8-1
+  [2XProjectiveResolution[0X  2.2-1
   
   
   -------------------------------------------------------

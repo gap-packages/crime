@@ -3,15 +3,12 @@ crime/doc/explanation.bbl
 crime/doc/manual.pdf
 crime/doc/explanation.pdf
 crime/doc/explanation.dvi
-crime/doc/manual.ps
 crime/doc/example.pdf
+crime/doc/crime.xml.bak
 crime/doc/explanation.ps
 crime/doc/example.dvi
-crime/doc/manual.dvi
 crime/doc/crime.bbl
 crime/doc/example.ps
 crime/doc/compile
-crime/tst/some_profiles
-crime/tst/16-groups
 crime/gap/comments
 crime/gap/print.pl

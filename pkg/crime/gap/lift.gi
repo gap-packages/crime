@@ -19,12 +19,10 @@ InstallGlobalFunction(LiftHom,function(L,R,p)
   for t in [1..Size(R)] do
     Append(m,[R[t]]);
     for j in [1..l] do
-      jg:=DownTheMiddle(L[j],n);
-      ConvertToMatrixRep(jg,p);
       for k in [1..p-1] do
         first:=(t-1)*p^l+(k-1)*p^(j-1)+1;
         last:= (t-1)*p^l+ k   *p^(j-1)  ;
-        Append(m,m{[first..last]}*jg);
+	Append(m,ActDiagonally(m{[first..last]},L[j]));
       od;
     od;
   od;

@@ -1,9 +1,9 @@
   
   
-                               [1m[4m[31mThe [1mCrime[1m[4m[31m Package[0m
+                               [1XThe [5XCrime[0X Package[0X
   
   
-                                  Version 1.1
+                                  Version 1.2
   
   
                                  Marcus Bishop
@@ -11,28 +11,32 @@
   
   
   Marcus Bishop
-      Email:    [34mmailto:marcus.bishop@gmail.com[0m
+      Email:    [7Xmailto:marcus.bishop@gmail.com[0X
   
   -------------------------------------------------------
-  [1m[4m[31mCopyright[0m
-  (C) 2006 Marcus Bishop
+  [1XCopyright[0X
+  © 2006, 2007 Marcus Bishop
   
-  We  adopt  the  copyright  regulations  of  [1mGAP[0m as detailed in the copyright
-  notice in the [1mGAP[0m manual.
+  Crime  is  free  software which is distributed under the GNU Public Licence,
+  version  2, and may be redistributed under the GNU Public Licence, version 2
+  or later (at your preference). See the file COPYING for detailed information
   
   
   -------------------------------------------------------
-  [1m[4m[31mAcknowledgements[0m
+  [1XAcknowledgements[0X
   This  project  would not have been possible without Jon Carlson. Jon devised
-  the  algorithms  used  by  [22m[32mProjectiveResolution[0m,  [22m[32mCohomologyGenerators[0m,  and
-  [22m[32mCohomologyRelators[0m,  having  already  implemented  them in [1mMagma[0m and sharing
+  the  algorithms  used  by  [9XProjectiveResolution[0X,  [9XCohomologyGenerators[0X,  and
+  [9XCohomologyRelators[0X,  having  already  implemented  them in [5XMagma[0X, and shared
   these programs with me.
   
+  The  documentation  for Crime was prepared using the GAPdoc package by Frank
+  L\"ubeck and Max Neunh\"offer
+  
   
   -------------------------------------------------------
   
   
-  [1m[4m[31mContent (crime)[0m
+  [1XContent (crime)[0X
   
   1. Installation and Loading
   2. Usage
@@ -50,13 +54,14 @@
       2.5-2 IsHomogeneous
       2.5-3 Degree
       2.5-4 LocateGeneratorsInCohomologyRing
-    2.6 What Happens if [22m[32mn[0m Isn't Big Enough?
+    2.6 What Happens if [9Xn[0X Isn't Big Enough?
     2.7 Induced Maps
       2.7-1 InducedHomomorphismOnCohomology
       2.7-2 Inclusion
     2.8 Massey Products
       2.8-1 MasseyProduct
-  3. Leisure and Recreation: Cohomology Rings of all Groups of Size 16
+  A. Some Benchmarks
+  B. Leisure and Recreation: Cohomology Rings of all Groups of Size 16
   
   
   -------------------------------------------------------

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -6,79 +6,93 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <title>GAP (crime) - Contents</title>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="GAPDoc2HTML" />
 <link rel="stylesheet" type="text/css" href="manual.css" />
 </head>
 <body>
 
 
-<div class="pcenter"><table class="chlink"><tr><td class="chlink1">Goto Chapter: </td><td><a href="chap0.html">Top</a></td><td><a href="chap1.html">1</a></td><td><a href="chap2.html">2</a></td><td><a href="chap3.html">3</a></td><td><a href="chapBib.html">Bib</a></td><td><a href="chapInd.html">Ind</a></td></tr></table><br /></div>
-<p><a id="s0ss0" name="s0ss0"></a></p>
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">Top of Book</a>&nbsp;  &nbsp;<a href="chap1.html">Next Chapter</a>&nbsp;  </div>
+
+<p><a id="X7D2C85EC87DD46E5" name="X7D2C85EC87DD46E5"></a></p>
 <div class="pcenter">
 
 <h1>The <strong class="pkg">Crime</strong> Package</h1>
 
-<p>Version 1.1</p>
+<p>Version 1.2</p>
 
 </div>
 <p><b>Marcus Bishop
   
 </b>
-<br />e-mail: <a href="mailto:marcus.bishop@gmail.com">marcus.bishop@gmail.com</a>
+<br />e-mail: <span class="URL"><a href="mailto:marcus.bishop@gmail.com">marcus.bishop@gmail.com</a></span>
 </p>
 
-<p><a id="s0ss1" name="s0ss1"></a></p>
+<p><a id="X81488B807F2A1CF1" name="X81488B807F2A1CF1"></a></p>
 <h3>Copyright</h3>
-<p>(C) 2006 Marcus Bishop</p>
+<p>© 2006, 2007 Marcus Bishop</p>
 
-<p>We adopt the copyright regulations of <strong class="pkg">GAP</strong> as detailed in the copyright notice in the <strong class="pkg">GAP</strong> manual.</p>
+<p>Crime is free software which is distributed under the GNU Public Licence, version 2, and may be redistributed under the GNU Public Licence, version 2 or later (at your preference). See the file COPYING for detailed information</p>
 
-<p><a id="s0ss2" name="s0ss2"></a></p>
+<p><a id="X82A988D47DFAFCFA" name="X82A988D47DFAFCFA"></a></p>
 <h3>Acknowledgements</h3>
-<p>This project would not have been possible without Jon Carlson. Jon devised the algorithms used by <code class="keyw">ProjectiveResolution</code>, <code class="keyw">CohomologyGenerators</code>, and <code class="keyw">CohomologyRelators</code>, having already implemented them in <strong class="pkg">Magma</strong> and sharing these programs with me.</p>
+<p>This project would not have been possible without Jon Carlson. Jon devised the algorithms used by <code class="keyw">ProjectiveResolution</code>, <code class="keyw">CohomologyGenerators</code>, and <code class="keyw">CohomologyRelators</code>, having already implemented them in <strong class="pkg">Magma</strong>, and shared these programs with me.</p>
 
-<p><a id="s0ss3" name="s0ss3"></a></p>
+<p>The documentation for Crime was prepared using the GAPdoc package by Frank L\"ubeck and Max Neunh\"offer</p>
+
+<p><a id="X8537FEB07AF2BEC8" name="X8537FEB07AF2BEC8"></a></p>
 
 <div class="contents">
 <h3>Contents</h3>
 
-<a href="chap1.html#s0ss0">1. Installation and Loading</a><br />
-<a href="chap2.html#s0ss0">2. Usage</a><br />
-&nbsp;&nbsp;&nbsp;<a href="chap2.html#s1ss0">2.1 Cohomology Objects</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="chap2.html#s1ss1">2.1-1 CohomologyObject</a><br />
-&nbsp;&nbsp;&nbsp;<a href="chap2.html#s2ss0">2.2 Minimal Projective Resolutions</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="chap2.html#s2ss1">2.2-1 ProjectiveResolution</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="chap2.html#s2ss2">2.2-2 BoundaryMap</a><br />
-&nbsp;&nbsp;&nbsp;<a href="chap2.html#s3ss0">2.3 Cohomology Generators and Relators</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="chap2.html#s3ss1">2.3-1 CohomologyGenerators</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="chap2.html#s3ss2">2.3-2 CohomologyRelators</a><br />
-&nbsp;&nbsp;&nbsp;<a href="chap2.html#s4ss0">2.4 Tests for Completion</a><br />
-&nbsp;&nbsp;&nbsp;<a href="chap2.html#s5ss0">2.5 Cohomology Rings</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="chap2.html#s5ss1">2.5-1 CohomologyRing</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="chap2.html#s5ss2">2.5-2 IsHomogeneous</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="chap2.html#s5ss3">2.5-3 Degree</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="chap2.html#s5ss4">2.5-4 LocateGeneratorsInCohomologyRing</a><br />
-&nbsp;&nbsp;&nbsp;<a href="chap2.html#s6ss0">2.6 What Happens if <code class="keyw">n</code> Isn't
-Big Enough?</a><br />
-&nbsp;&nbsp;&nbsp;<a href="chap2.html#s7ss0">2.7 Induced Maps</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="chap2.html#s7ss1">2.7-1 InducedHomomorphismOnCohomology</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="chap2.html#s7ss2">2.7-2 Inclusion</a><br />
-&nbsp;&nbsp;&nbsp;<a href="chap2.html#s8ss0">2.8 Massey Products</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="chap2.html#s8ss1">2.8-1 MasseyProduct</a><br />
-<a href="chap3.html#s0ss0">3. Leisure and Recreation: Cohomology Rings
-of all Groups of Size 16</a><br />
+<div class="ContChap"><a href="chap1.html#X86C437C47F3988E8">1. <span class="Heading">Installation and Loading</span></a>
+</div>
+<div class="ContChap"><a href="chap2.html#X86A9B6F87E619FFF">2. <span class="Heading">Usage</span></a>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X85BF21B17BF76907">2.1 <span class="Heading">Cohomology Objects</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8716E7657F9683B7">2.1-1 CohomologyObject</a></span>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X7FEB30657DDEFE44">2.2 <span class="Heading">Minimal Projective Resolutions</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8273999C7B352F22">2.2-1 ProjectiveResolution</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7AF313D387F6BA22">2.2-2 BoundaryMap</a></span>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X78C37B2E7D297FC5">2.3 <span class="Heading">Cohomology Generators and Relators</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X81F141187B0EC653">2.3-1 CohomologyGenerators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X812BE8E983DC20BC">2.3-2 CohomologyRelators</a></span>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X87C9251687CD4247">2.4 <span class="Heading">Tests for Completion</span></a>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X80B6849C835B7F19">2.5 <span class="Heading">Cohomology Rings</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7B77337486380998">2.5-1 CohomologyRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7D8EA4528082A74D">2.5-2 IsHomogeneous</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X826A861E7E7D944E">2.5-3 Degree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X813A8E4C7D4C9FBD">2.5-4 LocateGeneratorsInCohomologyRing</a></span>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X7E21853583D6D86D">2.6 <span class="Heading">What Happens if <code class="keyw">n</code> Isn't
+Big Enough?</span></a>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X837261007B39795C">2.7 <span class="Heading">Induced Maps</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8608BD148307390B">2.7-1 InducedHomomorphismOnCohomology</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X87D180E2801B1EA8">2.7-2 Inclusion</a></span>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X7B541EB97BAB36D7">2.8 <span class="Heading">Massey Products</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7E3023CE86641F9E">2.8-1 MasseyProduct</a></span>
+</div>
+</div>
+<div class="ContChap"><a href="chapA.html#X82113B3184F76F58">A. <span class="Heading">Some Benchmarks</span></a>
+</div>
+<div class="ContChap"><a href="chapB.html#X7BC2C62E7A8CC2B9">B. <span class="Heading">Leisure and Recreation: Cohomology Rings
+of all Groups of Size 16</span></a>
+</div>
 <br />
 </div>
 
-<div class="pcenter">
-<table class="chlink"><tr><td><a href="chap0.html">Top of Book</a></td><td><a href="chap1.html">Next Chapter</a></td></tr></table>
-<br />
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">Top of Book</a>&nbsp;  &nbsp;<a href="chap1.html">Next Chapter</a>&nbsp;  </div>
 
 
-<div class="pcenter"><table class="chlink"><tr><td class="chlink1">Goto Chapter: </td><td><a href="chap0.html">Top</a></td><td><a href="chap1.html">1</a></td><td><a href="chap2.html">2</a></td><td><a href="chap3.html">3</a></td><td><a href="chapBib.html">Bib</a></td><td><a href="chapInd.html">Ind</a></td></tr></table><br /></div>
-
-</div>
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>

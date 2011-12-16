@@ -24,9 +24,8 @@ InstallGlobalFunction(PCGens,function(G,K)
   # set of G in the second list.
 
   X:=List(_RegularModule(G,K),x->m*(x-I)*Inverse(m));
-  Y:=ListX([1..Size(P)],x->P[x] in M,x->X[x]);
   for g in X do ConvertToMatrixRep(g,K);od;
-  for g in Y do ConvertToMatrixRep(g,K);od;
+  Y:=ListX([1..Size(P)],x->P[x] in M,x->X[x]);
   return [X,Y];
   end
 );

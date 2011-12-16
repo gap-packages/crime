@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# This script should be run on mad as
+# This script should be run as
 # ./packagecrime directory version
 
 my $location=$ARGV[0];
@@ -40,16 +40,16 @@ rename ("/tmp/pkg/crime/README-","/tmp/pkg/crime/README");
 
 chdir "/tmp/pkg/crime/doc" or die "Cant chdir to /tmp/pkg/crime/doc: $!";
 # Yes, I know how to spell Can't.
-#system "latex explanation";
-#system "bibtex explanation";
-#system "latex explanation";
-#system "latex explanation";
-#system "dvips explanation";
-#system "pdflatex explanation";
-#system "latex example";
-#system "latex example";
-#system "dvips example";
-#system "pdflatex example";
+system "latex explanation";
+system "bibtex explanation";
+system "latex explanation";
+system "latex explanation";
+system "dvips explanation";
+system "pdflatex explanation";
+system "latex example";
+system "latex example";
+system "dvips example";
+system "pdflatex example";
 system "gap -l '/tmp;' compile"; # Has to be killed manually.
 
 foreach (glob "*.blg *.brf *.idx *.ilg *.ind *.log *.pnr *.toc *.aux"){
@@ -58,5 +58,5 @@ foreach (glob "*.blg *.brf *.idx *.ilg *.ind *.log *.pnr *.toc *.aux"){
 
 chdir "/tmp/pkg" or die "Cant chdir to /tmp/pkg: $!";
 system "tar cvzvf /tmp/crime-$version.tar.gz --owner=0 --group=0 crime";
-system "scp crime/PackageInfo.g crime/README crime/doc/manual.dvi /tmp/crime-$version.tar.gz math.uic.edu:/afs/math.uic.edu/public_html/marcus/Crime/";
+system "scp crime/PackageInfo.g crime/README /tmp/crime-$version.tar.gz math.uic.edu:/afs/math.uic.edu/public_html/marcus/Crime/";
 system "rm -fr /tmp/pkg";

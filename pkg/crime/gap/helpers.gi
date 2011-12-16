@@ -17,22 +17,6 @@ InstallGlobalFunction(FirstLift,function(C,v)
   end
 );
 
-InstallGlobalFunction(DownTheMiddle,function(M,d)
-# Returns a block diagonal matrix having M
-# on the diagonal d times.
-  local m,n,N,i,j,k;
-  m:=Size(M);
-  n:=Size(M[1]);
-  N:=NullMat(m*d,n*d,M[1][1]);
-  for k in [1..d] do
-    for i in [1..m] do for j in [1..n] do
-      N[m*(k-1)+i][n*(k-1)+j]:=M[i][j];
-    od;od;
-  od;
-  return N;
-  end
-);
-
 InstallGlobalFunction(LiftChainMap,function(C,L,d,n)
   # Lifts the chain map L of degree d several times.
   # There will be a total of n lifts afterwards,
@@ -63,5 +47,14 @@ InstallMethod(Inclusion,"Inclusion of a subgroup",
   [IsGroup,IsGroup], function(H,G)
     return GroupHomomorphismByImages(H,G,
       GeneratorsOfGroup(H),GeneratorsOfGroup(H));
+  end
+);
+
+InstallGlobalFunction(ActDiagonally,function(N,g)
+  # Applies g diagonally to the vectors in N
+  local n,m;
+  m:=Size(g);
+  n:=Size(N[1])/m; # n is the number of block columns
+  return List(N,x->Concatenation(List([1..n],i->x{[(i-1)*m+1..i*m]}*g)));
   end
 );

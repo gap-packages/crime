@@ -16,12 +16,12 @@ DeclareOperation("ProjectiveResolution",
 DeclareOperation("BoundaryMap",
   [IsCObject,IsInt]);
 
+DeclareGlobalFunction("ActDiagonally");
 DeclareGlobalFunction("ChangeOfBasisMatrix");
 DeclareGlobalFunction("ExtractColumn");
 DeclareGlobalFunction("FirstLift");
 DeclareGlobalFunction("FirstStep");
 DeclareGlobalFunction("GeneratorsOfRadical");
-DeclareGlobalFunction("DownTheMiddle");
 DeclareGlobalFunction("InducedHomomorphismOnCohomology");
 DeclareGlobalFunction("Intersperse");
 DeclareGlobalFunction("MakeMultiplicationTable");

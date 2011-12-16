@@ -56,3 +56,9 @@ as K can be determined from M, and indeed, should
 be the same.
 
 Improved the argument testing in CohomologyObject.
+
+Changes from the 1.1 version to the 1.1 version
+
+What was I thinking? Down the middle was eliminated,
+being ridiculously wasteful, and replaced with
+a simple for-loop.

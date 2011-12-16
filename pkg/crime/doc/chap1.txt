@@ -1,54 +1,54 @@
   
-  [1m[4m[31m1. Installation and Loading[0m
+  [1X1. Installation and Loading[0X
   
-  Like other [1mGAP[0m packages, you download and unpack this package into [1mGAP[0m's [22m[32mpkg[0m
-  directory.  For example, if you were using some Unix derivative and [1mGAP[0m were
-  installed  in  the  directory  [22m[32m/usr/local/gap4r4[0m,  then  you  would  do  the
+  Like other [5XGAP[0X packages, you download and unpack this package into [5XGAP[0X's [9Xpkg[0X
+  directory.  For example, if you were using some Unix derivative and [5XGAP[0X were
+  installed  in  the  directory  [9X/usr/local/gap4r4[0X,  then  you  would  do  the
   following.
   
-  [22m[35m---------------------------  Example  ----------------------------[0m
-    [22m[35m[0m
-    [22m[35m$ cd /usr/local/gap4r4/pkg[0m
-    [22m[35m$ su[0m
-    [22m[35m% wget 'http://math.uic.edu/~marcus/Crime/crime-1.1.tar.gz'[0m
-    [22m[35m% tar xvzvf crime-1.1.tar.gz [0m
-    [22m[35m[0m
-  [22m[35m------------------------------------------------------------------[0m
+  [4X-----------------------------  Log  ------------------------------[0X
+    [4X[0X
+    [4X$ cd /usr/local/gap4r4/pkg[0X
+    [4X$ su[0X
+    [4X% wget 'http://math.uic.edu/~marcus/Crime/crime-1.2.tar.gz'[0X
+    [4X% tar xvzvf crime-1.2.tar.gz [0X
+    [4X[0X
+  [4X------------------------------------------------------------------[0X
   
-  In  this  situation,  users would then load the package with the [22m[32mLoadPackage[0m
+  In  this  situation,  users would then load the package with the [9XLoadPackage[0X
   command.
   
-  [22m[35m---------------------------  Example  ----------------------------[0m
-    [22m[35m[0m
-    [22m[35m$ gap[0m
-    [22m[35mgap> LoadPackage("crime");[0m
-    [22m[35m[0m
-  [22m[35m------------------------------------------------------------------[0m
+  [4X-----------------------------  Log  ------------------------------[0X
+    [4X[0X
+    [4X$ gap[0X
+    [4Xgap> LoadPackage("crime");[0X
+    [4X[0X
+  [4X------------------------------------------------------------------[0X
   
   Users  not  having root access, using someone else's computer, or having bad
   relationships  with  their network administrators, could install the package
   into  their  home  directories or into some other writable directory such as
-  [22m[32m/tmp[0m as follows.
+  [9X/tmp[0X, and load the package as follows.
   
-  [22m[35m---------------------------  Example  ----------------------------[0m
-    [22m[35m[0m
-    [22m[35m$ mkdir /tmp/pkg[0m
-    [22m[35m$ cd /tmp/pkg[0m
-    [22m[35m$ wget 'http://math.uic.edu/~marcus/Crime/crime-1.1.tar.gz'[0m
-    [22m[35m$ tar xvzvf crime-1.1.tar.gz [0m
-    [22m[35m$ gap -l ';/tmp'[0m
-    [22m[35mgap> LoadPackage("crime");[0m
-  [22m[35m------------------------------------------------------------------[0m
+  [4X-----------------------------  Log  ------------------------------[0X
+    [4X[0X
+    [4X$ mkdir /tmp/pkg[0X
+    [4X$ cd /tmp/pkg[0X
+    [4X$ wget 'http://math.uic.edu/~marcus/Crime/crime-1.2.tar.gz'[0X
+    [4X$ tar xvzvf crime-1.2.tar.gz [0X
+    [4X$ gap -l ';/tmp'[0X
+    [4Xgap> LoadPackage("crime");[0X
+  [4X------------------------------------------------------------------[0X
   
   Finally,  it  would  be a good idea to run the test file to confirm that all
   the functions work.
   
-  [22m[35m---------------------------  Example  ----------------------------[0m
-    [22m[35m[0m
-    [22m[35mgap> ReadPackage("crime","tst/test.g");[0m
-  [22m[35m------------------------------------------------------------------[0m
+  [4X---------------------------  Example  ----------------------------[0X
+    [4X[0X
+    [4Xgap> ReadPackage("crime","tst/test.g");[0X
+  [4X------------------------------------------------------------------[0X
   
-  You  can  count yourself lucky if [1mGAP[0m doesn't complain about anything. There
+  You  can  count yourself lucky if [5XGAP[0X doesn't complain about anything. There
   is  also  a  longer  running  test  file  for  those  having ample free time
-  described in Chapter [1m3.[0m.
+  described in Appendix [14XB.[0X.
   

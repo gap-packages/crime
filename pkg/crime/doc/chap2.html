@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -6,64 +6,100 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <title>GAP (crime) - Chapter 2: Usage</title>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="GAPDoc2HTML" />
 <link rel="stylesheet" type="text/css" href="manual.css" />
 </head>
 <body>
 
 
-<div class="pcenter"><table class="chlink"><tr><td class="chlink1">Goto Chapter: </td><td><a href="chap0.html">Top</a></td><td><a href="chap1.html">1</a></td><td><a href="chap2.html">2</a></td><td><a href="chap3.html">3</a></td><td><a href="chapBib.html">Bib</a></td><td><a href="chapInd.html">Ind</a></td></tr></table><br /></div>
-<p><a id="s0ss0" name="s0ss0"></a></p>
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
 
-<h3>2. Usage</h3>
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">Top of Book</a>&nbsp;  &nbsp;<a href="chap1.html">Previous Chapter</a>&nbsp;  &nbsp;<a href="chapA.html">Next Chapter</a>&nbsp;  </div>
 
-<p>All the functions described below taking an argument <code class="keyw">n</code> except <code class="keyw">CohomologyRing</code>, <code class="keyw">CohomologyRelators</code> and <code class="keyw">InducedHomomorphismOnCohomology</code> do whatever the manual says they do until some stage <code class="keyw">n</code>, where <code class="keyw">n</code> is normally the homological degree. These functions are idempotent in the sense that called a second time with the same argument <code class="keyw">n</code>, they do nothing, but called with a bigger <code class="keyw">n</code>, they continue computing from where the previous calculations left off.</p>
+<p><a id="X86A9B6F87E619FFF" name="X86A9B6F87E619FFF"></a></p>
+<div class="ChapSects"><a href="chap2.html#X86A9B6F87E619FFF">2. <span class="Heading">Usage</span></a>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X85BF21B17BF76907">2.1 <span class="Heading">Cohomology Objects</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8716E7657F9683B7">2.1-1 CohomologyObject</a></span>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X7FEB30657DDEFE44">2.2 <span class="Heading">Minimal Projective Resolutions</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8273999C7B352F22">2.2-1 ProjectiveResolution</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7AF313D387F6BA22">2.2-2 BoundaryMap</a></span>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X78C37B2E7D297FC5">2.3 <span class="Heading">Cohomology Generators and Relators</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X81F141187B0EC653">2.3-1 CohomologyGenerators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X812BE8E983DC20BC">2.3-2 CohomologyRelators</a></span>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X87C9251687CD4247">2.4 <span class="Heading">Tests for Completion</span></a>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X80B6849C835B7F19">2.5 <span class="Heading">Cohomology Rings</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7B77337486380998">2.5-1 CohomologyRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7D8EA4528082A74D">2.5-2 IsHomogeneous</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X826A861E7E7D944E">2.5-3 Degree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X813A8E4C7D4C9FBD">2.5-4 LocateGeneratorsInCohomologyRing</a></span>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X7E21853583D6D86D">2.6 <span class="Heading">What Happens if <code class="keyw">n</code> Isn't
+Big Enough?</span></a>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X837261007B39795C">2.7 <span class="Heading">Induced Maps</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8608BD148307390B">2.7-1 InducedHomomorphismOnCohomology</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X87D180E2801B1EA8">2.7-2 Inclusion</a></span>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X7B541EB97BAB36D7">2.8 <span class="Heading">Massey Products</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7E3023CE86641F9E">2.8-1 MasseyProduct</a></span>
+</div>
+</div>
 
-<p><a id="s1ss0" name="s1ss0"></a></p>
+<h3>2. <span class="Heading">Usage</span></h3>
 
-<h4>2.1 Cohomology Objects</h4>
+<p>Unless otherwise specified, all the functions described below taking an argument <code class="keyw">n</code> do whatever the manual says they do up to homological degree <code class="keyw">n</code>. These functions are idempotent in the sense that called a second time with the same argument <code class="keyw">n</code>, they do nothing, but called with a bigger <code class="keyw">n</code>, they continue computing from where the previous calculations left off.</p>
+
+<p><a id="X85BF21B17BF76907" name="X85BF21B17BF76907"></a></p>
+
+<h4>2.1 <span class="Heading">Cohomology Objects</span></h4>
 
 <p>The computation of group cohomology involves several calculations, the results of which are reused in later calculations, and are thus collected in an object of type <code class="keyw">CObject</code>, which is created with the following command.</p>
 
-<p><a id="s1ss1" name="s1ss1"></a></p>
+<p><a id="X8716E7657F9683B7" name="X8716E7657F9683B7"></a></p>
 
 <h5>2.1-1 CohomologyObject</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; CohomologyObject</code>( <var>G, M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; CohomologyObject</code>( <var>G</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<p><b>Returns: </b>a cohomology object.</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; CohomologyObject</code>( <var class="Arg">G, M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; CohomologyObject</code>( <var class="Arg">G</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p><b>Returns: </b>a <code class="keyw">CObject</code>.</p>
 
-<p>This function creates a cohomology object having components the p-group G and the <strong class="pkg">MeatAxe</strong> kG-module M. The second invocation creates a cohomology object having components the p-group G and the trivial <strong class="pkg">MeatAxe</strong> kG-module where k is the field GF(p).</p>
+<p>This function creates a <code class="keyw">CObject</code> having components the p-group G and the <strong class="pkg">MeatAxe</strong> module M, which should be a kG-module with G the same group and k a field of characteristic p. Note that <strong class="pkg">MeatAxe</strong> modules record k but not G, which is why this operation requires the user to specify G but not k.</p>
 
-<p>We emphasize that in the first invocation, <code class="keyw">M</code> can be any <strong class="pkg">MeatAxe</strong> module over kG where k is any field of characteristic p. But since the case k=GF(p), and M=k is probably the most common, the second invocation is provided for convenience. At the present, <code class="keyw">ProjectiveResolution</code> works when <code class="keyw">M</code> is an arbitrary <strong class="pkg">MeatAxe</strong> module, but all the functions dealing with the ring-structure of H*(G,k) require that <code class="keyw">M</code> be the trivial module.</p>
+<p>Fortunately, most users won't need to know anything about this <strong class="pkg">MeatAxe</strong> business, since they will be interested only in the case where k=GF(p), and M=k, the trivial kG-module. The second invocation creates a cohomology object having components the p-group G and the trivial <strong class="pkg">MeatAxe</strong> kG-module k=GF(p).</p>
+
+<p>We emphasize that in the first invocation, k can be any field of characteristic p and <code class="keyw">M</code> can be any <strong class="pkg">MeatAxe</strong> module over kG, and that <code class="keyw">ProjectiveResolution</code> works when <code class="keyw">M</code> is an arbitrary <strong class="pkg">MeatAxe</strong> module, but all the functions dealing with the ring-structure of H*(G,k) require that <code class="keyw">M</code> be the trivial module.</p>
 
 <p>The cohomology object is used to store, in addition to the items mentioned above, the boundary maps, the Betti numbers, the multiplication table, etc.</p>
 
-<p><a id="s2ss0" name="s2ss0"></a></p>
+<p><a id="X7FEB30657DDEFE44" name="X7FEB30657DDEFE44"></a></p>
 
-<h4>2.2 Minimal Projective Resolutions</h4>
+<h4>2.2 <span class="Heading">Minimal Projective Resolutions</span></h4>
 
-<p>Given a p-group G, a field k of characteristic p and a kG-module M, the function below computes the first few terms of the minimal projective resolution of M</p>
+<p>Given a p-group G, a field k of characteristic p, and a kG-module M, the function below computes the first n terms of the minimal projective resolution of M</p>
 
-<p class="pcenter">\[ P_n -> ... P_2 -> P_1 -> P_0 -> M -> 0 \]</p>
+<p class="pcenter"> P_n -&gt; ... P_2 -&gt; P_1 -&gt; P_0 -&gt; M -&gt; 0</p>
 
-<p>where P_i is the direct sum (kG)^(b_i) for certain numbers b_i, the <em>Betti numbers</em> of the resolution. The minimal kG-projective resolution of M is unique up to chain isomorphism. Then the groups Ext^n(M,N) are simply Hom(P_n,N), and if M=N=k is the trivial kG-module, then H^n(G,k)=Ext^n(k,k)=k^(b_n).</p>
+<p>where P_i is the direct sum (kG)^(b_i) for certain numbers b_i, the <em>Betti numbers</em> of the resolution. The minimal kG-projective resolution of M is unique up to chain isomorphism. Because of the minimality of P, the groups Ext^i(M,N) are simply Hom(P_i,N), and if M and N are both the trivial kG-module k, then H^i(G,k)=Ext^i(k,k)=k^(b_i).</p>
 
-<p><a id="s2ss1" name="s2ss1"></a></p>
+<p><a id="X8273999C7B352F22" name="X8273999C7B352F22"></a></p>
 
 <h5>2.2-1 ProjectiveResolution</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; ProjectiveResolution</code>( <var>C, n</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; ProjectiveResolution</code>( <var class="Arg">C, n</var> )</td><td class="tdright">( operation )</td></tr></table></div>
 <p><b>Returns: </b>a list containing the Betti numbers b_0, b_1,..., b_n.</p>
 
-<p>Given a cohomology object <code class="keyw">C</code> having components G, k, and M, this function computes the first <code class="keyw">n</code>+1 terms of the minimal projective resolution P_* of M of the form P_i=(kG)^(b_i) for i=0,1,...,n, and returns the numbers b_i as a list.</p>
+<p>Given a cohomology object <code class="keyw">C</code> having components G and M, this function computes the first <code class="keyw">n</code>+1 terms of the minimal projective resolution P of M of the form P_i=(kG)^(b_i) for i=0,1,...,n, and returns the numbers b_i as a list.</p>
 
-<p><a id="s2ss2" name="s2ss2"></a></p>
+<p><a id="X7AF313D387F6BA22" name="X7AF313D387F6BA22"></a></p>
 
 <h5>2.2-2 BoundaryMap</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; BoundaryMap</code>( <var>C, n</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; BoundaryMap</code>( <var class="Arg">C, n</var> )</td><td class="tdright">( operation )</td></tr></table></div>
 <p><b>Returns: </b>the <code class="keyw">n</code>th boundary map.</p>
 
 <p>Given the cohomology object <code class="keyw">C</code>, this function computes a projective resolution to degree <code class="keyw">n</code> if it hasn't been computed already, and returns the <code class="keyw">n</code>th boundary map.</p>
@@ -72,40 +108,39 @@
 
 <p>See the file <code class="keyw">doc/example.*</code> for an example of the usage and interpretation of the result of this function.</p>
 
-<p><a id="s3ss0" name="s3ss0"></a></p>
+<p><a id="X78C37B2E7D297FC5" name="X78C37B2E7D297FC5"></a></p>
 
-<h4>2.3 Cohomology Generators and Relators</h4>
+<h4>2.3 <span class="Heading">Cohomology Generators and Relators</span></h4>
 
-<p><a id="s3ss1" name="s3ss1"></a></p>
+<p><a id="X81F141187B0EC653" name="X81F141187B0EC653"></a></p>
 
 <h5>2.3-1 CohomologyGenerators</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; CohomologyGenerators</code>( <var>C, n</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<p><b>Returns: </b>a list containing the degrees of the generators of the cohomology ring.</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; CohomologyGenerators</code>( <var class="Arg">C, n</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p><b>Returns: </b>a list containing the degrees of the elements of a set of generators of the cohomology ring.</p>
 
-<p>Given a cohomology object <code class="keyw">C</code> having components G, k, and M, this function computes the generators of H*(G,k) of degree less than or equal to <code class="keyw">n</code>, and stores them in <code class="keyw">C</code>. The function returns a list of the degrees of these generators.</p>
+<p>Given a cohomology object <code class="keyw">C</code> having group component G and module component the trivial kG-module this function computes a set of generators of H*(G,k) having degree <code class="keyw">n</code> or less, and stores them in <code class="keyw">C</code>. The function returns a list of the degrees of these generators.</p>
 
 <p>The actual cohomology generators are represented by maps P_n -&gt; k and are stored in <code class="keyw">C</code> as matrices. Only their degrees are returned.</p>
 
-<p><a id="s3ss2" name="s3ss2"></a></p>
+<p><a id="X812BE8E983DC20BC" name="X812BE8E983DC20BC"></a></p>
 
 <h5>2.3-2 CohomologyRelators</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; CohomologyRelators</code>( <var>C, n</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; CohomologyRelators</code>( <var class="Arg">C, n</var> )</td><td class="tdright">( operation )</td></tr></table></div>
 <p><b>Returns: </b>a list of generators and a list of relators.</p>
 
-<p>Given a cohomology object <code class="keyw">C</code> having components G, k, and M, this function computes a set of generators of the ideal of relators in H*(G,k), all having multidegree less than or equal to n. Read on for what this means exactly.</p>
+<p>Given a cohomology object <code class="keyw">C</code> having group component G and module component k, this function computes a set of generators of the ideal of relators in H*(G,k), all having multidegree n or less. Read on for what this means exactly.</p>
 
 <p>The function returns two lists, the first list containing the variables <code class="keyw">z</code>, <code class="keyw">y</code>, <code class="keyw">x</code>, ... corresponding to the generators of H*(G,k) if there are fewer than 12 generators and containing the variables <code class="keyw">x_1</code>, <code class="keyw">x_2</code>, <code class="keyw">x_3</code>, ... otherwise. The second list is a list of polynomials in the variables from the first list.</p>
 
-<p>These two lists should be interpreted as follows. A degree-<code class="keyw">n</code> approximation of the cohomology ring H*(G,k) is given by the polynomial ring over k in the non-commuting variables from the first list, (having degrees given by the list returned by <code class="keyw">CohomologyGenerators</code> above) and subject to the relators in the second list. See <a href="chap2.html#s6ss0"><b>2.6</b></a> for more details still.</p>
+<p>These two lists should be interpreted as follows. A degree <code class="keyw">n</code> approximation of the cohomology ring H*(G,k) is given by the polynomial ring over k in the non-commuting variables from the first list, (having degrees given by the list returned by <code class="keyw">CohomologyGenerators</code> above) and subject to the relators in the second list. See <a href="chap2.html#X7E21853583D6D86D"><b>2.6</b></a> for more details still.</p>
 
-<p>For example, the following commands</p>
+<p>For example, consider the following commands.</p>
 
 
 <table class="example">
 <tr><td><pre>
-
 
 gap&gt; C:=CohomologyObject(DihedralGroup(8));
 &lt;object&gt;
@@ -114,36 +149,35 @@ gap&gt; CohomologyGenerators(C,10);
 gap&gt; CohomologyRelators(C,10);
 [ [ z, y, x ], [ z*y+y^2 ] ]
 
-
 </pre></td></tr></table>
 
-<p>tell us that for G=D_8, the cohomology ring H*(G,k) is the graded-commutative polynomial ring in the variables z, y, and x of degrees 1, 1, and 2, subject to the relation zy+y^2. But since H*(G,k) <em>is</em> commutative, k being of characteristic 2, we have H*(G,k)=k[z,y,x]/(zy+y^2). This result can be further improved by taking z=z+y, giving H*(G,k)=k[z,y,x]/(zy).</p>
+<p>This tells us that for G=D_8, the cohomology ring H*(G,k) is the graded-commutative polynomial ring in the variables z, y, and x of degrees 1, 1, and 2, subject to the relation zy+y^2. But since H*(G,k) <em>is</em> commutative, k being of characteristic 2, we have H*(G,k)=k[z,y,x]/(zy+y^2). This result can be further improved by taking z=z+y, giving H*(G,k)=k[z,y,x]/(zy).</p>
 
-<p>Observe that in this case, we knew in advance that there was a set of generators for H*(G,k) all having degree less than 10, and that there was a set of generators of the ideal of relators all having multidegree less than 10. See see <a href="chap2.html#s6ss0"><b>2.6</b></a> for details.</p>
+<p>Observe that in this case, we knew in advance that there was a set of generators for H*(G,k) all having degree less than 10, and that there was a set of generators of the ideal of relators all having multidegree less than 10. See see <a href="chap2.html#X7E21853583D6D86D"><b>2.6</b></a> for details.</p>
 
-<p>While this isn't likely to occur, we point out that if there are 12 or more generators and some of the indeterminates <code class="keyw">x_1</code>, <code class="keyw">x_2</code>, <code class="keyw">x_3</code>, ... have already been named, say by a previous call to <code class="keyw">CohomologyRelators</code>, then these variables will retain their old names. If this is confusing, restart <strong class="pkg">GAP</strong> and do it again.</p>
+<p>While this isn't likely to occur, we point out that if there are 12 or more generators and some of the indeterminates <code class="keyw">x_1</code>, <code class="keyw">x_2</code>, <code class="keyw">x_3</code>, ... have already been named, say by a previous call to <code class="keyw">CohomologyRelators</code>, then these variables will retain their old names. If this is confusing, you could restart <strong class="pkg">GAP</strong> and do it again. Finally, <code class="keyw">CohomologyRelators</code> is <em>not</em> idempotent.</p>
 
-<p><a id="s4ss0" name="s4ss0"></a></p>
+<p><a id="X87C9251687CD4247" name="X87C9251687CD4247"></a></p>
 
-<h4>2.4 Tests for Completion</h4>
+<h4>2.4 <span class="Heading">Tests for Completion</span></h4>
 
-<p>A test or series of tests for completion of the calculation will hopefully be implemented soon. See <a href="chapBib.html#biBcarlson">[CT+03]</a> for the details.</p>
+<p>A test or series of tests for completion of the calculation will hopefully be implemented soon. See <a href="chapBib.html#biBcarlson">[CTVZ03]</a> for the details.</p>
 
-<p><a id="s5ss0" name="s5ss0"></a></p>
+<p><a id="X80B6849C835B7F19" name="X80B6849C835B7F19"></a></p>
 
-<h4>2.5 Cohomology Rings</h4>
+<h4>2.5 <span class="Heading">Cohomology Rings</span></h4>
 
-<p>See <a href="chapBib.html#biBcarlson">[CT+03]</a> for the details of the calculation of cohomology products using composition of chain maps. See also the file <code class="keyw">doc/explanation.*</code> for an explanation of the implementation.</p>
+<p>See <a href="chapBib.html#biBcarlson">[CTVZ03]</a> for the details of the calculation of cohomology products using composition of chain maps. See also the file <code class="keyw">doc/explanation.*</code> for an explanation of the implementation.</p>
 
-<p><a id="s5ss1" name="s5ss1"></a></p>
+<p><a id="X7B77337486380998" name="X7B77337486380998"></a></p>
 
 <h5>2.5-1 CohomologyRing</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; CohomologyRing</code>( <var>C, n</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; CohomologyRing</code>( <var>G, n</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; CohomologyRing</code>( <var class="Arg">C, n</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; CohomologyRing</code>( <var class="Arg">G, n</var> )</td><td class="tdright">( operation )</td></tr></table></div>
 <p><b>Returns: </b>the cohomology ring of G.</p>
 
-<p>Given a cohomology object <code class="keyw">C</code> having module component the trivial kG-module and possibly having a projective resolution already computed, this function returns the degree-<code class="keyw">n</code> truncation of the cohomology ring H*(G,k). See <a href="chap2.html#s6ss0"><b>2.6</b></a> for what this means exactly. The object returned is a structure constant algebra.</p>
+<p>Given a cohomology object <code class="keyw">C</code> with group component G and module component the trivial kG-module, this function returns the degree <code class="keyw">n</code> truncation of the cohomology ring H*(G,k). See <a href="chap2.html#X7E21853583D6D86D"><b>2.6</b></a> for what this means exactly. The object returned is a structure constant algebra.</p>
 
 <p>Users interested only in working with the cohomology ring of a group as a <strong class="pkg">GAP</strong> object, and not in calculating generators, relators, induced maps, etc, can use the second invocation of this function, which returns the cohomology ring of the group <code class="keyw">G</code> immediately, throwing away all intermediate calculations.</p>
 
@@ -151,28 +185,27 @@ gap&gt; CohomologyRelators(C,10);
 
 <p>Observe also that calling <code class="keyw">CohomologyRing</code> a second time with a bigger <code class="keyw">n</code> does <em>not</em> extend the previous ring, but rather, recalculates the entire ring from the beginning. Extending the previous ring appears not to be worth the effort for technical reasons, since almost everything would need to be recalculated again anyway.</p>
 
-<p><a id="s5ss2" name="s5ss2"></a></p>
+<p><a id="X7D8EA4528082A74D" name="X7D8EA4528082A74D"></a></p>
 
 <h5>2.5-2 IsHomogeneous</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; IsHomogeneous</code>( <var>e</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; IsHomogeneous</code>( <var class="Arg">e</var> )</td><td class="tdright">( operation )</td></tr></table></div>
 <p><b>Returns: </b><code class="keyw">true</code> or <code class="keyw">false</code>.</p>
 
 <p>Given an element <code class="keyw">e</code> of some cohomology ring A, this operation determines whether or not <code class="keyw">e</code> is homogeneous, that is, whether or not <code class="keyw">e</code> is contained in some <code class="keyw">hom_component</code> of A.</p>
 
-<p><a id="s5ss3" name="s5ss3"></a></p>
+<p><a id="X826A861E7E7D944E" name="X826A861E7E7D944E"></a></p>
 
 <h5>2.5-3 Degree</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; Degree</code>( <var>e</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; Degree</code>( <var class="Arg">e</var> )</td><td class="tdright">( method )</td></tr></table></div>
 <p><b>Returns: </b>the degree of <code class="keyw">e</code>.</p>
 
-<p>This function is intended to return the degree of the possibly non-homogeneous element <code class="keyw">e</code> of some cohomology ring A, but in principle, works for any element of any graded <code class="keyw">SCAlgebra</code>. Specifically, if A = A_0 + A_1 + A_2 + ... where A_i are the <code class="keyw">hom_components</code> of A, then this function returns the minimum n such that <code class="keyw">e</code> is in A_0 + A_1 + ... + A_n.</p>
+<p>This function is intended to return the degree of the possibly non-homogeneous element <code class="keyw">e</code> of some cohomology ring A, but in principle, works for any element of any graded structure constant algebra. Specifically, if A = A_0 + A_1 + A_2 + ... where A_i are the <code class="keyw">hom_components</code> of A, then this function returns the minimum n such that <code class="keyw">e</code> is in A_0 + A_1 + ... + A_n.</p>
 
 
 <table class="example">
 <tr><td><pre>
-
 gap&gt; A:=CohomologyRing(DihedralGroup(8),10);
 &lt;algebra of dimension 66 over GF(2)&gt;
 gap&gt; b:=Basis(A);
@@ -183,24 +216,22 @@ gap&gt; IsHomogeneous(x);
 false
 gap&gt; Degree(x);
 2 
-
 </pre></td></tr></table>
 
-<p><a id="s5ss4" name="s5ss4"></a></p>
+<p><a id="X813A8E4C7D4C9FBD" name="X813A8E4C7D4C9FBD"></a></p>
 
 <h5>2.5-4 LocateGeneratorsInCohomologyRing</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; LocateGeneratorsInCohomologyRing</code>( <var>C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; LocateGeneratorsInCohomologyRing</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p><b>Returns: </b>a list containing the cohomology generators.</p>
 
-<p>Having already called <code class="keyw">CohomologyRing</code> (see <a href="chap2.html#s5ss1"><b>2.5-1</b></a>), this function returns a list of elements of the cohomology ring which together with the identity element generate the cohomology ring.</p>
+<p>Having already called <code class="keyw">CohomologyRing</code> (see <a href="chap2.html#X7B77337486380998"><b>2.5-1</b></a>), this function returns a list of elements of the cohomology ring which together with the identity element generate the cohomology ring.</p>
 
-<p>This function is a wrapper for <code class="keyw">CohomologyGenerators</code> (see <a href="chap2.html#s3ss1"><b>2.3-1</b></a>), indicating which elements of the cohomology ring correspond with the generators found by <code class="keyw">CohomologyGenerators</code>.</p>
+<p>This function is a wrapper for <code class="keyw">CohomologyGenerators</code> (see <a href="chap2.html#X81F141187B0EC653"><b>2.3-1</b></a>). It points out which elements of the cohomology ring correspond with the generators found by <code class="keyw">CohomologyGenerators</code>.</p>
 
 
 <table class="example">
 <tr><td><pre>
-
 gap&gt; C:=CohomologyObject(SmallGroup(8,4));
 &lt;object&gt;
 gap&gt; A:=CohomologyRing(C,10);
@@ -209,46 +240,45 @@ gap&gt; L:=LocateGeneratorsInCohomologyRing(C);
 [ v.2, v.3, v.7 ]
 gap&gt; A=Subalgebra(A,Concatenation(L,[One(A)]));
 true
-
 </pre></td></tr></table>
 
-<p><a id="s6ss0" name="s6ss0"></a></p>
+<p><a id="X7E21853583D6D86D" name="X7E21853583D6D86D"></a></p>
 
-<h4>2.6 What Happens if <code class="keyw">n</code> Isn't
-Big Enough?</h4>
+<h4>2.6 <span class="Heading">What Happens if <code class="keyw">n</code> Isn't
+Big Enough?</span></h4>
 
-<p>Since P_* is a <em>minimal</em> resolution, the cohomology group H^i(G,k) is the dual of P_n, so that H^i(G,k) has a natural basis consisting of the maps sending the element 1_G of the jth direct summand of P_i to 1_k and all other direct summands to 0_k for j=1,2,...,b_i.</p>
+<p>Since P is a <em>minimal</em> projective resolution, the cohomology group H^i(G,k) is the k-dual of P_i, so that H^i(G,k) has a natural basis consisting of the maps sending the element 1_G of the jth direct summand of P_i to 1_k and all other direct summands to 0, for j=1,2,...,b_i, where b_i is the kG-rank of P_i.</p>
 
-<p>The command <code class="keyw">CohomologyRing(C,n)</code> concatenates these bases for i=1,2,...,n and computes all products of basis elements x and y for which deg x+deg y &lt;= n. Thinking of H*(G,k) in terms of it's multiplication table, then this means that the function computes the upper left-hand corner of the multiplication table. If deg x + deg y &gt; n then the product xy is taken to be zero. Therefore, the ring returned by <code class="keyw">CohomologyGenerators</code> is H*(G,k)/J where J is the ideal of all elements of degree &gt;n.</p>
+<p>The command <code class="keyw">CohomologyRing(C,n)</code> forms the vector space whose basis is the concatenation of the natural bases of H^i(G,k) for i=1,2,...,n and computes all products of basis elements x and y for which deg x+deg y &lt;= n. Thinking of H*(G,k) in terms of it's multiplication table, this means that the function computes the upper left-hand corner of the multiplication table. If deg x + deg y &gt; n, the product xy is taken to be zero. Therefore, the ring returned by <code class="keyw">CohomologyRing</code> is H*(G,k)/J where J is the ideal of all elements of degree &gt;n.</p>
 
-<p>The ring determined by <code class="keyw">CohomologyGenerators</code> and <code class="keyw">CohomologyRelators</code> is somewhat different. <code class="keyw">CohomologyGenerators</code> proceeds inductively, taking all standard basis elements of H^1(G,k) as generators, and for i=2... n, taking all standard basis elements of H^i(G,k) which are <em>not</em> products of lower-degree elements as generators. Therefore, unless you have some reason to believe that there exists a generating set for H*(G,k) consisting of elements of degree &lt;= n, then you are <em>not</em> guaranteed that the elements returned by the <code class="keyw">CohomologyGenerators</code> generate H*(G,k) as a ring.</p>
+<p>The ring determined by <code class="keyw">CohomologyGenerators</code> and <code class="keyw">CohomologyRelators</code> is somewhat different. <code class="keyw">CohomologyGenerators</code> proceeds inductively, taking all standard basis elements of H^1(G,k) as generators, and for i=2... n, taking all standard basis elements of H^i(G,k) which are <em>not</em> products of lower-degree elements as generators. Therefore, unless you know that there is an n for which there exists a generating set of H*(G,k) consisting of elements of degree n or less, then you are <em>not</em> guaranteed that the elements returned by the <code class="keyw">CohomologyGenerators</code> generate H*(G,k) as a ring. The knowledge of such an n is the subject of <a href="chap2.html#X87C9251687CD4247"><b>2.4</b></a>.</p>
 
-<p>Similarly, <code class="keyw">CohomologyRelators</code> proceeds inductively until degree n, returning a list of polynomials of multidegree &lt;= n.</p>
+<p>Similarly, <code class="keyw">CohomologyRelators</code> proceeds inductively until degree n, returning a list of polynomials which generate the ideal of relators of multidegree n or less.</p>
 
-<p>The impact of the preceeding information is that there is a homomorphism k&lt; x_1,x_2,..., x_m &gt;/ I -&gt; H*(G,k) where x_1,x_2,...,x_m represent the elements returned by <code class="keyw">CohomologyGenerators(C,n)</code>, k&lt; x_1,x_2,... x_m &gt; is the polynomial ring over k in the non-commuting variables x_1,x_2,...,x_m, and I is the ideal in k&lt; x_1,x_2,..., x_m &gt; generated by the elements returned by <code class="keyw">CohomologyRelators(C,n)</code>.</p>
+<p>The result of the preceding information is that there is a homomorphism k&lt; x_1,x_2,..., x_m &gt;/ I -&gt; H*(G,k), where k&lt; x_1,x_2,... x_m &gt; is the graded polynomial ring over k in the non-commuting variables x_1,x_2,...,x_m, having degrees the numbers in the list returned by <code class="keyw">CohomologyGenerators</code>, and I is the ideal in k&lt; x_1,x_2,..., x_m &gt; generated by the elements returned by <code class="keyw">CohomologyRelators(C,n)</code>.</p>
 
-<p>Therefore, if there is a generator of degree &gt;n, then f won't be surjective. If there is a relator of multidegree &gt;n which is not a consequence of lower degree relators, then f won't be injective. See <a href="chap2.html#s4ss0"><b>2.4</b></a> for how big n needs to be to ensure that f be an isomorphism.</p>
+<p>Therefore, if there is a generator of degree greater than n, then f won't be surjective. Similarly, if there is a relator of multidegree greater than n which is not a consequence of lower degree relators, then f won't be injective. See <a href="chap2.html#X87C9251687CD4247"><b>2.4</b></a> for a discussion on how big n needs to be to ensure that f be an isomorphism.</p>
 
-<p><a id="s7ss0" name="s7ss0"></a></p>
+<p><a id="X837261007B39795C" name="X837261007B39795C"></a></p>
 
-<h4>2.7 Induced Maps</h4>
+<h4>2.7 <span class="Heading">Induced Maps</span></h4>
 
 <p>Let f: H -&gt; G be a group homomorphism. Then f induces a homomorphism on cohomology H*(G,k) -&gt; H*(H,k) which is returned by the following function.</p>
 
-<p><a id="s7ss1" name="s7ss1"></a></p>
+<p><a id="X8608BD148307390B" name="X8608BD148307390B"></a></p>
 
 <h5>2.7-1 InducedHomomorphismOnCohomology</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; InducedHomomorphismOnCohomology</code>( <var>C, D, f, n</var> )</td><td class="tdright">( function )</td></tr></table></div>
-<p><b>Returns: </b>the induced homomorphism on cohomology rings.</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; InducedHomomorphismOnCohomology</code>( <var class="Arg">C, D, f, n</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p><b>Returns: </b>the induced homomorphism on cohomology.</p>
 
-<p>This function returns the induced homomorphism on cohomology H*(G,k) -&gt; H*(H,k) where the groups H and G are the components of the cohomology objects <code class="keyw">C</code> and <code class="keyw">D</code> and f: H -&gt; G is a group homomorphism. If the cohomology rings have not yet been calculated, they will be computed to degree n, and in this case, they can then be accessed by calling <code class="keyw">CohomologyRing</code> (see <a href="chap2.html#s5ss1"><b>2.5-1</b></a>).</p>
+<p>This function returns the induced homomorphism H*(G,k) -&gt; H*(H,k), where the groups H and G are the components of the cohomology objects <code class="keyw">C</code> and <code class="keyw">D</code> and f: H -&gt; G is a group homomorphism. If the cohomology rings have not yet been calculated, they will be computed to degree n, and in this case, they can then be accessed by calling <code class="keyw">CohomologyRing</code> (see <a href="chap2.html#X7B77337486380998"><b>2.5-1</b></a>).</p>
 
-<p><a id="s7ss2" name="s7ss2"></a></p>
+<p><a id="X87D180E2801B1EA8" name="X87D180E2801B1EA8"></a></p>
 
 <h5>2.7-2 Inclusion</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; Inclusion</code>( <var>H, G</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; Inclusion</code>( <var class="Arg">H, G</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p><b>Returns: </b>the inclusion H-&gt; G</p>
 
 <p>This function returns the group homomorphism H-&gt; G when H is a subgroup of G. The returned map can be used as the <code class="keyw">f</code> argument of <code class="keyw">InducedHomomorphismOnCohomology</code>, in which case the induced homomorphism is the restriction map Res: H*(G,k) -&gt; H*(H,k).</p>
@@ -258,7 +288,6 @@ Big Enough?</h4>
 
 <table class="example">
 <tr><td><pre>
-
 
 gap&gt; G:=DihedralGroup(8);H:=Subgroup(G,[G.2]);
 &lt;pc group of size 8 with 3 generators&gt;
@@ -279,30 +308,28 @@ v.1
 v.2
 v.3
 
-
 </pre></td></tr></table>
 
-<p><a id="s8ss0" name="s8ss0"></a></p>
+<p><a id="X7B541EB97BAB36D7" name="X7B541EB97BAB36D7"></a></p>
 
-<h4>2.8 Massey Products</h4>
+<h4>2.8 <span class="Heading">Massey Products</span></h4>
 
-<p>See <a href="chapBib.html#biBkraines">[K66]</a> for the definitions and <a href="chapBib.html#biBborge">[B01]</a> for the details of the calculation using the Yoneda cocomplex. See also the file <code class="keyw">doc/explanation.*</code> for an explanation of the implementation.</p>
+<p>See <a href="chapBib.html#biBkraines">[Kra66]</a> for the definitions and <a href="chapBib.html#biBborge">[Bor01]</a> for the details of the calculation using the Yoneda cocomplex. See also the file <code class="keyw">doc/explanation.*</code> for an explanation of the implementation.</p>
 
-<p><a id="s8ss1" name="s8ss1"></a></p>
+<p><a id="X7E3023CE86641F9E" name="X7E3023CE86641F9E"></a></p>
 
 <h5>2.8-1 MasseyProduct</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; MasseyProduct</code>( <var>x1, x2, ..., xn</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; MasseyProduct</code>( <var class="Arg">x1, x2, ..., xn</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p><b>Returns: </b>the Massey product &lt; x1, x2, ... , xn&gt;.</p>
 
-<p>Given elements x1, x2, ... , xn of a cohomology ring returned by <code class="keyw">CohomologyRing</code> (see <a href="chap2.html#s5ss0"><b>2.5</b></a>), this function computes the n-fold Massey product &lt; x1, x2, ... , xn &gt; provided that the lower-degree Massey products &lt; x_i ,x_{i+1}, ... , x_j &gt; vanish for all 1 &lt;= i &lt; j &lt;= n, and returns <code class="keyw">fail</code> otherwise.</p>
+<p>Given elements x1, x2, ... , xn of the ring returned by <code class="keyw">CohomologyRing</code> (see <a href="chap2.html#X80B6849C835B7F19"><b>2.5</b></a>), this function computes the n-fold Massey product &lt;Â x1, x2, ... , xnÂ &gt; provided that the lower-degree Massey products &lt;Â xi, x{i+1}, ... , xjÂ &gt; vanish for all 1 &lt;= i &lt; j &lt;= n, and returns <code class="keyw">fail</code> otherwise.</p>
 
-<p>As an example, recall that the cohomology rings of the cyclic groups C_3 and C_9 of size 3 and 9 over k=GF(3) are both given by k&lt; z,y &gt;/(z^2), that is, they are isomorphic as rings. However, the following example shows that &lt; z, z, z &gt; is non-zero in H*(C_3,k) but is zero in H*(C_9,k).</p>
+<p>As an example, recall that the cohomology rings of the cyclic groups C_3 and C_9 of sizes 3 and 9 over k=GF(3) are both given by k&lt;Â z,yÂ &gt;/(z^2), so they are isomorphic as rings. However, the following example shows that &lt;Â z, z, zÂ &gt; is non-zero in H*(C_3,k) but is zero in H*(C_9,k).</p>
 
 
 <table class="example">
 <tr><td><pre>
-
 
 gap&gt; A:=CohomologyRing(CyclicGroup(3),10);
 &lt;algebra of dimension 11 over GF(3)&gt;
@@ -323,18 +350,13 @@ gap&gt; MasseyProduct(z,z,z);
 gap&gt; MasseyProduct(z,z,z,z,z,z,z,z,z);
 v.3
 
-
 </pre></td></tr></table>
 
 
-<div class="pcenter">
-<table class="chlink"><tr><td><a href="chap0.html">Top of Book</a></td><td><a href="chap1.html">Previous Chapter</a></td><td><a href="chap3.html">Next Chapter</a></td></tr></table>
-<br />
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">Top of Book</a>&nbsp;  &nbsp;<a href="chap1.html">Previous Chapter</a>&nbsp;  &nbsp;<a href="chapA.html">Next Chapter</a>&nbsp;  </div>
 
 
-<div class="pcenter"><table class="chlink"><tr><td class="chlink1">Goto Chapter: </td><td><a href="chap0.html">Top</a></td><td><a href="chap1.html">1</a></td><td><a href="chap2.html">2</a></td><td><a href="chap3.html">3</a></td><td><a href="chapBib.html">Bib</a></td><td><a href="chapInd.html">Ind</a></td></tr></table><br /></div>
-
-</div>
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>

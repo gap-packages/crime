@@ -1,16 +1,17 @@
   
   
-  [1m[4m[31mReferences[0m
+  [1XReferences[0X
   
-  [33m[B01]  [0m[1m[31mBorge,  I. C. [0m, [34mA cohomological approach to the classification of
-  $p$-groups[0m, Oxford (2001)
+  [[20XBor01[15X]  [16XBorge, I. C.[15X, [17XA cohomological approach to the classification of
+  p-groups[15X,                         Oxford                         (2001),
+  http://www.maths.abdn.ac.uk/\~{}bensondj/html/archive/borge.html
   
-  [33m[CT+03]  [0m[1m[31mCarlson,  J.  F.  and  Townsley, L. and Valeri-Elizondo, L. and
-  Zhang,   M.  [0m,  [34mCohomology  rings  of  finite  groups[0m,  Kluwer  Academic
-  Publishers, Algebras and Applications, [34m3[0m, Dordrecht (2003), xvi+776
+  [[20XCTVZ03[15X]  [16XCarlson,  J.  F., Townsley, L., Valeri-Elizondo, L. and Zhang,
+  M.[15X,  [17XCohomology  rings  of  finite  groups[15X,  Kluwer Academic Publishers,
+  Algebras and Applications, [19X3[15X, Dordrecht (2003), xvi+776
   
-  [33m[K66] [0m[1m[31mKraines, D. [0m, [34mMassey higher products[0m, Trans. Amer. Math. Soc., [34m124[0m
-  (1966), 431--449
+  [[20XKra66[15X]  [16XKraines,  D.[15X,  [17XMassey higher products[15X, [18XTrans. Amer. Math. Soc.[15X,
+  [19X124[15X (1966), 431--449
   
   
   
