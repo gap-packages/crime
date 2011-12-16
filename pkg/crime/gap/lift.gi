@@ -11,7 +11,7 @@ InstallGlobalFunction(LiftHom,function(L,R,K)
   # R is the list of images of the map constructed. 
   # K is the field.
   
-  local p,b,n,l,m,t,j,k,first,last;
+  local p,b,n,l,m,t,j,k,first,last,jg;
   p:=Characteristic(K);
   b:=Size(L[1]);   # Size of the blocks
                    # (in case the target is a direct sum)
@@ -19,13 +19,19 @@ InstallGlobalFunction(LiftHom,function(L,R,K)
                    # (in case the target is a direct sum)
   l:=Size(L);      # Size of Pcgs(G); ie, |G|=p^l
   m:=[];
+
   for t in [1..Size(R)] do
     Append(m,[R[t]]);
     for j in [1..l] do
+      jg:=DownTheMiddle(L[j],n);
+      ConvertToMatrixRep(jg,p);
       for k in [1..p-1] do
-        first:=(t-1)*b+(k-1)*p^(j-1)+1;
-        last:= (t-1)*b+ k   *p^(j-1)  ;
-        Append(m,m{[first..last]}*DiagonalAction(L[j],n));
+        #first:=(t-1)*b+(k-1)*p^(j-1)+1;
+        #last:= (t-1)*b+ k   *p^(j-1)  ;
+	# is this it?
+        first:=(t-1)*p^l+(k-1)*p^(j-1)+1;
+        last:= (t-1)*p^l+ k   *p^(j-1)  ;
+        Append(m,m{[first..last]}*jg);
       od;
     od;
   od;

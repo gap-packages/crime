@@ -7,8 +7,8 @@ InstallGlobalFunction(GeneratorsOfRadical,function(d,L)
   local N,n,NG;
   
   N:=TriangulizedNullspaceMat(d);
-  n:=Size(N[1])/Size(L[1]); # n is the number of block columns, 
-  NG:=BaseMat(Concatenation(List(L,x->N*DiagonalAction(x,n))));
+  n:=Size(N[1])/Size(L[1]); # n is the number of block columns 
+  NG:=BaseMat(Concatenation(List(L,x->N*DownTheMiddle(x,n))));
   return BaseSteinitzVectors(N,NG).factorspace;
   end
-);  
+); 

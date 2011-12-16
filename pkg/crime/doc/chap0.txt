@@ -3,7 +3,7 @@
                                [1m[4m[31mThe [1mCrime[1m[4m[31m Package[0m
   
   
-                                  Version 0.2
+                                  Version 0.3
   
   
                                  Marcus Bishop
@@ -23,14 +23,14 @@
   
   -------------------------------------------------------
   [1m[4m[31mAcknowledgements[0m
-  This  project  wouldn't  have been possible without Jon Carlson. Jon devised
+  This  project  would not have been possible without Jon Carlson. Jon devised
   the  algorithms  used  by  [22m[32mProjectiveResolution[0m,  [22m[32mCohomologyGenerators[0m,  and
   [22m[32mCohomologyRelators[0m,  having  already  implemented  them in [1mMagma[0m and sharing
   these programs with me.
   
   Thank  you  also  to Laurent Bartholdi for his helpful suggestions regarding
   the  [1mGAP[0m  implementation  and  the  user  interface. Laurent also tested the
-  program extensively and uncovered many bugs.
+  program extensively and uncovered several bugs.
   
   
   -------------------------------------------------------
@@ -44,6 +44,7 @@
       2.1-1 CohomologyObject
     2.2 Minimal Projective Resolutions
       2.2-1 ProjectiveResolution
+      2.2-2 BoundaryMap
     2.3 Cohomology Generators and Relators
       2.3-1 CohomologyGenerators
       2.3-2 CohomologyRelators
@@ -54,6 +55,7 @@
       2.4-4 LocateGeneratorsInCohomologyRing
     2.5 Induced Maps
       2.5-1 InducedHomomorphismOnCohomology
+      2.5-2 Inclusion
     2.6 Massey Products
       2.6-1 MasseyProduct
   3. Leisure and Recreation: Cohomology Rings of all Groups of Size 16

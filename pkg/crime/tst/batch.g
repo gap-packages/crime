@@ -26,4 +26,4 @@ for j in [1..NumberSmallGroups(n)] do
   AppendTo(f,"Relators: ",R,"\nTime: ",StringTime(t-s),"\n\n");
   s:=t;
 od;
-Print("Total time: ",StringTime(t),"\n");
+AppendTo(f,"Total time: ",StringTime(t),"\n");

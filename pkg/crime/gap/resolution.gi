@@ -1,5 +1,5 @@
 DeclareRepresentation("IsCObjectCompRep",
-  IsComponentObjectRep, ["G","K","M","e","d","L","R","B","H","P","V"]);
+  IsComponentObjectRep, ["G","K","M","e","d","L","R","B","H","P"]);
 CObject:=NewType(NewFamily("Cohomology Object"),
   IsCObject and IsCObjectCompRep);
 
@@ -19,11 +19,13 @@ CObject:=NewType(NewFamily("Cohomology Object"),
 # H the chain maps corresponding with the cohomology
 #   generators -- these could arguably be thrown away
 # P for internal usage in calculating generators
-# V the variables used in the cohomology ring
 
 InstallMethod(CohomologyObject,
   "Creates a cohomology object",[IsGroup,IsField,IsObject],
   function(G,K,M)
+    if not IsFinite(G) or not IsPGroup(G) then
+      TryNextMethod();
+    fi;
     return Objectify(CObject,
       Immutable(rec(G:=G,K:=K,M:=M)));
   end
@@ -33,6 +35,9 @@ InstallOtherMethod(CohomologyObject,
   "Creates a cohomology object",[IsGroup],
   function(G)
     local K;
+    if not IsFinite(G) or not IsPGroup(G) then
+      TryNextMethod();
+    fi;
     K:=GF(PrimePGroup(G));
     return CohomologyObject(G,K,
       GModuleByMats(List(Pcgs(G),x->[[One(K)]]),K)
@@ -54,15 +59,26 @@ InstallMethod(ProjectiveResolution,"Computes a minimal projective resolution",
     if not IsBound(C!.R) then C!.R:=[];fi;
     if not IsBound(C!.d) then C!.d:=[];fi;
     if not IsBound(C!.R[1]) then
-      C!.R[1]:=GeneratorsOfRadical(C!.e,C!.L[2]);
-      C!.d[1]:=LiftHom(C!.L[1],C!.R[1],C!.K);
-      C!.B[2]:=Size(C!.R[1]);
-    fi;
-    for d in [Size(C!.R)+1..n] do
-      C!.R[d]:=GeneratorsOfRadical(C!.d[d-1],C!.L[2]);
-      C!.d[d]:=LiftHom(C!.L[1],C!.R[d],C!.K);
-      C!.B[d+1]:=Size(C!.R[d]);
-    od;
+     C!.R[1]:=GeneratorsOfRadical(C!.e,C!.L[2]);
+     C!.d[1]:=LiftHom(C!.L[1],C!.R[1],C!.K);
+     C!.B[2]:=Size(C!.R[1]);
+   fi;
+
+   for d in [Size(C!.R)+1..n] do
+     C!.R[d]:=GeneratorsOfRadical(C!.d[d-1],C!.L[2]);
+     C!.d[d]:=LiftHom(C!.L[1],C!.R[d],C!.K);
+     C!.B[d+1]:=Size(C!.R[d]);
+   od;
     return C!.B;
+  end
+);
+
+InstallMethod(BoundaryMap,"Returns a boundary map",
+  [IsCObject,IsInt],
+  function(C,n)
+    if n<0 then Error("n should be nonnegative");
+    elif n=0 then ProjectiveResolution(C,1); return C!.e;
+    else ProjectiveResolution(C,n); return C!.R[n];
+    fi;
   end
 );

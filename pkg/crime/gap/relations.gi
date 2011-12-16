@@ -5,27 +5,20 @@ InstallGlobalFunction(ProductOfChainMaps,function(E,e,F,f,C)
   end
 );
 
-InstallGlobalFunction(NiceIndeterminate,function(C,n)
-  # Because I can't spell the alphabet backwards without looking.
-  local L;
-  L:=["z","y","x","w","v","u","t","s","r","q","p"];
-  return X(C!.K,L[n]);
-  end
-);
-
-InstallGlobalFunction(Intersperse,function(C,M,x)
+InstallGlobalFunction(Intersperse,function(C,IN,M,x)
   # Every time we commute an element of degree d with an element
   # of degree e, we have to multiply the product by (-1)^(d*e).
-  # This function returns the factor +-1 resulting from moving
+  # This function returns the factor +/- 1 resulting from moving
   # x from the RIGHT into its proper position in the monomial M.
   local e,f,g,fe,fo;
   e:=IndeterminateNumberOfUnivariateRationalFunction(x);
   f:=ExtRepPolynomialRatFun(M)[1];
-  g:=First([1..Size(f)],x->IsOddInt(x) and f[x]>e);
+  g:=First([1,3..Size(f)-1],x->f[x]>e);
   if fail=g then return 1;fi;
-  fo:=f{[g,g+2..Size(f)-1]};
-  fe:=f{[g+1,g+3..Size(f)]};
-  return (-1)^(C!.D[e]*Sum(List([1..Size(fo)],x->C!.D[fo[x]]*fe[x])));
+  fo:=f{[g,g+2..Size(f)-1]}; # The indeterminate numbers to the RIGHT of x.
+  fe:=f{[g+1,g+3..Size(f)]}; # Their degrees.
+  return (-1)^(C!.D[e]*Sum([1..Size(fo)],
+    x->C!.D[Position(IN,fo[x])]*fe[x]));
   end
 );
 
@@ -34,20 +27,20 @@ InstallMethod(CohomologyRelators,
 [IsCObject,IsPosInt], 
 
 function(C,n)
-local F,G,M,S,I,d,L,c,x,y,z,w,N,s,k;
+local l,V,IN,F,G,M,S,I,d,L,c,x,y,z,w,N,s,k;
 CohomologyGenerators(C,n);
 
-if not IsBound(C!.V) or Size(C!.V) < Size(C!.D) then 
-  if(Size(C!.D)>11) then
-    C!.V:=List([1..Size(C!.D)],x->X(C!.K,x));
-  else
-    C!.V:=List([1..Size(C!.D)],x->NiceIndeterminate(C,x));
-  fi;
+l:=["z","y","x","w","v","u","t","s","r","q","p"];
+if(Size(C!.D)>11) then
+  V:=List([1..Size(C!.D)],x->Indeterminate(C!.K,x));
+else
+  V:=List([1..Size(C!.D)],x->Indeterminate(C!.K,l[x]));
 fi;
-F:=PolynomialRing(C!.K,C!.V);
+IN:=List(V,IndeterminateNumberOfUnivariateRationalFunction);
 
+F:=PolynomialRing(C!.K,V);
 G:=List([1..Size(C!.D)],           # The cohomology generators.
-  j->[C!.D[j],C!.V[j],C!.H[j]]);
+  j->[C!.D[j],V[j],C!.H[j]]);
 M:=ListX(G,x->x[1]=1,ShallowCopy); # The monomials that remain.
 S:=[];                             # The final answer goes here.
 I:=[];                             # The leading monomials of S.
@@ -62,10 +55,16 @@ for d in [2..n] do
           Append(c,[z]);
           if not IsZero(PolynomialReducedRemainder(z,I,
             MonomialLexOrdering())) then
-            w:=ExtractColumn(LiftHom(C!.L[1],
-              x[3][y[1]+1]
+            if not 2=Characteristic(C!.K) then
+              w:=ExtractColumn(LiftHom(C!.L[1],
+                x[3][y[1]+1]
                 *LiftHom(C!.L[1],y[3][1],C!.K),C!.K),1)
-              *Intersperse(C,x[2],y[2]);
+                *Intersperse(C,IN,x[2],y[2]);
+            else
+              w:=ExtractColumn(LiftHom(C!.L[1],
+                x[3][y[1]+1]
+                *LiftHom(C!.L[1],y[3][1],C!.K),C!.K),1);
+            fi;
             if IsZero(w) then 
               Append(I,[z]);
               Append(S,[z]);
@@ -96,6 +95,6 @@ for d in [2..n] do
     );
 od; # end d
 
-return [C!.V,S];
+return [V,S];
 end
 );

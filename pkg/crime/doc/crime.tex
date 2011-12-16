@@ -55,7 +55,7 @@
 \begin{center}{\Huge \textbf{The \textsf{Crime} Package}}\\[1cm]
 \hypersetup{pdftitle=The \textsf{Crime} Package}
 \markright{\scriptsize \mbox{}\hfill The \textsf{Crime} Package \hfill\mbox{}}
-{Version 0.2}\\[1cm]
+{Version 0.3}\\[1cm]
 \mbox{}\\[2cm]
 {\large \textbf{Marcus Bishop  }}\\
 \hypersetup{pdfauthor=Marcus Bishop  }
@@ -76,11 +76,11 @@
 {\small 
 \section*{Acknowledgements}
 \logpage{[ 0, 0, 2 ]}
- This project wouldn't have been possible without Jon Carlson. Jon devised the
+ This project would not have been possible without Jon Carlson. Jon devised the
 algorithms used by \texttt{ProjectiveResolution}, \texttt{CohomologyGenerators}, and \texttt{CohomologyRelators}, having already implemented them in \textsf{Magma} and sharing these programs with me. 
 
 Thank you also to Laurent Bartholdi for his helpful suggestions regarding the \textsf{GAP} implementation and the user interface. Laurent also tested the program
-extensively and uncovered many bugs. }\\[1cm]
+extensively and uncovered several bugs. }\\[1cm]
 \newpage
 
 \def\contentsname{Contents\logpage{[ 0, 0, 3 ]}}
@@ -96,8 +96,8 @@ extensively and uncovered many bugs. }\\[1cm]
   
   $ cd /usr/local/gap4r4/pkg
   $ su
-  % wget 'http://mad.epfl.ch/~bishop/Crime/crime-0.2.tar.gz'
-  % tar xvzvf crime-0.2.tar.gz 
+  % wget 'http://mad.epfl.ch/~bishop/Crime/crime-0.3.tar.gz'
+  % tar xvzvf crime-0.3.tar.gz 
   
 \end{Verbatim}
  In this situation, users would then load the package with the \texttt{LoadPackage} command. 
@@ -114,8 +114,8 @@ into their home directories or into some other writable directory such as \textt
   
   $ mkdir /tmp/pkg
   $ cd /tmp/pkg
-  $ wget 'http://mad.epfl.ch/~bishop/Crime/crime-0.2.tar.gz'
-  $ tar xvzvf crime-0.2.tar.gz 
+  $ wget 'http://mad.epfl.ch/~bishop/Crime/crime-0.3.tar.gz'
+  $ tar xvzvf crime-0.3.tar.gz 
   $ gap -l ';/tmp'
   gap> LoadPackage("crime");
 \end{Verbatim}
@@ -131,13 +131,13 @@ those having ample free time described in Chapter \ref{test}. }
  
 \chapter{\textcolor{Chapter }{Usage}}\logpage{[ 2, 0, 0 ]}
 {
-  All the functions described below taking an argument \texttt{n} except \texttt{CohomologyRing} do whatever the manual says they do until some stage \texttt{n}, where \texttt{n} is normally the homological degree. These functions are idempotent in the
+  All the functions described below taking an argument \texttt{n} except \texttt{CohomologyRing}, \texttt{CohomologyRelators} and \texttt{InducedHomomorphismOnCohomology} do whatever the manual says they do until some stage \texttt{n}, where \texttt{n} is normally the homological degree. These functions are idempotent in the
 sense that called a second time with the same argument \texttt{n}, they do nothing, but called with a bigger \texttt{n}, they continue computing from where the previous calculations left off. 
 \section{\textcolor{Chapter }{Cohomology Objects}}\logpage{[ 2, 1, 0 ]}
 {
-  The calculation of group cohomology involves several computations, the results
+  The computation of group cohomology involves several calculations, the results
 of which are reused in later calculations, and are thus collected in an object
-of type \texttt{CObject}, created with the following operation. 
+of type \texttt{CObject}, which is created with the following command. 
 
 \subsection{\textcolor{Chapter }{CohomologyObject}}
 \logpage{[ 2, 1, 1 ]}\nobreak
@@ -155,7 +155,12 @@ a cohomology object.
  This function creates a cohomology object, initially having components the $p$-group $G$, the field $k$ of characteristic $p$, and the \textsf{MeatAxe} $kG$-module $M$. The second invocation creates a cohomology object, initially having
 components the $p$-group $G$, the field $\mathbb{F}_p$,  and the trivial \textsf{MeatAxe} $kG$-module. }
 
- The cohomology object is used to store, in addition to the group, field, and
+ 
+
+We emphasize that in the first invocation, \texttt{k} can be any field of characteristic $p$ and that \texttt{M} can be any \textsf{MeatAxe} module over $kG$. However, since the case $k=\mathbb{F}_p$,  and $M=k$ is probabaly the most common, the second invocation is provided for
+convenience. 
+
+The cohomology object is used to store, in addition to the group, field, and
 module, the boundary maps, the Betti numbers, the multiplication table, etc. }
 
  
@@ -163,8 +168,8 @@ module, the boundary maps, the Betti numbers, the multiplication table, etc. }
 {
  Given a $p$-group $G$, the field $k$ of characteristic $p$ and a $kG$-module $M$, the function below computes a minimal projective resolution  
 \[ P_n\rightarrow\cdots\rightarrow P_2\rightarrow P_1 \rightarrow P_0\rightarrow
-k\rightarrow 0 \]
- where $P_i=(kG)^{b_i}$   for certain numbers $b_i$, the \emph{Betti numbers} of the resolution. Then the groups  $\mathrm{Ext}^n_{kG}\left(M,N\right)$  are simply  $\mathrm{Hom}_{kG}\left(P_n,N\right)$,  and if $N=k$ is the trivial $kG$-module, then  $H^n\left(G,k\right)=\mathrm{Ext}^n_{kG} \left(k,k\right)=k^{b_n}$ . 
+M\rightarrow 0 \]
+ where $P_i=\left(kG\right)^{b_i}$   for certain numbers $b_i$, the \emph{Betti numbers} of the resolution. Then the groups  $\mathrm{Ext}^n_{kG}\left(M,N\right)$  are simply  $\mathrm{Hom}_{kG}\left(P_n,N\right)$,  and if $N=k$ is the trivial $kG$-module, then  $H^n\left(G,k\right)=\mathrm{Ext}^n_{kG} \left(k,k\right)=k^{b_n}$ . 
 
 \subsection{\textcolor{Chapter }{ProjectiveResolution}}
 \logpage{[ 2, 2, 1 ]}\nobreak
@@ -177,6 +182,24 @@ a list containing the Betti numbers $b_0, b_1,\ldots, b_n$.
 
 
  Given a cohomology object \texttt{C} having components $G$, $k$, and $M$, this function computes the first \texttt{n}$+1$ terms of the minimal projective resolution  $P_\ast$ of $M$ of the form $P_i=\left(kG\right)^{b_i}$ for $0\leq i\leq n$,  and returns the numbers $b_i$ as a list. }
+
+ 
+
+\subsection{\textcolor{Chapter }{BoundaryMap}}
+\logpage{[ 2, 2, 2 ]}\nobreak
+{\noindent\textcolor{FuncColor}{$\Diamond$\ \texttt{BoundaryMap( C, n )\index{BoundaryMap@\texttt{BoundaryMap}}
+\label{BoundaryMap}
+}\hfill{\scriptsize (operation)}}\\
+\textbf{\indent Returns:\ }
+the $n$th boundary map.
+
+
+
+ Given the cohomology object \texttt{C}, this function computes a projective resolution to degree \texttt{n} if it hasn't been computed already, and returns the \texttt{n}th boundary map. 
+
+The map is returned is a $b_n$ -by- $\left|G\right|b_{n-1}$ matrix, having in the $i$th row the image of the element $1_G$ from the $i$th direct summand of $P_n$. 
+
+See the file \texttt{doc/example.*} for an example of the usage and interpretation of the result of this function. }
 
  }
 
@@ -214,6 +237,10 @@ a list of generators and a list of relators.
 The function returns two lists, the first containing the variables \texttt{z}, \texttt{y}, \texttt{x}, $\ldots$ corresponding to the generators of  $H^\ast\left(G,k\right)$  if there are fewer than 12 generators, and containing the variables \texttt{x{\textunderscore}1}, \texttt{x{\textunderscore}2}, \texttt{x{\textunderscore}3}, $\ldots$ otherwise. The second is a list of polynomials in the variables from the first
 list. 
 
+While this isn't likely to occur, we point out that if there are 12 or more
+generators and some of the indeterminates \texttt{x{\textunderscore}1}, \texttt{x{\textunderscore}2}, \texttt{x{\textunderscore}3}, $\ldots$ have already been named, say by a previous call to \texttt{CohomologyRelators}, then these variables will retain their old names. If this is confusing,
+restart \textsf{GAP} and do it again. 
+
 These two lists should be interpreted as follows. The degree \texttt{n} truncation of the cohomology ring  $H^\ast\left(G,k\right)$  is the polynomial ring in the non-commuting variables from the first list,
 having the degrees returned by \texttt{CohomologyGenerators} above, and subject to the relators in the second list. }
 
@@ -235,7 +262,7 @@ having the degrees returned by \texttt{CohomologyGenerators} above, and subject 
 \logpage{[ 2, 4, 0 ]}
 {
  See \cite{carlson} for the details of the calculation of cohomology products using composition of
-chain maps. See also the file \texttt{doc/explanation.tex} for an explanation of the implementation. 
+chain maps. See also the file \texttt{doc/explanation.*} for an explanation of the implementation. 
 
 \subsection{\textcolor{Chapter }{CohomologyRing}}
 \logpage{[ 2, 4, 1 ]}\nobreak
@@ -258,12 +285,12 @@ use the second invocation of this function, which returns the cohomology ring
 of the group \texttt{G} immediately, throwing away all intermediate calculations. 
 
 Observe that the object returned is a degree \texttt{n} truncation of the infinite-dimensional cohomology ring. A consequence of this
-is that multiplying two elements whose product has degree greater than \texttt{n} results in zero. 
+is that multiplying two elements whose product has degree greater than \texttt{n} results in zero, whether or not the product is really zero. 
 
 Observe also that calling \texttt{CohomologyRing} a second time with a bigger \texttt{n} does \emph{not} extend the previous ring, but rather, recalculates the entire ring from the
-beginning. Admittedly, this is rather inconvenient, and I promise to think
-about extending the previous ring the next time I find myself drinking a
-martini on the beach with my laptop. }
+beginning. Extending the previous ring appears not to be worth the effort for
+technical reasons, since almost everything would need to be recalculated again
+anyway. }
 
  
 
@@ -320,7 +347,7 @@ a list containing the cohomology generators.
 
 
  Having already called \texttt{CohomologyRing} (see \ref{CohomologyRing}), this function returns a list of elements of the cohomology ring which
-together with the identity element of the ring generate it as a ring. 
+together with the identity element generate the cohomology ring. 
 
 This function is a wrapper for \texttt{CohomologyGenerators} (see \ref{CohomologyGenerators}), indicating which elements of the cohomology ring correspond with the
 generators found by \texttt{CohomologyGenerators}. }
@@ -341,7 +368,7 @@ generators found by \texttt{CohomologyGenerators}. }
  
 \section{\textcolor{Chapter }{Induced Maps}}\logpage{[ 2, 5, 0 ]}
 {
- Let $f: G \rightarrow H$ be a group homomorphism for $p$-groups $G$ and $H$. Then $f$ induces a homomorphism on cohomology  $H^\ast\left(H,k\right) \to H^\ast\left(G,k\right)$  which is returned by the following function. 
+ Let $f: H \rightarrow G$ be a group homomorphism. Then $f$ induces a homomorphism on cohomology  $H^\ast\left(G,k\right) \to H^\ast\left(H,k\right)$  which is returned by the following function. 
 
 \subsection{\textcolor{Chapter }{InducedHomomorphismOnCohomology}}
 \logpage{[ 2, 5, 1 ]}\nobreak
@@ -353,35 +380,46 @@ the induced homomorphism on cohomology rings.
 
 
 
- This function returns the induced homomorphism on cohomology  $H^\ast\left(H,k\right) \to H^\ast\left(G,k\right)$  where the groups $G$ and $H$ are the components of the cohomology objects \texttt{C} and \texttt{D} and $f: G \rightarrow H$ is a group homomorphism. If the cohomology rings have not yet been calculated,
+ This function returns the induced homomorphism on cohomology  $H^\ast\left(G,k\right) \to H^\ast\left(H,k\right)$  where the groups $H$ and $G$ are the components of the cohomology objects \texttt{C} and \texttt{D} and $f: H \rightarrow G$ is a group homomorphism. If the cohomology rings have not yet been calculated,
 they will be computed to degree $n$, and in this case, they can then be accessed by calling \texttt{CohomologyRing} (see \ref{CohomologyRing}). }
+
+ 
+
+\subsection{\textcolor{Chapter }{Inclusion}}
+\logpage{[ 2, 5, 2 ]}\nobreak
+{\noindent\textcolor{FuncColor}{$\Diamond$\ \texttt{Inclusion( H, G )\index{Inclusion@\texttt{Inclusion}}
+\label{Inclusion}
+}\hfill{\scriptsize (function)}}\\
+\textbf{\indent Returns:\ }
+the inclusion $H\rightarrow G$
+
+
+
+This function returns the group homomorphism $H\rightarrow G$ when $H$ is a subgroup of $G$. The returned map can be used as the \texttt{f} argument of \texttt{InducedHomomorphismOnCohomology}, in which case the induced homomorphism is the restriction map  $\mathrm{Res}^G_H:H^\ast\left(G,k\right) \to H^\ast\left(H,k\right)$ . }
 
  The following example calculates the homomorphism on cohomology induced by the
 inclusion of the cyclic group of size 4 into the dihedral group of size 8. 
 \begin{Verbatim}[fontsize=\small,frame=single,label=Example]
   
-  gap> G:=CyclicGroup(4);H:=DihedralGroup(8);
-  <pc group of size 4 with 2 generators>
+  gap> G:=DihedralGroup(8);H:=Subgroup(G,[G.2]);
   <pc group of size 8 with 3 generators>
-  gap> C:=CohomologyObject(G);D:=CohomologyObject(H);
+  Group([ f2 ])
+  gap> C:=CohomologyObject(H);D:=CohomologyObject(G);
   <object>
   <object>
-  gap> f:=GroupHomomorphismByImages(G,H,[G.1],[H.2]);
-  [ f1 ] -> [ f2 ]
-  gap> F:=InducedHomomorphismOnCohomology(C,D,f,10);
-  CanonicalBasis( <algebra of dimension 66 over GF(2)> ) ->
-  [ v.1, 0*v.1, v.2, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-    0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-    0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-    0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-    0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-    0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-    0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1 ]
-  gap> B:=CohomologyRing(D,10);
+  gap> i:=Inclusion(H,G);
+  [ f2 ] -> [ f2 ]
+  gap> Res:=InducedHomomorphismOnCohomology(C,D,i,10);;
+  gap> A:=CohomologyRing(D,10);
   <algebra of dimension 66 over GF(2)>
-  gap> B.1^F;B.2^F;
+  gap> LocateGeneratorsInCohomologyRing(D);
+  [ v.2, v.3, v.6 ]
+  gap> A.1^Res; A.2^Res; A.3^Res; A.6^Res;
   v.1
   0*v.1
+  v.2
+  v.3
+  
 \end{Verbatim}
  }
 
@@ -389,7 +427,7 @@ inclusion of the cyclic group of size 4 into the dihedral group of size 8.
 \section{\textcolor{Chapter }{Massey Products}}\logpage{[ 2, 6, 0 ]}
 {
  See \cite{kraines} for the definitions and \cite{borge} for the details of the calculation using the Yoneda cocomplex. See also the
-file \texttt{doc/explanation.tex} for an explanation of the implementation. 
+file \texttt{doc/explanation.*} for an explanation of the implementation. 
 
 \subsection{\textcolor{Chapter }{MasseyProduct}}
 \logpage{[ 2, 6, 1 ]}\nobreak
@@ -558,7 +596,7 @@ processes.
 
  \def\bibname{References\logpage{[ "Bib", 0, 0 ]}}
 
-\bibliographystyle{alpha}
+\bibliographystyle{plain}
 \bibliography{crime}
 
 \def\indexname{Index\logpage{[ "Ind", 0, 0 ]}}

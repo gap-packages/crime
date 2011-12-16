@@ -23,6 +23,7 @@ InstallMethod(CohomologyGenerators,
     H:=C!.H;
 
     for m in [Size(H[1])..n-1] do
+      # Size(H[1]) is the number of lifts already computed.
       h:=Size(H); 
       # h is the number of generators there were at the 
       # beginning of round m. We need this information later.

@@ -5,4 +5,5 @@ path:=Concatenation(
 main:="crime.xml";
 files:=[];
 bookname:="Crime";
+#r:=ParseTreeXMLString(ComposedXMLString(path,main,files));
 MakeGAPDocDoc(path,main,files,bookname);

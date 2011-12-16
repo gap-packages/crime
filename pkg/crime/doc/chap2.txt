@@ -1,19 +1,20 @@
   
   [1m[4m[31m2. Usage[0m
   
-  All the functions described below taking an argument [22m[32mn[0m except [22m[32mCohomologyRing[0m
-  do  whatever the manual says they do until some stage [22m[32mn[0m, where [22m[32mn[0m is normally
-  the  homological  degree.  These  functions are idempotent in the sense that
-  called  a  second time with the same argument [22m[32mn[0m, they do nothing, but called
-  with   a   bigger  [22m[32mn[0m,  they  continue  computing  from  where  the  previous
-  calculations left off.
+  All   the   functions   described   below   taking   an  argument  [22m[32mn[0m  except
+  [22m[32mCohomologyRing[0m,  [22m[32mCohomologyRelators[0m  and  [22m[32mInducedHomomorphismOnCohomology[0m do
+  whatever the manual says they do until some stage [22m[32mn[0m, where [22m[32mn[0m is normally the
+  homological  degree. These functions are idempotent in the sense that called
+  a  second  time with the same argument [22m[32mn[0m, they do nothing, but called with a
+  bigger  [22m[32mn[0m, they continue computing from where the previous calculations left
+  off.
   
   
   [1m[4m[31m2.1 Cohomology Objects[0m
   
-  The  calculation  of  group  cohomology  involves  several computations, the
+  The  computation  of  group  cohomology  involves  several calculations, the
   results of which are reused in later calculations, and are thus collected in
-  an object of type [22m[32mCObject[0m, created with the following operation.
+  an object of type [22m[32mCObject[0m, which is created with the following command.
   
   [1m[4m[31m2.1-1 CohomologyObject[0m
   
@@ -26,6 +27,11 @@
   second  invocation  creates a cohomology object, initially having components
   the p-group G, the field GF(p), and the trivial [1mMeatAxe[0m kG-module.
   
+  We  emphasize  that  in  the  first  invocation,  [22m[32mk[0m  can  be  any  field  of
+  characteristic  p  and  that  [22m[32mM[0m  can be any [1mMeatAxe[0m module over kG. However,
+  since  the  case  k=GF(p),  and M=k is probabaly the most common, the second
+  invocation is provided for convenience.
+  
   The cohomology object is used to store, in addition to the group, field, and
   module, the boundary maps, the Betti numbers, the multiplication table, etc.
   
@@ -36,7 +42,7 @@
   function below computes a minimal projective resolution
   
   \[
-       P_n -> ... P_2 -> P_1 -> P_0 -> k -> 0
+       P_n -> ... P_2 -> P_1 -> P_0 -> M -> 0
   \]
   
    where P_i=(kG)^(b_i)
@@ -54,6 +60,21 @@
   computes the first [22m[32mn[0m+1 terms of the minimal projective resolution P* of M of
   the  form  P_i=(kG)^(b_i)  for i=0,1,...,n, and returns the numbers b_i as a
   list.
+  
+  [1m[4m[31m2.2-2 BoundaryMap[0m
+  
+  [1m[34m> BoundaryMap( [0m[22m[34mC, n[0m[1m[34m ) _____________________________________________[0moperation
+  [1mReturns:[0m  the nth boundary map.
+  
+  Given   the  cohomology  object  [22m[32mC[0m,  this  function  computes  a  projective
+  resolution  to  degree [22m[32mn[0m if it hasn't been computed already, and returns the
+  [22m[32mn[0mth boundary map.
+  
+  The map is returned is a b_n -by- |G|b_n-1 matrix, having in the ith row the
+  image of the element 1_G from the ith direct summand of P_n.
+  
+  See the file [22m[32mdoc/example.*[0m for an example of the usage and interpretation of
+  the result of this function.
   
   
   [1m[4m[31m2.3 Cohomology Generators and Relators[0m
@@ -86,6 +107,12 @@
   generators,  and  containing the variables [22m[32mx_1[0m, [22m[32mx_2[0m, [22m[32mx_3[0m, ... otherwise. The
   second is a list of polynomials in the variables from the first list.
   
+  While  this isn't likely to occur, we point out that if there are 12 or more
+  generators  and  some  of the indeterminates [22m[32mx_1[0m, [22m[32mx_2[0m, [22m[32mx_3[0m, ... have already
+  been  named,  say  by  a  previous  call  to  [22m[32mCohomologyRelators[0m, then these
+  variables will retain their old names. If this is confusing, restart [1mGAP[0m and
+  do it again.
+  
   These two lists should be interpreted as follows. The degree [22m[32mn[0m truncation of
   the  cohomology  ring  H*(G,k)  is  the polynomial ring in the non-commuting
   variables   from   the   first   list,   having   the  degrees  returned  by
@@ -115,7 +142,7 @@
   [1m[4m[31m2.4 Cohomology Rings[0m
   
   See  [CT+03] for the details of the calculation of cohomology products using
-  composition  of  chain  maps.  See  also the file [22m[32mdoc/explanation.tex[0m for an
+  composition  of  chain  maps.  See  also  the  file [22m[32mdoc/explanation.*[0m for an
   explanation of the implementation.
   
   [1m[4m[31m2.4-1 CohomologyRing[0m
@@ -138,13 +165,13 @@
   Observe   that  the  object  returned  is  a  degree  [22m[32mn[0m  truncation  of  the
   infinite-dimensional   cohomology  ring.  A  consequence  of  this  is  that
   multiplying  two elements whose product has degree greater than [22m[32mn[0m results in
-  zero.
+  zero, whether or not the product is really zero.
   
   Observe  also that calling [22m[32mCohomologyRing[0m a second time with a bigger [22m[32mn[0m does
   [22m[36mnot[0m  extend the previous ring, but rather, recalculates the entire ring from
-  the  beginning.  Admittedly,  this  is rather inconvenient, and I promise to
-  think about extending the previous ring the next time I find myself drinking
-  a martini on the beach with my laptop.
+  the  beginning.  Extending  the  previous  ring  appears not to be worth the
+  effort  for  technical  reasons,  since  almost  everything would need to be
+  recalculated again anyway.
   
   [1m[4m[31m2.4-2 IsHomogeneous[0m
   
@@ -186,7 +213,7 @@
   
   Having  already  called  [22m[32mCohomologyRing[0m (see [1m2.4-1[0m), this function returns a
   list  of  elements  of  the cohomology ring which together with the identity
-  element of the ring generate it as a ring.
+  element generate the cohomology ring.
   
   This  function is a wrapper for [22m[32mCohomologyGenerators[0m (see [1m2.3-1[0m), indicating
   which  elements  of the cohomology ring correspond with the generators found
@@ -206,21 +233,30 @@
   
   [1m[4m[31m2.5 Induced Maps[0m
   
-  Let f: G -> H be a group homomorphism for p-groups G and H. Then f induces a
-  homomorphism  on  cohomology  H*(H,k)  ->  H*(G,k)  which is returned by the
-  following function.
+  Let  f:  H  ->  G  be a group homomorphism. Then f induces a homomorphism on
+  cohomology H*(G,k) -> H*(H,k) which is returned by the following function.
   
   [1m[4m[31m2.5-1 InducedHomomorphismOnCohomology[0m
   
   [1m[34m> InducedHomomorphismOnCohomology( [0m[22m[34mC, D, f, n[0m[1m[34m ) ____________________[0mfunction
   [1mReturns:[0m  the induced homomorphism on cohomology rings.
   
-  This  function  returns  the  induced  homomorphism on cohomology H*(H,k) ->
-  H*(G,k)  where  the  groups  G  and  H  are the components of the cohomology
-  objects  [22m[32mC[0m  and  [22m[32mD[0m  and f: G -> H is a group homomorphism. If the cohomology
+  This  function  returns  the  induced  homomorphism on cohomology H*(G,k) ->
+  H*(H,k)  where  the  groups  H  and  G  are the components of the cohomology
+  objects  [22m[32mC[0m  and  [22m[32mD[0m  and f: H -> G is a group homomorphism. If the cohomology
   rings  have  not yet been calculated, they will be computed to degree n, and
   in  this  case,  they  can  then  be accessed by calling [22m[32mCohomologyRing[0m (see
   [1m2.4-1[0m).
+  
+  [1m[4m[31m2.5-2 Inclusion[0m
+  
+  [1m[34m> Inclusion( [0m[22m[34mH, G[0m[1m[34m ) ________________________________________________[0mfunction
+  [1mReturns:[0m  the inclusion H-> G
+  
+  This  function  returns the group homomorphism H-> G when H is a subgroup of
+  G.    The    returned   map   can   be   used   as   the   [22m[32mf[0m   argument   of
+  [22m[32mInducedHomomorphismOnCohomology[0m,  in  which case the induced homomorphism is
+  the restriction map Res: H*(G,k) -> H*(H,k).
   
   The  following  example calculates the homomorphism on cohomology induced by
   the  inclusion of the cyclic group of size 4 into the dihedral group of size
@@ -228,35 +264,32 @@
   
   [22m[35m---------------------------  Example  ----------------------------[0m
     [22m[35m[0m
-    [22m[35mgap> G:=CyclicGroup(4);H:=DihedralGroup(8);[0m
-    [22m[35m<pc group of size 4 with 2 generators>[0m
+    [22m[35mgap> G:=DihedralGroup(8);H:=Subgroup(G,[G.2]);[0m
     [22m[35m<pc group of size 8 with 3 generators>[0m
-    [22m[35mgap> C:=CohomologyObject(G);D:=CohomologyObject(H);[0m
+    [22m[35mGroup([ f2 ])[0m
+    [22m[35mgap> C:=CohomologyObject(H);D:=CohomologyObject(G);[0m
     [22m[35m<object>[0m
     [22m[35m<object>[0m
-    [22m[35mgap> f:=GroupHomomorphismByImages(G,H,[G.1],[H.2]);[0m
-    [22m[35m[ f1 ] -> [ f2 ][0m
-    [22m[35mgap> F:=InducedHomomorphismOnCohomology(C,D,f,10);[0m
-    [22m[35mCanonicalBasis( <algebra of dimension 66 over GF(2)> ) ->[0m
-    [22m[35m[ v.1, 0*v.1, v.2, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,[0m
-    [22m[35m  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,[0m
-    [22m[35m  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,[0m
-    [22m[35m  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,[0m
-    [22m[35m  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,[0m
-    [22m[35m  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,[0m
-    [22m[35m  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1 ][0m
-    [22m[35mgap> B:=CohomologyRing(D,10);[0m
+    [22m[35mgap> i:=Inclusion(H,G);[0m
+    [22m[35m[ f2 ] -> [ f2 ][0m
+    [22m[35mgap> Res:=InducedHomomorphismOnCohomology(C,D,i,10);;[0m
+    [22m[35mgap> A:=CohomologyRing(D,10);[0m
     [22m[35m<algebra of dimension 66 over GF(2)>[0m
-    [22m[35mgap> B.1^F;B.2^F;[0m
+    [22m[35mgap> LocateGeneratorsInCohomologyRing(D);[0m
+    [22m[35m[ v.2, v.3, v.6 ][0m
+    [22m[35mgap> A.1^Res; A.2^Res; A.3^Res; A.6^Res;[0m
     [22m[35mv.1[0m
     [22m[35m0*v.1[0m
+    [22m[35mv.2[0m
+    [22m[35mv.3[0m
+    [22m[35m[0m
   [22m[35m------------------------------------------------------------------[0m
   
   
   [1m[4m[31m2.6 Massey Products[0m
   
   See  [K66]  for the definitions and [B01] for the details of the calculation
-  using  the  Yoneda  cocomplex.  See also the file [22m[32mdoc/explanation.tex[0m for an
+  using  the  Yoneda  cocomplex.  See  also  the file [22m[32mdoc/explanation.*[0m for an
   explanation of the implementation.
   
   [1m[4m[31m2.6-1 MasseyProduct[0m

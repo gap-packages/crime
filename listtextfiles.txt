@@ -1,8 +1,10 @@
 crime/init.g
+crime/CHANGES
 crime/README
 crime/PackageInfo.g
 crime/doc/explanation.tex
 crime/doc/crime.tex
+crime/doc/example.tex
 crime/doc/chap0.html
 crime/doc/chap2.html
 crime/doc/chapBib.txt

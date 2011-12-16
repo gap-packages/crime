@@ -1,5 +1,6 @@
 InstallGlobalFunction(ChangeOfBasisMatrix,function(G,K)
 local A,i,e,P,Q,p,n,l,OldB,NewB,m;
+
   A:=GroupRing(K,G);
   i:=One(A);
   e:=Embedding(G,A);

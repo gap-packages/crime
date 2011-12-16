@@ -3,9 +3,7 @@
   [1m[4m[31mReferences[0m
   
   [33m[B01]  [0m[1m[31mBorge,  I. C. [0m, [34mA cohomological approach to the classification of
-  $p$-groups[0m,                          Oxford,                         \tt
-  http://www.maths.abdn.ac.uk/$\sim$bensondj/html/archive/borge.html
-  (2001)
+  $p$-groups[0m, Oxford (2001)
   
   [33m[CT+03]  [0m[1m[31mCarlson,  J.  F.  and  Townsley, L. and Valeri-Elizondo, L. and
   Zhang,   M.  [0m,  [34mCohomology  rings  of  finite  groups[0m,  Kluwer  Academic

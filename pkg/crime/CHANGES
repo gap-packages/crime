@@ -1,0 +1,41 @@
+Changes from the 0.2 to the 0.3 versions.
+
+Most importantly, the function DiagonalAction
+uses a for-loop in place of the call to
+KroneckerProduct. I thought I was so clever
+for having written the entire function on one line
+with one single call to KroneckerProduct, but in fact,
+KroneckerProduct was taking up an inordinate amount
+of processor time.
+
+The same function has been renamed DownTheMiddle
+to avoid a conflict with another GAP package.
+
+The call to this function in lift.g on line 18
+has been replaced by a single call at the top
+of the j-loop, once per loop instead of every time.
+
+And I threw in a ConvertToMatrixRep at that point,
+which saves a few milliseconds.
+
+Changed last line in batch.g from "Print(" to "AppendTo(f".
+
+Added a comment to generators.gi explaining Size(H[1]).
+
+Changed "X" to "Indeterminate" in relations.gi
+
+Remarked that CohomologyRelators is *not* idempotent.
+Thus, took C!.V away from the cohomology object
+and included it as a local variable in CohomologyRelators.
+
+Also as a local variable in CohomologyRelators is the
+new variable IN which holds the indeterminate numbers.
+This information is kept in order to fix a bug in Intersperse.
+
+NiceIndeterminate was eliminated and incorporated into
+CohomologyRelators.
+
+CohomologyObject and CohomologyRing both use the filter
+IsPGroup instead of IsGroup.
+
+Added operation Inclusion.

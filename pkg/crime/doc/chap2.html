@@ -18,13 +18,13 @@
 
 <h3>2. Usage</h3>
 
-<p>All the functions described below taking an argument <code class="keyw">n</code> except <code class="keyw">CohomologyRing</code> do whatever the manual says they do until some stage <code class="keyw">n</code>, where <code class="keyw">n</code> is normally the homological degree. These functions are idempotent in the sense that called a second time with the same argument <code class="keyw">n</code>, they do nothing, but called with a bigger <code class="keyw">n</code>, they continue computing from where the previous calculations left off.</p>
+<p>All the functions described below taking an argument <code class="keyw">n</code> except <code class="keyw">CohomologyRing</code>, <code class="keyw">CohomologyRelators</code> and <code class="keyw">InducedHomomorphismOnCohomology</code> do whatever the manual says they do until some stage <code class="keyw">n</code>, where <code class="keyw">n</code> is normally the homological degree. These functions are idempotent in the sense that called a second time with the same argument <code class="keyw">n</code>, they do nothing, but called with a bigger <code class="keyw">n</code>, they continue computing from where the previous calculations left off.</p>
 
 <p><a id="s1ss0" name="s1ss0"></a></p>
 
 <h4>2.1 Cohomology Objects</h4>
 
-<p>The calculation of group cohomology involves several computations, the results of which are reused in later calculations, and are thus collected in an object of type <code class="keyw">CObject</code>, created with the following operation.</p>
+<p>The computation of group cohomology involves several calculations, the results of which are reused in later calculations, and are thus collected in an object of type <code class="keyw">CObject</code>, which is created with the following command.</p>
 
 <p><a id="s1ss1" name="s1ss1"></a></p>
 
@@ -36,6 +36,8 @@
 
 <p>This function creates a cohomology object, initially having components the p-group G, the field k of characteristic p, and the <strong class="pkg">MeatAxe</strong> kG-module M. The second invocation creates a cohomology object, initially having components the p-group G, the field GF(p), and the trivial <strong class="pkg">MeatAxe</strong> kG-module.</p>
 
+<p>We emphasize that in the first invocation, <code class="keyw">k</code> can be any field of characteristic p and that <code class="keyw">M</code> can be any <strong class="pkg">MeatAxe</strong> module over kG. However, since the case k=GF(p), and M=k is probabaly the most common, the second invocation is provided for convenience.</p>
+
 <p>The cohomology object is used to store, in addition to the group, field, and module, the boundary maps, the Betti numbers, the multiplication table, etc.</p>
 
 <p><a id="s2ss0" name="s2ss0"></a></p>
@@ -44,7 +46,7 @@
 
 <p>Given a p-group G, the field k of characteristic p and a kG-module M, the function below computes a minimal projective resolution</p>
 
-<p class="pcenter">\[P_n -> ... P_2 -> P_1 -> P_0 -> k -> 0 \]</p>
+<p class="pcenter">\[ P_n -> ... P_2 -> P_1 -> P_0 -> M -> 0 \]</p>
 
 <p>where P_i=(kG)^(b_i) for certain numbers b_i, the <em>Betti numbers</em> of the resolution. Then the groups Ext^n(M,N) are simply Hom(P_n,N), and if N=k is the trivial kG-module, then H^n(G,k)=Ext^n(k,k)=k^(b_n).</p>
 
@@ -56,6 +58,19 @@
 <p><b>Returns: </b>a list containing the Betti numbers b_0, b_1,..., b_n.</p>
 
 <p>Given a cohomology object <code class="keyw">C</code> having components G, k, and M, this function computes the first <code class="keyw">n</code>+1 terms of the minimal projective resolution P* of M of the form P_i=(kG)^(b_i) for i=0,1,...,n, and returns the numbers b_i as a list.</p>
+
+<p><a id="s2ss2" name="s2ss2"></a></p>
+
+<h5>2.2-2 BoundaryMap</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; BoundaryMap</code>( <var>C, n</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p><b>Returns: </b>the nth boundary map.</p>
+
+<p>Given the cohomology object <code class="keyw">C</code>, this function computes a projective resolution to degree <code class="keyw">n</code> if it hasn't been computed already, and returns the <code class="keyw">n</code>th boundary map.</p>
+
+<p>The map is returned is a b_n -by- |G|b_n-1 matrix, having in the ith row the image of the element 1_G from the ith direct summand of P_n.</p>
+
+<p>See the file <code class="keyw">doc/example.*</code> for an example of the usage and interpretation of the result of this function.</p>
 
 <p><a id="s3ss0" name="s3ss0"></a></p>
 
@@ -83,6 +98,8 @@
 
 <p>The function returns two lists, the first containing the variables <code class="keyw">z</code>, <code class="keyw">y</code>, <code class="keyw">x</code>, ... corresponding to the generators of H*(G,k) if there are fewer than 12 generators, and containing the variables <code class="keyw">x_1</code>, <code class="keyw">x_2</code>, <code class="keyw">x_3</code>, ... otherwise. The second is a list of polynomials in the variables from the first list.</p>
 
+<p>While this isn't likely to occur, we point out that if there are 12 or more generators and some of the indeterminates <code class="keyw">x_1</code>, <code class="keyw">x_2</code>, <code class="keyw">x_3</code>, ... have already been named, say by a previous call to <code class="keyw">CohomologyRelators</code>, then these variables will retain their old names. If this is confusing, restart <strong class="pkg">GAP</strong> and do it again.</p>
+
 <p>These two lists should be interpreted as follows. The degree <code class="keyw">n</code> truncation of the cohomology ring H*(G,k) is the polynomial ring in the non-commuting variables from the first list, having the degrees returned by <code class="keyw">CohomologyGenerators</code> above, and subject to the relators in the second list.</p>
 
 <p>For example, the following commands</p>
@@ -108,7 +125,7 @@ gap&gt; CohomologyRelators(C,10);
 
 <h4>2.4 Cohomology Rings</h4>
 
-<p>See <a href="chapBib.html#biBcarlson">[CT+03]</a> for the details of the calculation of cohomology products using composition of chain maps. See also the file <code class="keyw">doc/explanation.tex</code> for an explanation of the implementation.</p>
+<p>See <a href="chapBib.html#biBcarlson">[CT+03]</a> for the details of the calculation of cohomology products using composition of chain maps. See also the file <code class="keyw">doc/explanation.*</code> for an explanation of the implementation.</p>
 
 <p><a id="s4ss1" name="s4ss1"></a></p>
 
@@ -122,9 +139,9 @@ gap&gt; CohomologyRelators(C,10);
 
 <p>Users interested only in working with the cohomology ring of a group as a <strong class="pkg">GAP</strong> object, and not in calculating generators, relators, induced maps, etc, can use the second invocation of this function, which returns the cohomology ring of the group <code class="keyw">G</code> immediately, throwing away all intermediate calculations.</p>
 
-<p>Observe that the object returned is a degree <code class="keyw">n</code> truncation of the infinite-dimensional cohomology ring. A consequence of this is that multiplying two elements whose product has degree greater than <code class="keyw">n</code> results in zero.</p>
+<p>Observe that the object returned is a degree <code class="keyw">n</code> truncation of the infinite-dimensional cohomology ring. A consequence of this is that multiplying two elements whose product has degree greater than <code class="keyw">n</code> results in zero, whether or not the product is really zero.</p>
 
-<p>Observe also that calling <code class="keyw">CohomologyRing</code> a second time with a bigger <code class="keyw">n</code> does <em>not</em> extend the previous ring, but rather, recalculates the entire ring from the beginning. Admittedly, this is rather inconvenient, and I promise to think about extending the previous ring the next time I find myself drinking a martini on the beach with my laptop.</p>
+<p>Observe also that calling <code class="keyw">CohomologyRing</code> a second time with a bigger <code class="keyw">n</code> does <em>not</em> extend the previous ring, but rather, recalculates the entire ring from the beginning. Extending the previous ring appears not to be worth the effort for technical reasons, since almost everything would need to be recalculated again anyway.</p>
 
 <p><a id="s4ss2" name="s4ss2"></a></p>
 
@@ -168,7 +185,7 @@ gap&gt; Degree(x);
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; LocateGeneratorsInCohomologyRing</code>( <var>C</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p><b>Returns: </b>a list containing the cohomology generators.</p>
 
-<p>Having already called <code class="keyw">CohomologyRing</code> (see <a href="chap2.html#s4ss1"><b>2.4-1</b></a>), this function returns a list of elements of the cohomology ring which together with the identity element of the ring generate it as a ring.</p>
+<p>Having already called <code class="keyw">CohomologyRing</code> (see <a href="chap2.html#s4ss1"><b>2.4-1</b></a>), this function returns a list of elements of the cohomology ring which together with the identity element generate the cohomology ring.</p>
 
 <p>This function is a wrapper for <code class="keyw">CohomologyGenerators</code> (see <a href="chap2.html#s3ss1"><b>2.3-1</b></a>), indicating which elements of the cohomology ring correspond with the generators found by <code class="keyw">CohomologyGenerators</code>.</p>
 
@@ -191,7 +208,7 @@ true
 
 <h4>2.5 Induced Maps</h4>
 
-<p>Let f: G -&gt; H be a group homomorphism for p-groups G and H. Then f induces a homomorphism on cohomology H*(H,k) -&gt; H*(G,k) which is returned by the following function.</p>
+<p>Let f: H -&gt; G be a group homomorphism. Then f induces a homomorphism on cohomology H*(G,k) -&gt; H*(H,k) which is returned by the following function.</p>
 
 <p><a id="s5ss1" name="s5ss1"></a></p>
 
@@ -200,7 +217,16 @@ true
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; InducedHomomorphismOnCohomology</code>( <var>C, D, f, n</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p><b>Returns: </b>the induced homomorphism on cohomology rings.</p>
 
-<p>This function returns the induced homomorphism on cohomology H*(H,k) -&gt; H*(G,k) where the groups G and H are the components of the cohomology objects <code class="keyw">C</code> and <code class="keyw">D</code> and f: G -&gt; H is a group homomorphism. If the cohomology rings have not yet been calculated, they will be computed to degree n, and in this case, they can then be accessed by calling <code class="keyw">CohomologyRing</code> (see <a href="chap2.html#s4ss1"><b>2.4-1</b></a>).</p>
+<p>This function returns the induced homomorphism on cohomology H*(G,k) -&gt; H*(H,k) where the groups H and G are the components of the cohomology objects <code class="keyw">C</code> and <code class="keyw">D</code> and f: H -&gt; G is a group homomorphism. If the cohomology rings have not yet been calculated, they will be computed to degree n, and in this case, they can then be accessed by calling <code class="keyw">CohomologyRing</code> (see <a href="chap2.html#s4ss1"><b>2.4-1</b></a>).</p>
+
+<p><a id="s5ss2" name="s5ss2"></a></p>
+
+<h5>2.5-2 Inclusion</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; Inclusion</code>( <var>H, G</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p><b>Returns: </b>the inclusion H-&gt; G</p>
+
+<p>This function returns the group homomorphism H-&gt; G when H is a subgroup of G. The returned map can be used as the <code class="keyw">f</code> argument of <code class="keyw">InducedHomomorphismOnCohomology</code>, in which case the induced homomorphism is the restriction map Res: H*(G,k) -&gt; H*(H,k).</p>
 
 <p>The following example calculates the homomorphism on cohomology induced by the inclusion of the cyclic group of size 4 into the dihedral group of size 8.</p>
 
@@ -209,28 +235,25 @@ true
 <tr><td><pre>
 
 
-gap&gt; G:=CyclicGroup(4);H:=DihedralGroup(8);
-&lt;pc group of size 4 with 2 generators&gt;
+gap&gt; G:=DihedralGroup(8);H:=Subgroup(G,[G.2]);
 &lt;pc group of size 8 with 3 generators&gt;
-gap&gt; C:=CohomologyObject(G);D:=CohomologyObject(H);
+Group([ f2 ])
+gap&gt; C:=CohomologyObject(H);D:=CohomologyObject(G);
 &lt;object&gt;
 &lt;object&gt;
-gap&gt; f:=GroupHomomorphismByImages(G,H,[G.1],[H.2]);
-[ f1 ] -&gt; [ f2 ]
-gap&gt; F:=InducedHomomorphismOnCohomology(C,D,f,10);
-CanonicalBasis( &lt;algebra of dimension 66 over GF(2)&gt; ) -&gt;
-[ v.1, 0*v.1, v.2, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1,
-  0*v.1, 0*v.1, 0*v.1, 0*v.1, 0*v.1 ]
-gap&gt; B:=CohomologyRing(D,10);
+gap&gt; i:=Inclusion(H,G);
+[ f2 ] -&gt; [ f2 ]
+gap&gt; Res:=InducedHomomorphismOnCohomology(C,D,i,10);;
+gap&gt; A:=CohomologyRing(D,10);
 &lt;algebra of dimension 66 over GF(2)&gt;
-gap&gt; B.1^F;B.2^F;
+gap&gt; LocateGeneratorsInCohomologyRing(D);
+[ v.2, v.3, v.6 ]
+gap&gt; A.1^Res; A.2^Res; A.3^Res; A.6^Res;
 v.1
 0*v.1
+v.2
+v.3
+
 
 </pre></td></tr></table>
 
@@ -238,7 +261,7 @@ v.1
 
 <h4>2.6 Massey Products</h4>
 
-<p>See <a href="chapBib.html#biBkraines">[K66]</a> for the definitions and <a href="chapBib.html#biBborge">[B01]</a> for the details of the calculation using the Yoneda cocomplex. See also the file <code class="keyw">doc/explanation.tex</code> for an explanation of the implementation.</p>
+<p>See <a href="chapBib.html#biBkraines">[K66]</a> for the definitions and <a href="chapBib.html#biBborge">[B01]</a> for the details of the calculation using the Yoneda cocomplex. See also the file <code class="keyw">doc/explanation.*</code> for an explanation of the implementation.</p>
 
 <p><a id="s6ss1" name="s6ss1"></a></p>
 

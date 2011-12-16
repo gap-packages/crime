@@ -6,9 +6,9 @@ homomorphisms on cohomology and
 Massey products.
 
 To install, download the package from
-http://mad.epfl.ch/~bishop/Crime/crime-0.2.tar.gz
+http://mad.epfl.ch/~bishop/Crime/crime-0.3.tar.gz
 Put the package in GAP's pkg directory and unpack:
-tar xvzvf crime-0.2.tar.gz
+tar xvzvf crime-0.3.tar.gz
 
 See the documentation in the doc directory for
 more information.
