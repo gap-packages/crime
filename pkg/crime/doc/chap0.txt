@@ -3,7 +3,7 @@
                                [1XThe [5XCrime[0X Package[0X
   
   
-                                  Version 1.2
+                                  Version 1.3
   
   
                                  Marcus Bishop
@@ -28,9 +28,6 @@
   the  algorithms  used  by  [9XProjectiveResolution[0X,  [9XCohomologyGenerators[0X,  and
   [9XCohomologyRelators[0X,  having  already  implemented  them in [5XMagma[0X, and shared
   these programs with me.
-  
-  The  documentation  for Crime was prepared using the GAPdoc package by Frank
-  L\"ubeck and Max Neunh\"offer
   
   
   -------------------------------------------------------

@@ -4,7 +4,7 @@
   
   [[20XBor01[15X]  [16XBorge, I. C.[15X, [17XA cohomological approach to the classification of
   p-groups[15X,                         Oxford                         (2001),
-  http://www.maths.abdn.ac.uk/\~{}bensondj/html/archive/borge.html
+  http://www.maths.abdn.ac.uk/~bensondj/html/archive/borge.html
   
   [[20XCTVZ03[15X]  [16XCarlson,  J.  F., Townsley, L., Valeri-Elizondo, L. and Zhang,
   M.[15X,  [17XCohomology  rings  of  finite  groups[15X,  Kluwer Academic Publishers,

@@ -10,12 +10,12 @@
     [4X[0X
     [4X$ cd /usr/local/gap4r4/pkg[0X
     [4X$ su[0X
-    [4X% wget 'http://math.uic.edu/~marcus/Crime/crime-1.2.tar.gz'[0X
-    [4X% tar xvzvf crime-1.2.tar.gz [0X
+    [4X% wget http://math.uic.edu/~marcus/Crime/crime-1.3.tar.gz[0X
+    [4X% tar xvzvf crime-1.3.tar.gz [0X
     [4X[0X
   [4X------------------------------------------------------------------[0X
   
-  In  this  situation,  users would then load the package with the [9XLoadPackage[0X
+  In  this  situation,  users  would  load  the  package  with the [9XLoadPackage[0X
   command.
   
   [4X-----------------------------  Log  ------------------------------[0X
@@ -34,8 +34,8 @@
     [4X[0X
     [4X$ mkdir /tmp/pkg[0X
     [4X$ cd /tmp/pkg[0X
-    [4X$ wget 'http://math.uic.edu/~marcus/Crime/crime-1.2.tar.gz'[0X
-    [4X$ tar xvzvf crime-1.2.tar.gz [0X
+    [4X$ wget http://math.uic.edu/~marcus/Crime/crime-1.3.tar.gz[0X
+    [4X$ tar xvzvf crime-1.3.tar.gz [0X
     [4X$ gap -l ';/tmp'[0X
     [4Xgap> LoadPackage("crime");[0X
   [4X------------------------------------------------------------------[0X

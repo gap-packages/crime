@@ -1,14 +1,16 @@
   
   [1XA. Some Benchmarks[0X
   
-  The  numbers  in  the following table compare the times taken to execute the
-  1.1  and  1.2  versions of the functions listed in the column headers on all
-  the  groups  of  size  16.  All  functions  were executed on a 2.4 GHz AMD64
-  processor  with 12 GB of RAM. The number in the first column of every row is
-  the  Small  Group Library number of the group used in that row, so the group
-  used  in  row  [9Xn[0X  is  [9XSmallGroup(16,n)[0X.  The upper number in each box is the
-  runtime for the 1.1 version, whereas the lower number is the runtime for the
-  1.2 version.
+  Some  of  the  key  subroutines  have been improved in version 1.3 of [5XCrime[0X,
+  resulting in a significant speedup of many basic calculations.
+  
+  The  numbers  in the following table compare the runtimes of the 1.1 and 1.3
+  versions  of the functions listed in the column headers on all the groups of
+  size 16. All functions were executed on a 2.4 GHz AMD64 processor with 12 GB
+  of  RAM.  The  number  in  the  first column of every row is the Small Group
+  Library  number of the group used in that row, so the group used in row [9Xn[0X is
+  [9XSmallGroup(16,n)[0X.  The  upper  number in each box is the runtime for the 1.1
+  version, whereas the lower number is the runtime for the 1.3 version.
   
         Group | [9XProjectiveResolution[0X | [9XCohomologyGenerators[0X | [9XCohomologyRelators[0X
      ---------------------------------------------------------------------------

@@ -51,7 +51,7 @@
 \begin{center}{\Huge \textbf{The \textsf{Crime} Package\mbox{}}}\\[1cm]
 \hypersetup{pdftitle=The \textsf{Crime} Package}
 \markright{\scriptsize \mbox{}\hfill The \textsf{Crime} Package \hfill\mbox{}}
-{Version 1.2\mbox{}}\\[1cm]
+{Version 1.3\mbox{}}\\[1cm]
 \mbox{}\\[2cm]
 {\large \textbf{Marcus Bishop  \mbox{}}}\\
 \hypersetup{pdfauthor=Marcus Bishop  }
@@ -75,10 +75,7 @@ later (at your preference). See the file COPYING for detailed information \mbox{
 \section*{Acknowledgements}
 \logpage{[ 0, 0, 2 ]}
  This project would not have been possible without Jon Carlson. Jon devised the
-algorithms used by \texttt{ProjectiveResolution}, \texttt{CohomologyGenerators}, and \texttt{CohomologyRelators}, having already implemented them in \textsf{Magma}, and shared these programs with me. 
-
- The documentation for Crime was prepared using the GAPdoc package by Frank
-L\texttt{\symbol{92}}"ubeck and Max Neunh\texttt{\symbol{92}}"offer \mbox{}}\\[1cm]
+algorithms used by \texttt{ProjectiveResolution}, \texttt{CohomologyGenerators}, and \texttt{CohomologyRelators}, having already implemented them in \textsf{Magma}, and shared these programs with me. \mbox{}}\\[1cm]
 \newpage
 
 \def\contentsname{Contents\logpage{[ 0, 0, 3 ]}}
@@ -95,11 +92,11 @@ L\texttt{\symbol{92}}"ubeck and Max Neunh\texttt{\symbol{92}}"offer \mbox{}}\\[1
   
   $ cd /usr/local/gap4r4/pkg
   $ su
-  % wget 'http://math.uic.edu/~marcus/Crime/crime-1.2.tar.gz'
-  % tar xvzvf crime-1.2.tar.gz 
+  % wget http://math.uic.edu/~marcus/Crime/crime-1.3.tar.gz
+  % tar xvzvf crime-1.3.tar.gz 
   
 \end{Verbatim}
- In this situation, users would then load the package with the \texttt{LoadPackage} command. 
+ In this situation, users would load the package with the \texttt{LoadPackage} command. 
 \begin{Verbatim}[fontsize=\small,frame=single,label=Example]
   
   $ gap
@@ -113,8 +110,8 @@ into their home directories or into some other writable directory such as \textt
   
   $ mkdir /tmp/pkg
   $ cd /tmp/pkg
-  $ wget 'http://math.uic.edu/~marcus/Crime/crime-1.2.tar.gz'
-  $ tar xvzvf crime-1.2.tar.gz 
+  $ wget http://math.uic.edu/~marcus/Crime/crime-1.3.tar.gz
+  $ tar xvzvf crime-1.3.tar.gz 
   $ gap -l ';/tmp'
   gap> LoadPackage("crime");
 \end{Verbatim}
@@ -157,12 +154,12 @@ a \texttt{CObject}.
 
  This function creates a \texttt{CObject} having components the $p$-group $G$ and the \textsf{MeatAxe} module $M$, which should be a $kG$-module with $G$ the same group and $k$ a field of characteristic $p$. Note that \textsf{MeatAxe} modules record $k$ but not $G$, which is why this operation requires the user to specify $G$ but not $k$. 
 
- Fortunately, most users won't need to know anything about this \textsf{MeatAxe} business, since they will be interested only in the case where $k=\mathbb{F}_p$,  and $M=k$, the trivial $kG$-module. The second invocation creates a cohomology object having components
-the $p$-group $G$ and the trivial \textsf{MeatAxe} $kG$-module $k=\mathbb{F}_p$.  }
+ Fortunately, most users don't need to know anything about \textsf{MeatAxe} modules, being interested primarily in the case where $k=\mathbb{F}_p$,  and $M=k$, the trivial $kG$-module. In this situation, the second invocation creates a cohomology object
+having components the $p$-group $G$ and the trivial \textsf{MeatAxe} $kG$-module $k=\mathbb{F}_p$.  }
 
  
 
- We emphasize that in the first invocation, $k$ can be any field of characteristic $p$ and \texttt{M} can be any \textsf{MeatAxe} module over $kG$, and that \texttt{ProjectiveResolution} works when \texttt{M} is an arbitrary \textsf{MeatAxe} module, but all the functions dealing with the ring-structure of $H^\ast\left(G,k\right)$  require that \texttt{M} be the trivial module. 
+ We emphasize that in the first invocation, $k$ can be any field of characteristic $p$ and \texttt{M} can be any \textsf{MeatAxe} module over $kG$, and that \texttt{ProjectiveResolution} works when \texttt{M} is an arbitrary \textsf{MeatAxe} module, but that all the functions dealing with the ring-structure of $H^\ast\left(G,k\right)$  require that \texttt{M} be the trivial module. 
 
 The cohomology object is used to store, in addition to the items mentioned
 above, the boundary maps, the Betti numbers, the multiplication table, etc. }
@@ -204,7 +201,7 @@ the \texttt{n}th boundary map.
 
  Given the cohomology object \texttt{C}, this function computes a projective resolution to degree \texttt{n} if it hasn't been computed already, and returns the \texttt{n}th boundary map. 
 
-The map returned is a  $b_n\times\left(b_{n-1}\left|G\right|\right)$  matrix, having in the $i$th row the image of the element $1_G$ from the $i$th direct summand of $P_n$. 
+The map returned is a  $b_n\times b_{n-1}\left|G\right|$  matrix, having in the $i$th row the image of the element $1_G$ from the $i$th direct summand of $P_n$. 
 
 See the file \texttt{doc/example.*} for an example of the usage and interpretation of the result of this function. }
 
@@ -214,7 +211,8 @@ See the file \texttt{doc/example.*} for an example of the usage and interpretati
 \section{\textcolor{Chapter }{Cohomology Generators and Relators}}\logpage{[ 2, 3, 0 ]}
 \hyperdef{L}{X78C37B2E7D297FC5}{}
 {
- 
+ See \cite{carlson} for the details of the calculation of cohomology products using composition of
+chain maps. See also the file \texttt{doc/explanation.*} for an explanation of the implementation. 
 
 \subsection{\textcolor{Chapter }{CohomologyGenerators}}
 \logpage{[ 2, 3, 1 ]}\nobreak
@@ -228,7 +226,7 @@ cohomology ring.
 
 
 
- Given a cohomology object \texttt{C} having group component $G$ and module component the trivial $kG$-module this function computes a set of generators of  $H^\ast\left(G,k\right)$  having degree \texttt{n} or less, and stores them in \texttt{C}. The function returns a list of the degrees of these generators. }
+ Given a cohomology object \texttt{C} having group component $G$ and module component the trivial $kG$-module, this function computes a set of generators of  $H^\ast\left(G,k\right)$  having degree \texttt{n} or less, and stores them in \texttt{C}. The function returns a list of the degrees of these generators. }
 
  The actual cohomology generators are represented by maps $P_n \rightarrow k$ and are stored in \texttt{C} as matrices. Only their degrees are returned. 
 
@@ -243,13 +241,14 @@ a list of generators and a list of relators.
 
 
 
- Given a cohomology object \texttt{C} having group component $G$ and module component $k$, this function computes a set of generators of the ideal of relators in  $H^\ast\left(G,k\right),$  all having multidegree $n$ or less. Read on for what this means exactly. 
+ Given a cohomology object \texttt{C} having group component $G$ and module component $k$, this function computes a set of generators of the ideal of relators in  $H^\ast\left(G,k\right),$  all having multidegree $n$ or less. 
 
-The function returns two lists, the first list containing the variables \texttt{z}, \texttt{y}, \texttt{x}, $\ldots$ corresponding to the generators of  $H^\ast\left(G,k\right)$  if there are fewer than 12 generators and containing the variables \texttt{x{\textunderscore}1}, \texttt{x{\textunderscore}2}, \texttt{x{\textunderscore}3}, $\ldots$ otherwise. The second list is a list of polynomials in the variables from the
+More specifically, the function returns two lists, the first list containing
+the variables \texttt{z}, \texttt{y}, \texttt{x}, $\ldots$ corresponding to the generators of  $H^\ast\left(G,k\right)$  if there are fewer than 12 generators and containing the variables \texttt{x{\textunderscore}1}, \texttt{x{\textunderscore}2}, \texttt{x{\textunderscore}3}, $\ldots$ otherwise. The second list is a list of polynomials in the variables from the
 first list. 
 
 These two lists should be interpreted as follows. A degree \texttt{n} approximation of the cohomology ring  $H^\ast\left(G,k\right)$  is given by the polynomial ring over $k$ in the non-commuting variables from the first list, (having degrees given by
-the list returned by \texttt{CohomologyGenerators} above) and subject to the relators in the second list. See \ref{whathappens} for more details still. }
+the list returned by \texttt{CohomologyGenerators} in section \ref{CohomologyGenerators} ) and subject to the relators in the second list. See section \ref{whathappens} for more details still. }
 
  For example, consider the following commands. 
 \begin{Verbatim}[fontsize=\small,frame=single,label=Example]
@@ -262,15 +261,18 @@ the list returned by \texttt{CohomologyGenerators} above) and subject to the rel
   [ [ z, y, x ], [ z*y+y^2 ] ]
   
 \end{Verbatim}
- This tells us that for $G=D_8$, the cohomology ring  $H^\ast\left(G,k\right)$  is the graded-commutative polynomial ring in the variables $z$, $y$, and $x$ of degrees 1, 1, and 2, subject to the relation $zy+y^2$. But since  $H^\ast\left(G,k\right)$  \emph{is} commutative, $k$ being of characteristic 2, we have  $H^\ast\left(G,k\right)=k\left[z,y,x\right] \left/\left(zy+y^2\right)\right.$.  This result can be further improved by taking $z=z+y$, giving  $H^\ast\left(G,k\right)=k\left[z,y,x\right] \left/\left(zy\right)\right.$.  
+ This tells us that for $G=D_8$, the cohomology ring  $H^\ast\left(G,k\right)$  is the graded-commutative polynomial ring in the variables $z$, $y$, and $x$ of degrees 1, 1, and 2, subject to the relation $zy+y^2$. But since  $H^\ast\left(G,k\right)$  is commutative, $k$ being of characteristic 2, we have  $H^\ast\left(G,k\right)=k\left[z,y,x\right] \left/\left(zy+y^2\right)\right.$.  This result can be further improved by taking $z=z+y$, giving  $H^\ast\left(G,k\right)=k\left[z,y,x\right] \left/\left(zy\right)\right.$.  
 
 Observe that in this case, we knew in advance that there was a set of
 generators for $H^\ast\left(G,k\right)$  all having degree less than 10, and that there was a set of generators of the
-ideal of relators all having multidegree less than 10. See see \ref{whathappens} for details. 
+ideal of relators all having multidegree less than 10. See see section \ref{whathappens} for details. 
 
 While this isn't likely to occur, we point out that if there are 12 or more
 generators and some of the indeterminates \texttt{x{\textunderscore}1}, \texttt{x{\textunderscore}2}, \texttt{x{\textunderscore}3}, $\ldots$ have already been named, say by a previous call to \texttt{CohomologyRelators}, then these variables will retain their old names. If this is confusing, you
-could restart \textsf{GAP} and do it again. Finally, \texttt{CohomologyRelators} is \emph{not} idempotent. }
+could restart \textsf{GAP} and do it again. 
+
+Finally, \texttt{CohomologyRelators} is \emph{not} idempotent for efficiency reasons, so sadly, if you don't uncover all the
+relators the first time, you will have to start all over from the beginning. }
 
  
 \section{\textcolor{Chapter }{Tests for Completion}}\label{completion}
@@ -285,7 +287,10 @@ implemented soon. See \cite{carlson} for the details. }
 \logpage{[ 2, 5, 0 ]}
 \hyperdef{L}{X80B6849C835B7F19}{}
 {
- See \cite{carlson} for the details of the calculation of cohomology products using composition of
+ Whereas the operations in sections \ref{CohomologyGenerators} and \ref{CohomologyRelators} calculate a presentation for the cohomology ring, the operation below creates
+the ring in \textsf{GAP} as a structure constant algebra. 
+
+See \cite{carlson} for the details of the calculation of cohomology products using composition of
 chain maps. See also the file \texttt{doc/explanation.*} for an explanation of the implementation. 
 
 \subsection{\textcolor{Chapter }{CohomologyRing}}
@@ -317,7 +322,9 @@ beginning. Extending the previous ring appears not to be worth the effort for
 technical reasons, since almost everything would need to be recalculated again
 anyway. }
 
- 
+ Recall that $H^\ast\left(G,k\right)$  is a graded structure constant algebra, the components being the cohomology
+groups $H^i\left(G,k\right)$.  The following functions were intended to be used for cohomology rings, but in
+principle, they work for any graded structure constant algebra. 
 
 \subsection{\textcolor{Chapter }{IsHomogeneous}}
 \logpage{[ 2, 5, 2 ]}\nobreak
@@ -330,7 +337,7 @@ anyway. }
 
 
 
- Given an element \texttt{e} of some cohomology ring $A$, this operation determines whether or not \texttt{e} is homogeneous, that is, whether or not \texttt{e} is contained in some \texttt{hom{\textunderscore}component} of $A$. }
+ Given an element \texttt{e} of a cohomology ring $H^\ast\left(G,k\right)$,  this operation determines whether or not \texttt{e} is homogeneous, that is, whether \texttt{e} is contained in $H^i\left(G,k\right)$  for some \texttt{i}. }
 
  
 
@@ -345,9 +352,7 @@ the degree of \texttt{e}.
 
 
 
- This function is intended to return the degree of the possibly non-homogeneous
-element \texttt{e} of some cohomology ring $A$, but in principle, works for any element of any graded structure constant
-algebra. Specifically, if  $A=A_0\oplus A_1\oplus A_2\oplus\cdots$  where $A_i$ are the \texttt{hom{\textunderscore}components} of $A$, then this function returns the minimum $n$ such that \texttt{e} is in  $A_0\oplus A_1\oplus\cdots\oplus A_n$.  }
+ This function returns the degree of the possibly non-homogeneous element \texttt{e} of a cohomology ring $H^\ast\left(G,k\right)$.  Specifically, if  $H^\ast\left(G,k\right)=A_0\oplus A_1\oplus A_2\oplus\cdots$  where $A_i=H^i\left(G,k\right)$,  then this function returns the minimum $n$ such that \texttt{e} is in  $A_0\oplus A_1\oplus\cdots\oplus A_n$.  }
 
  
 \begin{Verbatim}[fontsize=\small,frame=single,label=Example]
@@ -399,23 +404,23 @@ generators found by \texttt{CohomologyGenerators}. }
 \logpage{[ 2, 6, 0 ]}
 \hyperdef{L}{X7E21853583D6D86D}{}
 {
-  Since $P_\ast$ is a \emph{minimal} projective resolution, the cohomology group $H^i\left(G,k\right)$ is the $k$-dual of $P_i$, so that $H^i\left(G,k\right)$ has a natural basis consisting of the maps sending the element $1_G$ of the $j$th direct summand of $P_i$ to $1_k$ and all other direct summands to $0$, for  $1\le j\le b_i$,  where $b_i$ is the $kG$-rank of $P_i$. 
+  Since $P_\ast$ is a \emph{minimal} projective resolution, we have  $H^i\left(G,k\right) = \mathrm{Hom}_{kG}\left(P_i,k\right)$  where $P_i = \left(kG\right)^{b_i}$ so that $H^i\left(G,k\right)$ has a natural basis consisting of the maps sending the element $1_G$ of the $j$th direct summand of $P_i$ to $1_k$ and all other direct summands to $0$, for  $1\le j\le b_i$,  where $b_i$ is the $kG$-rank of $P_i$. 
 
 The command \texttt{CohomologyRing(C,n)} forms the vector space whose basis is the concatenation of the natural bases
 of $H^i\left(G,k\right)$ for  $1\le i\le n$  and computes all products of basis elements $x$ and $y$ for which $\deg x+\deg y \leq n$. Thinking of $H^\ast\left(G,k\right)$  in terms of it's multiplication table, this means that the function computes
 the upper left-hand corner of the multiplication table. If $\deg x + \deg y > n$, the product $xy$ is taken to be zero. Therefore, the ring returned by \texttt{CohomologyRing} is  $H^\ast\left(G,k\right)\left/J_{>n}\right.$  where $J_{>n}$  is the ideal of all elements of degree $>n$. 
 
-The ring determined by \texttt{CohomologyGenerators} and \texttt{CohomologyRelators} is somewhat different. \texttt{CohomologyGenerators} proceeds inductively, taking all standard basis elements of $H^1\left(G,k\right)$ as generators, and for  $1<i\le n$,  taking all standard basis elements of $H^i\left(G,k\right)$ which are \emph{not} products of lower-degree elements as generators. Therefore, unless you know
-that there is an $n$ for which there exists a generating set of  $H^\ast\left(G,k\right)$  consisting of elements of degree $n$ or less, then you are \emph{not} guaranteed that the elements returned by the \texttt{CohomologyGenerators} generate  $H^\ast\left(G,k\right)$  as a ring. The knowledge of such an $n$ is the subject of \ref{completion}. 
+The ring determined by \texttt{CohomologyGenerators} and \texttt{CohomologyRelators} is somewhat different. \texttt{CohomologyGenerators} proceeds inductively, taking all natural basis elements of $H^1\left(G,k\right)$ as generators, and for  $1<i\le n$,  taking all natural basis elements of $H^i\left(G,k\right)$ which are \emph{not} products of lower-degree elements as generators. Therefore, unless you know
+that there is an $n$ for which there exists a generating set of  $H^\ast\left(G,k\right)$  consisting of elements of degree $n$ or less, then you are \emph{not} guaranteed that the elements returned by the \texttt{CohomologyGenerators} generate  $H^\ast\left(G,k\right)$  as a ring. The knowledge of such an $n$ is the subject of section \ref{completion}. 
 
 Similarly, \texttt{CohomologyRelators} proceeds inductively until degree $n$, returning a list of polynomials which generate the ideal of relators of
-multidegree $n$ or less. 
+multidegree $n$ or less. Again, you have to already know how big $n$ should be. 
 
 The result of the preceding information is that there is a homomorphism  $f:k\left.\left\langle x_1,x_2,\dots x_m \right\rangle\right./I \to
 H^\ast\left(G,k\right)$,  where $k\left\langle x_1,x_2,\ldots x_m \right\rangle$ is the graded polynomial ring over $k$ in the non-commuting variables $x_1,x_2,\ldots,x_m$, having degrees the numbers in the list returned by \texttt{CohomologyGenerators}, and $I$ is the ideal in $k\left\langle x_1,x_2,\ldots, x_m \right\rangle$ generated by the elements returned by \texttt{CohomologyRelators(C,n)}. 
 
 Therefore, if there is a generator of degree greater than $n$, then $f$ won't be surjective. Similarly, if there is a relator of multidegree greater
-than $n$ which is not a consequence of lower degree relators, then $f$ won't be injective. See \ref{completion} for a discussion on how big $n$ needs to be to ensure that $f$ be an isomorphism. }
+than $n$ which is not a consequence of lower degree relators, then $f$ won't be injective. See section \ref{completion} for a discussion on how big $n$ needs to be to ensure that $f$ be an isomorphism. }
 
  
 \section{\textcolor{Chapter }{Induced Maps}}\logpage{[ 2, 7, 0 ]}
@@ -534,12 +539,14 @@ the Massey product  $\left\langle x_1,x_2,\dots,x_n\right\rangle$.
 \logpage{[ "A", 0, 0 ]}
 \hyperdef{L}{X82113B3184F76F58}{}
 {
- The numbers in the following table compare the times taken to execute the 1.1
-and 1.2 versions of the functions listed in the column headers on all the
-groups of size 16. All functions were executed on a 2.4 GHz AMD64 processor
-with 12 GB of RAM. The number in the first column of every row is the Small
-Group Library number of the group used in that row, so the group used in row \texttt{n} is \texttt{SmallGroup(16,n)}. The upper number in each box is the runtime for the 1.1 version, whereas the
-lower number is the runtime for the 1.2 version. \begin{center}
+ Some of the key subroutines have been improved in version 1.3 of \textsf{Crime}, resulting in a significant speedup of many basic calculations. 
+
+The numbers in the following table compare the runtimes of the 1.1 and 1.3
+versions of the functions listed in the column headers on all the groups of
+size 16. All functions were executed on a 2.4 GHz AMD64 processor with 12 GB
+of RAM. The number in the first column of every row is the Small Group Library
+number of the group used in that row, so the group used in row \texttt{n} is \texttt{SmallGroup(16,n)}. The upper number in each box is the runtime for the 1.1 version, whereas the
+lower number is the runtime for the 1.3 version. \begin{center}
 \begin{tabular}{c|c|c|c}Group&
 \texttt{ProjectiveResolution}&
 \texttt{CohomologyGenerators}&
@@ -680,9 +687,9 @@ lower number is the runtime for the 1.2 version. \begin{center}
 \logpage{[ "B", 0, 0 ]}
 \hyperdef{L}{X7BC2C62E7A8CC2B9}{}
 {
- Below is the output of the test file \texttt{tst/batch.g}. The file runs through all groups of size $n$, which is initially set to $16$, and runs \texttt{ProjectiveResolution}, \texttt{CohomologyGenerators} and \texttt{CohomologyRelators} for each group, and prints the results as well as the timings for each
-operation to a file. The timings have been deleted, having been presented in
-Appendix \ref{benchmarks}. The output below was computed on a 2.4 GHz AMD64 processor with 12 GB of
+ Below is the output of the test file \texttt{tst/batch.g}. The file runs through all groups of size $n$, which is initially set to $16$, calls \texttt{ProjectiveResolution}, \texttt{CohomologyGenerators}, and \texttt{CohomologyRelators} for each group, and prints the results, as well as the runtimes for each
+operation, to a file like the one shown below. The runtimes in this example
+have been deleted, having been presented in Appendix \ref{benchmarks}. The example below was computed on a 2.4 GHz AMD64 processor with 12 GB of
 RAM. See the file \texttt{tst/README} for suggestions on dealing with other users when running long-running batch
 processes. 
 \begin{Verbatim}[fontsize=\small,frame=single,label=Example]
@@ -765,7 +772,7 @@ processes.
 }
 
 \bibliographystyle{plain}
-\bibliography{crime}
+\bibliography{crimebib.xml}
 
 \def\indexname{Index\logpage{[ "Ind", 0, 0 ]}
 \hyperdef{L}{X83A0356F839C696F}{}

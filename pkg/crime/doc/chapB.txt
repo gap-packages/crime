@@ -2,13 +2,13 @@
   [1XB. Leisure and Recreation: Cohomology Rings of all Groups of Size 16[0X
   
   Below  is the output of the test file [9Xtst/batch.g[0X. The file runs through all
-  groups   of   size   n,   which   is   initially   set   to   16,  and  runs
-  [9XProjectiveResolution[0X,  [9XCohomologyGenerators[0X  and [9XCohomologyRelators[0X for each
-  group, and prints the results as well as the timings for each operation to a
-  file.  The  timings have been deleted, having been presented in Appendix [14XA.[0X.
-  The  output  below  was  computed on a 2.4 GHz AMD64 processor with 12 GB of
-  RAM.  See  the  file  [9Xtst/README[0X for suggestions on dealing with other users
-  when running long-running batch processes.
+  groups  of size n, which is initially set to 16, calls [9XProjectiveResolution[0X,
+  [9XCohomologyGenerators[0X,  and [9XCohomologyRelators[0X for each group, and prints the
+  results,  as well as the runtimes for each operation, to a file like the one
+  shown  below.  The  runtimes  in this example have been deleted, having been
+  presented  in Appendix [14XA.[0X. The example below was computed on a 2.4 GHz AMD64
+  processor  with  12  GB  of  RAM. See the file [9Xtst/README[0X for suggestions on
+  dealing with other users when running long-running batch processes.
   
   [4X-----------------------------  Log  ------------------------------[0X
     [4X[0X

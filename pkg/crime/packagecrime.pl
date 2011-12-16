@@ -40,6 +40,7 @@ rename ("/tmp/pkg/crime/README-","/tmp/pkg/crime/README");
 
 chdir "/tmp/pkg/crime/doc" or die "Cant chdir to /tmp/pkg/crime/doc: $!";
 # Yes, I know how to spell Can't.
+system "gap -l '/tmp;' compile"; # Has to be killed manually.
 system "latex explanation";
 system "bibtex explanation";
 system "latex explanation";
@@ -50,9 +51,8 @@ system "latex example";
 system "latex example";
 system "dvips example";
 system "pdflatex example";
-system "gap -l '/tmp;' compile"; # Has to be killed manually.
 
-foreach (glob "*.blg *.brf *.idx *.ilg *.ind *.log *.pnr *.toc *.aux"){
+foreach (glob "*.blg *.brf *.idx *.ilg *.ind *.log *.toc *.aux"){
   unlink;
 }
 
