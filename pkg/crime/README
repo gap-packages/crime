@@ -1,0 +1,17 @@
+This GAP package computes cohomology
+rings for p-finite groups, both as GAP
+objects, and also in terms of generators
+and relators. It also computes induced
+homomorphisms on cohomology and
+Massey products.
+
+To install, download the package from
+http://mad.epfl.ch/~bishop/Crime/crime-0.2.tar.gz
+Put the package in GAP's pkg directory and unpack:
+tar xvzvf crime-0.2.tar.gz
+
+See the documentation in the doc directory for
+more information.
+
+Marcus Bishop
+marcus.bishop@epfl.ch

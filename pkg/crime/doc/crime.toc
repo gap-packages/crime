@@ -1,0 +1,19 @@
+\contentsline {chapter}{\numberline {1}\leavevmode {\color {Chapter }Installation and Loading}}{4}{chapter.1}
+\contentsline {chapter}{\numberline {2}\leavevmode {\color {Chapter }Usage}}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}\leavevmode {\color {Chapter }Cohomology Objects}}{5}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}\leavevmode {\color {Chapter }CohomologyObject}}{5}{subsection.2.1.1}
+\contentsline {section}{\numberline {2.2}\leavevmode {\color {Chapter }Minimal Projective Resolutions}}{5}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}\leavevmode {\color {Chapter }ProjectiveResolution}}{6}{subsection.2.2.1}
+\contentsline {section}{\numberline {2.3}\leavevmode {\color {Chapter }Cohomology Generators and Relators}}{6}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}\leavevmode {\color {Chapter }CohomologyGenerators}}{6}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}\leavevmode {\color {Chapter }CohomologyRelators}}{6}{subsection.2.3.2}
+\contentsline {section}{\numberline {2.4}\leavevmode {\color {Chapter }Cohomology Rings}}{7}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}\leavevmode {\color {Chapter }CohomologyRing}}{7}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}\leavevmode {\color {Chapter }IsHomogeneous}}{7}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.3}\leavevmode {\color {Chapter }Degree}}{7}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.4}\leavevmode {\color {Chapter }LocateGeneratorsInCohomologyRing}}{8}{subsection.2.4.4}
+\contentsline {section}{\numberline {2.5}\leavevmode {\color {Chapter }Induced Maps}}{8}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}\leavevmode {\color {Chapter }InducedHomomorphismOnCohomology}}{8}{subsection.2.5.1}
+\contentsline {section}{\numberline {2.6}\leavevmode {\color {Chapter }Massey Products}}{9}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}\leavevmode {\color {Chapter }MasseyProduct}}{9}{subsection.2.6.1}
+\contentsline {chapter}{\numberline {3}\leavevmode {\color {Chapter }Leisure and Recreation: Cohomology Rings of all Groups of Size 16}}{10}{chapter.3}

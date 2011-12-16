@@ -1,0 +1,53 @@
+  
+  [1m[4m[31m1. Installation and Loading[0m
+  
+  Like other [1mGAP[0m packages, you download and unpack this package into [1mGAP[0m's [22m[32mpkg[0m
+  directory.  For example, if you were using some Unix derivative and [1mGAP[0m were
+  installed in the directory [22m[32m/usr/local/gap4r4[0m, you would do the following.
+  
+  [22m[35m---------------------------  Example  ----------------------------[0m
+    [22m[35m[0m
+    [22m[35m$ cd /usr/local/gap4r4/pkg[0m
+    [22m[35m$ su[0m
+    [22m[35m% wget 'http://mad.epfl.ch/~bishop/Crime/crime-0.2.tar.gz'[0m
+    [22m[35m% tar xvzvf crime-0.2.tar.gz [0m
+    [22m[35m[0m
+  [22m[35m------------------------------------------------------------------[0m
+  
+  In  this  situation,  users would then load the package with the [22m[32mLoadPackage[0m
+  command.
+  
+  [22m[35m---------------------------  Example  ----------------------------[0m
+    [22m[35m[0m
+    [22m[35m$ gap[0m
+    [22m[35mgap> LoadPackage("crime");[0m
+    [22m[35m[0m
+  [22m[35m------------------------------------------------------------------[0m
+  
+  Users  not  having root access, using someone else's computer, or having bad
+  relationships  with  their network administrators, could install the package
+  into  their  home  directories or into some other writable directory such as
+  [22m[32m/tmp[0m as follows.
+  
+  [22m[35m---------------------------  Example  ----------------------------[0m
+    [22m[35m[0m
+    [22m[35m$ mkdir /tmp/pkg[0m
+    [22m[35m$ cd /tmp/pkg[0m
+    [22m[35m$ wget 'http://mad.epfl.ch/~bishop/Crime/crime-0.2.tar.gz'[0m
+    [22m[35m$ tar xvzvf crime-0.2.tar.gz [0m
+    [22m[35m$ gap -l ';/tmp'[0m
+    [22m[35mgap> LoadPackage("crime");[0m
+  [22m[35m------------------------------------------------------------------[0m
+  
+  Finally,  it  would  be a good idea to run the test file to confirm that all
+  the functions work.
+  
+  [22m[35m---------------------------  Example  ----------------------------[0m
+    [22m[35m[0m
+    [22m[35mgap> ReadPackage("crime","tst/test.g");[0m
+  [22m[35m------------------------------------------------------------------[0m
+  
+  You  can  count yourself lucky if [1mGAP[0m doesn't complain about anything. There
+  is  also  a  longer  running  test  file  for  those  having ample free time
+  described in Chapter [1m3.[0m.
+  

@@ -1,0 +1,25 @@
+General comments on multiplying chain maps.
+
+Let L be a chain map of degree d.
+Then L is represented as a list 
+having in position 1 a map P_d -> P_0,
+in position 2 a map P_{d+1} -> P_1, etc.
+such that the standard diagram commutes.
+
+Let M be a chain map of degree e.
+Observe that in position e+1, L has a
+map P_{e+d} -> P_e.
+
+Therefore, the product of M*L has
+L[e+1] * M[1] in position 1
+L[e+2] * M[2] in position 2, etc.
+
+However, since L and M are represented
+as lists of non-lifted matricies, we have
+to lift the matrix on the right using
+LiftHom. So M*L actually has
+L[e+1] * LiftHom(...,M[1],...) in position 1,
+L[e+2] * LiftHom(...,M[2],...) in position 2, etc.
+The result is non-lifted because the
+matrix on the left is non-lifted.
+

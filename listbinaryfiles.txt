@@ -1,0 +1,14 @@
+crime/doc/crime.ind
+crime/doc/explanation.bbl
+crime/doc/manual.pdf
+crime/doc/explanation.pdf
+crime/doc/explanation.dvi
+crime/doc/crime.idx
+crime/doc/manual.ps
+crime/doc/explanation.ps
+crime/doc/manual.dvi
+crime/doc/crime.bbl
+crime/doc/compile
+crime/doc/crime.toc
+crime/doc/crime.pnr
+crime/gap/comments

@@ -1,0 +1,8 @@
+LoadPackage("gapdoc");
+LoadPackage("crime");
+path:=Concatenation(
+  PackageInfo("crime")[1].InstallationPath,"/doc");
+main:="crime.xml";
+files:=[];
+bookname:="Crime";
+MakeGAPDocDoc(path,main,files,bookname);

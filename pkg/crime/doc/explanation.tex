@@ -1,0 +1,897 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,palatino,verbatim,a4wide,amsthm,euler}
+\usepackage[matrix,arrow]{xy}
+\newtheorem{definition}{Definition}
+\newtheorem{claim}[definition]{Claim}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{observation}[definition]{Observation}
+\newtheorem{trouble}[definition]{Troubling Observation}
+\renewcommand{\qedsymbol}{\rule{0.5em}{0.5em}}
+\title{Cohomology Products in \textsf{GAP}, Explained in not Unbearable 
+Detail, but Still Bad Enough to Require Being Seated while Reading}
+\author{Marcus Bishop}
+\newcounter{savedenumii}
+\begin{document}
+\maketitle
+The purpose of this document is to explain
+the implementation of cohomology products in the 
+\textsf{crime} package for \textsf{GAP} including the Massey $n$-fold
+product. In this document, a composition of two functions
+$g\circ f$ is the function obtained by applying $f$ first 
+and then $g$. The symbol $\circlearrowright$ is used
+in diagrams to indicate that a polygon either commutes
+or anticommutes. 
+
+Let $G$ be a finite $p$-group for some prime $p$
+and let $k=\mathbb{F}_p$. Also write $k$ for the
+trivial $kG$-module. We assume that we can
+calculate a $kG$-projective resolution $P_\ast$
+of $k$, that is, for $n$ as large as we need,
+we can compute the integers
+$\left\{b_m:0\le m\le n\right\}$, the
+maps $\left\{\partial_m:1\le m\le n\right\}$
+and the map $\epsilon$ such that
+\begin{equation}\label{proj}
+\xymatrix{P_n\ar[r]^{\partial_n}
+&P_{n-1}\ar[r]&\dots\ar[r]
+&P_1\ar[r]^{\partial_1}
+&P_0\ar[r]^{\epsilon}&k}\end{equation}
+is exact, where $P_m=\left(kG\right)^{b_m}$.
+Later, we will assume moreover that $P_\ast$ is {\em minimal},
+that is, that $\partial_m\left(P_m\right)\le 
+\mathrm{Rad}\left(P_{m-1}\right)$ for all $m\ge 1$.
+
+\section{Cohomology Products}\label{cp}
+The following construction is taken from \cite{carlson}.
+We begin with two cocycles $f:P_i\to k$ and $g:P_j\to k$,
+that is, that $f\circ\partial_{i+1}=g\circ\partial_{j+1}=0$.
+We want to compute the cup product $fg:P_{i+j}\to k$.
+
+We first convert $f$ into an chain map,
+resulting in the following commutative diagram.
+\begin{equation}\label{ff}\xymatrix{
+P_m\ar[r]^{\partial_m}\ar[d]^{f_m}
+&P_{m-1}\ar[d]^{f_{m-1}}\ar[r]^{\partial_{m-1}}
+&P_{m-2}\ar[d]^{f_{m-2}}\ar[r]
+&\dots\ar[r]
+&P_{i+2}\ar[r]^{\partial_{i+2}}\ar[d]^{f_{i+2}}
+&P_{i+1}\ar[r]^{\partial_{i+1}}\ar[d]^{f_{i+1}}
+&P_i\ar[d]^{f_i}\ar[dr]^f
+\\
+P_{m-i}\ar[r]_{\partial_{m-i}}
+&P_{m-i-1}\ar[r]\ar[r]_{\partial_{m-i-1}}
+&P_{m-i-2}\ar[r]
+&\dots\ar[r]
+&P_2\ar[r]_{\partial_2}
+&P_1\ar[r]_{\partial_1}
+&P_0\ar[r]_\epsilon&k\ar[r]&0
+}\end{equation}
+\begin{enumerate}
+\item Define $f_i$ such that $\epsilon\circ f_i=f$.
+This is possible by projectivity of $P_i$.
+\item Define $f_{i+1}$ such that $\partial_1\circ f_{i+1}
+=f_i\circ\partial_{i+1}$.
+This is possible by projectivity of $P_{i+1}$ since
+\[\mathrm{im}\left(f_i\circ\partial_{i+1}\right)
+\le\mathrm{im}\left(\partial_1\right)
+=\ker\left(\epsilon\right)\]
+as $\epsilon\circ\left(f_i\circ\partial_{i+1}\right)
+=f\circ\partial_{i+1}=0$.
+\item Define $f_{i+2}$ such that $\partial_2\circ f_{i+2}
+=f_{i+1}\circ\partial_{i+2}$.
+This is possible by projectivity of $P_{i+2}$ since
+\[\mathrm{im}\left(f_{i+1}\circ\partial_{i+2}\right)
+\le\mathrm{im}\left(\partial_2\right)
+=\ker\left(\partial_1\right)\]
+as $\partial_1\circ\left(f_{i+1}\circ\partial_{i+2}\right)
+=f_i\circ\partial_{i+1}\circ\partial_{i+2}=0$.
+\item Define $f_m$ for $m>i+2$ by recursion 
+such that $\partial_{m-i}\circ f_m
+=f_{m-1}\circ\partial_m$.
+This is possible by projectivity of $P_m$ since
+\[\mathrm{im}\left(f_{m-1}\circ\partial_m\right)
+\le\mathrm{im}\left(\partial_{m-i}\right)
+=\ker\left(\partial_{m-i-1}\right)\]
+as $\partial_{m-i-1}\circ\left(f_{m-1}\circ\partial_m\right)
+=f_{m-2}\circ\partial_{m-1}\circ\partial_m=0$.
+\end{enumerate}
+Then the product $fg$ is calculated as $g\circ f_{i+j}$.
+The process above is used to compute the multiplication
+table used by the \verb!CohomologyRing! command
+and is used to find generators by the \verb!CohomologyGenerators!
+command.
+
+\section{The Yoneda Cocomplex}
+My understanding of the purpose of the Yoneda Cocomplex
+is the following. The definition of the Massey product below
+requires a cocomplex having an associative product.
+The product defined above,
+however, is defined only for $f$ and $g$ cocycles
+in $\mathrm{Hom}\left(P_\ast,k\right)$.
+The Yoneda cocomplex $Y$, on the other hand, has the same
+cohomology as $\mathrm{Hom}\left(P_\ast,k\right)$,
+but has an associative product defined 
+for all cochains, namely composition.
+Moreover, we will show that via the isomorphism 
+$\Phi:\mathrm{H}^\ast\left(G,k\right)\to
+\mathrm{H}^\ast\left(Y\right)$, composition in $Y$ 
+agrees with the product defined in Section \ref{cp}
+up to the factor $\left(-1\right)^{\deg f\deg g}$,
+that is, \[\Phi\left(fg\right)
+=\left(-1\right)^{\deg f\deg g}\Phi\left(g\right)
+\circ\Phi\left(f\right).\]
+
+The following construction comes from \cite{borge}.
+\begin{definition}
+For $i\ge 0$, define
+\[Y^i=\prod_{m\ge i}\mathrm{Hom}_{kG}\left(P_m,P_{m-i}\right).\]
+Then an element $f\in Y^i$ is a collection of $kG$-homomorphisms
+$\left\{f_m:P_m\to P_{m-i}:m\ge i\right\}$
+as in the following diagram.
+
+\begin{equation}\label{f}\xymatrix{
+P_n\ar[r]^{\partial_n}\ar[d]^{f_n}
+&P_{n-1}\ar[r]\ar[d]^{f_{n-1}}
+&\dots\ar[r]
+&P_m\ar[d]^{f_m}\ar[r]^{\partial_m}
+&P_{m-1}\ar[d]\ar[d]^{f_{m-1}}\ar[r]^{\partial_{m-1}}
+&P_{m-2}\ar[d]^{f_{m-2}}\ar[r]
+&\dots\ar[r]
+&P_{i+1}\ar[r]^{\partial_{i+1}}\ar[d]^{f_{i+1}}
+&P_i\ar[d]^{f_i}
+\\
+P_{n-i}\ar[r]_{\partial_{n-i}}
+&P_{n-i-1}\ar[r]
+&\dots\ar[r]\ar[r]
+&P_{m-i}\ar[r]_{\partial_{m-i}}
+&P_{m-i-1}\ar[r]_{\partial_{m-i-1}}
+&P_{m-i-2}\ar[r]
+&\dots\ar[r]
+&P_1\ar[r]_{\partial_1}
+&P_0
+}\end{equation}
+\end{definition}
+Diagram (\ref{f}) is not required to commute.
+
+\begin{definition}
+Define $\displaystyle{Y=\bigoplus_{i\ge 0}Y^i}$.
+$Y$ is called the {\em Yoneda cocomplex} of $P_\ast$.
+We write $\deg\left(f\right)=~i$ for $f\in Y^i$.
+Let $f=\left\{f_m:m\ge i\right\}\in Y^i$ and define 
+\begin{align*}
+\partial:Y^i&\to Y^{i+1}\\
+f&\mapsto\left\{f_{m-1}\circ\partial_m
+-\left(-1\right)^i\partial_{m-i}\circ f_m
+:m\ge 1\right\}.
+\end{align*}
+\end{definition}
+
+We observe that cocycles in $Y$ are those
+elements $f$ for which (\ref{f}) commutes if $\deg f$ is even
+and anticommutes if $\deg f$ is odd.
+
+\begin{lemma}
+$Y$ with differentiation
+$\partial$ is a cocomplex, that is, $\partial^2=0$. 
+\end{lemma}
+
+\begin{proof}
+Let $f\in Y^i$.  We will show that $\partial^2 f=0$ at the point $P_m$
+in (\ref{f}) for $m\ge i+2=\deg\left(\partial^2 f\right)$. 
+Follow along in the picture.
+\begin{eqnarray*}
+\left(\partial\left(\partial f\right)\right)_m
+&=&\left(\partial f\right)_{m-1}\circ\partial_m
+-\left(-1\right)^{i+1}
+\partial_{m-i-1}\circ
+\left(\partial f\right)_m\\
+&=&\left(f_{m-2}\circ\partial_{m-1}
+-\left(-1\right)^i\partial_{m-i-1}\circ f_{m-1} \right)
+\circ\partial_m\\
+&&-\left(-1\right)^{i+1}
+\partial_{m-i-1}\circ
+\left(f_{m-1}\circ\partial_m
+-\left(-1\right)^i\partial_{m-i}\circ f_m\right)\\
+&=&f_{m-2}\circ\partial_{m-1}\circ\partial_m
+-\partial_{m-i-1}\circ\partial_{m-i}\circ f_m\\
+&=&0
+\end{eqnarray*}
+\end{proof}
+
+\begin{theorem}
+The cohomology groups of $Y$ are $\mathrm{H}^\ast\left(G,k\right)$.
+\end{theorem}
+\begin{proof}
+We will define a group isomorphism
+$\Phi:H^i\left(G,k\right)\to H^i\left(Y\right)$.
+\begin{enumerate}
+\item Let $f:P_i\to k$ be a cocycle
+in $\mathrm{Hom}_{kG}^i\left(P_\ast,k\right)$,
+that is, assume $f\circ\partial_{i+1}=0$.
+Define $\Phi\left(f\right)=
+\left\{f_m:m\ge i\right\}\in Y^i$ as follows.
+The element $\Phi\left(f\right)$, together with $f$, is pictured
+in the following diagram.
+
+\begin{equation}\label{pff}\xymatrix{
+P_m\ar[r]^{\partial_m}\ar[d]^{f_m}
+&P_{m-1}\ar[d]^{f_{m-1}}\ar[r]^{\partial_{m-1}}
+&P_{m-2}\ar[d]^{f_{m-2}}\ar[r]
+&\dots\ar[r]
+&P_{i+2}\ar[r]^{\partial_{i+2}}\ar[d]^{f_{i+2}}
+&P_{i+1}\ar[r]^{\partial_{i+1}}\ar[d]^{f_{i+1}}
+&P_i\ar[d]^{f_i}\ar[dr]^f
+\\
+P_{m-i}\ar[r]_{\partial_{m-i}}
+&P_{m-i-1}\ar[r]\ar[r]_{\partial_{m-i-1}}
+&P_{m-i-2}\ar[r]
+&\dots\ar[r]
+&P_2\ar[r]_{\partial_2}
+&P_1\ar[r]_{\partial_1}
+&P_0\ar[r]_\epsilon&k\ar[r]&0
+}\end{equation}
+
+\begin{enumerate}
+\item\label{first} Define $f_i$ such that $\epsilon\circ f_i=f$.
+This is possible by projectivity of $P_i$.
+\item\label{firstsecond} Define $f_{i+1}$ such that $\partial_1\circ f_{i+1}
+=\left(-1\right)^i f_i\circ\partial_{i+1}$.
+This is possible by projectivity of $P_{i+1}$ since
+\[\mathrm{im}\left(\left(-1\right)^i f_i\circ\partial_{i+1}\right)
+\le\mathrm{im}\left(\partial_1\right)
+=\ker\left(\epsilon\right)\]
+as $\epsilon\circ\left(\left(-1\right)^i f_i\circ\partial_{i+1}\right)
+=\left(-1\right)^i f\circ\partial_{i+1}=0$.
+\item Define $f_{i+2}$ such that $\partial_2\circ f_{i+2}
+=\left(-1\right)^i f_{i+1}\circ\partial_{i+2}$.
+This is possible by projectivity of $P_{i+2}$ since
+\[\mathrm{im}\left(\left(-1\right)^i f_{i+1}\circ\partial_{i+2}\right)
+\le\mathrm{im}\left(\partial_2\right)
+=\ker\left(\partial_1\right)\]
+as $\partial_1\circ\left(\left(-1\right)^i
+f_{i+1}\circ\partial_{i+2}\right)
+=f_i\circ\partial_{i+1}\circ\partial_{i+2}=0$.
+\item\label{last} Define $f_m$ for $m>i+2$ by recursion
+such that $\partial_{m-i}\circ f_m
+=\left(-1\right)^i f_{m-1}\circ\partial_m$.
+This is possible by projectivity of $P_m$ since
+\[\mathrm{im}\left(\left(-1\right)^i f_{m-1}\circ\partial_m\right)
+\le\mathrm{im}\left(\partial_{m-i}\right)
+=\ker\left(\partial_{m-i-1}\right)\]
+as $\partial_{m-i-1}\circ\left(\left(-1\right)^i
+f_{m-1}\circ\partial_m\right)
+=f_{m-2}\circ\partial_{m-1}\circ\partial_m=0$.
+\setcounter{savedenumii}{\value{enumii}}
+\end{enumerate}
+This completes the definition of $\Phi$.
+The maps $\left\{f_m:m\ge i\right\}$
+defined in Steps \ref{firstsecond}-\ref{last} above satisfy
+\[\partial_{m-i}\circ f_m=\left(-1\right)^i f_{m-1}\partial_m.\]
+In other words, $\left(\partial \Phi\left(f\right)\right)_{m+1}=0$ for all $m\ge i+1$
+so that $\partial\Phi\left(f\right)=0$.
+Thus, $\Phi\left(f\right)$ is a cocycle by construction.
+
+\item\label{otherf}
+We claim than any other choice of maps
+$\left\{f'_m:m\ge i\right\}$ 
+satisfying the conditions in \ref{first}-\ref{last} above
+will be equivalent to
+$\left\{f_m:m\ge i\right\}$ in $\mathrm{H}^i\left(Y\right)$.
+More precisely, if $f$ and $f'$ both satisfy
+conditions \ref{first}-\ref{last}, 
+then will define a map $\theta\in Y^{i-1}$
+such that $\partial\theta=f-f'$.
+Write $g_m=f_m-f'_m$ for $m\ge i$.
+\begin{equation}
+\begin{xy}{\xymatrix{
+P_m\ar[r]^{\partial_m}\ar[d]_{g_m}
+&P_{m-1}\ar[r]^{\partial_{m-1}}\ar[d]_{g_{m-1}}
+\ar[dl]_{\theta_{m-1}}
+&P_{m-2}\ar[r]^{\partial_{m-2}}\ar[d]_{g_{m-2}}
+\ar[dl]_{\theta_{m-2}}
+&P_{m-3}\ar[r]\ar[d]_{g_{m-3}}
+\ar[dl]_{\theta_{m-3}}
+&\dots\ar[r]
+&P_{i+2}\ar[r]^{\partial_{i+2}}\ar[d]_{g_{i+2}}
+&P_{i+1}\ar[r]^{\partial_{i+1}}\ar[d]_{g_{i+1}}
+\ar[dl]_{\theta_{i+1}}
+&P_i\ar[d]_{g_i}\ar[dl]_{\theta_i}\ar[r]^{\partial_{i}}
+&P_{i-1}\ar[dl]_{\theta_{i-1}}
+\\
+P_{m-i}\ar[r]_{\partial_{m-i}}
+&P_{m-i-1}\ar[r]_{\partial_{m-i-1}}
+&P_{m-i-2}\ar[r]\ar[r]_{\partial_{m-i-2}}
+&P_{m-i-3}\ar[r]
+&\dots\ar[r]
+&P_2\ar[r]_{\partial_2}
+&P_1\ar[r]_{\partial_1}
+&P_0\ar[r]_\epsilon
+&k
+}};
+"2,8";"1,7"**{};
+?(.35)*{\circlearrowright}
+\end{xy}
+\end{equation}
+\begin{enumerate}
+\setcounter{enumii}{\value{savedenumii}}
+\item\label{secondfirst} Take $\theta_{i-1}=0$.
+\item\label{secondsecond}
+Since $\epsilon\circ f_i=\epsilon\circ f'_i=f$, we have
+$\mathrm{im}\left(g_i\right)\le
+\ker\left(\epsilon\right)=\mathrm{im}\left(\partial_1\right)$.
+Define $\theta_i$ such that $\partial_1\circ\theta_i=\left(-1\right)^i g_i$.
+This is possible by projectivity of $P_i$.
+We rewrite the condition on $\theta_i$ for future reference as follows.
+\begin{equation}\label{t1}
+\left(\partial\theta\right)_i=
+0-\left(-1\right)^{i-1}\partial_1\circ\theta_i=g_i
+\end{equation}
+\item By (\ref{secondsecond}), we have
+\[\partial_1\circ\theta_i\circ\partial_{i+1}
+=\left(-1\right)^i g_i\circ\partial_{i+1}
+=\partial_1\circ g_{i+1}
+\] so that 
+\[\mathrm{im}\left(g_{i+1}-\theta_i\circ\partial_{i+1}\right)
+\le\ker\left(\partial_1\right)=\mathrm{im}\left(\partial_2\right).\]
+Define $\theta_{i+1}$
+such that \[\partial_2\circ\theta_{i+1}
+=\left(-1\right)^i \left(g_{i+1}-\theta_i\circ\partial_{i+1}\right),\]
+and again, for future reference, we rewrite this as follows.
+\begin{equation}\label{t2}
+\left(\partial\theta\right)_{i+1}=\theta_i\circ\partial_{i+1}
+-\left(-1\right)^{i-1}\partial_2\circ\theta_{i+1}=g_{i+1}
+\end{equation}
+\item Assume by recursion that we have computed $\theta_{m-2}$
+and $\theta_{m-3}$ such that \[\partial_{m-i-1}\circ\theta_{m-2}
+=\left(-1\right)^i\left(g_{m-2}-\theta_{m-3}\circ\partial_{m-2}\right).\]
+Then $\partial_{m-i-1}\circ\theta_{m-2}\circ\partial_{m-1}
+=\left(-1\right)^i g_{m-2}\circ\partial_{m-1}
+=\partial_{m-i-1}\circ g_{m-1}$ so that
+\[\mathrm{im}\left(g_{m-1}-\theta_{m-2}\circ\partial_{m-1}\right)
+\le\ker\left(\partial_{m-i-1}\right)=\mathrm{im}\left(\partial_{m-i}\right).\]
+Define $\theta_{m-1}$
+such that \[\partial_{m-i}\circ\theta_{m-1}
+=\left(-1\right)^i\left(g_{m-1}-\theta_{m-2}\circ\partial_{m-1}\right),\]
+and again, for future reference, we rewrite this as follows.
+\begin{equation}\label{tm}
+\left(\partial\theta\right)_{m-1}=\theta_{m-2}\circ\partial_{m-1}
+-\left(-1\right)^{i-1}\partial_{m-i}\circ\theta_{m-1}=g_{m-1}
+\end{equation}
+\setcounter{savedenumii}{\value{enumii}}
+\end{enumerate}
+This completes the definition of $\theta$. Then $\theta$ satisfies
+$\partial\theta=f-f'$ by (\ref{t1}), (\ref{t2}), and (\ref{tm}).
+
+\item\label{dg}
+Suppose now that $f=\partial g$ for some cochain $g:P_{i-1}\to k$.
+Write $\Phi\left(g\circ\partial_i\right)=\left\{
+g_m:m\ge i\right\}$. We will construct $\theta$ such
+that $\Phi\left(\partial g\right)=
+\partial\theta$ for some $\theta\in Y^{i-1}$ as in the
+following diagram.
+\[\begin{xy}{\xymatrix@+5pt{
+P_{m+1}\ar[r]^{\partial_{m+1}}\ar[d]_{g_{m+1}}
+&P_m\ar[r]^{\partial_m}\ar[d]_{g_m}\ar[dl]_{\theta_m}
+&P_{m-1}\ar[r]^{\partial_{m-1}}
+\ar[d]_{g_{m-1}}\ar[dl]_{\theta_{m-1}}
+&P_{m-2}\ar[r]\ar[d]_{g_{m-2}}\ar[dl]_{\theta_{m-2}}
+&\dots\ar[r]
+&P_{i+1}\ar[r]^{\partial_{i+1}}\ar[d]_{g_{i+1}}
+&P_i\ar[d]_{g_i}\ar[r]^{\partial_i}\ar[dl]_{\theta_i}
+&P_{i-1}\ar[d]_g\ar[dl]_{\theta_{i-1}}
+\\
+P_{m-i+1}\ar[r]_{\partial_{m-i+1}}
+&P_{m-i}\ar[r]_{\partial_{m-i}}
+&P_{m-i-1}\ar[r]_{\partial_{m-i-1}}
+&P_{m-i-2}\ar[r]
+&\dots\ar[r]
+&P_1\ar[r]_{\partial_1}
+&P_0\ar[r]_{\epsilon}
+&k}};
+"2,8";"1,7"**{};
+?(.35)*{\circlearrowright}
+\end{xy}\]
+\begin{enumerate}
+\setcounter{enumii}{\value{savedenumii}}
+\item Define $\theta_{i-1}$ such that $\epsilon\circ\theta_{i-1}=g$.
+This is possible by projectivity of $P_{i-1}$.
+\item Since $\epsilon\circ\theta_{i-1}\circ\partial_i
+=g\circ\partial_i=\epsilon\circ g_i$, we have that
+\[\mathrm{im}\left(g_i-\theta_{i-1}\circ\partial_i\right)
+\le\ker\left(\epsilon\right) =\mathrm{im}\left(\partial_1\right).\]
+Thus, by projectivity of $P_i$, we have $\theta_i$ such that
+\[\partial_1\circ\theta_i
+=\left(-1\right)^i\left(g_i-\theta_{i-1}\circ\partial_i\right).\]
+Then
+\[\left(\partial\theta\right)_i=
+\theta_{i-1}\circ\partial_i-\left(-1\right)^{i-1}\partial_1\circ\theta_i=g_i.\]
+\item Assume by recursion that we have computed the maps
+$\theta_{m-1}$ and $\theta_{m-2}$ such that
+\[\theta_{m-2}\circ\partial_{m-1}
+-\left(-1\right)^{i-1}\partial_{m-i}\circ\theta_{m-1}
+= g_{m-1}.\]
+Then
+\[\partial_{m-i}\circ g_m=\left(-1\right)^i
+g_{m-1}\circ\partial_m
+=\partial_{m-i}\circ\theta_{m-1}\circ\partial_m\]
+so that
+\[\mathrm{im}\left(g_m-\theta_{m-1}\circ\partial_m\right)
+\le\ker\left(\partial_{m-i}\right)=\mathrm{im}
+\left(\partial_{m-i+1}\right).\] 
+Define $\theta_m$ such that
+\[\partial_{m-i-1}\circ\theta_m=
+\left(-1\right)^i\left(g_m-\theta_{m-1}\circ\partial_m\right).\]
+Then
+\[\left(\partial\theta\right)_m=
+\theta_{m-1}\circ\partial_m-\left(-1\right)^{i-1}
+\partial_{m-i+1}\circ\theta_m=g_m.\]
+\end{enumerate}
+This completes the definition of $\theta$.
+Then $g=\partial\theta$ by construction.
+
+\item\label{hom}
+We will now show that $\Phi$ is a $k$-module homomorphism.
+Let $f,g:P_i\to k$ be cocycles and let $\alpha,\beta\in k$.
+Write $h=\alpha f+\beta g$. We want to show that 
+$\Phi\left(h\right)=\alpha\Phi\left(f\right)+\beta\Phi\left(g\right)$.
+But $\epsilon\circ h_0=\epsilon\circ\left(\alpha f_0+\beta g_0\right)
+=\alpha f+\beta g$, so that we are in the situation
+of Step \ref{otherf} above. Thus, 
+$\Phi\left(h\right)$ and 
+$\alpha\Phi\left(f\right)+\beta\Phi\left(g\right)$
+are equivalent elements of $Y$.
+
+\item By Steps \ref{dg} and \ref{hom}, we have that
+if $f$ and $f'$ are equivalent in $H^\ast\left(G,k\right)$,
+then $\Phi\left(f\right)$ and $\Phi\left(f'\right)$
+are equivalent in $H^\ast\left(Y\right)$.
+This together with \ref{otherf} shows that $\Phi$ is a 
+well-defined $k$-module homomorphism.
+
+\item Finally, $\Phi$ is a bijection, having inverse given by
+\[\left\{f_m:m\ge i\right\}\mapsto\epsilon\circ f_i.\]
+\end{enumerate}
+\end{proof}
+
+\section{Products in $Y$}
+Consider the following product 
+$Y^i\otimes Y^j\to Y^{i+j}$ on $Y$.
+Let $f\in Y^i$ and $g\in Y^j$ and consider
+the composition of the individual component
+maps of $f$ with those of $g$ such that legitimate
+compositions are obtained, as in the following diagram.
+\begin{equation}\label{comp}\xymatrix{
+P_n\ar[r]^{\partial_n}\ar[d]^{f_n}
+&P_{n-1}\ar[d]^{f_{n-1}}\ar[r]
+&\dots\ar[r]
+&P_m\ar[r]^{\partial_m}\ar[d]^{f_m}
+&P_{m-1}\ar[r]\ar[d]^{f_{m-1}}
+&\dots\ar[r]
+&P_{i+j+1}\ar[r]^{\partial_{i+j+1}}\ar[d]^{f_{i+j+1}}
+&P_{i+j}\ar[d]^{f_{i+j}}
+\\
+P_{n-i}\ar[r]^{\partial_{n-i}}\ar[d]^{g_{n-i}}
+&P_{n-i-1}\ar[r]\ar[d]^{g_{n-i-1}}
+&\dots\ar[r]
+&P_{m-i}\ar[r]^{\partial_{m-i}}\ar[d]^{g_{m-i}}
+&P_{m-i-1}\ar[r]\ar[d]^{g_{m-i-1}}
+&\dots\ar[r]
+&P_{j+1}\ar[r]^{\partial_{j+1}}\ar[d]^{g_{j+1}}
+&P_j\ar[d]^{g_j}
+\\
+P_{n-i-j}\ar[r]^{\partial_{n-i-j}}
+&P_{n-i-j-1}\ar[r]
+&\dots\ar[r]
+&P_{m-i-j}\ar[r]^{\partial_{m-i-j}}
+&P_{m-i-j-1}\ar[r]
+&\dots\ar[r]
+&P_1\ar[r]^{\partial_1}
+&P_0
+}\end{equation}
+Observe that we have thrown away the maps 
+$\left\{f_m:i\le m\le i+j-1\right\}$.
+I suppose that the natural symbol 
+for the object in (\ref{comp}) 
+would be $g\circ f$, to emphasize
+the fact that we're talking about
+the component-wise composition of two elements of $Y$
+and {\em not} a cohomology product.
+
+\begin{observation}\label{differential}
+$\displaystyle{\partial\left(g\circ f\right)
+=g\circ\partial f
++\left(-1\right)^{\deg f}\partial g\circ f}$.
+\end{observation}
+\begin{proof} Write $i=\deg\left(f\right)$
+and $j=\deg\left(g\right)$ as in (\ref{comp}). 
+We will show the claim at the point $P_m$ in (\ref{comp})
+for $m\ge i+j+1=\deg\left(\partial\left(g\circ f\right)\right)$.
+Follow along in the picture.
+\begin{eqnarray*}
+\left(g\circ\partial f+\left(-1\right)^i 
+\partial g\circ f\right)_m
+&=&
+g_{m-i-1}\circ
+\left(f_{m-1}\circ\partial_m
+-\left(-1\right)^i\partial_{m-i}\circ f_m
+\right)\\
+&&+\left(-1\right)^i\left(
+g_{m-i-1}\circ\partial_{m-i}
+-\left(-1\right)^j
+\partial_{m-i-j}\circ g_{m-i}\right)
+\circ f_m\\
+&=&g_{m-i-1}\circ f_{m-1}\circ\partial_m
+-\left(-1\right)^{i+j}
+\partial_{m-i-j}\circ g_{m-i}\circ f_m\\
+&=&\left(\partial\left(g\circ f\right)
+\right)_m
+\end{eqnarray*}
+\end{proof}
+\begin{claim}
+Composition in $Y$ induces via $\Phi$ an associative binary operation 
+\[\mathrm{H}^i\left(G,k\right)
+\otimes\mathrm{H}^j\left(G,k\right)
+\to\mathrm{H}^{i+j}\left(G,k\right)\]
+making $\mathrm{H}^\ast\left(G,k\right)$ into a ring with 1.
+\end{claim}
+
+\section{Relationships among products on $\mathrm{H}^\ast\left(G,k\right)$}
+Let $f\in\mathrm{H}^i\left(G,k\right)$ 
+and $g\in\mathrm{H}^j\left(G,k\right)$.
+Consider the following products on $\mathrm{H}^\ast\left(G,k\right)$.
+\begin{enumerate}
+\item The {\em cup product}\label{cup} $fg$ defined in Section \ref{cp}
+\item\label{yp} The product induced from composition in $Y$
+\[\left(f,g\right)\stackrel{\Phi}{\mapsto}
+\big(\Phi\left(f\right),\Phi\left(g\right)\big)
+\stackrel{\circ}{\mapsto}
+\Phi\left(g\right)\circ\Phi\left(f\right)
+\stackrel{\Phi^{-1}}{\mapsto}
+\epsilon\circ\big(\Phi\left(g\right)\circ\Phi\left(f\right)\big)_{i+j} \]
+\item The {\em Massey 2-fold product} $\left\langle f,g\right\rangle$,
+defined more generally in Section \ref{mp} below,
+\[\left(f,g\right)\stackrel{\Phi}{\mapsto}
+\big(\Phi\left(f\right),\Phi\left(g\right)\big)
+\stackrel{\left\langle\cdot\right\rangle}{\mapsto}
+\left(-1\right)^i \Phi\left(g\right)\circ\Phi\left(f\right)
+\stackrel{\Phi^{-1}}{\mapsto}
+\left(-1\right)^i \epsilon\circ
+\big(\Phi\left(g\right)\circ\Phi\left(f\right)\big)_{i+j} \]
+\end{enumerate}
+The cup product is calculated as $g\circ f_{i+j}$, where $f_{i+j}$
+is as in (\ref{ff}), whereas product \ref{yp} 
+is calculated as $g\circ f_{i+j}$, where $f_{i+j}$ is as
+in (\ref{pff}). Comparing (\ref{ff}) and (\ref{pff}), we see
+that the two $f_i$'s are the same, the $f_{i+1}$'s differ by
+$\left(-1\right)^i$, the $f_{i+2}$'s differ by $\left(-1\right)^{2i}$,
+and in general, the $f_{i+m}$'s differ
+by $\left(-1\right)^{im}$. Thus, products \ref{cup} and \ref{yp}
+differ by $\left(-1\right)^{ij}$, that is,
+\begin{align*}
+&\Phi^{-1}\big(\Phi\left(g\right)\circ\Phi\left(f\right)\big)=
+\left(-1\right)^{ij} fg\\
+\intertext{so that}
+&\Phi\left(fg\right)=\left(-1\right)^{ij}\Phi\left(g\right)\circ
+\Phi\left(f\right)
+\intertext{and therefore}
+&\Phi\left(fg\right)=\left(-1\right)^{i\left(j+1\right)}
+\left\langle f,g\right\rangle.
+\end{align*}
+We observe that product \ref{cup} is associative
+(see \cite{carlson}), and that product \ref{yp}
+is also associative, consisting of composition of functions.
+The Massey product, however, is not associative
+in general.
+
+\section{Massey Products}\label{mp}
+The idea of the Massey product is to extend the cohomology
+product to an $n$-fold product for $n\ge 2$.
+The following definition is adapted from \cite{kraines}.
+
+\begin{definition}\label{massey}
+For $k\ge 2$, let 
+$f^{\left(1\right)},
+f^{\left(2\right)},\dots,f^{\left(k\right)}$ be cocycles in $Y$.
+The {\em Massey $k$-fold product} 
+$\left\langle f^{\left(1\right)},
+f^{\left(2\right)},\dots,f^{\left(k\right)}\right\rangle$
+is defined provided that for each pair $\left(i,j\right)$
+with $1\le i<j\le k$ other than $\left(1,k\right)$,
+the lower-degree product 
+$\left\langle f^{\left(i\right)},
+f^{\left(i+1\right)},\dots,f^{\left(j\right)}\right\rangle$
+is defined and vanishes as an element of $H^\ast\left(Y\right)$,
+that is, if for each qualifying $\left(i,j\right)$,
+there exists $u^{i,j}\in Y$ such that 
+$\partial u^{i,j}
+=\left\langle f^{\left(i\right)},
+f^{\left(i+1\right)},\dots,f^{\left(j\right)}\right\rangle$.
+In this situation, the value of
+$\left\langle f^{\left(1\right)},
+f^{\left(2\right)},\dots,f^{\left(k\right)}\right\rangle$
+is defined to be
+\[\sum_{t=1}^{k-1}
+u^{t+1,k}\circ
+\overline{u^{1,t}}
+\]
+where the symbols $u^{1,1}$ and $u^{k,k}$ are taken
+to be $f^{\left(1\right)}$ and 
+$f^{\left(k\right)}$ respectively
+and $\overline{u}=\left(-1\right)^{\deg\left(u\right)}u$.
+\end{definition}
+
+Observe that in the case $k=2$, the condition
+on $\left(i,j\right)$ is vacuously satisfied,
+so that $\left\langle f,g\right\rangle=g\circ\overline{f}$.
+
+Traditionally, one organizes the information
+in Definition \ref{massey} 
+in an array, such as the following, 
+\[\begin{array}{cccc}
+f^{\left(1\right)}&u^{1,2}&u^{1,3}\\
+&f^{\left(2\right)}&u^{2,3}&u^{2,4}\\
+&&f^{\left(3\right)}&u^{3,4}\\
+&&&f^{\left(4\right)}\end{array}\]
+and traces the top row with one hand
+while tracing the rightmost column with
+the other hand as $t$ runs from 1 to 3. 
+In this case, we have
+\[\left\langle f^{\left(1\right)},f^{\left(2\right)},
+f^{\left(3\right)},f^{\left(4\right)}\right\rangle
+=u^{2,4}\circ \overline{f^{\left(1\right)}}
++ u^{3,4}\circ \overline{u^{1,2}} 
++ f^{\left(4\right)}\circ \overline{u^{1,3}}.\]
+
+\begin{lemma}\label{cocycle}
+$\left\langle f^{\left(1\right)},
+f^{\left(2\right)},\dots,f^{\left(k\right)}\right\rangle$
+is a cocycle in $Y$.
+\end{lemma}
+The reason for the sign appearing 
+in Definition \ref{massey} becomes apparent
+is the following proof.
+\begin{proof}
+We begin by making a general observation about $Y$.
+Suppose $f\in Y^i$ and that $g=\partial\theta$
+for some $\theta\in Y^{j-1}$ as in the following diagram.
+\[\xymatrix@+15pt{
+&P_{i+j+m+1}\ar[r]^{\partial_{i+j+m+1}}\ar[d]^{f_{i+j+m+1}}
+&P_{i+j+m}\ar[d]^{f_{i+j+m}}
+\\
+&P_{j+m+1}\ar[r]^{\partial_{j+m+1}}
+\ar[d]^{g_{j+m+1}}\ar[dl]^{\theta_{j+m+1}}
+&P_{j+m}\ar[d]^{g_{j+m}}\ar[dl]^{\theta_{j+m}}
+\\
+P_{m+2}\ar[r]_{\partial_{m+2}}
+&P_{m+1}\ar[r]_{\partial_{m+1}}
+&P_m
+}\]
+Then by Observation \ref{differential}, we have
+\begin{eqnarray*}
+\left(g\circ f\right)_{i+j+m+1}
+&=&g_{j+m+1}\circ f_{i+j+m+1}\\
+&=&\theta_{j+m}\circ\partial_{j+m+1}\circ f_{i+j+m+1}
+-\left(-1\right)^{j-1}
+\partial_{m+2}\circ\theta_{j+m+1}\circ f_{i+j+m+1}\\
+&=&\theta_{j+m}\circ\partial_{j+m+1}\circ f_{i+j+m+1}
+-\left(-1\right)^{j-1}
+\partial_{m+2}\circ\theta_{j+m+1}\circ f_{i+j+m+1}\\
+&&
+-\left(-1\right)^i\theta_{j+m}\circ f_{i+j+m}\circ\partial_{i+j+m+1}
++\left(-1\right)^i\theta_{j+m}\circ f_{i+j+m}\circ\partial_{i+j+m+1}\\
+&=&-\left(-1\right)^i
+\left(\theta\circ\left(\partial f\right)\right)_{i+j+m+1} 
++\left(-1\right)^i \partial\left(\theta\circ f\right)_{i+j+m+1}
+\end{eqnarray*}
+so that as elements of $\mathrm{H}^\ast\left(Y\right)$, we have
+\begin{equation}
+\partial\theta\circ f
+=-\left(-1\right)^i\theta\circ\partial f.\end{equation}
+Now we compute the derivative of
+$\left\langle f^{\left(1\right)},
+f^{\left(2\right)},\dots,f^{\left(k\right)}\right\rangle$.
+\begin{eqnarray*}
+\partial\left(\sum_{t=1}^{k-1}
+\left(-1\right)^{\left(\deg u^{1,t}\right)}
+u^{t+1,k}\circ u^{1,t}\right)
+&=&\sum_{t=1}^{k-1}\left(
+\left(-1\right)^{\left(\deg u^{1,t}\right)}
+u^{t+1,k}\circ
+\partial u^{1,t}
++\partial u^{t+1,k}\circ
+u^{1,t}
+\right)\\
+&=&\sum_{t=1}^{k-1}\left(
+-\partial u^{t+1,k}\circ
+u^{1,t}
++\partial u^{t+1,k}\circ
+u^{1,t}
+\right)\\
+&=&0
+\end{eqnarray*}
+\end{proof}
+
+\begin{observation}\label{degree}
+The  condition $\partial u^{i,j}
+=\left\langle f^{\left(i\right)},
+f^{\left(i+1\right)},\dots,f^{\left(j\right)}\right\rangle$ forces
+\begin{align*}
+\deg\left(u^{i,j}\right)
+&=\sum_{t=i}^j \deg\left(f^{\left(t\right)}\right) +i-j\\
+\text{and}\qquad\deg\left\langle f^{\left(i\right)},
+f^{\left(i+1\right)},\dots,f^{\left(j\right)}\right\rangle
+&=\sum_{t=i}^j \deg\left(f^{\left(t\right)}\right) +i-j+1.
+\end{align*}
+\end{observation}
+
+\begin{trouble}
+$\left\langle f^{\left(1\right)},
+f^{\left(2\right)},\dots,f^{\left(k\right)}\right\rangle$
+is not uniquely defined, unless for each $\left(i,j\right)$
+the condition
+$\partial u^{i,j}=\left\langle f^{\left(i\right)},
+f^{\left(i+1\right)},\dots,f^{\left(j\right)}\right\rangle$
+is satisfied by exactly one cochain $u^{i,j}$.
+\end{trouble}
+
+Suppose that we are given cocycles
+$f^{\left(1\right)}, f^{\left(2\right)},\dots,f^{\left(k\right)}$
+and we want to compute the 
+map $u^{i,j}$ for some $\left(i,j\right)$
+with $1\le i<j\le k$ other than $\left(1,k\right)$.
+Assume that recursively,
+we have computed all of the maps in the following array.
+\[\begin{array}{ccccc}
+f^{\left(i\right)}&u^{i,i+1}
+&\dots&u^{i,j-1}&\\
+&f^{\left(i+1\right)}&&u^{i+1,j-1}
+&u^{i+1,j}\\
+&&&&\vdots\\
+&&&f^{\left(j-1\right)}&u^{j-1,j}\\
+&&&&f^{\left(j\right)}
+\end{array}\]
+The map $u^{i,j}$ will be such that
+\begin{equation}\label{ij}
+\partial u^{i,j}=
+\left\langle f^{\left(i\right)}, f^{\left(i+1\right)},\dots, 
+f^{\left(j\right)}\right\rangle
+=\sum_{t=i}^{j-1}
+u^{t+1,j}\circ
+\overline{u^{i,t}}
+\end{equation}
+where $u^{i,i}=f^{\left(i\right)}$
+and $u^{j,j}=f^{\left(j\right)}$.
+Write $g$ for the map on the right-hand side
+of (\ref{ij}).
+Write \[d=\deg\left(g\right)
+=\sum_{t=i}^j\deg\left(f^{\left(t\right)}\right)+i-j+1.\]
+The relevant maps are all pictured below.
+\begin{equation}\label{masseypic}\tiny
+\begin{xy}{\xymatrix@+13pt{
+P_m\ar[r]^{\partial_m}\ar[d]_{g_m}
+&P_{m-1}\ar[r]^{\partial_{m-1}}\ar[d]_{g_{m-1}}\ar[dl]_{u^{i,j}_{m-1}}
+&P_{m-2}\ar[r]^{\partial_{m-2}}\ar[d]_{g_{m-2}}\ar[dl]_{u^{i,j}_{m-2}}
+&P_{m-3}\ar[r]\ar[d]_{g_{m-3}}\ar[dl]_{u^{i,j}_{m-3}}
+&\dots\ar[r]
+&P_{d+2}\ar[r]^{\partial_{d+2}}\ar[d]_{g_{d+2}}
+&P_{d+1}\ar[r]^{\partial_{d+1}}\ar[d]_{g_{d+1}}\ar[dl]_{u^{i,j}_{d+1}}
+&P_d\ar[d]_{g_d}\ar[r]^{\partial_d}\ar[dl]_{u^{i,j}_d}
+&P_{d-1}\ar[dl]_{u^{i,j}_{d-1}}
+\\
+P_{m-d}\ar[r]_{\partial_{m-d}}
+&P_{m-d-1}\ar[r]_{\partial_{m-d-1}}
+&P_{m-d-2}\ar[r]_{\partial_{m-d-2}}
+&P_{m-d-3}\ar[r]
+&\dots\ar[r]
+&P_2\ar[r]_{\partial_2}
+&P_1\ar[r]_{\partial_1}
+&P_0\ar[r]_\epsilon&k
+}};
+"2,8";"1,7"**{};
+?(.35)*{\circlearrowright}
+\end{xy}
+\end{equation}
+
+We assume now that $P_\ast$ is minimal, that is,
+that $\partial_m\left(P_m\right)\le\mathrm{Rad}\left(P_{m-1}\right)$
+for all $m\ge 1$.
+This implies that $\partial f=0$ for {\em any} cochain $f$,
+that is, we have $\partial_{i+1}\circ f=0$ for any
+$kG$-homomorphism $f:P_i\to k$.
+
+The map $u^{i,j}\in Y^{d-1}$ is constructed as follows.
+\begin{enumerate}
+\item\label{zero} We take $u^{i,j}_{d-1}=0$. 
+\item The assumption that
+$\left\langle f^{\left(i\right)},
+f^{\left(i+1\right)},\dots,f^{\left(j\right)}\right\rangle=g$ 
+vanishes as an element of $\mathrm{H}^d\left(Y\right)$
+tells us that $\epsilon\circ g_d$ vanishes
+as an element of $\mathrm{H}^d\left(G,k\right)$.
+But since $P_\ast$ is {\em minimal}, this means
+that $\epsilon\circ g_d$ is actually the zero map.
+Then by projectivity of $P_d$, there exists
+$u^{i,j}_d$ such that $\partial_1\circ u^{i,j}_d=\left(-1\right)^d g_d$.
+Observe that this  means
+\[\left(\partial u^{i,j}\right)_d
+=0-\left(-1\right)^{d-1}\partial_1\circ u^{i,j}_d=g_d.\]
+\item The map $g$ is a cocycle by Lemma \ref{cocycle}. 
+This means that the {\em rectangles} in (\ref{masseypic})
+either commute or anticommute, depending on whether $d$
+is even or odd. Thus,
+\[\partial_1\circ
+\left(g_{d+1}-u_d^{i,j}\circ\partial_{d+1}\right)
+=\partial_1\circ g_{d+1}
+-\left(-1\right)^d g_d\circ\partial_{d+1}=0\]
+so that
+\[\mathrm{im}\left(g_{d+1}-
+u_d^{i,j}\circ\partial_{d+1}\right)\le\ker\left(\partial_1\right)
+=\mathrm{im}\left(\partial_2\right).\]
+Thus, there exists $u^{i,j}_{d+1}$ such that
+\[\partial_2\circ u^{i,j}_{d+1}=
+\left(-1\right)^d\left(g_{d+1}- u_d^{i,j}\circ\partial_{d+1}\right).\]
+Observe that this means
+\[\left(\partial u^{i,j}\right)_{d+1}
+=u^{i,j}_d\circ\partial_{d+1}-\left(-1\right)^{d-1}
+\partial_2\circ u^{i,j}_{d+1}=g_{d+1}.\]
+\item Assume by recursion that we have constructed that maps $u^{i,j}_{m-2}$ and $u_{m-3}^{i,j}$ such that
+\[\partial_{m-d-1}\circ u^{i,j}_{m-2}=
+\left(-1\right)^d\left(g_{m-2}
+-u_{m-3}^{i,j}\circ\partial_{m-2}\right).\] Thus
+\[\partial_{m-d-1}\circ
+\left(g_{m-1}-u_{m-2}^{i,j}\circ\partial_{m-1}\right)
+=\partial_{m-d-1}\circ g_{m-1}
+-\left(-1\right)^d g_{m-2}\circ\partial_{m-1}=0\]
+so that
+\[\mathrm{im}\left(g_{m-1}-
+u_{m-2}^{i,j}\circ\partial_{m-1}\right)\le\ker\left(\partial_{m-d-1}\right)
+=\mathrm{im}\left(\partial_{m-d}\right).\]
+Thus, there exists $u^{i,j}_{m-1}$ such that
+\[\partial_{m-d}\circ u^{i,j}_{m-1}=
+\left(-1\right)^d\left(g_{m-1}- u_{m-2}^{i,j}\circ\partial_{m-1}\right).\]
+Observe that this means
+\[\left(\partial u^{i,j}\right)_{m-1}=
+u^{i,j}_{m-2}\circ\partial_{m-1}-\left(-1\right)^{d-1}
+\partial_{m-d}\circ u^{i,j}_{m-1}=g_{m-1}.\]
+\end{enumerate}
+This completes the construction of $u^{i,j}$.
+By construction, we have $\partial\left(u^{i,j}\right)=g$.
+
+Finally, observe that in the last step in the calculation of
+$\left\langle f^{\left(1\right)}, f^{\left(2\right)},\dots, 
+f^{\left(k\right)}\right\rangle$,
+which is actually
+the {\em first} step, as this is a recursive process,
+it is only necessary to calculate $u^{1,k-1}$,
+but none of the maps $u^{1,m}$ for $2\le m\le k-2$,
+and none of the maps $u^{m,k}$ for $2\le m\le k-1$.
+In effect, the sum
+\[\sum_{t=1}^{k-1}
+u^{t+1,k}\circ
+\overline{u^{1,t}}
+=\sum_{t=1}^{k-2}
+u^{t+1,k}\circ
+\overline{u^{1,t}}
++f^{\left(k\right)}\circ\overline{u^{1,k-1}}
+\] 
+appearing in Definition \ref{massey} 
+is calculated as
+\[ \sum_{t=1}^{k-2}
+\stackrel{!}{\boxed{u^{t+1,k}
+_{\deg u^{t+1,k}}}}
+\circ
+\overline{u^{1,t}_{\deg u^{t+1,k}+\deg u^{1,t}}}
++f^{\left(k\right)}_{\deg f^{\left(k\right)}}
+\circ\overline{u^{1,k-1}_{\deg f^{\left(k\right)}+\deg u^{1,k-1}}},
+\] 
+But $u^{t+1,k}_{\deg u^{t+1,k}}=0$
+by construction (see Step \ref{zero} above),
+so the sum reduces to a single term.
+This is not the case with the intermediate maps $u^{i,j}$
+with $j-i\le k-2$.
+
+\bibliographystyle{plain}
+\bibliography{crime}
+\end{document}
+
