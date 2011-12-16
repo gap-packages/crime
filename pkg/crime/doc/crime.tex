@@ -35,23 +35,23 @@
 \immediate\openout\pagenrlog =\jobname.pnr
 \immediate\write\pagenrlog{PAGENRS := [}
 \newcommand{\logpage}[1]{\protect\write\pagenrlog{#1, \thepage,}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\F}{\mathbb{F}}
+%% were never documented, give conflicts with some additional packages
+
 
 \newcommand{\GAP}{\textsf{GAP}}
+
+%% nicer description environments, allows long labels
+\usepackage{enumitem}
+\setdescription{style=nextline}
 
 \begin{document}
 
 \logpage{[ 0, 0, 0 ]}
 \begin{titlepage}
-\begin{center}{\Huge \textbf{The \textsf{Crime} Package\mbox{}}}\\[1cm]
-\hypersetup{pdftitle=The \textsf{Crime} Package}
-\markright{\scriptsize \mbox{}\hfill The \textsf{Crime} Package \hfill\mbox{}}
-{Version 1.3\mbox{}}\\[1cm]
+\begin{center}{\Huge \textbf{The \textsf{CRIME} Package\mbox{}}}\\[1cm]
+\hypersetup{pdftitle=The \textsf{CRIME} Package}
+\markright{\scriptsize \mbox{}\hfill The \textsf{CRIME} Package \hfill\mbox{}}
+{Version 1.4\mbox{}}\\[1cm]
 \mbox{}\\[2cm]
 {\large \textbf{Marcus Bishop  \mbox{}}}\\
 \hypersetup{pdfauthor=Marcus Bishop  }
@@ -68,9 +68,9 @@
 \logpage{[ 0, 0, 1 ]}
  {\copyright} 2006, 2007 Marcus Bishop 
 
- Crime is free software which is distributed under the GNU Public Licence,
-version 2, and may be redistributed under the GNU Public Licence, version 2 or
-later (at your preference). See the file COPYING for detailed information \mbox{}}\\[1cm]
+ \textsf{CRIME} is free software which is distributed under the GNU Public Licence, version 2,
+and may be redistributed under the GNU Public Licence, version 2 or later (at
+your preference). See the file COPYING for detailed information \mbox{}}\\[1cm]
 {\small 
 \section*{Acknowledgements}
 \logpage{[ 0, 0, 2 ]}
@@ -84,16 +84,21 @@ algorithms used by \texttt{ProjectiveResolution}, \texttt{CohomologyGenerators},
 \newpage
 
  
-\chapter{\textcolor{Chapter }{Installation and Loading}}\logpage{[ 1, 0, 0 ]}
+\chapter{\textcolor{Chapter }{Introduction}}\logpage{[ 1, 0, 0 ]}
+\hyperdef{L}{X7DFB63A97E67C0A1}{}
+{
+ 
+\section{\textcolor{Chapter }{Installation and Loading}}\logpage{[ 1, 1, 0 ]}
 \hyperdef{L}{X86C437C47F3988E8}{}
 {
- Like other \textsf{GAP} packages, you download and unpack this package into \textsf{GAP}'s \texttt{pkg} directory. For example, if you were using some Unix derivative and \textsf{GAP} were installed in the directory \texttt{/usr/local/gap4r4}, then you would do the following. 
+ Like other \textsf{GAP} packages, you download and unpack this package into \textsf{GAP}'s \texttt{pkg} directory. For example, if you were running \textsf{GAP} on some machine with a Unix-based operating system and \textsf{GAP} were installed in the directory \texttt{/usr/local/gap4r5} then you would do the following to install \textsf{CRIME}. 
 \begin{Verbatim}[fontsize=\small,frame=single,label=Example]
   
-  $ cd /usr/local/gap4r4/pkg
+  $ cd /usr/local/gap4r5/pkg
   $ su
-  % wget http://math.uic.edu/~marcus/Crime/crime-1.3.tar.gz
-  % tar xvzvf crime-1.3.tar.gz 
+  % wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz
+  % gunzip crime-1.4.tar.gz
+  % tar xvvf crime-1.4.tar
   
 \end{Verbatim}
  In this situation, users would load the package with the \texttt{LoadPackage} command. 
@@ -105,24 +110,52 @@ algorithms used by \texttt{ProjectiveResolution}, \texttt{CohomologyGenerators},
 \end{Verbatim}
  Users not having root access, using someone else's computer, or having bad
 relationships with their network administrators, could install the package
-into their home directories or into some other writable directory such as \texttt{/tmp}, and load the package as follows. 
+into their home directories or into some other writable directory such as \texttt{/tmp} and load the package as follows. 
 \begin{Verbatim}[fontsize=\small,frame=single,label=Example]
   
   $ mkdir /tmp/pkg
   $ cd /tmp/pkg
-  $ wget http://math.uic.edu/~marcus/Crime/crime-1.3.tar.gz
-  $ tar xvzvf crime-1.3.tar.gz 
+  $ wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz
+  $ gunzip crime-1.4.tar.gz
+  $ tar xvvf crime-1.4.tar
   $ gap -l ';/tmp'
   gap> LoadPackage("crime");
 \end{Verbatim}
- Finally, it would be a good idea to run the test file to confirm that all the
-functions work. 
+ Even simpler, users can simply install the package in the \texttt{\texttt{\symbol{126}}/.gap} directory as follows. 
 \begin{Verbatim}[fontsize=\small,frame=single,label=Example]
   
-  gap> ReadPackage("crime","tst/test.g");
+  $ mkdir -p ~/.gap/pkg
+  $ cd ~/.gap/pkg
+  $ wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz
+  $ gunzip crime-1.4.tar.gz
+  $ tar xvvf crime-1.4.tar
+  $ gap
+  gap> LoadPackage("crime");
+\end{Verbatim}
+ Finally, it would be a good idea to run the test file to confirm that all the
+functions work properly. This can be accomplished using \textsf{GAP}'s somewhat obfuscated but system-independent file-manipulation commands as
+follows. 
+\begin{Verbatim}[fontsize=\small,frame=single,label=Example]
+  
+  gap> P:=PackageInfo("crime")[1];;
+  gap> D:=Directory(P.InstallationPath);;
+  gap> F:=Filename(D,"tst");;
+  gap> D:=Directory(F);;
+  gap> F:=Filename(D,"test.g");;
+  gap> ReadTest(F);
 \end{Verbatim}
  You can count yourself lucky if \textsf{GAP} doesn't complain about anything. There is also a longer running test file for
 those having ample free time described in Appendix \ref{test}. }
+
+ 
+\section{\textcolor{Chapter }{For Further Information}}\logpage{[ 1, 2, 0 ]}
+\hyperdef{L}{X83499FE181F08DC9}{}
+{
+ The file \texttt{doc/example.*} contains the step-by-step \textsf{CRIME} calculation of the cohomology ring of the quaternion group. The file \texttt{doc/explanation.*} contains a theoretical description of how the package calculates the various
+cohomology products. Users wishing to read the source code can print all the
+programs in the \texttt{gap} directory with the program \texttt{gap/print.pl} which should be executed in the \texttt{gap} directory. }
+
+ }
 
  
 \chapter{\textcolor{Chapter }{Usage}}\logpage{[ 2, 0, 0 ]}
@@ -130,7 +163,7 @@ those having ample free time described in Appendix \ref{test}. }
 {
  Unless otherwise specified, all the functions described below taking an
 argument \texttt{n} do whatever the manual says they do up to homological degree \texttt{n}. These functions are idempotent in the sense that called a second time with
-the same argument \texttt{n}, they do nothing, but called with a bigger \texttt{n}, they continue computing from where the previous calculations left off. 
+the same argument \texttt{n}, they do nothing, but called with a bigger \texttt{n}, they continue computing from where the previous calculations finished. 
 \section{\textcolor{Chapter }{Cohomology Objects}}\logpage{[ 2, 1, 0 ]}
 \hyperdef{L}{X85BF21B17BF76907}{}
 {
@@ -152,9 +185,9 @@ a \texttt{CObject}.
 
 
 
- This function creates a \texttt{CObject} having components the $p$-group $G$ and the \textsf{MeatAxe} module $M$, which should be a $kG$-module with $G$ the same group and $k$ a field of characteristic $p$. Note that \textsf{MeatAxe} modules record $k$ but not $G$, which is why this operation requires the user to specify $G$ but not $k$. 
+ This function creates a \texttt{CObject} having components the $p$-group \texttt{G} and the \textsf{MeatAxe} module \texttt{M}, which should be a $kG$-module where $G$ the group \texttt{G} and $k$ a field of characteristic $p$. Note that \textsf{MeatAxe} modules know what $k$ is, but not what $G$ is, which is why this operation requires the user to specify $G$ but not $k$. 
 
- Fortunately, most users don't need to know anything about \textsf{MeatAxe} modules, being interested primarily in the case where $k=\mathbb{F}_p$,  and $M=k$, the trivial $kG$-module. In this situation, the second invocation creates a cohomology object
+ Fortunately, most users don't need to know anything about \textsf{MeatAxe} modules, being interested primarily in the case where $k=\mathbb{F}_p$,  and $M=k$ is the trivial $kG$-module. In this situation, the second invocation creates a cohomology object
 having components the $p$-group $G$ and the trivial \textsf{MeatAxe} $kG$-module $k=\mathbb{F}_p$.  }
 
  
@@ -168,10 +201,11 @@ above, the boundary maps, the Betti numbers, the multiplication table, etc. }
 \section{\textcolor{Chapter }{Minimal Projective Resolutions}}\logpage{[ 2, 2, 0 ]}
 \hyperdef{L}{X7FEB30657DDEFE44}{}
 {
- Given a $p$-group $G$, a field $k$ of characteristic $p$, and a $kG$-module $M$, the function below computes the first $n$ terms of the minimal projective resolution of $M$  
+ Given a $p$-group $G$, a field $k$ of characteristic $p$, and a $kG$-module $M$, the function below computes the beginning of the minimal projective
+resolution of $M$  
 \[ P_n\rightarrow\cdots\rightarrow P_2\rightarrow P_1 \rightarrow P_0\rightarrow
 M\rightarrow 0 \]
- where $P_i=\left(kG\right)^{\oplus b_i}$   for certain numbers $b_i$, the \emph{Betti numbers} of the resolution. The minimal $kG$-projective resolution of $M$ is unique up to chain isomorphism. Because of the minimality of $P_\ast$, the groups  $\mathrm{Ext}^i_{kG}\left(M,N\right)$  are simply  $\mathrm{Hom}_{kG}\left(P_i,N\right)$,  and if $M$ and $N$ are both the trivial $kG$-module $k$, then  $H^i\left(G,k\right)=\mathrm{Ext}^i_{kG} \left(k,k\right)=k^{b_i}$.  
+ where $P_i=\left(kG\right)^{\oplus b_i}$   for certain numbers $b_i$, the \emph{Betti numbers} of the resolution. The minimal $kG$-projective resolution of $M$ is unique up to chain isomorphism. Because of the minimality of $P_\ast$ the groups  $\mathrm{Ext}^i_{kG}\left(M,N\right)$  are simply  $\mathrm{Hom}_{kG}\left(P_i,N\right)$,  and if $M$ and $N$ are both the trivial $kG$-module $k$, then  $H^i\left(G,k\right)=\mathrm{Ext}^i_{kG} \left(k,k\right)=k^{b_i}$.  
 
 \subsection{\textcolor{Chapter }{ProjectiveResolution}}
 \logpage{[ 2, 2, 1 ]}\nobreak
@@ -184,7 +218,7 @@ a list containing the Betti numbers $b_0, b_1,\ldots, b_n$.
 
 
 
- Given a cohomology object \texttt{C} having components $G$ and $M$, this function computes the first \texttt{n}$+1$ terms of the minimal projective resolution $P_\ast$ of $M$ of the form  $P_i=\left(kG\right)^{\oplus b_i}$ for $0\leq i\leq n$,  and returns the numbers $b_i$ as a list. }
+ Given a cohomology object \texttt{C} having components $G$ and $M$, this function computes the first \texttt{n}$+1$ terms of the minimal projective resolution $P_\ast$ of $M$ of the form  $P_i=\left(kG\right)^{\oplus b_i}$ for $0\leq i\leq n$  and returns the numbers $b_i$ as a list. }
 
  
 
@@ -199,7 +233,7 @@ the \texttt{n}th boundary map.
 
 
 
- Given the cohomology object \texttt{C}, this function computes a projective resolution to degree \texttt{n} if it hasn't been computed already, and returns the \texttt{n}th boundary map. 
+ Given the cohomology object \texttt{C}, this function computes a projective resolution to degree \texttt{n} if it hasn't been computed already, and returns the \texttt{n}th boundary map $P_n \rightarrow P_{n-1}$. 
 
 The map returned is a  $b_n\times b_{n-1}\left|G\right|$  matrix, having in the $i$th row the image of the element $1_G$ from the $i$th direct summand of $P_n$. 
 
@@ -228,7 +262,7 @@ cohomology ring.
 
  Given a cohomology object \texttt{C} having group component $G$ and module component the trivial $kG$-module, this function computes a set of generators of  $H^\ast\left(G,k\right)$  having degree \texttt{n} or less, and stores them in \texttt{C}. The function returns a list of the degrees of these generators. }
 
- The actual cohomology generators are represented by maps $P_n \rightarrow k$ and are stored in \texttt{C} as matrices. Only their degrees are returned. 
+ The actual cohomology generators are represented by maps $P_i \rightarrow k$ for $0\le i\le n$ and are stored in \texttt{C} as matrices. Only their degrees are returned. 
 
 \subsection{\textcolor{Chapter }{CohomologyRelators}}
 \logpage{[ 2, 3, 2 ]}\nobreak
@@ -241,7 +275,7 @@ a list of generators and a list of relators.
 
 
 
- Given a cohomology object \texttt{C} having group component $G$ and module component $k$, this function computes a set of generators of the ideal of relators in  $H^\ast\left(G,k\right),$  all having multidegree $n$ or less. 
+ Given a cohomology object \texttt{C} having group component $G$ and module component $k$, this function computes a set of generators of the ideal of relators in  $H^\ast\left(G,k\right),$  all having degree $n$ or less. 
 
 More specifically, the function returns two lists, the first list containing
 the variables \texttt{z}, \texttt{y}, \texttt{x}, $\ldots$ corresponding to the generators of  $H^\ast\left(G,k\right)$  if there are fewer than 12 generators and containing the variables \texttt{x{\textunderscore}1}, \texttt{x{\textunderscore}2}, \texttt{x{\textunderscore}3}, $\ldots$ otherwise. The second list is a list of polynomials in the variables from the
@@ -259,13 +293,12 @@ the list returned by \texttt{CohomologyGenerators} in section \ref{CohomologyGen
   [ 1, 1, 2 ]
   gap> CohomologyRelators(C,10);
   [ [ z, y, x ], [ z*y+y^2 ] ]
-  
 \end{Verbatim}
- This tells us that for $G=D_8$, the cohomology ring  $H^\ast\left(G,k\right)$  is the graded-commutative polynomial ring in the variables $z$, $y$, and $x$ of degrees 1, 1, and 2, subject to the relation $zy+y^2$. But since  $H^\ast\left(G,k\right)$  is commutative, $k$ being of characteristic 2, we have  $H^\ast\left(G,k\right)=k\left[z,y,x\right] \left/\left(zy+y^2\right)\right.$.  This result can be further improved by taking $z=z+y$, giving  $H^\ast\left(G,k\right)=k\left[z,y,x\right] \left/\left(zy\right)\right.$.  
+ This tells us that for $G=D_8$ and $k=\mathbb{F}_p$,  the cohomology ring  $H^\ast\left(G,k\right)$  is the graded-commutative polynomial ring in the variables $z$, $y$, $x$ of degrees 1, 1, 2, subject to the relation $zy+y^2$. But since  $H^\ast\left(G,k\right)$  is commutative, $k$ being of characteristic 2, we have  $H^\ast\left(G,k\right)=k\left[z,y,x\right] \left/\left(zy+y^2\right)\right.$.  This result can be further improved by taking $z=z+y$, giving  $H^\ast\left(G,k\right)=k\left[z,y,x\right] \left/\left(zy\right)\right.$.  
 
 Observe that in this case, we knew in advance that there was a set of
 generators for $H^\ast\left(G,k\right)$  all having degree less than 10, and that there was a set of generators of the
-ideal of relators all having multidegree less than 10. See see section \ref{whathappens} for details. 
+ideal of relators all having degree less than 10. See see section \ref{whathappens} for details. 
 
 While this isn't likely to occur, we point out that if there are 12 or more
 generators and some of the indeterminates \texttt{x{\textunderscore}1}, \texttt{x{\textunderscore}2}, \texttt{x{\textunderscore}3}, $\ldots$ have already been named, say by a previous call to \texttt{CohomologyRelators}, then these variables will retain their old names. If this is confusing, you
@@ -322,8 +355,7 @@ beginning. Extending the previous ring appears not to be worth the effort for
 technical reasons, since almost everything would need to be recalculated again
 anyway. }
 
- Recall that $H^\ast\left(G,k\right)$  is a graded structure constant algebra, the components being the cohomology
-groups $H^i\left(G,k\right)$.  The following functions were intended to be used for cohomology rings, but in
+ Recall that $H^\ast\left(G,k\right)$  is a graded algebra, the components being the cohomology groups $H^i\left(G,k\right)$.  The following functions were intended to be used for cohomology rings, but in
 principle, they work for any graded structure constant algebra. 
 
 \subsection{\textcolor{Chapter }{IsHomogeneous}}
@@ -352,7 +384,7 @@ the degree of \texttt{e}.
 
 
 
- This function returns the degree of the possibly non-homogeneous element \texttt{e} of a cohomology ring $H^\ast\left(G,k\right)$.  Specifically, if  $H^\ast\left(G,k\right)=A_0\oplus A_1\oplus A_2\oplus\cdots$  where $A_i=H^i\left(G,k\right)$,  then this function returns the minimum $n$ such that \texttt{e} is in  $A_0\oplus A_1\oplus\cdots\oplus A_n$.  }
+ This function returns the degree of the possibly non-homogeneous element \texttt{e} of a cohomology ring $H^\ast\left(G,k\right)$.  Specifically, if  $H^\ast\left(G,k\right)=A_0\oplus A_1\oplus A_2\oplus\cdots$  where $A_i=H^i\left(G,k\right)$  then this function returns the minimum $n$ such that \texttt{e} is in  $A_0\oplus A_1\oplus\cdots\oplus A_n$.  }
 
  
 \begin{Verbatim}[fontsize=\small,frame=single,label=Example]
@@ -414,13 +446,12 @@ The ring determined by \texttt{CohomologyGenerators} and \texttt{CohomologyRelat
 that there is an $n$ for which there exists a generating set of  $H^\ast\left(G,k\right)$  consisting of elements of degree $n$ or less, then you are \emph{not} guaranteed that the elements returned by the \texttt{CohomologyGenerators} generate  $H^\ast\left(G,k\right)$  as a ring. The knowledge of such an $n$ is the subject of section \ref{completion}. 
 
 Similarly, \texttt{CohomologyRelators} proceeds inductively until degree $n$, returning a list of polynomials which generate the ideal of relators of
-multidegree $n$ or less. Again, you have to already know how big $n$ should be. 
+degree $n$ or less. Again, you have to already know how big $n$ should be. 
 
-The result of the preceding information is that there is a homomorphism  $f:k\left.\left\langle x_1,x_2,\dots x_m \right\rangle\right./I \to
-H^\ast\left(G,k\right)$,  where $k\left\langle x_1,x_2,\ldots x_m \right\rangle$ is the graded polynomial ring over $k$ in the non-commuting variables $x_1,x_2,\ldots,x_m$, having degrees the numbers in the list returned by \texttt{CohomologyGenerators}, and $I$ is the ideal in $k\left\langle x_1,x_2,\ldots, x_m \right\rangle$ generated by the elements returned by \texttt{CohomologyRelators(C,n)}. 
+The result of the preceding information is that there is a homomorphism  $f:k\left.\left\langle x_1,x_2,\dots,x_m \right\rangle\right./I \to
+H^\ast\left(G,k\right)$,  where $k\left\langle x_1,x_2,\ldots,x_m \right\rangle$ is the graded polynomial ring over $k$ in the non-commuting variables $x_1,x_2,\ldots,x_m$, having degrees the numbers in the list returned by \texttt{CohomologyGenerators}, and $I$ is the ideal in $k\left\langle x_1,x_2,\ldots, x_m \right\rangle$ generated by the elements returned by \texttt{CohomologyRelators(C,n)}. 
 
-Therefore, if there is a generator of degree greater than $n$, then $f$ won't be surjective. Similarly, if there is a relator of multidegree greater
-than $n$ which is not a consequence of lower degree relators, then $f$ won't be injective. See section \ref{completion} for a discussion on how big $n$ needs to be to ensure that $f$ be an isomorphism. }
+Therefore, if there is a generator of degree greater than $n$, then $f$ won't be surjective. Similarly, if there is a relator of degree greater than $n$ which is not a consequence of lower degree relators, then $f$ won't be injective. See section \ref{completion} for a discussion on how big $n$ needs to be to ensure that $f$ will be an isomorphism. }
 
  
 \section{\textcolor{Chapter }{Induced Maps}}\logpage{[ 2, 7, 0 ]}
@@ -439,16 +470,16 @@ the induced homomorphism on cohomology.
 
 
 
- This function returns the induced homomorphism  $H^\ast\left(G,k\right) \to H^\ast\left(H,k\right)$,  where the groups $H$ and $G$ are the components of the cohomology objects \texttt{C} and \texttt{D} and $f: H \rightarrow G$ is a group homomorphism. If the cohomology rings have not yet been calculated,
+ This function returns the induced homomorphism  $H^\ast\left(G,k\right) \to H^\ast\left(H,k\right)$  where the groups $H$ and $G$ are the components of the cohomology objects \texttt{C} and \texttt{D} and $f: H \rightarrow G$ is a group homomorphism. If the cohomology rings have not yet been calculated,
 they will be computed to degree $n$, and in this case, they can then be accessed by calling \texttt{CohomologyRing} (see \ref{CohomologyRing}). }
 
  
 
-\subsection{\textcolor{Chapter }{Inclusion}}
+\subsection{\textcolor{Chapter }{SubgroupInclusion}}
 \logpage{[ 2, 7, 2 ]}\nobreak
-\hyperdef{L}{X87D180E2801B1EA8}{}
-{\noindent\textcolor{FuncColor}{$\Diamond$\ \texttt{Inclusion({\slshape H, G})\index{Inclusion@\texttt{Inclusion}}
-\label{Inclusion}
+\hyperdef{L}{X80798C0979D4E9DC}{}
+{\noindent\textcolor{FuncColor}{$\Diamond$\ \texttt{SubgroupInclusion({\slshape H, G})\index{SubgroupInclusion@\texttt{SubgroupInclusion}}
+\label{SubgroupInclusion}
 }\hfill{\scriptsize (function)}}\\
 \textbf{\indent Returns:\ }
 the inclusion $H\rightarrow G$
@@ -467,7 +498,7 @@ inclusion of the cyclic group of size 4 into the dihedral group of size 8.
   gap> C:=CohomologyObject(H);D:=CohomologyObject(G);
   <object>
   <object>
-  gap> i:=Inclusion(H,G);
+  gap> i:=SubgroupInclusion(H,G);
   [ f2 ] -> [ f2 ]
   gap> Res:=InducedHomomorphismOnCohomology(C,D,i,10);;
   gap> A:=CohomologyRing(D,10);
@@ -501,7 +532,7 @@ the Massey product  $\left\langle x_1,x_2,\dots,x_n\right\rangle$.
 
 
 
- Given elements  $x_1,x_2,\dots,x_n$  of the ring returned by \texttt{CohomologyRing} (see \ref{ring}), this function computes the $n$-fold Massey product  $\left\langle x_1,x_2,\ldots,x_n\right\rangle$  provided that the lower-degree Massey products  $\left\langle x_i,x_{i+1},\ldots,x_n\right\rangle$  vanish for all $1 \leq i < j \leq n$, and returns \texttt{fail} otherwise. }
+ Given elements  $x_1,x_2,\dots,x_n$  of the ring returned by \texttt{CohomologyRing} (see \ref{ring}) this function computes the $n$-fold Massey product  $\left\langle x_1,x_2,\ldots,x_n\right\rangle$  provided that the lower-degree Massey products  $\left\langle x_i,x_{i+1},\ldots,x_j\right\rangle$  vanish for all $1 \leq i < j \leq n$ and returns \texttt{fail} otherwise. }
 
  As an example, recall that the cohomology rings of the cyclic groups $C_3$ and $C_9$ of sizes 3 and 9 over $k=\mathbb{F}_3$  are both given by  $k\left\langle z, y\right\rangle\left/\left(z^2\right)\right.$,  so they are isomorphic as rings. However, the following example shows that  $\left\langle z,z,z\right\rangle$  is non-zero in $H^\ast\left(C_3,k\right)$  but is zero in $H^\ast\left(C_9,k\right)$.  
 \begin{Verbatim}[fontsize=\small,frame=single,label=Example]
@@ -539,14 +570,14 @@ the Massey product  $\left\langle x_1,x_2,\dots,x_n\right\rangle$.
 \logpage{[ "A", 0, 0 ]}
 \hyperdef{L}{X82113B3184F76F58}{}
 {
- Some of the key subroutines have been improved in version 1.3 of \textsf{Crime}, resulting in a significant speedup of many basic calculations. 
+ Some of the key subroutines have been improved in version 1.2 of \textsf{CRIME}, resulting in a significant speedup of many basic calculations. 
 
-The numbers in the following table compare the runtimes of the 1.1 and 1.3
+The numbers in the following table compare the runtimes of the 1.1 and 1.2
 versions of the functions listed in the column headers on all the groups of
 size 16. All functions were executed on a 2.4 GHz AMD64 processor with 12 GB
 of RAM. The number in the first column of every row is the Small Group Library
 number of the group used in that row, so the group used in row \texttt{n} is \texttt{SmallGroup(16,n)}. The upper number in each box is the runtime for the 1.1 version, whereas the
-lower number is the runtime for the 1.3 version. \begin{center}
+lower number is the runtime for the 1.2 version. \begin{center}
 \begin{tabular}{c|c|c|c}Group&
 \texttt{ProjectiveResolution}&
 \texttt{CohomologyGenerators}&

@@ -1,14 +1,8 @@
-crime/packagecrime.pl
-crime/doc/explanation.bbl
 crime/doc/manual.pdf
 crime/doc/explanation.pdf
 crime/doc/explanation.dvi
 crime/doc/example.pdf
-crime/doc/explanation.ps
 crime/doc/example.dvi
-crime/doc/crime.bbl
-crime/doc/example.ps
 crime/doc/compile
-crime/doc/crime.pnr
 crime/gap/comments
 crime/gap/print.pl

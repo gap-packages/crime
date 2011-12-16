@@ -1,14 +1,14 @@
 #############################################################################
 ##  PackageInfo.g for the package `crime'                       Marcus Bishop
-##  (created from Frank Lübeck's PackageInfo.g template file)
+##  Created from Frank Lübeck's PackageInfo.g template file
 
 SetPackageInfo( rec(
   PackageName := "Crime",
   Subtitle := "A GAP Package to Calculate Group Cohomology and Massey Products",
-  Version := "1.3",
-  Date := "01/11/2007",
+  Version := "1.4",
+  Date := "01/6/2011",
   ArchiveURL := 
-    "http://math.uic.edu/~marcus/Crime/crime-1.3",
+    "http://math.uic.edu/~marcus/Crime/crime-1.4",
   ArchiveFormats := ".tar.gz",
 
   Persons := [
@@ -29,7 +29,7 @@ SetPackageInfo( rec(
   PackageInfoURL:=
     "http://math.uic.edu/~marcus/Crime/PackageInfo.g",
   AbstractHTML := Concatenation([
-    "This package computes the cohomology ring of finite", 
+    "This package computes the cohomology rings of finite ", 
     "p-groups, induced maps, and Massey products."
   ]),
   PackageWWWHome:= 
@@ -54,7 +54,7 @@ SetPackageInfo( rec(
 
   AvailabilityTest := ReturnTrue,
   BannerString:=Concatenation([
-    "\nThis is CRIME, Version 1.3\n",
+    "\nThis is CRIME, Version 1.4\n",
     "\"Obviously crime pays, or there'd be no crime\".\n",
     "                                G. Gordon Liddy\n\n"
   ]), 

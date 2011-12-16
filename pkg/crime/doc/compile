@@ -1,4 +1,3 @@
-LoadPackage("gapdoc");
 LoadPackage("crime");
 path:=Directory(Concatenation(
   PackageInfo("crime")[1].InstallationPath,"/doc"));

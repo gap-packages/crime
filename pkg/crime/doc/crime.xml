@@ -3,14 +3,14 @@
 <Book Name="crime">
 
 <TitlePage>
-<Title>The <Package>Crime</Package> Package</Title>
-<Version>Version 1.3</Version>
+<Title>The <Package>CRIME</Package> Package</Title>
+<Version>Version 1.4</Version>
 <Author>Marcus Bishop
   <Email>marcus.bishop@gmail.com</Email>
 </Author>
 
 <Copyright> &copyright; 2006, 2007 Marcus Bishop <P/>
-Crime is free software which is distributed under
+<Package>CRIME</Package> is free software which is distributed under
 the GNU Public Licence, version 2, and may be
 redistributed under the GNU Public Licence, version 2
 or later (at your preference). 
@@ -29,19 +29,24 @@ and shared these programs with me.
 
 <TableOfContents/>
 <Body>
-<Chapter><Heading>Installation and Loading</Heading>
+
+<Chapter><Heading>Introduction</Heading>
+
+<Section><Heading>Installation and Loading</Heading>
 Like other &GAP; packages, you download and unpack 
 this package into &GAP;'s <K>pkg</K> directory. 
-For example, if you were using some Unix derivative 
+For example, if you were running &GAP; on some
+machine with a Unix-based operating system
 and &GAP; were installed in the directory 
-<K>/usr/local/gap4r4</K>, then you would
-do the following.
+<K>/usr/local/gap4r5</K> then you would
+do the following to install <Package>CRIME</Package>.
 <Log>
 <![CDATA[
-$ cd /usr/local/gap4r4/pkg
+$ cd /usr/local/gap4r5/pkg
 $ su
-% wget http://math.uic.edu/~marcus/Crime/crime-1.3.tar.gz
-% tar xvzvf crime-1.3.tar.gz 
+% wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz
+% gunzip crime-1.4.tar.gz
+% tar xvvf crime-1.4.tar
 ]]>
 </Log>
 In this situation, users would load the package
@@ -58,28 +63,62 @@ someone else's computer, or having bad
 relationships with their network administrators,
 could install the package into their home 
 directories or into some other writable
-directory such as <K>/tmp</K>, and load
+directory such as <K>/tmp</K> and load
 the package as follows.
 <Log>
 <![CDATA[
 $ mkdir /tmp/pkg
 $ cd /tmp/pkg
-$ wget http://math.uic.edu/~marcus/Crime/crime-1.3.tar.gz
-$ tar xvzvf crime-1.3.tar.gz 
+$ wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz
+$ gunzip crime-1.4.tar.gz
+$ tar xvvf crime-1.4.tar
 $ gap -l ';/tmp'
 gap> LoadPackage("crime");
 ]]></Log>
 
-Finally, it would be a good idea to run the test file
-to confirm that all the functions work.
-<Example>
+Even simpler, users can simply install
+the package in the <K>~/.gap</K> directory as follows.
+<Log>
 <![CDATA[
-gap> ReadPackage("crime","tst/test.g");
-]]></Example>
+$ mkdir -p ~/.gap/pkg
+$ cd ~/.gap/pkg
+$ wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz
+$ gunzip crime-1.4.tar.gz
+$ tar xvvf crime-1.4.tar
+$ gap
+gap> LoadPackage("crime");
+]]></Log>
+
+Finally, it would be a good idea to run the test file
+to confirm that all the functions work properly.
+This can be accomplished using &GAP;'s somewhat obfuscated
+but system-independent file-manipulation commands as follows.
+<Log>
+<![CDATA[
+gap> P:=PackageInfo("crime")[1];;
+gap> D:=Directory(P.InstallationPath);;
+gap> F:=Filename(D,"tst");;
+gap> D:=Directory(F);;
+gap> F:=Filename(D,"test.g");;
+gap> ReadTest(F);
+]]></Log>
 You can count yourself lucky if &GAP; doesn't complain
 about anything. There is also a longer running test
 file for those having ample free time
 described in Appendix <Ref Chap="test"/>.
+</Section>
+
+<Section><Heading>For Further Information</Heading>
+The file <K>doc/example.*</K> contains the step-by-step
+<Package>CRIME</Package> calculation of the cohomology
+ring of the quaternion group. The file <K>doc/explanation.*</K>
+contains a theoretical description of how the package
+calculates the various cohomology products.
+Users wishing to read the source code can
+print all the programs in the <K>gap</K> directory with the 
+program <K>gap/print.pl</K> which should be executed
+in the <K>gap</K> directory.
+</Section>
 
 </Chapter>
 
@@ -91,7 +130,7 @@ These functions are idempotent in the sense that
 called a second time with the same argument <K>n</K>, they
 do nothing, but called with a bigger <K>n</K>,
 they continue computing from where the previous
-calculations left off.
+calculations finished.
 
 <Section> <Heading>Cohomology Objects</Heading>
 
@@ -110,20 +149,20 @@ Comm="Makes cohomology object"/>
 <Returns>a <K>CObject</K>.</Returns>
 <Description>
 This function creates a <K>CObject</K> having components
-the <M>p</M>-group <M>G</M>
-and the &MeatAxe; module <M>M</M>, which should be
-a <M>kG</M>-module with <M>G</M> the same group and
+the <M>p</M>-group <K>G</K>
+and the &MeatAxe; module <K>M</K>, which should be
+a <M>kG</M>-module where <M>G</M> the group <K>G</K> and
 <M>k</M> a field of characteristic <M>p</M>.
-Note that &MeatAxe; modules record <M>k</M> but not
-<M>G</M>, which is why this operation requires the user
+Note that &MeatAxe; modules know what <M>k</M> is, but not
+what <M>G</M> is, which is why this operation requires the user
 to specify <M>G</M> but not <M>k</M>.
 <P/>
 Fortunately, most users don't need to know anything
 about &MeatAxe; modules, 
 being interested primarily in the case where 
 <Alt Only="LaTeX"><M>k=\mathbb{F}_p</M>,</Alt>
-<Alt Not="LaTeX"><M>k=GF(p)</M>,</Alt> and
-<M>M=k</M>, the trivial <M>kG</M>-module. In this situation, 
+<Alt Not="LaTeX"><M>k=GF(p)</M></Alt> and
+<M>M=k</M> is the trivial <M>kG</M>-module. In this situation, 
 the second invocation creates a cohomology 
 object having components
 the <M>p</M>-group <M>G</M> and
@@ -154,9 +193,8 @@ table, etc.
 Given a <M>p</M>-group <M>G</M>, a field
 <M>k</M> of characteristic <M>p</M>, and
 a <M>kG</M>-module <M>M</M>,
-the function below computes the first <M>n</M>
-terms of the minimal projective resolution
-of <M>M</M>
+the function below computes the beginning of
+the minimal projective resolution of <M>M</M>
 <Alt Only="LaTeX">
 <Display> P_n\rightarrow\cdots\rightarrow P_2\rightarrow P_1
 \rightarrow P_0\rightarrow M\rightarrow 0 </Display>
@@ -171,7 +209,7 @@ the <E>Betti numbers</E> of the resolution.
 The minimal <M>kG</M>-projective resolution of <M>M</M>
 is unique up to chain isomorphism.
 Because of the minimality of
-<Alt Only="LaTeX"><M>P_\ast</M>,</Alt><Alt Not="LaTeX"><M>P</M>,</Alt>
+<Alt Only="LaTeX"><M>P_\ast</M></Alt><Alt Not="LaTeX"><M>P</M></Alt>
 the groups 
 <Alt Only="LaTeX">
 <M>\mathrm{Ext}^i_{kG}\left(M,N\right)</M></Alt>
@@ -201,10 +239,10 @@ of the minimal projective resolution
 of <M>M</M> of the form
 <Alt Only="LaTeX">
 <M>P_i=\left(kG\right)^{\oplus b_i}</M> 
-for <M>0\leq i\leq n</M>,</Alt>
+for <M>0\leq i\leq n</M></Alt>
 <Alt Not="LaTeX">
 <M>P_i=(kG)^(b_i)</M>
-for <M>i=0,1,...,n</M>,</Alt> 
+for <M>i=0,1,...,n</M></Alt> 
 and returns the numbers <M>b_i</M> as a list.
 </Description></ManSection>
 
@@ -215,7 +253,8 @@ Comm="Returns the nth boundary map"/>
 Given the cohomology object <K>C</K>, this function
 computes a projective resolution to degree <K>n</K> 
 if it hasn't been computed already,
-and returns the <K>n</K>th boundary map.
+and returns the <K>n</K>th boundary map
+<M>P_n \rightarrow P_{n-1}</M>.
 
 <P/>The map returned is a
 <Alt Only="LaTeX">
@@ -257,7 +296,9 @@ The function returns a list of the degrees of these generators.
 </Description></ManSection>
 
 The actual cohomology generators are represented by
-maps <M>P_n \rightarrow k</M> and are stored in <K>C</K>
+maps <M>P_i \rightarrow k</M> 
+for <M>0\le i\le n</M>
+and are stored in <K>C</K>
 as matrices. Only their degrees are returned.
 
 <ManSection><Oper Name="CohomologyRelators" Arg="C, n"
@@ -272,7 +313,7 @@ generators of the ideal of relators in
 </Alt><Alt Not="LaTeX">
 <M>H*(G,k),</M> 
 </Alt>
-all having multidegree <M>n</M> or less.
+all having degree <M>n</M> or less.
 
 <P/>More specifically, the function returns two lists, the first list containing
 the variables <K>z</K>, <K>y</K>, <K>x</K>, <M>\ldots</M>
@@ -311,16 +352,18 @@ gap> CohomologyGenerators(C,10);
 [ 1, 1, 2 ]
 gap> CohomologyRelators(C,10);
 [ [ z, y, x ], [ z*y+y^2 ] ]
-]]>
-</Example>
-This tells us that for <M>G=D_8</M>, the cohomology ring
+]]></Example>
+This tells us that for <M>G=D_8</M>
+and <Alt Only="LaTeX"><M>k=\mathbb{F}_p</M>,</Alt>
+<Alt Not="LaTeX"><M>k=GF(p)</M></Alt> 
+the cohomology ring
 <Alt Only="LaTeX">
 <M>H^\ast\left(G,k\right)</M> 
 </Alt><Alt Not="LaTeX">
 <M>H*(G,k)</M> 
 </Alt>
 is the graded-commutative polynomial ring in the variables
-<M>z</M>, <M>y</M>, and <M>x</M> of degrees 1, 1, and 2,
+<M>z</M>, <M>y</M>, <M>x</M> of degrees 1, 1, 2,
 subject to the relation
 <M>zy+y^2</M>. But since
 <Alt Only="LaTeX">
@@ -351,7 +394,7 @@ that there was a set of generators for
 <Alt Not="LaTeX"><M>H*(G,k)</M></Alt> 
 all having degree less than 10, and that there was
 a set of generators of the ideal of relators
-all having multidegree less than 10. See
+all having degree less than 10. See
 see section <Ref Sect="whathappens"/> for details.
 
 <P/>While this isn't likely to occur, we point
@@ -431,7 +474,7 @@ would need to be recalculated again anyway.
 Recall that 
 <Alt Only="LaTeX"><M>H^\ast\left(G,k\right)</M></Alt>
 <Alt Not="LaTeX"><M>H*(G,k)</M></Alt> 
-is a graded structure constant algebra, the components being
+is a graded algebra, the components being
 the cohomology groups
 <Alt Only="LaTeX"><M>H^i\left(G,k\right)</M>.</Alt>
 <Alt Not="LaTeX"><M>H^i(G,k)</M>.</Alt> 
@@ -471,8 +514,8 @@ Specifically, if
 <M>H*(G,k) = A_0 + A_1 + A_2 + \ldots</M>
 </Alt>
 where 
-<Alt Only="LaTeX"><M>A_i=H^i\left(G,k\right)</M>,</Alt>
-<Alt Not="LaTeX"><M>A_i = H^i(G,k)</M>,</Alt> 
+<Alt Only="LaTeX"><M>A_i=H^i\left(G,k\right)</M></Alt>
+<Alt Not="LaTeX"><M>A_i = H^i(G,k)</M></Alt> 
 then this function returns the
 minimum <M>n</M> such that <K>e</K> is in
 <Alt Only="LaTeX">
@@ -605,17 +648,17 @@ section <Ref Sect="completion"/>.
 
 <P/>Similarly, <K>CohomologyRelators</K> proceeds inductively
 until degree <M>n</M>, returning a list of polynomials which
-generate the ideal of relators of multidegree <M>n</M> or less.
+generate the ideal of relators of degree <M>n</M> or less.
 Again, you have to already know how big <M>n</M> should be.
 
 <P/>The result of the preceding information is
 that there is a homomorphism
 <Alt Only="LaTeX">
-<M>f:k\left.\left\langle x_1,x_2,\dots x_m \right\rangle\right./I
+<M>f:k\left.\left\langle x_1,x_2,\dots,x_m \right\rangle\right./I
 \to H^\ast\left(G,k\right)</M>,</Alt> 
 <Alt Not="LaTeX">
 <M>k\left\langle x_1,x_2,\ldots, x_m \right\rangle/ I \to H*(G,k)</M>,</Alt>
-where <M>k\left\langle x_1,x_2,\ldots x_m \right\rangle</M>
+where <M>k\left\langle x_1,x_2,\ldots,x_m \right\rangle</M>
 is the graded polynomial ring over <M>k</M> in 
 the non-commuting variables <M>x_1,x_2,\ldots,x_m</M>,
 having degrees the numbers in the list returned by <K>CohomologyGenerators</K>,
@@ -627,14 +670,14 @@ generated by the elements returned by
 <P/>Therefore, if there is a 
 generator of degree greater than <M>n</M>,
 then <M>f</M> won't be surjective.
-Similarly, if there is a relator of multidegree
+Similarly, if there is a relator of degree
 greater than <M>n</M> which is not a consequence
 of lower degree relators, then <M>f</M>
 won't be injective.
 
 See section <Ref Sect="completion"/> for a discussion on how
 big <M>n</M> needs to be to ensure that
-<M>f</M> be an isomorphism.
+<M>f</M> will be an isomorphism.
 
 </Section>
 
@@ -656,8 +699,8 @@ Comm="Computes the induced homomorphism on cohomology"/>
 This function returns the induced homomorphism
 <Alt Only="LaTeX">
 <M>H^\ast\left(G,k\right)
-\to H^\ast\left(H,k\right)</M>,</Alt>
-<Alt Not="LaTeX"><M>H\ast(G,k) \rightarrow H\ast(H,k)</M>,</Alt>
+\to H^\ast\left(H,k\right)</M></Alt>
+<Alt Not="LaTeX"><M>H\ast(G,k) \rightarrow H\ast(H,k)</M></Alt>
 where the groups <M>H</M> and <M>G</M> are the components
 of the cohomology objects <K>C</K> and <K>D</K>
 and <M>f: H \rightarrow G</M> is a group homomorphism.
@@ -668,7 +711,7 @@ by calling <K>CohomologyRing</K> (see <Ref Subsect="CohomologyRing"/>).
 </Description></ManSection>
 
 <ManSection>
-<Func Name="Inclusion" Arg="H, G" Comm="Returns the inclusion"/>
+<Func Name="SubgroupInclusion" Arg="H, G" Comm="Returns the inclusion"/>
 <Returns>the inclusion <M>H\rightarrow G</M></Returns>
 <Description>This function returns the group homomorphism
 <M>H\rightarrow G</M> when <M>H</M> is a subgroup
@@ -696,7 +739,7 @@ Group([ f2 ])
 gap> C:=CohomologyObject(H);D:=CohomologyObject(G);
 <object>
 <object>
-gap> i:=Inclusion(H,G);
+gap> i:=SubgroupInclusion(H,G);
 [ f2 ] -> [ f2 ]
 gap> Res:=InducedHomomorphismOnCohomology(C,D,i,10);;
 gap> A:=CohomologyRing(D,10);
@@ -730,7 +773,7 @@ x_1,x_2,\dots,x_n\right\rangle</M>.</Alt>
 <Alt Only="LaTeX"> <M>x_1,x_2,\dots,x_n</M></Alt>
 <Alt Not="LaTeX"> <M>x1, x2, \ldots , xn</M></Alt>
 of the ring returned by
-<K>CohomologyRing</K> (see <Ref Sect="ring"/>), 
+<K>CohomologyRing</K> (see <Ref Sect="ring"/>)
 this function computes the <M>n</M>-fold Massey product
 <Alt Only="LaTeX">
 <M>\left\langle x_1,x_2,\ldots,x_n\right\rangle</M></Alt>
@@ -738,10 +781,10 @@ this function computes the <M>n</M>-fold Massey product
 <M>\left\langle&nbsp;x1, x2, \ldots , xn&nbsp;\right\rangle</M></Alt>
 provided that the lower-degree Massey products
 <Alt Only="LaTeX">
-<M>\left\langle x_i,x_{i+1},\ldots,x_n\right\rangle</M></Alt>
+<M>\left\langle x_i,x_{i+1},\ldots,x_j\right\rangle</M></Alt>
 <Alt Not="LaTeX">
 <M>\left\langle&nbsp;xi, x{{i+1}}, \ldots , xj&nbsp;\right\rangle</M></Alt>
-vanish for all <M>1 \leq i &lt; j \leq n</M>, and returns <K>fail</K> otherwise.
+vanish for all <M>1 \leq i &lt; j \leq n</M> and returns <K>fail</K> otherwise.
 </Description>
 </ManSection>
 
@@ -794,11 +837,11 @@ v.3
 
 <Appendix Label="benchmarks"><Heading>Some Benchmarks</Heading>
 Some of the key subroutines have been improved
-in version 1.3 of <Package>Crime</Package>, resulting in a
+in version 1.2 of <Package>CRIME</Package>, resulting in a
 significant speedup of many basic calculations.
 
 <P/>The numbers in the following table compare the runtimes
-of the 1.1 and 1.3 versions of the
+of the 1.1 and 1.2 versions of the
 functions listed in the column headers
 on all the groups of size 16.
 All functions were executed on a 2.4 GHz AMD64 processor with 12 GB of RAM.
@@ -807,7 +850,7 @@ is the Small Group Library number of the
 group used in that row, so the group used in row <K>n</K>
 is <K>SmallGroup(16,n)</K>.
 The upper number in each box is the runtime for the 1.1 version, whereas the 
-lower number is the runtime for the 1.3 version.
+lower number is the runtime for the 1.2 version.
 <Table Align="c|c|c|c">
 <Row>
 <Item>Group</Item>

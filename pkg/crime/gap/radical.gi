@@ -2,7 +2,6 @@
 # for some n and m, this function determines which 
 # elements of kG^n generate ker(d) as a kG-submodule.
 
-
 InstallGlobalFunction(GeneratorsOfRadical,function(d,L) 
   # L should be the minimal list of g-1's acting on kG.
   local N,n,NG;

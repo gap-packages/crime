@@ -1,40 +1,41 @@
   
-  [1X2. Usage[0X
+  [1X2 Usage[0X
   
   Unless  otherwise  specified,  all  the  functions described below taking an
-  argument  [9Xn[0X  do whatever the manual says they do up to homological degree [9Xn[0X.
+  argument  [9Xn[0m  do whatever the manual says they do up to homological degree [9Xn[0m.
   These  functions  are idempotent in the sense that called a second time with
-  the  same  argument  [9Xn[0X,  they  do  nothing, but called with a bigger [9Xn[0X, they
-  continue computing from where the previous calculations left off.
+  the  same  argument  [9Xn[0m,  they  do  nothing, but called with a bigger [9Xn[0m, they
+  continue computing from where the previous calculations finished.
   
   
   [1X2.1 Cohomology Objects[0X
   
   The  computation  of  group  cohomology  involves  several calculations, the
   results of which are reused in later calculations, and are thus collected in
-  an object of type [9XCObject[0X, which is created with the following command.
+  an object of type [9XCObject[0m, which is created with the following command.
   
-  [1X2.1-1 CohomologyObject[0X
+  [1X2.1-1 CohomologyObject[0m
   
   [2X> CohomologyObject( [0X[3XG, M[0X[2X ) ________________________________________[0Xoperation
   [2X> CohomologyObject( [0X[3XG[0X[2X ) ___________________________________________[0Xoperation
-  [6XReturns:[0X  a [9XCObject[0X.
+  [6XReturns:[0X  a [9XCObject[0m.
   
-  This  function  creates  a  [9XCObject[0X  having components the p-group G and the
-  [5XMeatAxe[0X  module M, which should be a kG-module with G the same group and k a
-  field  of  characteristic  p.  Note that [5XMeatAxe[0X modules record k but not G,
-  which is why this operation requires the user to specify G but not k.
+  This  function  creates  a  [9XCObject[0m  having components the p-group [9XG[0m and the
+  [5XMeatAxe[0m  module  [9XM[0m,  which should be a kG-module where G the group [9XG[0m and k a
+  field of characteristic p. Note that [5XMeatAxe[0m modules know what k is, but not
+  what  G  is,  which is why this operation requires the user to specify G but
+  not k.
   
-  Fortunately,  most  users don't need to know anything about [5XMeatAxe[0X modules,
-  being  interested  primarily in the case where k=GF(p), and M=k, the trivial
+  Fortunately,  most  users don't need to know anything about [5XMeatAxe[0m modules,
+  being  interested primarily in the case where k=GF(p) and M=k is the trivial
   kG-module.  In  this  situation,  the second invocation creates a cohomology
-  object  having  components  the  p-group G and the trivial [5XMeatAxe[0X kG-module
+  object  having  components  the  p-group G and the trivial [5XMeatAxe[0m kG-module
   k=GF(p).
   
   We  emphasize  that  in  the  first  invocation,  k  can  be  any  field  of
-  characteristic  p  and  [9XM[0X  can  be  any  [5XMeatAxe[0X  module  over  kG, and that
-  [9XProjectiveResolution[0X  works  when [9XM[0X is an arbitrary [5XMeatAxe[0X module, but that
-  all  the functions dealing with the ring-structure of H*(G,k) require that [9XM[0X
+  characteristic  p  and  [9XM[0m  can  be  any  [5XMeatAxe[0m  module  over  kG, and that
+  [9XProjectiveResolution[0m  works  when [9XM[0m is an arbitrary [5XMeatAxe[0m module, but that
+  all  the functions dealing with the ring-structure of H*(G,k) require that [9XM[0m
   be the trivial module.
   
   The  cohomology  object is used to store, in addition to the items mentioned
@@ -44,85 +45,85 @@
   [1X2.2 Minimal Projective Resolutions[0X
   
   Given  a  p-group  G,  a field k of characteristic p, and a kG-module M, the
-  function  below  computes  the  first  n  terms  of  the  minimal projective
-  resolution of M
+  function  below  computes the beginning of the minimal projective resolution
+  of M
   
   
        P_n -> ... -> P_2 -> P_1 -> P_0 -> M -> 0
   
   
   where  P_i  is  the direct sum (kG)^(b_i) for certain numbers b_i, the [13XBetti
-  numbers[0X  of  the  resolution.  The  minimal kG-projective resolution of M is
-  unique  up  to chain isomorphism. Because of the minimality of P, the groups
+  numbers[0m  of  the  resolution.  The  minimal kG-projective resolution of M is
+  unique  up  to  chain isomorphism. Because of the minimality of P the groups
   Ext^i(M,N)  are  simply  Hom(P_i,N),  and  if  M  and N are both the trivial
   kG-module k, then H^i(G,k)=Ext^i(k,k)=k^(b_i).
   
-  [1X2.2-1 ProjectiveResolution[0X
+  [1X2.2-1 ProjectiveResolution[0m
   
   [2X> ProjectiveResolution( [0X[3XC, n[0X[2X ) ____________________________________[0Xoperation
   [6XReturns:[0X  a list containing the Betti numbers b_0, b_1,..., b_n.
   
-  Given  a  cohomology  object  [9XC[0X  having  components  G  and M, this function
-  computes  the first [9Xn[0X+1 terms of the minimal projective resolution P of M of
-  the  form  P_i=(kG)^(b_i)  for i=0,1,...,n, and returns the numbers b_i as a
+  Given  a  cohomology  object  [9XC[0m  having  components  G  and M, this function
+  computes  the first [9Xn[0m+1 terms of the minimal projective resolution P of M of
+  the  form  P_i=(kG)^(b_i)  for  i=0,1,...,n and returns the numbers b_i as a
   list.
   
-  [1X2.2-2 BoundaryMap[0X
+  [1X2.2-2 BoundaryMap[0m
   
   [2X> BoundaryMap( [0X[3XC, n[0X[2X ) _____________________________________________[0Xoperation
-  [6XReturns:[0X  the [9Xn[0Xth boundary map.
+  [6XReturns:[0X  the [9Xn[0mth boundary map.
   
-  Given   the  cohomology  object  [9XC[0X,  this  function  computes  a  projective
-  resolution  to  degree [9Xn[0X if it hasn't been computed already, and returns the
-  [9Xn[0Xth boundary map.
+  Given   the  cohomology  object  [9XC[0m,  this  function  computes  a  projective
+  resolution  to  degree [9Xn[0m if it hasn't been computed already, and returns the
+  [9Xn[0mth boundary map P_n -> P_n-1.
   
   The map returned is a b_n x b_n-1|G| matrix, having in the ith row the image
   of the element 1_G from the ith direct summand of P_n.
   
-  See the file [9Xdoc/example.*[0X for an example of the usage and interpretation of
+  See the file [9Xdoc/example.*[0m for an example of the usage and interpretation of
   the result of this function.
   
   
   [1X2.3 Cohomology Generators and Relators[0X
   
   See [CTVZ03] for the details of the calculation of cohomology products using
-  composition  of  chain  maps.  See  also  the  file [9Xdoc/explanation.*[0X for an
+  composition  of  chain  maps.  See  also  the  file [9Xdoc/explanation.*[0m for an
   explanation of the implementation.
   
-  [1X2.3-1 CohomologyGenerators[0X
+  [1X2.3-1 CohomologyGenerators[0m
   
   [2X> CohomologyGenerators( [0X[3XC, n[0X[2X ) ____________________________________[0Xoperation
   [6XReturns:[0X  a  list  containing  the  degrees  of  the  elements  of  a set of
             generators of the cohomology ring.
   
-  Given  a  cohomology  object [9XC[0X having group component G and module component
+  Given  a  cohomology  object [9XC[0m having group component G and module component
   the trivial kG-module, this function computes a set of generators of H*(G,k)
-  having  degree  [9Xn[0X or less, and stores them in [9XC[0X. The function returns a list
+  having  degree  [9Xn[0m or less, and stores them in [9XC[0m. The function returns a list
   of the degrees of these generators.
   
-  The  actual  cohomology  generators are represented by maps P_n -> k and are
-  stored in [9XC[0X as matrices. Only their degrees are returned.
+  The  actual  cohomology  generators are represented by maps P_i -> k for 0le
+  ile n and are stored in [9XC[0m as matrices. Only their degrees are returned.
   
-  [1X2.3-2 CohomologyRelators[0X
+  [1X2.3-2 CohomologyRelators[0m
   
   [2X> CohomologyRelators( [0X[3XC, n[0X[2X ) ______________________________________[0Xoperation
   [6XReturns:[0X  a list of generators and a list of relators.
   
-  Given a cohomology object [9XC[0X having group component G and module component k,
+  Given a cohomology object [9XC[0m having group component G and module component k,
   this  function  computes  a  set  of  generators of the ideal of relators in
-  H*(G,k), all having multidegree n or less.
+  H*(G,k), all having degree n or less.
   
   More specifically, the function returns two lists, the first list containing
-  the  variables  [9Xz[0X,  [9Xy[0X,  [9Xx[0X, ... corresponding to the generators of H*(G,k) if
-  there  are  fewer  than 12 generators and containing the variables [9Xx_1[0X, [9Xx_2[0X,
-  [9Xx_3[0X,  ...  otherwise.  The  second  list  is  a  list  of polynomials in the
+  the  variables  [9Xz[0m,  [9Xy[0m,  [9Xx[0m, ... corresponding to the generators of H*(G,k) if
+  there  are  fewer  than 12 generators and containing the variables [9Xx_1[0m, [9Xx_2[0m,
+  [9Xx_3[0m,  ...  otherwise.  The  second  list  is  a  list  of polynomials in the
   variables from the first list.
   
-  These  two  lists should be interpreted as follows. A degree [9Xn[0X approximation
+  These  two  lists should be interpreted as follows. A degree [9Xn[0m approximation
   of the cohomology ring H*(G,k) is given by the polynomial ring over k in the
   non-commuting  variables  from  the first list, (having degrees given by the
-  list  returned by [9XCohomologyGenerators[0X in section [14X2.3-1[0X ) and subject to the
-  relators in the second list. See section [14X2.6[0X for more details still.
+  list  returned by [9XCohomologyGenerators[0m in section [14X2.3-1[0m ) and subject to the
+  relators in the second list. See section [14X2.6[0m for more details still.
   
   For example, consider the following commands.
   
@@ -134,28 +135,26 @@
     [4X[ 1, 1, 2 ][0X
     [4Xgap> CohomologyRelators(C,10);[0X
     [4X[ [ z, y, x ], [ z*y+y^2 ] ][0X
-    [4X[0X
   [4X------------------------------------------------------------------[0X
   
-  This   tells  us  that  for  G=D_8,  the  cohomology  ring  H*(G,k)  is  the
-  graded-commutative  polynomial  ring in the variables z, y, and x of degrees
-  1,  1,  and  2,  subject  to  the  relation  zy+y^2.  But  since  H*(G,k) is
-  commutative, k being of characteristic 2, we have H*(G,k)=k[z,y,x]/(zy+y^2).
-  This   result   can   be   further   improved   by   taking   z=z+y,  giving
-  H*(G,k)=k[z,y,x]/(zy).
+  This  tells us that for G=D_8 and k=GF(p) the cohomology ring H*(G,k) is the
+  graded-commutative polynomial ring in the variables z, y, x of degrees 1, 1,
+  2, subject to the relation zy+y^2. But since H*(G,k) is commutative, k being
+  of  characteristic  2, we have H*(G,k)=k[z,y,x]/(zy+y^2). This result can be
+  further improved by taking z=z+y, giving H*(G,k)=k[z,y,x]/(zy).
   
   Observe  that  in  this  case,  we  knew  in advance that there was a set of
   generators  for H*(G,k) all having degree less than 10, and that there was a
-  set  of generators of the ideal of relators all having multidegree less than
-  10. See see section [14X2.6[0X for details.
+  set  of  generators of the ideal of relators all having degree less than 10.
+  See see section [14X2.6[0m for details.
   
   While  this isn't likely to occur, we point out that if there are 12 or more
-  generators  and  some  of the indeterminates [9Xx_1[0X, [9Xx_2[0X, [9Xx_3[0X, ... have already
-  been  named,  say  by  a  previous  call  to  [9XCohomologyRelators[0X, then these
+  generators  and  some  of the indeterminates [9Xx_1[0m, [9Xx_2[0m, [9Xx_3[0m, ... have already
+  been  named,  say  by  a  previous  call  to  [9XCohomologyRelators[0m, then these
   variables  will  retain  their  old  names.  If this is confusing, you could
-  restart [5XGAP[0X and do it again.
+  restart [5XGAP[0m and do it again.
   
-  Finally,  [9XCohomologyRelators[0X  is  [13Xnot[0X  idempotent for efficiency reasons, so
+  Finally,  [9XCohomologyRelators[0m  is  [13Xnot[0m  idempotent for efficiency reasons, so
   sadly,  if  you don't uncover all the relators the first time, you will have
   to start all over from the beginning.
   
@@ -168,65 +167,65 @@
   
   [1X2.5 Cohomology Rings[0X
   
-  Whereas  the operations in sections [14X2.3-1[0X and [14X2.3-2[0X calculate a presentation
-  for  the  cohomology  ring, the operation below creates the ring in [5XGAP[0X as a
+  Whereas  the operations in sections [14X2.3-1[0m and [14X2.3-2[0m calculate a presentation
+  for  the  cohomology  ring, the operation below creates the ring in [5XGAP[0m as a
   structure constant algebra.
   
   See [CTVZ03] for the details of the calculation of cohomology products using
-  composition  of  chain  maps.  See  also  the  file [9Xdoc/explanation.*[0X for an
+  composition  of  chain  maps.  See  also  the  file [9Xdoc/explanation.*[0m for an
   explanation of the implementation.
   
-  [1X2.5-1 CohomologyRing[0X
+  [1X2.5-1 CohomologyRing[0m
   
   [2X> CohomologyRing( [0X[3XC, n[0X[2X ) __________________________________________[0Xoperation
   [2X> CohomologyRing( [0X[3XG, n[0X[2X ) __________________________________________[0Xoperation
   [6XReturns:[0X  the cohomology ring of G.
   
-  Given  a cohomology object [9XC[0X with group component G and module component the
-  trivial  kG-module,  this  function  returns  the degree [9Xn[0X truncation of the
-  cohomology  ring  H*(G,k).  See  [14X2.6[0X for what this means exactly. The object
+  Given  a cohomology object [9XC[0m with group component G and module component the
+  trivial  kG-module,  this  function  returns  the degree [9Xn[0m truncation of the
+  cohomology  ring  H*(G,k).  See  [14X2.6[0m for what this means exactly. The object
   returned is a structure constant algebra.
   
   Users  interested  only  in working with the cohomology ring of a group as a
-  [5XGAP[0X  object, and not in calculating generators, relators, induced maps, etc,
+  [5XGAP[0m  object, and not in calculating generators, relators, induced maps, etc,
   can use the second invocation of this function, which returns the cohomology
-  ring   of   the   group   [9XG[0X  immediately,  throwing  away  all  intermediate
+  ring   of   the   group   [9XG[0m  immediately,  throwing  away  all  intermediate
   calculations.
   
-  Observe   that  the  object  returned  is  a  degree  [9Xn[0X  truncation  of  the
+  Observe   that  the  object  returned  is  a  degree  [9Xn[0m  truncation  of  the
   infinite-dimensional   cohomology  ring.  A  consequence  of  this  is  that
-  multiplying  two elements whose product has degree greater than [9Xn[0X results in
+  multiplying  two elements whose product has degree greater than [9Xn[0m results in
   zero, whether or not the product is really zero.
   
-  Observe  also that calling [9XCohomologyRing[0X a second time with a bigger [9Xn[0X does
-  [13Xnot[0X  extend the previous ring, but rather, recalculates the entire ring from
+  Observe  also that calling [9XCohomologyRing[0m a second time with a bigger [9Xn[0m does
+  [13Xnot[0m  extend the previous ring, but rather, recalculates the entire ring from
   the  beginning.  Extending  the  previous  ring  appears not to be worth the
   effort  for  technical  reasons,  since  almost  everything would need to be
   recalculated again anyway.
   
-  Recall  that  H*(G,k) is a graded structure constant algebra, the components
-  being  the cohomology groups H^i(G,k). The following functions were intended
-  to  be used for cohomology rings, but in principle, they work for any graded
-  structure constant algebra.
+  Recall that H*(G,k) is a graded algebra, the components being the cohomology
+  groups  H^i(G,k).  The  following  functions  were  intended  to be used for
+  cohomology  rings,  but  in  principle,  they  work for any graded structure
+  constant algebra.
   
-  [1X2.5-2 IsHomogeneous[0X
+  [1X2.5-2 IsHomogeneous[0m
   
   [2X> IsHomogeneous( [0X[3Xe[0X[2X ) ______________________________________________[0Xoperation
-  [6XReturns:[0X  [9Xtrue[0X or [9Xfalse[0X.
+  [6XReturns:[0X  [9Xtrue[0m or [9Xfalse[0m.
   
-  Given  an  element [9Xe[0X of a cohomology ring H*(G,k), this operation determines
-  whether or not [9Xe[0X is homogeneous, that is, whether [9Xe[0X is contained in H^i(G,k)
-  for some [9Xi[0X.
+  Given  an  element [9Xe[0m of a cohomology ring H*(G,k), this operation determines
+  whether or not [9Xe[0m is homogeneous, that is, whether [9Xe[0m is contained in H^i(G,k)
+  for some [9Xi[0m.
   
-  [1X2.5-3 Degree[0X
+  [1X2.5-3 Degree[0m
   
   [2X> Degree( [0X[3Xe[0X[2X ) ________________________________________________________[0Xmethod
-  [6XReturns:[0X  the degree of [9Xe[0X.
+  [6XReturns:[0X  the degree of [9Xe[0m.
   
-  This  function  returns the degree of the possibly non-homogeneous element [9Xe[0X
+  This  function  returns the degree of the possibly non-homogeneous element [9Xe[0m
   of  a  cohomology ring H*(G,k). Specifically, if H*(G,k) = A_0 + A_1 + A_2 +
-  ... where A_i = H^i(G,k), then this function returns the minimum n such that
-  [9Xe[0X is in A_0 + A_1 + ... + A_n.
+  ...  where A_i = H^i(G,k) then this function returns the minimum n such that
+  [9Xe[0m is in A_0 + A_1 + ... + A_n.
   
   [4X---------------------------  Example  ----------------------------[0X
     [4Xgap> A:=CohomologyRing(DihedralGroup(8),10);[0X
@@ -241,18 +240,18 @@
     [4X2 [0X
   [4X------------------------------------------------------------------[0X
   
-  [1X2.5-4 LocateGeneratorsInCohomologyRing[0X
+  [1X2.5-4 LocateGeneratorsInCohomologyRing[0m
   
   [2X> LocateGeneratorsInCohomologyRing( [0X[3XC[0X[2X ) ____________________________[0Xfunction
   [6XReturns:[0X  a list containing the cohomology generators.
   
-  Having  already  called  [9XCohomologyRing[0X (see [14X2.5-1[0X), this function returns a
+  Having  already  called  [9XCohomologyRing[0m (see [14X2.5-1[0m), this function returns a
   list  of  elements  of  the cohomology ring which together with the identity
   element generate the cohomology ring.
   
-  This  function  is a wrapper for [9XCohomologyGenerators[0X (see [14X2.3-1[0X). It points
+  This  function  is a wrapper for [9XCohomologyGenerators[0m (see [14X2.3-1[0m). It points
   out  which  elements  of  the cohomology ring correspond with the generators
-  found by [9XCohomologyGenerators[0X.
+  found by [9XCohomologyGenerators[0m.
   
   [4X---------------------------  Example  ----------------------------[0X
     [4Xgap> C:=CohomologyObject(SmallGroup(8,4));[0X
@@ -266,49 +265,49 @@
   [4X------------------------------------------------------------------[0X
   
   
-  [1X2.6 What Happens if [9Xn[0X[1X Isn't Big Enough?[0X
+  [1X2.6 What Happens if [9Xn[1X Isn't Big Enough?[0X
   
-  Since   P   is   a   [13Xminimal[0X  projective  resolution,  we  have  H^i(G,k)  =
+  Since   P   is   a   [13Xminimal[0m  projective  resolution,  we  have  H^i(G,k)  =
   Hom_{kG}(P_i,k)  where  P_i  = (kG)^b_i so that H^i(G,k) has a natural basis
   consisting  of the maps sending the element 1_G of the jth direct summand of
   P_i  to 1_k and all other direct summands to 0, for j=1,2,...,b_i, where b_i
   is the kG-rank of P_i.
   
-  The  command  [9XCohomologyRing(C,n)[0X  forms the vector space whose basis is the
+  The  command  [9XCohomologyRing(C,n)[0m  forms the vector space whose basis is the
   concatenation  of the natural bases of H^i(G,k) for i=1,2,...,n and computes
   all  products of basis elements x and y for which deg x+deg y <= n. Thinking
   of  H*(G,k)  in  terms  of  it's  multiplication  table, this means that the
   function computes the upper left-hand corner of the multiplication table. If
   deg  x  + deg y > n, the product xy is taken to be zero. Therefore, the ring
-  returned by [9XCohomologyRing[0X is H*(G,k)/J where J is the ideal of all elements
+  returned by [9XCohomologyRing[0m is H*(G,k)/J where J is the ideal of all elements
   of degree >n.
   
-  The  ring  determined  by  [9XCohomologyGenerators[0X  and  [9XCohomologyRelators[0X  is
-  somewhat  different.  [9XCohomologyGenerators[0X  proceeds inductively, taking all
+  The  ring  determined  by  [9XCohomologyGenerators[0m  and  [9XCohomologyRelators[0m  is
+  somewhat  different.  [9XCohomologyGenerators[0m  proceeds inductively, taking all
   natural  basis  elements of H^1(G,k) as generators, and for i=2... n, taking
-  all   natural   basis  elements  of  H^i(G,k)  which  are  [13Xnot[0X  products  of
+  all   natural   basis  elements  of  H^i(G,k)  which  are  [13Xnot[0m  products  of
   lower-degree  elements  as generators. Therefore, unless you know that there
   is  an  n  for  which there exists a generating set of H*(G,k) consisting of
-  elements  of degree n or less, then you are [13Xnot[0X guaranteed that the elements
-  returned  by  the  [9XCohomologyGenerators[0X  generate  H*(G,k)  as  a  ring. The
-  knowledge of such an n is the subject of section [14X2.4[0X.
+  elements  of degree n or less, then you are [13Xnot[0m guaranteed that the elements
+  returned  by  the  [9XCohomologyGenerators[0m  generate  H*(G,k)  as  a  ring. The
+  knowledge of such an n is the subject of section [14X2.4[0m.
   
-  Similarly, [9XCohomologyRelators[0X proceeds inductively until degree n, returning
-  a  list of polynomials which generate the ideal of relators of multidegree n
-  or less. Again, you have to already know how big n should be.
+  Similarly, [9XCohomologyRelators[0m proceeds inductively until degree n, returning
+  a  list  of  polynomials which generate the ideal of relators of degree n or
+  less. Again, you have to already know how big n should be.
   
   The  result  of the preceding information is that there is a homomorphism k<
-  x_1,x_2,...,  x_m  >/ I -> H*(G,k), where k< x_1,x_2,... x_m > is the graded
+  x_1,x_2,...,  x_m  >/ I -> H*(G,k), where k< x_1,x_2,...,x_m > is the graded
   polynomial  ring  over  k  in  the  non-commuting variables x_1,x_2,...,x_m,
-  having degrees the numbers in the list returned by [9XCohomologyGenerators[0X, and
+  having degrees the numbers in the list returned by [9XCohomologyGenerators[0m, and
   I  is  the ideal in k< x_1,x_2,..., x_m > generated by the elements returned
-  by [9XCohomologyRelators(C,n)[0X.
+  by [9XCohomologyRelators(C,n)[0m.
   
   Therefore, if there is a generator of degree greater than n, then f won't be
-  surjective.  Similarly,  if there is a relator of multidegree greater than n
-  which  is  not  a  consequence  of  lower  degree  relators, then f won't be
-  injective.  See  section  [14X2.4[0X  for  a discussion on how big n needs to be to
-  ensure that f be an isomorphism.
+  surjective.  Similarly, if there is a relator of degree greater than n which
+  is  not  a  consequence of lower degree relators, then f won't be injective.
+  See  section  [14X2.4[0m for a discussion on how big n needs to be to ensure that f
+  will be an isomorphism.
   
   
   [1X2.7 Induced Maps[0X
@@ -316,25 +315,25 @@
   Let  f:  H  ->  G  be a group homomorphism. Then f induces a homomorphism on
   cohomology H*(G,k) -> H*(H,k) which is returned by the following function.
   
-  [1X2.7-1 InducedHomomorphismOnCohomology[0X
+  [1X2.7-1 InducedHomomorphismOnCohomology[0m
   
   [2X> InducedHomomorphismOnCohomology( [0X[3XC, D, f, n[0X[2X ) ____________________[0Xfunction
   [6XReturns:[0X  the induced homomorphism on cohomology.
   
-  This function returns the induced homomorphism H*(G,k) -> H*(H,k), where the
-  groups H and G are the components of the cohomology objects [9XC[0X and [9XD[0X and f: H
+  This  function returns the induced homomorphism H*(G,k) -> H*(H,k) where the
+  groups H and G are the components of the cohomology objects [9XC[0m and [9XD[0m and f: H
   ->  G  is  a  group  homomorphism. If the cohomology rings have not yet been
   calculated,  they  will  be computed to degree n, and in this case, they can
-  then be accessed by calling [9XCohomologyRing[0X (see [14X2.5-1[0X).
+  then be accessed by calling [9XCohomologyRing[0m (see [14X2.5-1[0m).
   
-  [1X2.7-2 Inclusion[0X
+  [1X2.7-2 SubgroupInclusion[0m
   
-  [2X> Inclusion( [0X[3XH, G[0X[2X ) ________________________________________________[0Xfunction
+  [2X> SubgroupInclusion( [0X[3XH, G[0X[2X ) ________________________________________[0Xfunction
   [6XReturns:[0X  the inclusion H-> G
   
   This  function  returns the group homomorphism H-> G when H is a subgroup of
-  G.    The    returned   map   can   be   used   as   the   [9Xf[0X   argument   of
-  [9XInducedHomomorphismOnCohomology[0X,  in  which case the induced homomorphism is
+  G.    The    returned   map   can   be   used   as   the   [9Xf[0m   argument   of
+  [9XInducedHomomorphismOnCohomology[0m,  in  which case the induced homomorphism is
   the restriction map Res: H*(G,k) -> H*(H,k).
   
   The  following  example calculates the homomorphism on cohomology induced by
@@ -349,7 +348,7 @@
     [4Xgap> C:=CohomologyObject(H);D:=CohomologyObject(G);[0X
     [4X<object>[0X
     [4X<object>[0X
-    [4Xgap> i:=Inclusion(H,G);[0X
+    [4Xgap> i:=SubgroupInclusion(H,G);[0X
     [4X[ f2 ] -> [ f2 ][0X
     [4Xgap> Res:=InducedHomomorphismOnCohomology(C,D,i,10);;[0X
     [4Xgap> A:=CohomologyRing(D,10);[0X
@@ -368,18 +367,18 @@
   [1X2.8 Massey Products[0X
   
   See  [Kra66]  for  the  definitions  and  [Bor01]  for  the  details  of the
-  calculation  using the Yoneda cocomplex. See also the file [9Xdoc/explanation.*[0X
+  calculation  using the Yoneda cocomplex. See also the file [9Xdoc/explanation.*[0m
   for an explanation of the implementation.
   
-  [1X2.8-1 MasseyProduct[0X
+  [1X2.8-1 MasseyProduct[0m
   
   [2X> MasseyProduct( [0X[3Xx1, x2, ..., xn[0X[2X ) _________________________________[0Xfunction
   [6XReturns:[0X  the Massey product < x1, x2, ... , xn>.
   
-  Given  elements x1, x2, ... , xn of the ring returned by [9XCohomologyRing[0X (see
-  [14X2.5[0X),  this function computes the n-fold Massey product < x1, x2, ... , xn >
+  Given  elements x1, x2, ... , xn of the ring returned by [9XCohomologyRing[0m (see
+  [14X2.5[0m)  this  function computes the n-fold Massey product < x1, x2, ... , xn >
   provided  that  the  lower-degree  Massey  products < xi, x{i+1}, ... , xj >
-  vanish for all 1 <= i < j <= n, and returns [9Xfail[0X otherwise.
+  vanish for all 1 <= i < j <= n and returns [9Xfail[0m otherwise.
   
   As an example, recall that the cohomology rings of the cyclic groups C_3 and
   C_9  of sizes 3 and 9 over k=GF(3) are both given by k< z,y >/(z^2), so they

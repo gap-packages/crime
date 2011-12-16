@@ -8,7 +8,7 @@ InstallMethod(CohomologyGenerators,
   "Computes cohomology generators to degree n",
   [IsCObject,IsPosInt], 
   function(C,n)
-    local G,K,R,L,B,H,D,BB,j,k,l,m,h,d,N; 
+    local G,K,R,L,B,D,P,BB,H,h,j,k,l,m,d,N; 
     ProjectiveResolution(C,n);
     G:=C!.G; K:=C!.K; R:=C!.R; L:=C!.L; B:=C!.B;
     if not IsBound(C!.D) then C!.D:=List([1..B[2]],x->1);fi;

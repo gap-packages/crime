@@ -35,7 +35,7 @@ l:=["z","y","x","w","v","u","t","s","r","q","p"];
 if(Size(C!.D)>11) then
   V:=List([1..Size(C!.D)],x->Indeterminate(C!.K,x));
 else
-  V:=List([1..Size(C!.D)],x->Indeterminate(C!.K,l[x]));
+  V:=List([1..Size(C!.D)],x->Indeterminate(C!.K,l[x]:old));
 fi;
 IN:=List(V,IndeterminateNumberOfUnivariateRationalFunction);
 

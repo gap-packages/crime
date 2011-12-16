@@ -1,5 +1,5 @@
 # All the functions in this file are intended to 
-# improve the readability of the rest of the program.
+# improve the readability of the rest of the programs.
 
 InstallGlobalFunction(ExtractColumn,function(M,n)
 # Returns column n of M as a list.
@@ -8,7 +8,7 @@ InstallGlobalFunction(ExtractColumn,function(M,n)
 );
 
 InstallGlobalFunction(FirstLift,function(C,v) 
-# Returns a list containing a |v|x|G| matrix 
+# Returns a list containing a |v| by |G| matrix 
 # having the transpose of v in the first column.
   local N,j;
   N:=NullMat(Size(v),Size(C!.G),C!.K);
@@ -31,7 +31,7 @@ InstallGlobalFunction(LiftChainMap,function(C,L,d,n)
   end
 );
 
-InstallGlobalFunction(LiftChainMapMassey,function(C,L,d,n)
+InstallGlobalFunction(LiftChainMapAlternating,function(C,L,d,n)
   # Same as the previous function, but with a sign change.
   # Read the documentation for an explanation of the (-1)^n.
   local j,c;
@@ -43,7 +43,7 @@ InstallGlobalFunction(LiftChainMapMassey,function(C,L,d,n)
   end
 );
 
-InstallMethod(Inclusion,"Inclusion of a subgroup",
+InstallMethod(SubgroupInclusion,"Inclusion of a subgroup",
   [IsGroup,IsGroup], function(H,G)
     return GroupHomomorphismByImages(H,G,
       GeneratorsOfGroup(H),GeneratorsOfGroup(H));
@@ -51,7 +51,7 @@ InstallMethod(Inclusion,"Inclusion of a subgroup",
 );
 
 InstallGlobalFunction(ActDiagonally,function(N,g)
-  # Applies g diagonally to the vectors in N
+  # Applies g to each block of the vectors in N
   local n,m;
   m:=Size(g);
   n:=Size(N[1])/m; # n is the number of block columns

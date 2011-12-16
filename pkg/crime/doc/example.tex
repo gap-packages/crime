@@ -21,7 +21,7 @@ gap> Pcgs(G);
 Pcgs([ f1, f2, f3 ])
 \end{verbatim}
 Then a little manipulation in \textsf{ GAP}
-reveals that \verb!f1!, \verb!f2!, and \verb!f3!,
+reveals that \verb!f1!, \verb!f2!, and \verb!f3!
 correspond with $x$, $y$, and $z$
 from the presentation above, and with $i$,
 $j$, and $-1$ from the standard presentation 
@@ -71,18 +71,18 @@ of $P_0$. Thus, the Betti numbers give the
 ranks of the cohomology groups as well.
 
 To look at the boundary maps, we need some notation.
-Recall that for $G$ a $p$-group of size $p^n$ and $k$ a field of
+Recall that for a $p$-group $G$ of size $p^n$ and a field $k$ of
 characteristic $p$, which is exactly the situation
-that we're in in this example, the group algebra $kG$ has
-a basis
+that we're in in this example, the group algebra $kG$ has a basis
 \begin{equation}
 \mathcal{B}'=\left\{\left.\rule{0pt}{12pt} x_1^{a_1}x_2^{a_2}\dots x_n^{a_n}\right|
-0\le a_1,a_2,\dots a_n\le p-1\right\}\end{equation}
-where $x_1,x_2,\dots x_n$ is a polycyclic generating set for $G$.
+0\le a_1,a_2,\dots,a_n\le p-1\right\}\end{equation}
+where $x_1,x_2,\dots,x_n$ is a polycyclic generating set for $G$.
 In fact, the fact that $\mathcal{B'}$ is a basis merely expresses the
-fact the $x_1,x_2,\dots x_n$ is a polycyclic generating set.
-In the example $G=Q_8$, arranging the $\left(a_1,a_2,\dots, a_n\right)$'s 
-in reverse lexicographic order, we have
+fact the $x_1,x_2,\dots,x_n$ is a polycyclic generating set.
+When we arrange the elements in the example $G=Q_8$
+such that the exponent tuples $\left(a_1,a_2,\dots, a_n\right)$
+are in reverse lexicographic order, we have
 \begin{align*}
 \mathcal{B}'
 &=\left(\begin{array}{cccccccc}1,&x,&y,&xy,&z,&xz,&yz,&xyz\end{array}\right)\\
@@ -124,14 +124,9 @@ Observe first that $\partial_5=\partial_1$,
 so we see that $P_\ast$ is in fact
 periodic as mentioned above. 
 The matrices for $\partial_n$ give only the image of $1_G$
-from each direct factor of $P_n$, since the images of the
+from each direct factor of $P_n$ since the images of the
 the other elements of $P_n$ are determined by linearity.
-\footnote{Note to users: if the matrices giving the action
-of $kG$ on itself with respect to $\mathcal{B}$, or the full
-matrices for the $\partial_n$'s would be useful to users,
-please let me know. I could include functions to return them,
-but I hesitate to overload the user with superfluous information.}
-For example, since \[\partial_1:P_1=kG\oplus kG\to P_0=kG,\]
+For example, since \[\partial_1:P_1=kG\oplus kG\to P_0=kG\]
 the matrix returned above tells us that $\partial_1\left(1_G,0\right)=I$
 and $\partial_1\left(0,1_G\right)=J$. Summarizing the information
 above, we have the following.
@@ -157,7 +152,7 @@ around.
 
 Then the following are chain maps representing $\eta_1$ and $\eta_2$.
 \begin{equation}\label{eta12}
-\begin{xy}\xymatrix{
+\vcenter{\begin{xy}\xymatrix{
 P_3\ar[r]^{\left(\begin{smallmatrix}J&K\end{smallmatrix}\right)}
 \ar[d]_{\left(\begin{smallmatrix}0&1\end{smallmatrix}\right)}
 &P_2\ar[r]^{\left(\begin{smallmatrix}I&J\\J&K\end{smallmatrix}\right)}
@@ -168,8 +163,8 @@ P_2\ar[r]_{\left(\begin{smallmatrix}I&J\\J&K\end{smallmatrix}\right)}
 &P_1\ar[r]_{\left(\begin{smallmatrix}I\\J\end{smallmatrix}\right)}
 &P_0\ar[r]^\epsilon
 &k
-}\end{xy}\qquad
-\begin{xy}\xymatrix{
+}\end{xy}}\qquad
+\vcenter{\begin{xy}\xymatrix{
 P_3\ar[r]^{\left(\begin{smallmatrix}J&K\end{smallmatrix}\right)}
 \ar[d]_{\left(\begin{smallmatrix}1&1\end{smallmatrix}\right)}
 &P_2\ar[r]^{\left(\begin{smallmatrix}I&J\\J&K\end{smallmatrix}\right)}
@@ -180,12 +175,12 @@ P_2\ar[r]_{\left(\begin{smallmatrix}I&J\\J&K\end{smallmatrix}\right)}
 &P_1\ar[r]_{\left(\begin{smallmatrix}I\\J\end{smallmatrix}\right)}
 &P_0\ar[r]^\epsilon
 &k
-}\end{xy}
+}\end{xy}}
 \end{equation}
 In the rows of the diagrams in (\ref{eta12}) we have copies
 of $P_\ast$, while in the columns, we have maps making the diagrams
-commute. These maps were produced by inspection and by \dots
-well, let's just say that I used \textsf{GAP} a tiny bit.
+commute. These maps were produced by inspection, but would be much
+harder to compute for larger groups.
 Fortunately, this is exactly what the \textsf{CRIME} package
 does for us, as we will see below.
 
@@ -196,7 +191,7 @@ of the two pictures represents the product,
 as in the following picture.
 
 \begin{equation}\label{prod}
-\begin{xy}\xymatrix{
+\vcenter{\begin{xy}\xymatrix{
 P_3\ar[r]
 \ar[d]_{\left(\begin{smallmatrix}0&1\end{smallmatrix}\right)}
 &P_2\ar[r]
@@ -212,7 +207,7 @@ P_2\ar[r]
 P_1\ar[r]
 &P_0\ar[r]^\epsilon
 &k
-}\end{xy}
+}\end{xy}}
 \end{equation}
 
 From (\ref{prod}), we can see that $\eta_1\eta_2=\zeta_2$
@@ -233,7 +228,7 @@ Let $\left\{\xi\right\}$ be the natural
 basis of $H^4\left(G\right)$.
 We lift $\xi$ to a chain map.
 \begin{equation}\label{xi}
-\begin{xy}\xymatrix{
+\vcenter{\begin{xy}\xymatrix{
 P_8\ar[r]^{\left(\begin{smallmatrix}I^3J\end{smallmatrix}\right)}
 \ar[d]_1
 &P_7\ar[r]^{\left(\begin{smallmatrix}J\\K\end{smallmatrix}\right)}
@@ -249,11 +244,11 @@ P_4\ar[r]_{\left(\begin{smallmatrix}I^3J\end{smallmatrix}\right)}
 &P_1\ar[r]_{\left(\begin{smallmatrix}I&J\end{smallmatrix}\right)}\ar[r]
 &P_0\ar[r]^\epsilon
 &k
-}\end{xy}
+}\end{xy}}
 \end{equation}
 This time, the production of the chain map is easy because
 of the periodicity of $P_\ast$. 
-From (\ref{xi}), we see that all the elements of degree 4--7 
+From (\ref{xi}) we see that all the elements of degree 4--7 
 arise as products of $\xi$ with elements of degree
 0--3, which in turn are products of $\eta_1$ and $\eta_2$.
 

@@ -1,9 +1,9 @@
   
   
-                               [1XThe [5XCrime[0X Package[0X
+                               [1XThe [5XCRIME[0m[1X Package[0m
   
   
-                                  Version 1.3
+                                  Version 1.4
   
   
                                  Marcus Bishop
@@ -11,32 +11,34 @@
   
   
   Marcus Bishop
-      Email:    [7Xmailto:marcus.bishop@gmail.com[0X
+      Email:    [7Xmailto:marcus.bishop@gmail.com[0m
   
   -------------------------------------------------------
-  [1XCopyright[0X
+  [1XCopyright[0m
   © 2006, 2007 Marcus Bishop
   
-  Crime  is  free  software which is distributed under the GNU Public Licence,
+  [5XCRIME[0m  is  free  software which is distributed under the GNU Public Licence,
   version  2, and may be redistributed under the GNU Public Licence, version 2
   or later (at your preference). See the file COPYING for detailed information
   
   
   -------------------------------------------------------
-  [1XAcknowledgements[0X
+  [1XAcknowledgements[0m
   This  project  would not have been possible without Jon Carlson. Jon devised
-  the  algorithms  used  by  [9XProjectiveResolution[0X,  [9XCohomologyGenerators[0X,  and
-  [9XCohomologyRelators[0X,  having  already  implemented  them in [5XMagma[0X, and shared
+  the  algorithms  used  by  [9XProjectiveResolution[0m,  [9XCohomologyGenerators[0m,  and
+  [9XCohomologyRelators[0m,  having  already  implemented  them in [5XMagma[0m, and shared
   these programs with me.
   
   
   -------------------------------------------------------
   
   
-  [1XContent (crime)[0X
+  [1XContents (crime)[0X
   
-  1. Installation and Loading
-  2. Usage
+  1 Introduction
+    1.1 Installation and Loading
+    1.2 For Further Information
+  2 Usage
     2.1 Cohomology Objects
       2.1-1 CohomologyObject
     2.2 Minimal Projective Resolutions
@@ -51,14 +53,14 @@
       2.5-2 IsHomogeneous
       2.5-3 Degree
       2.5-4 LocateGeneratorsInCohomologyRing
-    2.6 What Happens if [9Xn[0X Isn't Big Enough?
+    2.6 What Happens if [9Xn[0m Isn't Big Enough?
     2.7 Induced Maps
       2.7-1 InducedHomomorphismOnCohomology
-      2.7-2 Inclusion
+      2.7-2 SubgroupInclusion
     2.8 Massey Products
       2.8-1 MasseyProduct
-  A. Some Benchmarks
-  B. Leisure and Recreation: Cohomology Rings of all Groups of Size 16
+  A Some Benchmarks
+  B Leisure and Recreation: Cohomology Rings of all Groups of Size 16
   
   
   -------------------------------------------------------
