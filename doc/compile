@@ -1,7 +1,0 @@
-LoadPackage("crime");
-path:=Directory(Concatenation(
-  PackageInfo("crime")[1].InstallationPath,"/doc"));
-main:="crime.xml";
-files:=[];
-bookname:="Crime";
-MakeGAPDocDoc(path,main,files,bookname);
