@@ -1,0 +1,86 @@
+  
+  [1XB [33X[0;0YLeisure and Recreation: Cohomology Rings of all Groups of Size 16[133X[101X
+  
+  [33X[0;0YBelow  is the output of the test file [9Xtst/batch.g[109X. The file runs through all
+  groups  of size [22Xn[122X, which is initially set to [22X16[122X, calls [9XProjectiveResolution[109X,
+  [9XCohomologyGenerators[109X,  and [9XCohomologyRelators[109X for each group, and prints the
+  results,  as well as the runtimes for each operation, to a file like the one
+  shown  below.  The  runtimes  in this example have been deleted, having been
+  presented  in  Appendix [14XA[114X. The example below was computed on a 2.4 GHz AMD64
+  processor  with  12  GB  of  RAM. See the file [9Xtst/README[109X for suggestions on
+  dealing with other users when running long-running batch processes.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+    [4X[28XSmallGroup(16,1)[128X[104X
+    [4X[28XBetti Numbers: [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ][128X[104X
+    [4X[28XGenerators in degrees: [ 1, 2 ][128X[104X
+    [4X[28XRelators: [ [ z, y ], [ z^2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSmallGroup(16,2)[128X[104X
+    [4X[28XBetti Numbers: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ][128X[104X
+    [4X[28XGenerators in degrees: [ 1, 1, 2, 2 ][128X[104X
+    [4X[28XRelators: [ [ z, y, x, w ], [ z^2, y^2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSmallGroup(16,3)[128X[104X
+    [4X[28XBetti Numbers: [ 1, 2, 4, 6, 9, 12, 16, 20, 25, 30, 36 ][128X[104X
+    [4X[28XGenerators in degrees: [ 1, 1, 2, 2, 2 ][128X[104X
+    [4X[28XRelators: [ [ z, y, x, w, v ], [ z^2, z*y, z*x, y^2*v+x^2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSmallGroup(16,4)[128X[104X
+    [4X[28XBetti Numbers: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ][128X[104X
+    [4X[28XGenerators in degrees: [ 1, 1, 2, 2 ][128X[104X
+    [4X[28XRelators: [ [ z, y, x, w ], [ z^2, z*y+y^2, y^3 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSmallGroup(16,5)[128X[104X
+    [4X[28XBetti Numbers: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ][128X[104X
+    [4X[28XGenerators in degrees: [ 1, 1, 2 ][128X[104X
+    [4X[28XRelators: [ [ z, y, x ], [ z^2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSmallGroup(16,6)[128X[104X
+    [4X[28XBetti Numbers: [ 1, 2, 2, 2, 3, 4, 4, 4, 5, 6, 6 ][128X[104X
+    [4X[28XGenerators in degrees: [ 1, 1, 3, 4 ][128X[104X
+    [4X[28XRelators: [ [ z, y, x, w ], [ z^2, z*y^2, z*x, x^2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSmallGroup(16,7)[128X[104X
+    [4X[28XBetti Numbers: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ][128X[104X
+    [4X[28XGenerators in degrees: [ 1, 1, 2 ][128X[104X
+    [4X[28XRelators: [ [ z, y, x ], [ z*y ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSmallGroup(16,8)[128X[104X
+    [4X[28XBetti Numbers: [ 1, 2, 2, 2, 3, 4, 4, 4, 5, 6, 6 ][128X[104X
+    [4X[28XGenerators in degrees: [ 1, 1, 3, 4 ][128X[104X
+    [4X[28XRelators: [ [ z, y, x, w ], [ z*y, z^3, z*x, y^2*w+x^2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSmallGroup(16,9)[128X[104X
+    [4X[28XBetti Numbers: [ 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2 ][128X[104X
+    [4X[28XGenerators in degrees: [ 1, 1, 4 ][128X[104X
+    [4X[28XRelators: [ [ z, y, x ], [ z*y, z^3+y^3, y^4 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSmallGroup(16,10)[128X[104X
+    [4X[28XBetti Numbers: [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66 ][128X[104X
+    [4X[28XGenerators in degrees: [ 1, 1, 1, 2 ][128X[104X
+    [4X[28XRelators: [ [ z, y, x, w ], [ z^2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSmallGroup(16,11)[128X[104X
+    [4X[28XBetti Numbers: [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66 ][128X[104X
+    [4X[28XGenerators in degrees: [ 1, 1, 1, 2 ][128X[104X
+    [4X[28XRelators: [ [ z, y, x, w ], [ z*y ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSmallGroup(16,12)[128X[104X
+    [4X[28XBetti Numbers: [ 1, 3, 5, 6, 7, 9, 11, 12, 13, 15, 17 ][128X[104X
+    [4X[28XGenerators in degrees: [ 1, 1, 1, 4 ][128X[104X
+    [4X[28XRelators: [ [ z, y, x, w ], [ z^2+z*y+y^2, y^3 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSmallGroup(16,13)[128X[104X
+    [4X[28XBetti Numbers: [ 1, 3, 5, 6, 7, 9, 11, 12, 13, 15, 17 ][128X[104X
+    [4X[28XGenerators in degrees: [ 1, 1, 1, 4 ][128X[104X
+    [4X[28XRelators: [ [ z, y, x, w ], [ z*y+x^2, z*x^2+y*x^2, y^2*x^2+x^4 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSmallGroup(16,14)[128X[104X
+    [4X[28XBetti Numbers: [ 1, 4, 10, 20, 35, 56, 84, 120, 165, 220, 286 ][128X[104X
+    [4X[28XGenerators in degrees: [ 1, 1, 1, 1 ][128X[104X
+    [4X[28XRelators: [ [ z, y, x, w ], [  ] ][128X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  

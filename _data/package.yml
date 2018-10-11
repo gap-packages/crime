@@ -1,75 +1,53 @@
-name: GitHubPagesForGAP
-version: 0.2
-date: 2017-02-04
+name: CRIME
+version: 1.4
+date: 2011-06-01
 description: |
-    A GitHub Pages generator for GAP packages
+    A GAP Package to Calculate Group Cohomology and Massey Products
 
 authors:
-    - name: Max Horn
-      url: http://www.quendi.de/math
-    - name: A. U. Thor
+    - name: Marcus Bishop
+      url: http://math.uic.edu/~marcus
 
 maintainers:
-    - name: Max Horn
-      url: http://www.quendi.de/math
-    - name: Jan Itor
+    - name: Marcus Bishop
+      url: http://math.uic.edu/~marcus
 
-GAP: ">=4.8.1"
+GAP: ">=4.4"
 
-needed-pkgs:
-    - name: "GAPDoc"
-      version: ">= 1.2"
-      url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
-    - name: "IO"
-      version: ">= 4.1"
-      url: "https://gap-packages.github.io/io"
-
-suggested-pkgs:
-    - name: "orb"
-      version: ">= 4.2"
-      url: "https://gap-packages.github.io/orb"
-
-www: https://gap-system.github.io/GitHubPagesForGAP/
-readme: README.md
-packageinfo: https://gap-system.github.io/GitHubPagesForGAP/PackageInfo.g
-github: https://github.com/gap-system/GitHubPagesForGAP
+www: http://math.uic.edu/~marcus/Crime
+readme: README
+packageinfo: http://math.uic.edu/~marcus/Crime/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-system/GitHubPagesForGAP/releases/download/v0.2/GitHubPagesForGAP-0.2.tar.gz
-    - name: .tar.bz2
-      url: https://github.com/gap-system/GitHubPagesForGAP/releases/download/v0.2/GitHubPagesForGAP-0.2.tar.bz2
+      url: http://math.uic.edu/~marcus/Crime/crime-1.4.tar.gz
 
 abstract: |
-    This is a pseudo package that contains no actual  <span class="pkgname">GAP</span> code. Instead, it is a template for other  GAP packages that allows to quickly setup GitHub Pages.
+    This package computes the cohomology rings of finite p-groups, induced maps, and Massey products.
 
-status: other
+status: accepted
 doc-html: doc/chap0.html
 doc-pdf: doc/manual.pdf
 keywords: |
-    GitHub Pages, GAP.
+    cohomology.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>HTI17</span>]   <b class='BibAuthor'>Horn, M., Thor, A. U. and Itor, J.</b>,
-     <i class='BibTitle'>GitHubPagesForGAP, A GitHub Pages generator for GAP packages,
-             Version 0.2</i>
-     (<span class='BibYear'>2017</span>)<br />
-    (<span class='BibNote'>GAP package</span>),
-    <span class='BibHowpublished'><a href="https://gap-system.github.io/GitHubPagesForGAP/">https://gap-system.github.io/GitHubPagesForGAP/</a></span>.
+    [<span class='BibKey'>Bis</span>]   <b class='BibAuthor'>Bishop, M.</b>,
+     <i class='BibTitle'>CRIME, A GAP Package to Calculate Group Cohomology and Massey Products,
+             Version 1.4</i><br />
+    (<span class='BibNote'>Refereed GAP package</span>),
+    <span class='BibHowpublished'><a href="http://math.uic.edu/~marcus/Crime">http://math.uic.edu/~marcus/Crime</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ GitHubPagesForGAP0.2,
-      author =           {Horn, M. and Thor, A. U. and Itor, J.},
-      title =            {{GitHubPagesForGAP}, A GitHub Pages generator for GAP packages, {V}ersion 0.2},
-      month =            {Feb},
-      year =             {2017},
-      note =             {GAP package},
-      howpublished =     {\href                              {https://gap-system.github.io/GitHubPagesForGAP/}
-                          {\texttt{https://gap-system.github.io/}\discretionary
-                          {}{}{}\texttt{GitHubPagesForGAP/}}},
-      keywords =         {GitHub Pages; GAP},
-      printedkey =       {HTI17}
+    @misc{ CRIME1.4,
+      author =           {Bishop, M.},
+      title =            {{CRIME}, A GAP Package to Calculate Group Cohomology and Massey Products, {V}ersion 1.4},
+      note =             {Refereed GAP package},
+      howpublished =     {\href   {http://math.uic.edu/~marcus/Crime}   {\texttt{http://math.uic.edu/}\discretionary   {}{}{}\texttt{\texttt{\symbol{126}}marcus/}\discretionary
+                          {}{}{}\texttt{Crime}}},
+      keywords =         {cohomology},
+      printedkey =       {Bis}
     }
 

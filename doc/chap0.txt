@@ -1,1 +1,73 @@
-Placeholder
+  
+  
+                                    [1X CRIME [101X
+  
+  
+       [1X A [5XGAP[105X Package to Calculate Group Cohomology and Massey Products [101X
+  
+  
+                                      1.4
+  
+  
+                                  1 June 2011
+  
+  
+                                 Marcus Bishop
+  
+  
+  
+  Marcus Bishop
+      Email:    [7Xmailto:marcus.bishop@gmail.com[107X
+      Homepage: [7Xhttp://math.uic.edu/~marcus[107X
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y© 2006, 2007 Marcus Bishop[133X
+  
+  [33X[0;0Y[5XCRIME[105X  is  free  software which is distributed under the GNU Public Licence,
+  version  2, and may be redistributed under the GNU Public Licence, version 2
+  or later (at your preference). See the file COPYING for detailed information[133X
+  
+  
+  -------------------------------------------------------
+  [1XAcknowledgements[101X
+  [33X[0;0YThis  project  would not have been possible without Jon Carlson. Jon devised
+  the  algorithms  used  by  [9XProjectiveResolution[109X,  [9XCohomologyGenerators[109X,  and
+  [9XCohomologyRelators[109X,  having  already  implemented  them in [5XMagma[105X, and shared
+  these programs with me.[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (crime)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YInstallation and Loading[133X
+    1.2 [33X[0;0YFor Further Information[133X
+  2 [33X[0;0YUsage[133X
+    2.1 [33X[0;0YCohomology Objects[133X
+      2.1-1 CohomologyObject
+    2.2 [33X[0;0YMinimal Projective Resolutions[133X
+      2.2-1 ProjectiveResolution
+      2.2-2 BoundaryMap
+    2.3 [33X[0;0YCohomology Generators and Relators[133X
+      2.3-1 CohomologyGenerators
+      2.3-2 CohomologyRelators
+    2.4 [33X[0;0YTests for Completion[133X
+    2.5 [33X[0;0YCohomology Rings[133X
+      2.5-1 CohomologyRing
+      2.5-2 IsHomogeneous
+      2.5-3 Degree
+      2.5-4 LocateGeneratorsInCohomologyRing
+    2.6 [33X[0;0YWhat Happens if [9Xn[109X Isn't Big Enough?[133X
+    2.7 [33X[0;0YInduced Maps[133X
+      2.7-1 InducedHomomorphismOnCohomology
+      2.7-2 SubgroupInclusion
+    2.8 [33X[0;0YMassey Products[133X
+      2.8-1 MasseyProduct
+  A [33X[0;0YSome Benchmarks[133X
+  B [33X[0;0YLeisure and Recreation: Cohomology Rings of all Groups of Size 16[133X
+  
+  
+  [32X

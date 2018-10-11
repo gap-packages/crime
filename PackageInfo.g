@@ -1,102 +1,86 @@
 #############################################################################
-##  
-##  Demo PackageInfo.g for the GitHubPagesForGAP
-##
+##  PackageInfo.g for the package `crime'                       Marcus Bishop
+##  Created from Frank L�beck's PackageInfo.g template file
 
 SetPackageInfo( rec(
+  PackageName := "CRIME",
+  Subtitle := "A GAP Package to Calculate Group Cohomology and Massey Products",
+  Version := "1.4",
+  Date := "01/6/2011",
+  ArchiveURL := 
+    "http://math.uic.edu/~marcus/Crime/crime-1.4",
+  ArchiveFormats := ".tar.gz",
 
-PackageName := "GitHubPagesForGAP",
-
-Subtitle := "A GitHub Pages generator for GAP packages",
-Version := "0.2",
-Date := "04/02/2017", # dd/mm/yyyy format
-
-Persons := [
-  rec(
-    LastName      := "Horn",
-    FirstNames    := "Max",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "max.horn@math.uni-giessen.de",
-    WWWHome       := "http://www.quendi.de/math",
-    PostalAddress := Concatenation(
-                       "AG Algebra\n",
-                       "Mathematisches Institut\n",
-                       "Justus-Liebig-Universität Gießen\n",
-                       "Arndtstraße 2\n",
-                       "35392 Gießen\n",
-                       "Germany" ),
-    Place         := "Gießen",
-    Institution   := "Justus-Liebig-Universität Gießen"
-  ),
-
-  rec(
-    LastName      := "Thor",
-    FirstNames    := "A. U.",
-    IsAuthor      := true,
-    IsMaintainer  := false,
-    #Email         := "author@example.com",
-  ),
-
-  rec(
-    LastName      := "Itor",
-    FirstNames    := "Jan",
-    IsAuthor      := false,
-    IsMaintainer  := true,
-    #Email         := "janitor@example.com",
-  ),
-],
-
-Status := "other",
-
-# The following are not strictly necessary in your own PackageInfo.g
-# (in the sense that update.g only looks at the usual fields
-# like PackageWWWHome, ArchiveURL etc.). But they are convenient
-# if you use exactly the scheme for your package website that we propose.
-GithubUser := "gap-system",
-GithubRepository := ~.PackageName,
-GithubWWW := Concatenation("https://github.com/", ~.GithubUser, "/", ~.GithubRepository),
-
-PackageWWWHome := Concatenation("https://", ~.GithubUser, ".github.io/", ~.GithubRepository, "/"),
-README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
-# The following assumes you are using the Github releases system. If not, adjust
-# it accordingly.
-ArchiveURL     := Concatenation(~.GithubWWW,
-                    "/releases/download/v", ~.Version, "/",
-                    ~.GithubRepository, "-", ~.Version),
-
-ArchiveFormats := ".tar.gz .tar.bz2",
-
-AbstractHTML := 
-  "This is a pseudo package that contains no actual\
-  <span class=\"pkgname\">GAP</span> code. Instead, it is a template for other\
-  GAP packages that allows to quickly setup GitHub Pages.",
-
-PackageDoc := rec(
-  BookName  := "GitHubPagesForGAP",
-  ArchiveURLSubset := ["doc"],
-  HTMLStart := "doc/chap0.html",
-  PDFFile   := "doc/manual.pdf",
-  SixFile   := "doc/manual.six",
-  LongTitle := "A GitHub Pages generator for GAP packages",
-),
-
-# The following dependencies are fake and for testing / demo purposes
-Dependencies := rec(
-  GAP := ">=4.8.1",
-  NeededOtherPackages := [
-    ["GAPDoc", ">= 1.2"],
-    ["IO", ">= 4.1"],
+  Persons := [
+    rec( 
+      LastName      := "Bishop",
+      FirstNames    := "Marcus",
+      IsAuthor      := true,
+      IsMaintainer  := true,
+      Email         := "marcus.bishop@gmail.com",
+      WWWHome       := "http://math.uic.edu/~marcus",
+    )
   ],
-  SuggestedOtherPackages := [["orb", ">= 4.2"]],
-  ExternalConditions := []
+  Status := "accepted",
+  CommunicatedBy := "Bettina Eick (Braunschweig)",
+  AcceptDate := "10/2006",
+  README_URL := 
+    "http://math.uic.edu/~marcus/Crime/README",
+  PackageInfoURL:=
+    "http://math.uic.edu/~marcus/Crime/PackageInfo.g",
+  AbstractHTML := Concatenation([
+    "This package computes the cohomology rings of finite ", 
+    "p-groups, induced maps, and Massey products."
+  ]),
+  PackageWWWHome:= 
+    "http://math.uic.edu/~marcus/Crime",
+
+  PackageDoc := rec(
+    BookName      := "crime",
+    ArchiveURLSubset := ["doc"],
+    HTMLStart     := "doc/chap0.html",
+    PDFFile       := "doc/manual.pdf",
+    SixFile       := "doc/manual.six",
+    LongTitle     := "The CRIME Package",
+    Autoload      := true
+  ),
+
+  Dependencies := rec(
+    GAP := ">=4.4",
+    NeededOtherPackages := [],
+    SuggestedOtherPackages := [],
+    ExternalConditions := []
+  ),
+
+  AvailabilityTest := ReturnTrue,
+  BannerString:=Concatenation([
+    "\nThis is CRIME, Version ", ~.Version, "\n",
+    "\"Obviously crime pays, or there'd be no crime\".\n",
+    "                                G. Gordon Liddy\n\n"
+  ]), 
+  Autoload := false,
+  TestFile := "tst/testall.g",
+  Keywords := ["cohomology"],
+
+AutoDoc := rec(
+    TitlePage := rec(
+        Copyright := """
+&copyright; 2006, 2007 Marcus Bishop <P/>
+<Package>CRIME</Package> is free software which is distributed under
+the GNU Public Licence, version 2, and may be
+redistributed under the GNU Public Licence, version 2
+or later (at your preference).
+See the file COPYING for detailed information
+""",
+
+        Acknowledgements := """
+This project would not have been possible without Jon Carlson.
+Jon devised the algorithms used by <K>ProjectiveResolution</K>,
+<K>CohomologyGenerators</K>, and <K>CohomologyRelators</K>,
+having already implemented them in <Package>Magma</Package>,
+and shared these programs with me.
+""",
+    )
 ),
-
-AvailabilityTest := ReturnTrue,
-
-Keywords := ["GitHub Pages", "GAP"]
 
 ));
-
-

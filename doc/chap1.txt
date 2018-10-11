@@ -1,0 +1,82 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  
+  [1X1.1 [33X[0;0YInstallation and Loading[133X[101X
+  
+  [33X[0;0YLike other [5XGAP[105X packages, you download and unpack this package into [5XGAP[105X's [9Xpkg[109X
+  directory.  For  example,  if  you  were  running [5XGAP[105X on some machine with a
+  Unix-based  operating  system  and  [5XGAP[105X  were  installed  in  the  directory
+  [9X/usr/local/gap4r5[109X then you would do the following to install [5XCRIME[105X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+    [4X[28X$ cd /usr/local/gap4r5/pkg[128X[104X
+    [4X[28X$ su[128X[104X
+    [4X[28X% wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz[128X[104X
+    [4X[28X% gunzip crime-1.4.tar.gz[128X[104X
+    [4X[28X% tar xvvf crime-1.4.tar[128X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YIn  this  situation,  users  would  load  the  package  with the [9XLoadPackage[109X
+  command.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+    [4X[28X$ gap[128X[104X
+    [4X[25Xgap>[125X [27XLoadPackage("crime");[127X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YUsers  not  having root access, using someone else's computer, or having bad
+  relationships  with  their network administrators, could install the package
+  into  their  home  directories or into some other writable directory such as
+  [9X/tmp[109X and load the package as follows.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+    [4X[28X$ mkdir /tmp/pkg[128X[104X
+    [4X[28X$ cd /tmp/pkg[128X[104X
+    [4X[28X$ wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz[128X[104X
+    [4X[28X$ gunzip crime-1.4.tar.gz[128X[104X
+    [4X[28X$ tar xvvf crime-1.4.tar[128X[104X
+    [4X[28X$ gap -l ';/tmp'[128X[104X
+    [4X[25Xgap>[125X [27XLoadPackage("crime");[127X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YEven  simpler,  users can simply install the package in the [9X~/.gap[109X directory
+  as follows.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+    [4X[28X$ mkdir -p ~/.gap/pkg[128X[104X
+    [4X[28X$ cd ~/.gap/pkg[128X[104X
+    [4X[28X$ wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz[128X[104X
+    [4X[28X$ gunzip crime-1.4.tar.gz[128X[104X
+    [4X[28X$ tar xvvf crime-1.4.tar[128X[104X
+    [4X[28X$ gap[128X[104X
+    [4X[25Xgap>[125X [27XLoadPackage("crime");[127X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YFinally,  it  would  be a good idea to run the test file to confirm that all
+  the functions work properly. This can be accomplished as follows.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XReadPackage("crime", "tst/testall.g");[127X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YYou  can  count yourself lucky if [5XGAP[105X doesn't complain about anything. There
+  is  also  a  longer  running  test  file  for  those  having ample free time
+  described in Appendix [14XB[114X.[133X
+  
+  
+  [1X1.2 [33X[0;0YFor Further Information[133X[101X
+  
+  [33X[0;0YThe  file  [9Xdoc/example.*[109X  contains the step-by-step [5XCRIME[105X calculation of the
+  cohomology ring of the quaternion group. The file [9Xdoc/explanation.*[109X contains
+  a  theoretical  description  of  how  the  package  calculates  the  various
+  cohomology products. Users wishing to read the source code can print all the
+  programs  in the [9Xgap[109X directory with the program [9Xgap/print.pl[109X which should be
+  executed in the [9Xgap[109X directory.[133X
+  

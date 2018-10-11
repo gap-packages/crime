@@ -1,0 +1,19 @@
+  
+  
+  [1XIndex[101X
+  
+  [2XBoundaryMap[102X 2.2-2 
+  [2XCohomologyGenerators[102X 2.3-1 
+  [2XCohomologyObject[102X 2.1-1  2.1-1 
+  [2XCohomologyRelators[102X 2.3-2 
+  [2XCohomologyRing[102X 2.5-1  2.5-1 
+  [2XDegree[102X 2.5-3 
+  [2XInducedHomomorphismOnCohomology[102X 2.7-1 
+  [2XIsHomogeneous[102X 2.5-2 
+  [2XLocateGeneratorsInCohomologyRing[102X 2.5-4 
+  [2XMasseyProduct[102X 2.8-1 
+  [2XProjectiveResolution[102X 2.2-1 
+  [2XSubgroupInclusion[102X 2.7-2 
+  
+  
+  -------------------------------------------------------
