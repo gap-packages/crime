@@ -20,8 +20,8 @@ do the following to install <Package>CRIME</Package>.
 <Log><![CDATA[
 $ cd /usr/local/gap/pkg
 $ su
-% wget https://github.com/gap-packages/crime/releases/download/v1.4/crime-1.4.tar.gz
-% tar xvzf crime-1.4.tar.gz
+% wget https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.5.tar.gz
+% tar xvzf crime-1.5.tar.gz
 ]]>
 </Log>
 In this situation, users would load the package
@@ -42,8 +42,8 @@ the package as follows.
 <Log><![CDATA[
 $ mkdir /tmp/pkg
 $ cd /tmp/pkg
-% wget https://github.com/gap-packages/crime/releases/download/v1.4/crime-1.4.tar.gz
-$ tar xvzf crime-1.4.tar.gz
+% wget https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.5.tar.gz
+$ tar xvzf crime-1.5.tar.gz
 $ gap -l ';/tmp'
 gap> LoadPackage("crime");
 ]]></Log>
@@ -53,8 +53,8 @@ the package in the <K>~/.gap</K> directory as follows.
 <Log><![CDATA[
 $ mkdir -p ~/.gap/pkg
 $ cd ~/.gap/pkg
-% wget https://github.com/gap-packages/crime/releases/download/v1.4/crime-1.4.tar.gz
-% tar xvzf crime-1.4.tar.gz
+% wget https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.5.tar.gz
+% tar xvzf crime-1.5.tar.gz
 $ gap
 gap> LoadPackage("crime");
 ]]></Log>

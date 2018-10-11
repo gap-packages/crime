@@ -1,5 +1,15 @@
 # Version history of the CRIME package
 
+## 1.5 (2018-10-11)
+
+- Handed maintenance of the package over to the GAP team
+
+- Fixed an error when using the package in GAP 4.9 and newer
+
+- Moved package to GitHub
+
+- Various other minor changes
+
 ## 1.4 (2011-06-01)
 
   The 1.4 version was primarily introduced to comply with changes
