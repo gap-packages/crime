@@ -59,7 +59,7 @@ SetPackageInfo( rec(
     "                                G. Gordon Liddy\n\n"
   ]), 
   Autoload := false,
-  TestFile := "tst/test.tst",
+  TestFile := "tst/testall.g",
   Keywords := ["cohomology"],
 
 AutoDoc := rec(

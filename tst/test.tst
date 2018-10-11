@@ -1,5 +1,3 @@
-gap> LoadPackage("crime", false);
-true
 gap> G:=DihedralGroup(8);
 <pc group of size 8 with 3 generators>
 gap> H:=CyclicGroup(4);

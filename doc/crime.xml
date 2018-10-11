@@ -68,16 +68,9 @@ gap> LoadPackage("crime");
 
 Finally, it would be a good idea to run the test file
 to confirm that all the functions work properly.
-This can be accomplished using &GAP;'s somewhat obfuscated
-but system-independent file-manipulation commands as follows.
-<Log>
-<![CDATA[
-gap> P:=PackageInfo("crime")[1];;
-gap> D:=Directory(P.InstallationPath);;
-gap> F:=Filename(D,"tst");;
-gap> D:=Directory(F);;
-gap> F:=Filename(D,"test.g");;
-gap> ReadTest(F);
+This can be accomplished as follows.
+<Log><![CDATA[
+gap> ReadPackage("crime", "tst/testall.g");
 ]]></Log>
 You can count yourself lucky if &GAP; doesn't complain
 about anything. There is also a longer running test
