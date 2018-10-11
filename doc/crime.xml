@@ -17,19 +17,16 @@ machine with a Unix-based operating system
 and &GAP; were installed in the directory 
 <K>/usr/local/gap4r5</K> then you would
 do the following to install <Package>CRIME</Package>.
-<Log>
-<![CDATA[
+<Log><![CDATA[
 $ cd /usr/local/gap4r5/pkg
 $ su
 % wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz
-% gunzip crime-1.4.tar.gz
-% tar xvvf crime-1.4.tar
+% tar xvzf crime-1.4.tar.gz
 ]]>
 </Log>
 In this situation, users would load the package
 with the <K>LoadPackage</K> command.
-<Log>
-<![CDATA[
+<Log><![CDATA[
 $ gap
 gap> LoadPackage("crime");
 ]]>
@@ -42,26 +39,22 @@ could install the package into their home
 directories or into some other writable
 directory such as <K>/tmp</K> and load
 the package as follows.
-<Log>
-<![CDATA[
+<Log><![CDATA[
 $ mkdir /tmp/pkg
 $ cd /tmp/pkg
 $ wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz
-$ gunzip crime-1.4.tar.gz
-$ tar xvvf crime-1.4.tar
+$ tar xvzf crime-1.4.tar.gz
 $ gap -l ';/tmp'
 gap> LoadPackage("crime");
 ]]></Log>
 
 Even simpler, users can simply install
 the package in the <K>~/.gap</K> directory as follows.
-<Log>
-<![CDATA[
+<Log><![CDATA[
 $ mkdir -p ~/.gap/pkg
 $ cd ~/.gap/pkg
 $ wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz
-$ gunzip crime-1.4.tar.gz
-$ tar xvvf crime-1.4.tar
+% tar xvzf crime-1.4.tar.gz
 $ gap
 gap> LoadPackage("crime");
 ]]></Log>
@@ -1015,8 +1008,7 @@ below was computed on a 2.4 GHz AMD64 processor
 with 12 GB of RAM. 
 See the file <K>tst/README</K> for suggestions
 on dealing with other users when running long-running batch processes.
-<Log>
-<![CDATA[
+<Log><![CDATA[
 SmallGroup(16,1)
 Betti Numbers: [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
 Generators in degrees: [ 1, 2 ]

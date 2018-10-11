@@ -11,8 +11,8 @@ For example:
 wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz
 
 Put the package in GAP's pkg directory and unpack:
-gunzip crime-1.4.tar.gz
-tar xvvf crime-1.4.tar
+
+    tar xvzf crime-1.4.tar.gz
 
 See the documentation in the doc directory for
 more information.
