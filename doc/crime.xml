@@ -15,12 +15,12 @@ this package into &GAP;'s <K>pkg</K> directory.
 For example, if you were running &GAP; on some
 machine with a Unix-based operating system
 and &GAP; were installed in the directory 
-<K>/usr/local/gap4r5</K> then you would
+<K>/usr/local/gap</K> then you would
 do the following to install <Package>CRIME</Package>.
 <Log><![CDATA[
-$ cd /usr/local/gap4r5/pkg
+$ cd /usr/local/gap/pkg
 $ su
-% wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz
+% wget https://github.com/gap-packages/crime/releases/download/v1.4/crime-1.4.tar.gz
 % tar xvzf crime-1.4.tar.gz
 ]]>
 </Log>
@@ -42,7 +42,7 @@ the package as follows.
 <Log><![CDATA[
 $ mkdir /tmp/pkg
 $ cd /tmp/pkg
-$ wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz
+% wget https://github.com/gap-packages/crime/releases/download/v1.4/crime-1.4.tar.gz
 $ tar xvzf crime-1.4.tar.gz
 $ gap -l ';/tmp'
 gap> LoadPackage("crime");
@@ -53,7 +53,7 @@ the package in the <K>~/.gap</K> directory as follows.
 <Log><![CDATA[
 $ mkdir -p ~/.gap/pkg
 $ cd ~/.gap/pkg
-$ wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz
+% wget https://github.com/gap-packages/crime/releases/download/v1.4/crime-1.4.tar.gz
 % tar xvzf crime-1.4.tar.gz
 $ gap
 gap> LoadPackage("crime");
