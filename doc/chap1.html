@@ -36,16 +36,14 @@
 
 <h4>1.1 <span class="Heading">Installation and Loading</span></h4>
 
-<p>Like other <strong class="pkg">GAP</strong> packages, you download and unpack this package into <strong class="pkg">GAP</strong>'s <code class="keyw">pkg</code> directory. For example, if you were running <strong class="pkg">GAP</strong> on some machine with a Unix-based operating system and <strong class="pkg">GAP</strong> were installed in the directory <code class="keyw">/usr/local/gap4r5</code> then you would do the following to install <strong class="pkg">CRIME</strong>.</p>
+<p>Like other <strong class="pkg">GAP</strong> packages, you download and unpack this package into <strong class="pkg">GAP</strong>'s <code class="keyw">pkg</code> directory. For example, if you were running <strong class="pkg">GAP</strong> on some machine with a Unix-based operating system and <strong class="pkg">GAP</strong> were installed in the directory <code class="keyw">/usr/local/gap</code> then you would do the following to install <strong class="pkg">CRIME</strong>.</p>
 
 
 <div class="example"><pre>
-
-$ cd /usr/local/gap4r5/pkg
+$ cd /usr/local/gap/pkg
 $ su
-% wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz
-% gunzip crime-1.4.tar.gz
-% tar xvvf crime-1.4.tar
+% wget https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.5.tar.gz
+% tar xvzf crime-1.5.tar.gz
 
 </pre></div>
 
@@ -53,7 +51,6 @@ $ su
 
 
 <div class="example"><pre>
-
 $ gap
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("crime");</span>
 
@@ -63,12 +60,10 @@ $ gap
 
 
 <div class="example"><pre>
-
 $ mkdir /tmp/pkg
 $ cd /tmp/pkg
-$ wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz
-$ gunzip crime-1.4.tar.gz
-$ tar xvvf crime-1.4.tar
+% wget https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.5.tar.gz
+$ tar xvzf crime-1.5.tar.gz
 $ gap -l ';/tmp'
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("crime");</span>
 </pre></div>
@@ -77,12 +72,10 @@ $ gap -l ';/tmp'
 
 
 <div class="example"><pre>
-
 $ mkdir -p ~/.gap/pkg
 $ cd ~/.gap/pkg
-$ wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz
-$ gunzip crime-1.4.tar.gz
-$ tar xvvf crime-1.4.tar
+% wget https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.5.tar.gz
+% tar xvzf crime-1.5.tar.gz
 $ gap
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadPackage("crime");</span>
 </pre></div>

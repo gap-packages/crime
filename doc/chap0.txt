@@ -6,19 +6,23 @@
        [1X A [5XGAP[105X Package to Calculate Group Cohomology and Massey Products [101X
   
   
-                                      1.4
+                                      1.5
   
   
-                                  1 June 2011
+                                11 October 2018
   
   
                                  Marcus Bishop
+  
+                                  The GAP Team
   
   
   
   Marcus Bishop
       Email:    [7Xmailto:marcus.bishop@gmail.com[107X
       Homepage: [7Xhttp://math.uic.edu/~marcus[107X
+  The GAP Team
+      Email:    [7Xmailto:support@gap-system.org[107X
   
   -------------------------------------------------------
   [1XCopyright[101X

@@ -1,6 +1,6 @@
 name: CRIME
-version: 1.4
-date: 2011-06-01
+version: 1.5
+date: 2018-10-11
 description: |
     A GAP Package to Calculate Group Cohomology and Massey Products
 
@@ -9,18 +9,18 @@ authors:
       url: http://math.uic.edu/~marcus
 
 maintainers:
-    - name: Marcus Bishop
-      url: http://math.uic.edu/~marcus
+    - name: The GAP Team
+      url: mailto:support@gap-system.org
 
-GAP: ">=4.4"
+GAP: ">=4.9"
 
-www: http://math.uic.edu/~marcus/Crime
-readme: README
-packageinfo: http://math.uic.edu/~marcus/Crime/PackageInfo.g
+www: https://gap-packages.github.io/crime/
+readme: README.md
+packageinfo: https://gap-packages.github.io/crime/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: http://math.uic.edu/~marcus/Crime/crime-1.4.tar.gz
+      url: https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.5.tar.gz
 
 abstract: |
     This package computes the cohomology rings of finite p-groups, induced maps, and Massey products.
@@ -32,22 +32,24 @@ keywords: |
     cohomology.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>Bis</span>]   <b class='BibAuthor'>Bishop, M.</b>,
+    [<span class='BibKey'>BT18</span>]   <b class='BibAuthor'>Bishop, M. and GAP Team, T.</b>,
      <i class='BibTitle'>CRIME, A GAP Package to Calculate Group Cohomology and Massey Products,
-             Version 1.4</i><br />
+             Version 1.5</i>
+     (<span class='BibYear'>2018</span>)<br />
     (<span class='BibNote'>Refereed GAP package</span>),
-    <span class='BibHowpublished'><a href="http://math.uic.edu/~marcus/Crime">http://math.uic.edu/~marcus/Crime</a></span>.
+    <span class='BibHowpublished'><a href="https://gap-packages.github.io/crime/">https://gap-packages.github.io/crime/</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ CRIME1.4,
-      author =           {Bishop, M.},
-      title =            {{CRIME}, A GAP Package to Calculate Group Cohomology and Massey Products, {V}ersion 1.4},
+    @misc{ CRIME1.5,
+      author =           {Bishop, M. and GAP Team, T.},
+      title =            {{CRIME}, A GAP Package to Calculate Group Cohomology and Massey Products, {V}ersion 1.5},
+      month =            {Oct},
+      year =             {2018},
       note =             {Refereed GAP package},
-      howpublished =     {\href   {http://math.uic.edu/~marcus/Crime}   {\texttt{http://math.uic.edu/}\discretionary   {}{}{}\texttt{\texttt{\symbol{126}}marcus/}\discretionary
-                          {}{}{}\texttt{Crime}}},
+      howpublished =     {\href {https://gap-packages.github.io/crime/} {\texttt{https://gap-packages.github.io/}\discretionary {}{}{}\texttt{crime/}}},
       keywords =         {cohomology},
-      printedkey =       {Bis}
+      printedkey =       {BT18}
     }
 

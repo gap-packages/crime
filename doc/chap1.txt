@@ -7,15 +7,13 @@
   [33X[0;0YLike other [5XGAP[105X packages, you download and unpack this package into [5XGAP[105X's [9Xpkg[109X
   directory.  For  example,  if  you  were  running [5XGAP[105X on some machine with a
   Unix-based  operating  system  and  [5XGAP[105X  were  installed  in  the  directory
-  [9X/usr/local/gap4r5[109X then you would do the following to install [5XCRIME[105X.[133X
+  [9X/usr/local/gap[109X then you would do the following to install [5XCRIME[105X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[28X[128X[104X
-    [4X[28X$ cd /usr/local/gap4r5/pkg[128X[104X
+    [4X[28X$ cd /usr/local/gap/pkg[128X[104X
     [4X[28X$ su[128X[104X
-    [4X[28X% wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz[128X[104X
-    [4X[28X% gunzip crime-1.4.tar.gz[128X[104X
-    [4X[28X% tar xvvf crime-1.4.tar[128X[104X
+    [4X[28X% wget https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.5.tar.gz[128X[104X
+    [4X[28X% tar xvzf crime-1.5.tar.gz[128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
   
@@ -23,7 +21,6 @@
   command.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[28X[128X[104X
     [4X[28X$ gap[128X[104X
     [4X[25Xgap>[125X [27XLoadPackage("crime");[127X[104X
     [4X[28X[128X[104X
@@ -35,12 +32,10 @@
   [9X/tmp[109X and load the package as follows.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[28X[128X[104X
     [4X[28X$ mkdir /tmp/pkg[128X[104X
     [4X[28X$ cd /tmp/pkg[128X[104X
-    [4X[28X$ wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz[128X[104X
-    [4X[28X$ gunzip crime-1.4.tar.gz[128X[104X
-    [4X[28X$ tar xvvf crime-1.4.tar[128X[104X
+    [4X[28X% wget https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.5.tar.gz[128X[104X
+    [4X[28X$ tar xvzf crime-1.5.tar.gz[128X[104X
     [4X[28X$ gap -l ';/tmp'[128X[104X
     [4X[25Xgap>[125X [27XLoadPackage("crime");[127X[104X
   [4X[32X[104X
@@ -49,12 +44,10 @@
   as follows.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[28X[128X[104X
     [4X[28X$ mkdir -p ~/.gap/pkg[128X[104X
     [4X[28X$ cd ~/.gap/pkg[128X[104X
-    [4X[28X$ wget ftp://ftp.gap-system.org/pub/gap/gap4/tar.gz/packages/crime-1.4.tar.gz[128X[104X
-    [4X[28X$ gunzip crime-1.4.tar.gz[128X[104X
-    [4X[28X$ tar xvvf crime-1.4.tar[128X[104X
+    [4X[28X% wget https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.5.tar.gz[128X[104X
+    [4X[28X% tar xvzf crime-1.5.tar.gz[128X[104X
     [4X[28X$ gap[128X[104X
     [4X[25Xgap>[125X [27XLoadPackage("crime");[127X[104X
   [4X[32X[104X
