@@ -1,4 +1,4 @@
-gap> LoadPackage("crime");
+gap> LoadPackage("crime", false);
 true
 gap> G:=DihedralGroup(8);
 <pc group of size 8 with 3 generators>
@@ -7,8 +7,9 @@ gap> H:=CyclicGroup(4);
 gap> k:=GF(2);
 GF(2)
 gap> M:=TrivialGModule(G,k);;
-gap> Display(M);Print("\n");
+gap> Display(M);
 rec(
+  IsOverFiniteField := true,
   dimension := 1,
   field := GF(2),
   generators := [ [ [ Z(2)^0 ] ], [ [ Z(2)^0 ] ], [ [ Z(2)^0 ] ] ],

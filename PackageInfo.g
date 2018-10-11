@@ -59,6 +59,6 @@ SetPackageInfo( rec(
     "                                G. Gordon Liddy\n\n"
   ]), 
   Autoload := false,
-  TestFile := "tst/test.g",
+  TestFile := "tst/test.tst",
   Keywords := ["cohomology"],
 ));
