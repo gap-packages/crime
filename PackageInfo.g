@@ -7,9 +7,6 @@ SetPackageInfo( rec(
   Subtitle := "A GAP Package to Calculate Group Cohomology and Massey Products",
   Version := "1.4",
   Date := "01/6/2011",
-  ArchiveURL := 
-    "http://math.uic.edu/~marcus/Crime/crime-1.4",
-  ArchiveFormats := ".tar.gz",
 
   Persons := [
     rec( 
@@ -24,16 +21,24 @@ SetPackageInfo( rec(
   Status := "accepted",
   CommunicatedBy := "Bettina Eick (Braunschweig)",
   AcceptDate := "10/2006",
-  README_URL := 
-    "http://math.uic.edu/~marcus/Crime/README",
-  PackageInfoURL:=
-    "http://math.uic.edu/~marcus/Crime/PackageInfo.g",
+
+  PackageWWWHome  := "https://gap-packages.github.io/crime/",
+  README_URL      := Concatenation( ~.PackageWWWHome, "README" ),
+  PackageInfoURL  := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+  SourceRepository := rec(
+      Type := "git",
+      URL := "https://github.com/gap-packages/crime",
+  ),
+  IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
+  ArchiveURL      := Concatenation( ~.SourceRepository.URL,
+                                   "/releases/download/v", ~.Version,
+                                   "/crime-", ~.Version ),
+  ArchiveFormats := ".tar.gz",
+
   AbstractHTML := Concatenation([
     "This package computes the cohomology rings of finite ", 
     "p-groups, induced maps, and Massey products."
   ]),
-  PackageWWWHome:= 
-    "http://math.uic.edu/~marcus/Crime",
 
   PackageDoc := rec(
     BookName      := "crime",
