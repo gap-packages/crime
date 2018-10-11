@@ -35,8 +35,7 @@ InstallMethod(CohomologyObject,
     p:=PrimePGroup(G);
     if not p=Characteristic(K) then
       Error("PrimePGroup(G) should equal Characteristic(K)\n");fi;
-    return Objectify(CObject,
-      Immutable(rec(G:=G,p:=p,K:=K,M:=M)));
+    return Objectify(CObject, rec(G:=G,p:=p,K:=K,M:=M));
   end
 );
 
