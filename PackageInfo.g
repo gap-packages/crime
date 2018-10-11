@@ -3,7 +3,7 @@
 ##  Created from Frank Lübeck's PackageInfo.g template file
 
 SetPackageInfo( rec(
-  PackageName := "Crime",
+  PackageName := "CRIME",
   Subtitle := "A GAP Package to Calculate Group Cohomology and Massey Products",
   Version := "1.4",
   Date := "01/6/2011",
@@ -41,7 +41,7 @@ SetPackageInfo( rec(
     HTMLStart     := "doc/chap0.html",
     PDFFile       := "doc/manual.pdf",
     SixFile       := "doc/manual.six",
-    LongTitle     := "The Crime Package",
+    LongTitle     := "The CRIME Package",
     Autoload      := true
   ),
 
