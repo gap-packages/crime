@@ -58,7 +58,7 @@ SetPackageInfo( rec(
   ),
 
   Dependencies := rec(
-    GAP := ">=4.4",
+    GAP := ">=4.9",
     NeededOtherPackages := [],
     SuggestedOtherPackages := [],
     ExternalConditions := []
