@@ -54,7 +54,7 @@ SetPackageInfo( rec(
 
   AvailabilityTest := ReturnTrue,
   BannerString:=Concatenation([
-    "\nThis is CRIME, Version 1.4\n",
+    "\nThis is CRIME, Version ", ~.Version, "\n",
     "\"Obviously crime pays, or there'd be no crime\".\n",
     "                                G. Gordon Liddy\n\n"
   ]), 
