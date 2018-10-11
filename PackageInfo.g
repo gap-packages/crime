@@ -61,4 +61,26 @@ SetPackageInfo( rec(
   Autoload := false,
   TestFile := "tst/test.tst",
   Keywords := ["cohomology"],
+
+AutoDoc := rec(
+    TitlePage := rec(
+        Copyright := """
+&copyright; 2006, 2007 Marcus Bishop <P/>
+<Package>CRIME</Package> is free software which is distributed under
+the GNU Public Licence, version 2, and may be
+redistributed under the GNU Public Licence, version 2
+or later (at your preference).
+See the file COPYING for detailed information
+""",
+
+        Acknowledgements := """
+This project would not have been possible without Jon Carlson.
+Jon devised the algorithms used by <K>ProjectiveResolution</K>,
+<K>CohomologyGenerators</K>, and <K>CohomologyRelators</K>,
+having already implemented them in <Package>Magma</Package>,
+and shared these programs with me.
+""",
+    )
+),
+
 ));
