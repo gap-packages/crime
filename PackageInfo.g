@@ -6,7 +6,8 @@ SetPackageInfo( rec(
   PackageName := "CRIME",
   Subtitle := "A GAP Package to Calculate Group Cohomology and Massey Products",
   Version := "1.5",
-  Date := "11/10/2018",
+  Date := "11/10/2018", # dd/mm/yyyy format
+  License := "GPL-2.0-or-later",
 
   Persons := [
     rec( 
