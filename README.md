@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/gap-packages/crime.svg?branch=master)](https://travis-ci.com/gap-packages/crime)
+[![Build Status](https://github.com/gap-packages/crime/workflows/CI/badge.svg?branch=master)](https://github.com/gap-packages/crime/actions?query=workflow%3ACI+branch%3Amaster)
 [![Code Coverage](https://codecov.io/github/gap-packages/crime/coverage.svg?branch=master&token=)](https://codecov.io/gh/gap-packages/crime)
 
 # CRIME
