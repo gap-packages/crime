@@ -1,6 +1,5 @@
 #############################################################################
 ##  PackageInfo.g for the package `crime'                       Marcus Bishop
-##  Created from Frank Lübeck's PackageInfo.g template file
 
 SetPackageInfo( rec(
   PackageName := "CRIME",
