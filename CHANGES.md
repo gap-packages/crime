@@ -1,5 +1,9 @@
 # Version history of the CRIME package
 
+## 1.6 (2022-03-17)
+
+- add `License` field to `PackageInfo.g`
+
 ## 1.5 (2018-10-11)
 
 - Handed maintenance of the package over to the GAP team
