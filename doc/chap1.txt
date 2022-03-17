@@ -12,8 +12,8 @@
   [4X[32X  Example  [32X[104X
     [4X[28X$ cd /usr/local/gap/pkg[128X[104X
     [4X[28X$ su[128X[104X
-    [4X[28X% wget https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.5.tar.gz[128X[104X
-    [4X[28X% tar xvzf crime-1.5.tar.gz[128X[104X
+    [4X[28X% wget https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.6.tar.gz[128X[104X
+    [4X[28X% tar xvzf crime-1.6.tar.gz[128X[104X
     [4X[28X[128X[104X
   [4X[32X[104X
   
@@ -34,8 +34,8 @@
   [4X[32X  Example  [32X[104X
     [4X[28X$ mkdir /tmp/pkg[128X[104X
     [4X[28X$ cd /tmp/pkg[128X[104X
-    [4X[28X% wget https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.5.tar.gz[128X[104X
-    [4X[28X$ tar xvzf crime-1.5.tar.gz[128X[104X
+    [4X[28X% wget https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.6.tar.gz[128X[104X
+    [4X[28X$ tar xvzf crime-1.6.tar.gz[128X[104X
     [4X[28X$ gap -l ';/tmp'[128X[104X
     [4X[25Xgap>[125X [27XLoadPackage("crime");[127X[104X
   [4X[32X[104X
@@ -46,8 +46,8 @@
   [4X[32X  Example  [32X[104X
     [4X[28X$ mkdir -p ~/.gap/pkg[128X[104X
     [4X[28X$ cd ~/.gap/pkg[128X[104X
-    [4X[28X% wget https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.5.tar.gz[128X[104X
-    [4X[28X% tar xvzf crime-1.5.tar.gz[128X[104X
+    [4X[28X% wget https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.6.tar.gz[128X[104X
+    [4X[28X% tar xvzf crime-1.6.tar.gz[128X[104X
     [4X[28X$ gap[128X[104X
     [4X[25Xgap>[125X [27XLoadPackage("crime");[127X[104X
   [4X[32X[104X

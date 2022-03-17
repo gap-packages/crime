@@ -1,12 +1,12 @@
 #############################################################################
 ##  PackageInfo.g for the package `crime'                       Marcus Bishop
-##  Created from Frank Lübeck's PackageInfo.g template file
 
 SetPackageInfo( rec(
   PackageName := "CRIME",
   Subtitle := "A GAP Package to Calculate Group Cohomology and Massey Products",
-  Version := "1.5",
-  Date := "11/10/2018",
+  Version := "1.6",
+  Date := "17/03/2022", # dd/mm/yyyy format
+  License := "GPL-2.0-or-later",
 
   Persons := [
     rec( 

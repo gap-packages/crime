@@ -102,8 +102,8 @@
   having  degree  [9Xn[109X or less, and stores them in [9XC[109X. The function returns a list
   of the degrees of these generators.[133X
   
-  [33X[0;0YThe actual cohomology generators are represented by maps [22XP_i → k[122X for [22X0le ile
-  n[122X and are stored in [9XC[109X as matrices. Only their degrees are returned.[133X
+  [33X[0;0YThe actual cohomology generators are represented by maps [22XP_i → k[122X for [22X0≤ i≤ n[122X
+  and are stored in [9XC[109X as matrices. Only their degrees are returned.[133X
   
   [1X2.3-2 CohomologyRelators[101X
   

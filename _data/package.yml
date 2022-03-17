@@ -1,6 +1,6 @@
 name: CRIME
-version: 1.5
-date: 2018-10-11
+version: 1.6
+date: 2022-03-17
 description: |
     A GAP Package to Calculate Group Cohomology and Massey Products
 
@@ -20,7 +20,7 @@ packageinfo: https://gap-packages.github.io/crime/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.5.tar.gz
+      url: https://github.com/gap-packages/crime/releases/download/v1.6/crime-1.6.tar.gz
 
 abstract: |
     This package computes the cohomology rings of finite p-groups, induced maps, and Massey products.
@@ -32,24 +32,27 @@ keywords: |
     cohomology.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>BT18</span>]   <b class='BibAuthor'>Bishop, M. and GAP Team, T.</b>,
+    [<span class='BibKey'>BT22</span>]   <b class='BibAuthor'>Bishop, M. and GAP Team, T.</b>,
      <i class='BibTitle'>CRIME, A GAP Package to Calculate Group Cohomology and Massey Products,
-             Version 1.5</i>
-     (<span class='BibYear'>2018</span>)<br />
+             Version 1.6</i>
+     (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>Refereed GAP package</span>),
     <span class='BibHowpublished'><a href="https://gap-packages.github.io/crime/">https://gap-packages.github.io/crime/</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ CRIME1.5,
+    @misc{ CRIME1.6,
       author =           {Bishop, M. and GAP Team, T.},
-      title =            {{CRIME}, A GAP Package to Calculate Group Cohomology and Massey Products, {V}ersion 1.5},
-      month =            {Oct},
-      year =             {2018},
+      title =            {{CRIME},  A  GAP Package to Calculate Group Cohomology
+                          and Massey Products, {V}ersion 1.6},
+      month =            {Mar},
+      year =             {2022},
       note =             {Refereed GAP package},
-      howpublished =     {\href {https://gap-packages.github.io/crime/} {\texttt{https://gap-packages.github.io/}\discretionary {}{}{}\texttt{crime/}}},
+      howpublished =     {\href          {https://gap-packages.github.io/crime/}
+                          {\texttt{https://gap-packages.github.io/}\discretionary
+                          {}{}{}\texttt{crime/}}},
       keywords =         {cohomology},
-      printedkey =       {BT18}
+      printedkey =       {BT22}
     }
 
