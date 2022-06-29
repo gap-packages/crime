@@ -50,7 +50,7 @@ SetPackageInfo( rec(
   PackageDoc := rec(
     BookName      := "crime",
     ArchiveURLSubset := ["doc"],
-    HTMLStart     := "doc/chap0.html",
+    HTMLStart     := "doc/chap0_mj.html",
     PDFFile       := "doc/manual.pdf",
     SixFile       := "doc/manual.six",
     LongTitle     := "The CRIME Package",
