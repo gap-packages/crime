@@ -1,5 +1,6 @@
 name: CRIME
-version: 1.6
+version: "1.6"
+license: "GPL-2.0-or-later"
 date: 2022-03-17
 description: |
     A GAP Package to Calculate Group Cohomology and Massey Products
