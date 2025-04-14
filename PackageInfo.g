@@ -54,7 +54,6 @@ SetPackageInfo( rec(
     PDFFile       := "doc/manual.pdf",
     SixFile       := "doc/manual.six",
     LongTitle     := "The CRIME Package",
-    Autoload      := true
   ),
 
   Dependencies := rec(
@@ -70,7 +69,6 @@ SetPackageInfo( rec(
     "\"Obviously crime pays, or there'd be no crime\".\n",
     "                                G. Gordon Liddy\n\n"
   ]), 
-  Autoload := false,
   TestFile := "tst/testall.g",
   Keywords := ["cohomology"],
 
