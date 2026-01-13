@@ -108,7 +108,8 @@ following command.
 <Oper Name="CohomologyObject" Arg="G, M" 
 Comm="Makes cohomology object"/>
 <Oper Name="CohomologyObject" Arg="G"
-Comm="Makes cohomology object"/>
+Comm="Makes cohomology object"
+Label="CohomologyObjectNoMeatAxe"/>
 <Returns>a <K>CObject</K>.</Returns>
 <Description>
 This function creates a <K>CObject</K> having components
@@ -397,7 +398,8 @@ for an explanation of the implementation.
 <Oper Name="CohomologyRing" Arg="C, n"
 Comm="Calculates the cohomology ring"/>
 <Oper Name="CohomologyRing" Arg="G, n"
-Comm="Calculates the cohomology ring"/>
+Comm="Calculates the cohomology ring"
+Label="CohomologyRingGroupComp"/>
 <Returns>the cohomology ring of <M>G</M>.</Returns>
 <Description>
 Given a cohomology object <K>C</K> with group component <M>G</M> and
