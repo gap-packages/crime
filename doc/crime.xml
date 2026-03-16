@@ -22,15 +22,13 @@ $ cd /usr/local/gap/pkg
 $ su
 % wget https://github.com/gap-packages/crime/releases/download/v1.5/crime-1.6.tar.gz
 % tar xvzf crime-1.6.tar.gz
-]]>
-</Log>
+]]></Log>
 In this situation, users would load the package
 with the <K>LoadPackage</K> command.
 <Log><![CDATA[
 $ gap
 gap> LoadPackage("crime");
-]]>
-</Log>
+]]></Log>
 
 Users not having root access, using
 someone else's computer, or having bad
@@ -308,8 +306,7 @@ See section <Ref Sect="whathappens"/> for more details still.
 </Description></ManSection>
 
 For example, consider the following commands.
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> C:=CohomologyObject(DihedralGroup(8));
 <object>
 gap> CohomologyGenerators(C,10);
@@ -696,8 +693,7 @@ homomorphism on cohomology induced by
 the inclusion of the cyclic group of size 4
 into the dihedral group of size 8.
 
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> G:=DihedralGroup(8);H:=Subgroup(G,[G.2]);
 <pc group of size 8 with 3 generators>
 Group([ f2 ])
@@ -716,8 +712,7 @@ v.1
 0*v.1
 v.2
 v.3
-]]>
-</Example>
+]]></Example>
 
 </Section>
 <Section><Heading>Massey Products</Heading>
@@ -774,8 +769,7 @@ is non-zero in
 but is zero in
 <Alt Only="LaTeX"><M>H^\ast\left(C_9,k\right)</M>.</Alt>
 <Alt Not="LaTeX"><M>H*(C_9,k)</M>.</Alt>
-<Example>
-<![CDATA[
+<Example><![CDATA[
 gap> A:=CohomologyRing(CyclicGroup(3),10);
 <algebra of dimension 11 over GF(3)>
 gap> z:=Basis(A)[2];
@@ -794,8 +788,7 @@ gap> MasseyProduct(z,z,z);
 0*v.1
 gap> MasseyProduct(z,z,z,z,z,z,z,z,z);
 v.3
-]]>
-</Example>
+]]></Example>
 </Section>
 </Chapter>
 </Body>
@@ -1080,8 +1073,7 @@ SmallGroup(16,14)
 Betti Numbers: [ 1, 4, 10, 20, 35, 56, 84, 120, 165, 220, 286 ]
 Generators in degrees: [ 1, 1, 1, 1 ]
 Relators: [ [ z, y, x, w ], [  ] ]
-]]>
-</Log>
+]]></Log>
 </Appendix>
 <Bibliography Databases="crimebib.xml" Style="plain"/>
 <TheIndex/>
